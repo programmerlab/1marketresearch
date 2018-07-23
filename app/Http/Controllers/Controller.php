@@ -13,13 +13,14 @@ use View;
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
-
+ 
     /**
      * Displays all admin.
      *
      * @return \Illuminate\View\View
      */
     public function __construct() { 
+         
     	$setting = Settings::first(); 
         $web_setting =  Settings::all(); 
         if($setting)

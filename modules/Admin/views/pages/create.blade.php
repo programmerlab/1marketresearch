@@ -28,17 +28,17 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-dark sbold uppercase">Edit Category</span>
-                                    </div>
-                                    
+                                        <span class="caption-subject font-red sbold uppercase"> {{$page_action}} </span>
+                                    </div> 
                                 </div>
                                 <div class="portlet-body">
-                                    <!-- BEGIN FORM--> 
-
-
-                                {!! Form::model($category, ['method' => 'PATCH', 'route' => ['category.update', $category->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
-                                    @include('packages::category.form', compact('category'))
-                                {!! Form::close() !!} 
+                                    <!-- BEGIN FORM-->
+                                
+                                  {!! Form::model($page, ['route' => ['content.store'],'class'=>'form-horizontal user-form','id'=>'user-form','enctype'=>'multipart/form-data']) !!}
+                                  
+                                  @include('packages::pages.form')
+                                  
+                                  {!! Form::close() !!}   
                                     <!-- END FORM-->
                                 </div>
                                 <!-- END VALIDATION STATES-->

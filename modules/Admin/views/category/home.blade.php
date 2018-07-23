@@ -24,7 +24,7 @@
                                      <div class="col-md-2 pull-right">
                                             <div style="width: 150px;" class="input-group"> 
                                                 <a href="{{ route('category.create')}}">
-                                                    <button class="btn btn-success"><i class="fa fa-plus-circle"></i> Add Group</button> 
+                                                    <button class="btn btn-success"><i class="fa fa-plus-circle"></i> Add Category</button> 
                                                 </a>
                                             </div>
                                         </div> 
@@ -44,7 +44,7 @@
                                             <form action="{{route('category')}}" method="get" id="filter_data">
                                              
                                             <div class="col-md-3">
-                                                <input value="{{ (isset($_REQUEST['search']))?$_REQUEST['search']:''}}" placeholder="Search by group name" type="text" name="search" id="search" class="form-control" >
+                                                <input value="{{ (isset($_REQUEST['search']))?$_REQUEST['search']:''}}" placeholder="Search by category" type="text" name="search" id="search" class="form-control" >
                                             </div>
                                             <div class="col-md-2">
                                                 <input type="submit" value="Search" class="btn btn-primary form-control">
@@ -61,8 +61,9 @@
                                     <table class="table table-striped table-hover table-bordered" id="">
                                         <thead>
                                             <tr>
-                                                <th> Group Name </th>
-                                                <th> Image </th> 
+                                                 <th> Sno. </th>
+                                                <th> Category Name </th>
+                                                <th> Image </th>
                                                 <th>Created date</th> 
                                                 <th>Action</th> 
                                             </tr>
@@ -70,6 +71,7 @@
                                         <tbody>
                                         @foreach($categories as $key => $result)
                                             <tr>
+                                                <td> {{++$key}} </td>
                                                 <td> {{$result->category_group_name}} </td>
                                                 <td>
                                                 <a href="{{ url::asset('storage/uploads/category/'.$result->category_group_image)  }}" target="_blank" >

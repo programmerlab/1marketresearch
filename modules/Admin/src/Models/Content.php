@@ -1,12 +1,12 @@
 <?php
-
 namespace Modules\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent; 
-use Modules\Admin\Models\Group;
-use Modules\Admin\Models\Position; 
+use Modules\Admin\Models\Category;
+use Illuminate\Foundation\Http\FormRequest;
+use Response;
 
-class PostTask extends Eloquent {
+class Content extends Eloquent { 
 
    
     /**
@@ -14,7 +14,7 @@ class PostTask extends Eloquent {
      *
      * @var string
      */
-    protected $table = 'post_tasks';
+    protected $table = 'pages';
     /**
      * The attributes that are mass assignable.
      *
@@ -26,21 +26,21 @@ class PostTask extends Eloquent {
      * @var string
      */
     protected $primaryKey = 'id';
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+     protected $fillable = ['title','page_content','banner_image1']; // All field of user table here    
 
-    //protected $dates = ['due_date'];
+
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    
-
-    protected $guarded = ['created_at' , 'updated_at' , 'id' ];
-    
-    public function user()
-    {
-        return $this->hasOne('Modules\Admin\Models\User','id','userId');
-    }
-
+     
+  
 }

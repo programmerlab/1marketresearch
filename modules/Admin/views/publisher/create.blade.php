@@ -17,8 +17,7 @@
                     
                     <!-- END PAGE HEAD-->
                     <!-- BEGIN PAGE BREADCRUMB -->
-                  @include('packages::partials.breadcrumb')
-
+                      @include('packages::partials.breadcrumb')
                     <!-- END PAGE BREADCRUMB -->
                     <!-- BEGIN PAGE BASE CONTENT -->
                       <div class="row">
@@ -28,16 +27,16 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-red sbold uppercase">{{$page_action }}</span>
+                                        <span class="caption-subject font-red sbold uppercase">{{ $heading or 'Publisher' }}</span>
                                     </div>
                                     
                                 </div>
                                 <div class="portlet-body">
                                     <!-- BEGIN FORM-->
                                 
-                                  {!! Form::model($category, ['route' => ['category.store'],'class'=>'form-horizontal user-form','id'=>'user-form','enctype'=>'multipart/form-data']) !!}
+                                  {!! Form::model($publisher, ['route' => ['publisher.store'],'class'=>'form-horizontal user-form','id'=>'user-form','enctype'=>'multipart/form-data']) !!}
                                   
-                                  @include('packages::category.form')
+                                  @include('packages::publisher.form')
                                   
                                   {!! Form::close() !!}   
                                     <!-- END FORM-->

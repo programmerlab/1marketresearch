@@ -24,208 +24,39 @@
                                 </li> 
                                 </ul>
                         </li> 
-                        
-                         <li class="nav-item start active {{ (isset($page_title) && $page_title=='Role')?'open':'' }}">
-                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                
+                         
+                                
+                        <li class="nav-item  {{ (isset($page_title) && $page_title=='Category')?'open':'' }}">
+                            <a href="javascript:;" class="nav-link nav-toggle">
                                         <i class="glyphicon glyphicon-th"></i>
-                                        <span class="title">Roles</span>
-                                        <span class="arrow {{ (isset($page_title) && $page_title=='Blog')?'open':'' }}"></span>
+                                        <span class="title">Research Category</span>
+                                        <span class="arrow {{ (isset($page_title) && $page_title=='Category')?'open':'' }}"></span>
+                                    </a>    
+
+                            <ul class="sub-menu" style="display: {{ (isset($sub_page_title) && $sub_page_title=='Group Category')?'block':'' }}">
+                                <li class="nav-item {{ (isset($page_action) && $page_action=='Create Category')?'open':'' }}">
+                                    <a href="{{ route('category.create') }}" class="nav-link "  > 
+
+                                    <i class="glyphicon glyphicon-plus-sign"></i> 
+                                        <span class="title">
+                                          Create Category 
+                                        </span> 
                                     </a>
-                                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='View Role')?'block':'none' }}">
-                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Role')?'active':'' }}">
-                                            <a href="{{ route('role') }}" class="nav-link ">
-                                               <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                    View Roles 
-                                                </span>
-                                            </a>
-                                        </li> 
-
-                                         <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Role')?'active':'' }}">
-                                            <a href="{{ route('role.create') }}" class="nav-link ">
-                                               <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                    Create Role 
-                                                </span>
-                                            </a>
-                                        </li> 
-										 <li class="nav-item  {{ (isset($page_title) && $page_action=='Update Permission')?'active':'' }}">
-                                            <a href="{{ url('admin/permission') }}" class="nav-link ">
-                                               <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                    Set Permission 
-                                                </span>
-                                            </a>
-                                        </li> 
-                                    </ul>
-                                </li>                    
-                        
-
-                        <li class="nav-item  start active  {{ (isset($page_title) && ($page_title=='Admin User' || $page_title=='Client User') )?'open':'' }}">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                 <i class="glyphicon glyphicon-user"></i>
-                                <span class="title">Manage User</span>
-                                <span class="arrow {{ (isset($page_title) && $page_title=='Admin User')?'open':'' }}"></span>
-                            </a>
-
-                           <ul class="sub-menu" style="display: {{ (isset($page_title) && ($page_title=='Admin User' OR $page_title=='Client User' ))?'block':'none' }}">
-
-                               <li class="nav-item  {{ (isset($page_title) && $page_title=='Admin User')?'open':'' }}">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-user"></i>
-                                    <span class="title">Admin User</span>
-                                    <span class="arrow {{ (isset($page_title) && $page_title=='Admin User')?'open':'' }}"></span>
-                                </a>
-                                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Admin User')?'block':'none' }}">
-                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Admin User')?'active':'' }}">
-                                            <a href="{{ route('user.create') }}" class="nav-link ">
-                                                <i class="glyphicon glyphicon-plus-sign"></i> 
-                                                <span class="title">
-                                                    Create User
-                                                </span>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Admin User')?'active':'' }}">
-                                            <a href="{{ route('user') }}" class="nav-link ">
-                                                 <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                    View Users
-                                                </span>
-                                            </a>
-                                        </li> 
-                                    </ul>
-                                </li> 
-                               <li class="nav-item  {{ (isset($page_title) && $page_title=='Client User')?'open':'' }}">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-user"></i>
-                                    <span class="title">Client User</span>
-                                    <span class="arrow {{ (isset($page_title) && $page_title=='Client User')?'open':'' }}"></span>
-                                </a>
-                                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Client User')?'block':'none' }}">
-                                        <!-- <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Client User')?'active':'' }}">
-                                            <a href="{{ route('clientuser.create') }}" class="nav-link ">
-                                                <i class="glyphicon glyphicon-plus-sign"></i> 
-                                                <span class="title">
-                                                    Create User
-                                                </span>
-                                            </a>
-                                        </li> -->
-
-                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Client User')?'active':'' }}">
-                                            <a href="{{ route('clientuser') }}" class="nav-link ">
-                                                 <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                    View Users
-                                                </span>
-                                            </a>
-                                        </li> 
-                                     
-                                    </ul>
                                 </li>
-                                
-                            </ul>  
-                        </li>
-                       
-                       <!--  <li class="nav-item  start active {{ (isset($page_title) && $page_title=='Category')?'open':'' }}">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-folder-open-o"></i>
-                                <span class="title">Manage Category</span>
-                                <span class="arrow {{ (isset($page_title) && $page_title=='Category')?'open':'' }}"></span>
-                            </a>
-                            <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Category')?'block':'none' }}">
-                                
-                                <li class="nav-item  {{ (isset($sub_page_title) && $sub_page_title=='Group Category')?'open':'' }}">
-
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="fa fa-folder-o"></i>
-                                        <span class="title">Group Category</span>
-                                        <span class="arrow {{ (isset($sub_page_title) && $sub_page_title=='Group Category')?'open':'' }}"></span>
-                                    </a>
-                                    <ul class="sub-menu" style="display: {{ (isset($sub_page_title) && $sub_page_title=='Group Category')?'block':'' }}">
-                                        <li class="nav-item {{ (isset($page_action) && $page_action=='Create Group Category')?'open':'' }}">
-                                            <a href="{{ route('category.create') }}" class="nav-link "  > 
-
-                                            <i class="glyphicon glyphicon-plus-sign"></i> 
-                                                <span class="title">
-                                                  Create Group 
-                                                </span> 
-                                            </a>
-                                        </li>
-                                        <li class="nav-item {{ (isset($page_action) && $page_action=='View Group Category')?'open':'' }}">
-                                            <a href="{{ route('category') }}" class="nav-link " >
-                                                <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                 View Group 
-                                                </span> 
-                                            </a> 
-                                        </li>
-                                        
-                                    </ul>
-                                </li>
-                                <li class="nav-item  {{ (isset($sub_page_title) && $sub_page_title=='Sub Category')?'open':'' }}">
-
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="fa fa-folder-o"></i>
-                                        <span class="title">Category</span>
-                                        <span class="arrow {{ (isset($sub_page_title) && $sub_page_title=='Sub Category')?'open':'' }}"></span>
-                                    </a>
-                                    <ul class="sub-menu"  style="display: {{ (isset($sub_page_title) && $sub_page_title=='Sub Category')?'block':'' }}">
-                                        <li class="nav-item {{ (isset($page_action) && $page_action=='Create Sub Category')?'open':'' }}">
-                                            <a href="{{ route('sub-category.create') }}" class="nav-link " > Create Category</a>
-                                        </li>
-                                        <li class="nav-item {{ (isset($page_action) && $page_action=='View Sub Category')?'open':'' }}">
-                                            <a href="{{ route('sub-category') }}" class="nav-link "  >View Category</a>
-                                        </li>
-                                        
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item  {{ (isset($sub_page_title) && $sub_page_title=='Category Dashboard')?'open':'' }}">
-
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="fa fa-folder-o"></i>
-                                        <span class="title">Category Dashboard</span>
-                                        <span class="arrow {{ (isset($sub_page_title) && $sub_page_title=='Category Dashboard')?'open':'' }}"></span>
-                                    </a>
-                                    <ul class="sub-menu"  style="display: {{ (isset($sub_page_title) && $sub_page_title=='Category Dashboard')?'block':'' }}">
-                                        <li class="nav-item {{ (isset($page_action) && $page_action=='Category Dashboard')?'open':'' }}">
-                                            <a href="{{ route('category-dashboard') }}" class="nav-link "  >Category Dashboard</a>
-                                        </li>
-                                        
-                                    </ul>
+                                <li class="nav-item {{ (isset($page_action) && $page_action=='View Group Category')?'open':'' }}">
+                                    <a href="{{ route('category') }}" class="nav-link " >
+                                        <i class="glyphicon glyphicon-eye-open"></i> 
+                                        <span class="title">
+                                         View Category 
+                                        </span> 
+                                    </a> 
                                 </li>
                                 
                             </ul>
-                        </li> -->
-                         
-
-                            <li class="nav-item start active {{ (isset($page_title) && $page_title=='Blog')?'open':'' }}">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="glyphicon glyphicon-th"></i>
-                                    <span class="title">Blogs</span>
-                                    <span class="arrow {{ (isset($page_title) && $page_title=='Blog')?'open':'' }}"></span>
-                                </a>
-                                <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Blog')?'block':'none' }}">
-                                    <li class="nav-item  {{ (isset($page_title) && $page_action=='View Blog')?'active':'' }}">
-                                        <a href="{{ route('blog') }}" class="nav-link ">
-                                           <i class="glyphicon glyphicon-eye-open"></i> 
-                                            <span class="title">
-                                                View Blogs 
-                                            </span>
-                                        </a>
-                                    </li> 
-
-                                     <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Blog')?'active':'' }}">
-                                        <a href="{{ route('blog.create') }}" class="nav-link ">
-                                           <i class="glyphicon glyphicon-plus-sign"></i> 
-                                            <span class="title">
-                                                Create Blog 
-                                            </span>
-                                        </a>
-                                    </li> 
-                                </ul>
-                            </li> 
+                        </li>
+                                 
+ 
 
 
                                 <li class="nav-item start active {{ (isset($page_title) && $page_title=='Article Type')?'open':'' }}">
@@ -355,7 +186,64 @@
                                 </li> 
 
 
-                                <li class="nav-item start active {{ (isset($page_title) && $page_title=='setting')?'open':'' }}">
+                             <li class="nav-item start active {{ (isset($page_title) && $page_title=='Page')?'open':'' }}">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="glyphicon glyphicon-th"></i>
+                                        <span class="title">Page Content </span>
+                                        <span class="arrow {{ (isset($page_title) && $page_title=='Page')?'open':'' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='setting')?'block':'none' }}">
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Page')?'active':'' }}">
+                                            <a href="{{ route('content') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    View Pages
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Page')?'active':'' }}">
+                                            <a href="{{ route('content.create') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    Add Page
+                                                </span>
+                                            </a>
+                                        </li> 
+                                         
+                                </ul>
+                            </li>
+
+                            <li class="nav-item start active {{ (isset($page_title) && $page_title=='Publisher')?'open':'' }}">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="glyphicon glyphicon-th"></i>
+                                        <span class="title">Publisher </span>
+                                        <span class="arrow {{ (isset($page_title) && $page_title=='Publisher')?'open':'' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='setting')?'block':'none' }}">
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Publisher')?'active':'' }}">
+                                            <a href="{{ route('publisher') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    View Publisher
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Publisher')?'active':'' }}">
+                                            <a href="{{ route('publisher.create') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    Add Publisher
+                                                </span>
+                                            </a>
+                                        </li> 
+                                         
+                                </ul>
+                            </li>
+
+
+                            <li class="nav-item start active {{ (isset($page_title) && $page_title=='setting')?'open':'' }}">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <i class="glyphicon glyphicon-th"></i>
                                         <span class="title">Website Setting </span>
@@ -363,16 +251,16 @@
                                     </a>
                                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='setting')?'block':'none' }}">
                                         <li class="nav-item  {{ (isset($page_title) && $page_action=='View setting')?'active':'' }}">
-                                            <a href="{{ route('setting') }}" class="nav-link ">
-                                               <i class="glyphicon glyphicon-eye-open"></i> 
-                                                <span class="title">
-                                                    View Settings
-                                                </span>
-                                            </a>
-                                        </li> 
+                                        <a href="{{ route('setting') }}" class="nav-link ">
+                                           <i class="glyphicon glyphicon-eye-open"></i> 
+                                            <span class="title">
+                                                View Settings
+                                            </span>
+                                        </a>
+                                    </li> 
                                          
-                                    </ul>
-                                </li>
+                                </ul>
+                            </li>
 
 
                         <!-- posttask end-->

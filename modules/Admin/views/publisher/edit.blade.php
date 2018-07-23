@@ -17,8 +17,7 @@
                     
                     <!-- END PAGE HEAD-->
                     <!-- BEGIN PAGE BREADCRUMB -->
-                  @include('packages::partials.breadcrumb')
-
+                   @include('packages::partials.breadcrumb')
                     <!-- END PAGE BREADCRUMB -->
                     <!-- BEGIN PAGE BASE CONTENT -->
                       <div class="row">
@@ -28,18 +27,16 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-red sbold uppercase">Create Group Category</span>
+                                        <span class="caption-subject font-red sbold uppercase">Edit Publisher</span>
                                     </div>
                                     
                                 </div>
                                 <div class="portlet-body">
                                     <!-- BEGIN FORM-->
-                                
-                                  {!! Form::model($category, ['route' => ['category.store'],'class'=>'form-horizontal user-form','id'=>'user-form','enctype'=>'multipart/form-data']) !!}
-                                  
-                                  @include('packages::contact.form')
-                                  
-                                  {!! Form::close() !!}   
+
+                                {!! Form::model($publisher, ['method' => 'PATCH', 'route' => ['publisher.update', $publisher->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
+                                    @include('packages::publisher.form', compact('publisher'))
+                                {!! Form::close() !!} 
                                     <!-- END FORM-->
                                 </div>
                                 <!-- END VALIDATION STATES-->

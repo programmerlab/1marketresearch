@@ -320,7 +320,7 @@
         ); 
 
 
-         Route::bind('blog', function($value, $route) {
+        Route::bind('blog', function($value, $route) {
             return Modules\Admin\Models\Blogs::find($value);
         });
  
@@ -408,6 +408,39 @@
         );
         
 		
+        Route::bind('content', function($value, $route) {
+            return Modules\Admin\Models\Pages::find($value);
+        });
+ 
+        Route::resource('admin/content', 'Modules\Admin\Http\Controllers\PageController', [
+            'names' => [
+                'edit' => 'content.edit',
+                'show' => 'content.show',
+                'destroy' => 'content.destroy',
+                'update' => 'content.update',
+                'store' => 'content.store',
+                'index' => 'content',
+                'create' => 'content.create',
+            ]
+                ]
+        );
+
+        Route::bind('publisher', function($value, $route) {
+            return Modules\Admin\Models\Publisher::find($value);
+        });
+ 
+        Route::resource('admin/publisher', 'Modules\Admin\Http\Controllers\PublisherController', [
+            'names' => [
+                'edit' => 'publisher.edit',
+                'show' => 'publisher.show',
+                'destroy' => 'publisher.destroy',
+                'update' => 'publisher.update',
+                'store' => 'publisher.store',
+                'index' => 'publisher',
+                'create' => 'publisher.create',
+            ]
+                ]
+        );
 	 
         Route::match(['get','post'],'admin/permission', 'Modules\Admin\Http\Controllers\RoleController@permission');
 

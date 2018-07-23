@@ -2,38 +2,39 @@
 
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request; 
- 
+use App\Http\Requests\Request;
+use Input;
 
-class PageRequest  extends Request {
+class PublisherRequest  extends Request {
 
     /**
-     * The product validation rules.
+     * The metric validation rules.
      *
-     * @return array
+     * @return array    
      */
     public function rules() { 
             switch ( $this->method() ) {
-
                 case 'GET':
                 case 'DELETE': {
                         return [ ];
                     }
                 case 'POST': {
                         return [
-                            'title'             => 'required' ,  
-                            'page_content'      => 'required', 
-                            'images'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350', 
+                            'publisher' => 'required', 
+                            'company'=> 'required'
+
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
+                    if ( $result = $this->result) {
 
-                    return [
-                            'title'             => 'required' ,  
-                            'page_content'      => 'required', 
-                            'images'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350', 
+                        return [
+                            'publisher' => 'required', 
+                            'company'=> 'required'
+                            
                         ];
+                    }
                 }
                 default:break;
             }

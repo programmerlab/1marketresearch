@@ -28,18 +28,17 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-red sbold uppercase">{{$page_action }}</span>
+                                        <span class="caption-subject font-dark sbold uppercase">{{$page_action}}</span>
                                     </div>
                                     
                                 </div>
                                 <div class="portlet-body">
-                                    <!-- BEGIN FORM-->
-                                
-                                  {!! Form::model($category, ['route' => ['category.store'],'class'=>'form-horizontal user-form','id'=>'user-form','enctype'=>'multipart/form-data']) !!}
-                                  
-                                  @include('packages::category.form')
-                                  
-                                  {!! Form::close() !!}   
+                                    <!-- BEGIN FORM--> 
+
+
+                                {!! Form::model($page, ['method' => 'PATCH', 'route' => ['content.update', $page->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
+                                    @include('packages::pages.form', compact('page'))
+                                {!! Form::close() !!} 
                                     <!-- END FORM-->
                                 </div>
                                 <!-- END VALIDATION STATES-->

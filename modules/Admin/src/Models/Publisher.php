@@ -1,23 +1,18 @@
-
 <?php
+
 namespace Modules\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent; 
-use Modules\Admin\Models\Category;
-use Illuminate\Foundation\Http\FormRequest;
-use Response;
 
-class Page extends Eloquent {
-
-
-
-   
-    /**
+ 
+class Publisher extends Eloquent {
+ 
+    /*
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = ' pages';
+    protected $table = 'publishers';
     /**
      * The attributes that are mass assignable.
      *
@@ -35,14 +30,6 @@ class Page extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = ['title','page_content','banner_image1']; // All field of user table here    
-
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-     
+   protected $fillable = ['publisher','company'];  // All field of user table here    
   
 }

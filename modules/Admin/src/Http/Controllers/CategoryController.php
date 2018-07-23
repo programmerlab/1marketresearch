@@ -45,9 +45,9 @@ class CategoryController extends Controller {
     public function __construct() { 
         $this->middleware('admin');
         View::share('viewPage', 'Category');
-        View::share('sub_page_title', 'Group Category');
+        View::share('sub_page_title', 'Research Categories');
         View::share('helper',new Helper);
-        View::share('heading','Group Category');
+        View::share('heading','Research Categories');
         View::share('route_url',route('category'));
 
         $this->record_per_page = Config::get('app.record_per_page');
@@ -104,7 +104,7 @@ class CategoryController extends Controller {
     {
          
         $page_title = 'Category';
-        $page_action = 'Create Group Category';
+        $page_action = 'Create Category';
         $category  = Category::all();
         $sub_category_name  = Category::all();
  
@@ -155,7 +155,7 @@ class CategoryController extends Controller {
     public function edit(Category $category) {
 
         $page_title = 'Category';
-        $page_action = 'Edit Group category'; 
+        $page_action = 'Edit category'; 
         $url = url::asset('storage/uploads/category/'.$category->category_group_image)  ;
         return view('packages::category.edit', compact( 'url','category', 'page_title', 'page_action'));
     }
@@ -206,7 +206,7 @@ class CategoryController extends Controller {
                         ->with('flash_alert_notice', 'Group Category  successfully updated.');
     }
     /*
-     *Delete User
+     * Category category
      * @param ID
      * 
      */
