@@ -115,10 +115,8 @@ class ContactController extends Controller {
         
         $page_title = 'Contact';
         $page_action = 'Create Contact';
-        $category  = Category::all();
-        $categories  = Category::all();
   
-        return view('packages::contact.create', compact('categories','contact', 'html','category','sub_category_name', 'page_title', 'page_action'));
+        return view('packages::contact.create', compact('contact', 'page_title', 'page_action'));
     }
 
     public function createGroup(Request $request)
@@ -170,17 +168,11 @@ class ContactController extends Controller {
 
     public function store(ContactRequest $request, Contact $contact) 
     {   
-        
-        $categoryName = $request->get('categoryName');
-        $cn= ''; 
-        foreach ($categoryName as $key => $value) {
-            $cn = ltrim($cn.','.$value,',');
-        }
-        
+             
         $table_cname = \Schema::getColumnListing('contacts');
-        $except = ['id','create_at','updated_at','categoryName'];
+        $except = ['id','create_at','updated_at'];
         $input = $request->all();
-        $contact->categoryName = $cn;
+        
         foreach ($table_cname as $key => $value) {
            
            if(in_array($value, $except )){
@@ -287,30 +279,16 @@ class ContactController extends Controller {
 
     public function edit(Contact $contact) {
         $page_title     = 'contact';
-        $page_action    = 'Edit contact'; 
-        $categories  = Category::all();
-        $category_id  = explode(',',$contact->categoryName);
+        $page_action    = 'Edit contact';  
         
-        return view('packages::contact.edit', compact('category_id','categories','contact' ,'url','contact', 'page_title', 'page_action'));
+        return view('packages::contact.edit', compact('contact', 'page_title', 'page_action'));
     }
 
     public function update(Request $request, Contact $contact) {
         
         $contact = Contact::find($contact->id); 
-        $categoryName = $request->get('categoryName');
-        
-        $cn= '';
-        if($categoryName){
-            foreach ($categoryName as $key => $value) {
-                $cn = ltrim($cn.','.$value,',');
-            }
-        }
-        if($cn!=''){
-            $contact->categoryName =  $cn;
-        }else{
-             $contact->categoryName =  null; 
-        }
-        $request = $request->except('_method','_token','categoryName');
+       
+        $request = $request->except('_method','_token');
         
         foreach ($request as $key => $value) {
             $contact->$key = $value;

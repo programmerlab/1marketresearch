@@ -8,7 +8,7 @@
                         <!-- BEGIN PAGE TITLE -->
                         <div class="page-title">
                             <h1>My Dashboard
-                                <small>user, group category and category</small>
+                                <small>Reports,Research category and press</small>
                             </h1>
                         </div>
                         <!-- END PAGE TITLE -->
@@ -37,7 +37,7 @@
                                         <h3 class="font-purple-soft">
                                             <span data-counter="counterup" data-value="276">{{$users_count}}</span>
                                         </h3>
-                                        <small>Manage USERS</small>
+                                        <small>Research Category</small>
                                     </div>
                                     <div class="icon">
                                         <i class="icon-user"></i>
@@ -61,7 +61,7 @@
                                         <h3 class="font-blue-sharp">
                                             <span data-counter="counterup" data-value="567">{{ $category_grp_count }}</span>
                                         </h3> 
-                                        <small>Group Category  </small>
+                                        <small>Press  </small>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-folder-open-o"></i>
@@ -85,7 +85,7 @@
                                         <h3 class="font-blue-sharp">
                                             <span data-counter="counterup" data-value="567">{{$category_count}}</span>
                                         </h3>
-                                        <small> Manage Category</small>
+                                        <small> Reports</small>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-folder-open-o"></i>
@@ -109,7 +109,7 @@
                                         <h3 class="font-blue-sharp">
                                             <span data-counter="counterup" data-value="567">{{$category_dashboard_count or 0 }}</span>
                                         </h3>
-                                        <small> Category Dashboard</small>
+                                        <small>Contacts Request</small>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-folder-open-o"></i>

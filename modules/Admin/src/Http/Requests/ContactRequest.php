@@ -22,7 +22,7 @@ class ContactRequest  extends Request {
                         return [
                             'firstName' => 'required', 
                             'email'     => "required|email" , 
-                            'categoryName' => 'required'
+                            'phone' => 'required'
                         ];
                     }
                 case 'PUT':
@@ -31,8 +31,8 @@ class ContactRequest  extends Request {
 
                         return [
                             'firstName' => 'required', 
-                             'email' => 'required' , 
-                            'categoryName' => 'required'
+                            'email' => 'required' , 
+                            'phone' => 'required'
                             
                         ];
                     }

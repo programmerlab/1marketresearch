@@ -441,6 +441,24 @@
             ]
                 ]
         );
+
+
+        Route::bind('reports', function($value, $route) {
+            return Modules\Admin\Models\Report::find($value);
+        });
+ 
+        Route::resource('admin/reports', 'Modules\Admin\Http\Controllers\ReportController', [
+            'names' => [
+                'edit' => 'reports.edit',
+                'show' => 'reports.show',
+                'destroy' => 'reports.destroy',
+                'update' => 'reports.update',
+                'store' => 'reports.store',
+                'index' => 'reports',
+                'create' => 'reports.create',
+            ]
+                ]
+        );
 	 
         Route::match(['get','post'],'admin/permission', 'Modules\Admin\Http\Controllers\RoleController@permission');
 

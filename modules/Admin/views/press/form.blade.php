@@ -4,32 +4,66 @@
                 <div class="alert alert-danger display-hide">
                     <button class="close" data-close="alert"></button> Please fill the required field! </div>
             
-            <div class="form-group {{ $errors->first('pressName', ' has-error') }}
+            <div class="form-group {{ $errors->first('title', ' has-error') }}
             @if(session('field_errors')) {{ 'has-error' }} @endif
             ">
-            <label class="control-label col-md-3">Press Name <span class="required"> * </span></label>
+            <label class="control-label col-md-3">Press Title <span class="required"> * </span></label>
             <div class="col-md-8"> 
-                {!! Form::text('pressName',null, ['class' => 'form-control','data-required'=>1,'required'])  !!} 
-                <span class="help-block">{{ $errors->first('pressName', ':message') }}  
+                {!! Form::text('title',null, ['class' => 'form-control','data-required'=>1,'required'])  !!} 
+                <span class="help-block">{{ $errors->first('title', ':message') }}  
             </div>
         </div>  
         
 
-            <div class="form-group {{ $errors->first('link', ' has-error') }}
+        <div class="form-group {{ $errors->first('link', ' has-error') }}
             @if(session('field_errors')) {{ 'has-error' }} @endif
             ">
-            <label class="control-label col-md-3">Link <span class="required"> * </span></label>
+            <label class="control-label col-md-3">Download link <span class="required"> * </span></label>
             <div class="col-md-8"> 
                 {!! Form::text('link',null, ['class' => 'form-control','data-required'=>1,'required'])  !!} 
                 <span class="help-block">{{ $errors->first('link', ':message') }}  
             </div>
+        </div> 
+         <div class="form-group {{ $errors->first('publish_date', ' has-error') }}
+            @if(session('field_errors')) {{ 'has-error' }} @endif
+            ">
+            <label class="control-label col-md-3">Publish date <span class="required"> * </span></label>
+            <div class="col-md-8"> 
+                {!! Form::text('publish_date',null, ['class' => 'form-control','data-required'=>1,'required'])  !!} 
+                <span class="help-block">{{ $errors->first('publish_date', ':message') }}  
+            </div>
         </div>  
 
-         <div class="form-group {{ $errors->first('articleDescription', ' has-error') }}">
-            <label class="control-label col-md-3">Article Description<span class="required"> </span></label>
+         <div class="form-group {{ $errors->first('description', ' has-error') }}">
+            <label class="control-label col-md-3">Description<span class="required"> </span></label>
             <div class="col-md-8"> 
-                {!! Form::textarea('articleDescription',null, ['class' => 'form-control ckeditor form-cascade-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!}  
-                <span class="help-block">{{ $errors->first('articleDescription', ':message') }}</span>
+                {!! Form::textarea('description',null, ['class' => 'form-control ckeditor form-cascade-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!}  
+                <span class="help-block">{{ $errors->first('description', ':message') }}</span>
+            </div>
+        </div>
+
+        <div class="form-group {{ $errors->first('table_of_content', ' has-error') }}">
+            <label class="control-label col-md-3">Table for content<span class="required"> </span></label>
+            <div class="col-md-8"> 
+                {!! Form::textarea('table_of_content',null, ['class' => 'form-control ckeditor form-cascade-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!}  
+                <span class="help-block">{{ $errors->first('table_of_content', ':message') }}</span>
+            </div>
+        </div>
+
+
+         <div class="form-group {{ $errors->first('about_us', ' has-error') }}">
+            <label class="control-label col-md-3">About Us<span class="required"> </span></label>
+            <div class="col-md-8"> 
+                {!! Form::textarea('about_us',null, ['class' => 'form-control ckeditor form-cascade-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!}  
+                <span class="help-block">{{ $errors->first('about_us', ':message') }}</span>
+            </div>
+        </div>
+
+        <div class="form-group {{ $errors->first('contact_us', ' has-error') }}">
+            <label class="control-label col-md-3">Contact Us<span class="required"> </span></label>
+            <div class="col-md-8"> 
+                {!! Form::textarea('contact_us',null, ['class' => 'form-control ckeditor form-cascade-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!}  
+                <span class="help-block">{{ $errors->first('contact_us', ':message') }}</span>
             </div>
         </div>
     

@@ -34,15 +34,8 @@
                                              <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Contacts </a> 
                                             </div>
                                         </div>  
-                                        
-                                         <div class="col-md-2 pull-right">
-                                            <div   class="input-group">  
-                                              <a onclick="createGroup('{{url("admin/createGroup")}}')" class="btn  btn-success  btn-outline sbold" data-toggle="modal" href="#responsive"> 
-                                                <i class="fa fa-plus-circle"></i> 
-                                            Create Group </a>  
-                                            </div>
-                                        </div>  
-                                          <div class="col-md-3 pull-right">
+                                          
+                                          <div class="col-md-2 pull-right">
                                             <div   class="input-group">  
                                              <a class="btn  btn-success" data-toggle="modal" href="{{url('admin/contact?export=pdf')}}"><i class="fa fa-plus-circle"></i> Export Contacts to pdf </a> 
                                             </div>
@@ -82,23 +75,27 @@
                                     <table class="table table-striped table-hover table-bordered" id="contact">
                                         <thead>
                                             <tr>
-                                             <th>   <INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /> All </th> 
-                                             <th> Title </th>
-                                                <th> Name </th>
+                                                <th>  Sno.   </th>  
+                                                <th> Full Name </th>
                                                 <th> Email </th> 
-                                                <th> Phone </th>  
-                                                <th>Created date</th> 
-                                                <th>Action</th> 
+                                                <th> Phone </th> 
+                                                <th> Request Type </th> 
+                                                <th> Request Content </th>
+                                                <th>Request date</th> 
+                                            <th>Action</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($contacts as $key => $result)
                                             <tr>
-                                             <th> <input type="checkbox" value="{{$result->id}}" name="checkAll"  class="checkAll contactChk"> </th>
-                                             <td> {{$result->title }} </td>
-                                                <td> {{$result->firstName.' '.$result->lastName}} </td>
+                                             <th>  {{++$key}} </th>
+                                             
+                                                <td> {{$result->title }} {{$result->firstName.' '.$result->lastName}} </td>
                                                  <td> {{$result->email}} </td>
                                                  <td> {{$result->phone}} </td> 
+                                                   
+                                                <td> {{$result->request_type}} </td> 
+                                                <td> {{$result->request_description}} </td>
                                                      <td>
                                                         {!! Carbon\Carbon::parse($result->created_at)->format('Y-m-d'); !!}
                                                     </td>

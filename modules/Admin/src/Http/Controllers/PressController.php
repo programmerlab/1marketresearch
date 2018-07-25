@@ -108,7 +108,7 @@ class PressController extends Controller {
         $result->fill(Input::all()); 
         $result->save(); 
         return Redirect::to(route('press'))
-                            ->with('flash_alert_notice', 'New press item  successfully created.');
+                            ->with('flash_alert_notice', 'New press   successfully created.');
     }
 
     /*
@@ -131,7 +131,7 @@ class PressController extends Controller {
         $result->save(); 
         
         return Redirect::to(route('press'))
-                        ->with('flash_alert_notice', 'Press item successfully updated.');
+                        ->with('flash_alert_notice', 'Press successfully updated.');
     }
     /*
      *Delete User
@@ -147,8 +147,6 @@ class PressController extends Controller {
 
     public function show(Press $result) {
         
-        //Press::with('pressCategory')->Paginate($this->record_per_page);
-       // $result = $press->first();
         $page_title  = 'Press';
         $page_action  = 'Show Press';  
         return view('packages::press.show', compact('result','data', 'page_title', 'page_action','html'));

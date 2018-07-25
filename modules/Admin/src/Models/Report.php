@@ -1,18 +1,20 @@
 <?php
-
 namespace Modules\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent; 
+use Modules\Admin\Models\Category;
+use Illuminate\Foundation\Http\FormRequest;
+use Response;
 
- 
-class Press extends Eloquent {
- 
-    /*
+class Report extends Eloquent { 
+
+   
+    /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'press_master';
+    protected $table = 'reports';
     /**
      * The attributes that are mass assignable.
      *
@@ -30,14 +32,4 @@ class Press extends Eloquent {
      *
      * @var array
      */
-   protected $fillable = [
-                    'title',
-                    'link',
-                    'description',
-                    'table_of_content',
-                    'publish_date',
-                    'about_us',
-                    'contact_us',
-                    'status'];  // All field from table here    
-  
 }

@@ -48,22 +48,39 @@
         </div>
     </div> 
 
-     <div class="form-group {{ $errors->first('position', ' has-error') }}">
-        <label class="control-label col-md-3">Position </label>
+     <div class="form-group {{ $errors->first('job_title', ' has-error') }}">
+        <label class="control-label col-md-3">Job Title </label>
         <div class="col-md-4"> 
-            {!! Form::text('position',null, ['class' => 'form-control','data-required'=>1])  !!} 
+            {!! Form::text('job_title',null, ['class' => 'form-control','data-required'=>1])  !!} 
             
-            <span class="help-block">{{ $errors->first('position', ':message') }}</span>
+            <span class="help-block">{{ $errors->first('job_title', ':message') }}</span>
+        </div>
+    </div> 
+
+     <div class="form-group {{ $errors->first('request_type', ' has-error') }}">
+        <label class="control-label col-md-3">Request  type </label>
+        <div class="col-md-4"> 
+            {!! Form::text('request_type',null, ['class' => 'form-control','data-required'=>1])  !!} 
+            
+            <span class="help-block">{{ $errors->first('request_type', ':message') }}</span>
         </div>
     </div> 
 
     <div class="form-group {{ $errors->first('phone', ' has-error') }}">
         <label class="control-label col-md-3">Phone </label>
         <div class="col-md-4"> 
-            {!! Form::text('phone',null, ['class' => 'form-control','data-required'=>1,'min'=>10]) !!} 
+            {!! Form::number('phone',null, ['class' => 'form-control','data-required'=>1,'min'=>10]) !!} 
             <span class="help-block">{{ $errors->first('phone', ':message') }}</span>
         </div>
     </div> 
+
+    <div class="form-group {{ $errors->first('country', ' has-error') }}">
+        <label class="control-label col-md-3">Country </label>
+        <div class="col-md-4"> 
+            {!! Form::text('country',null, ['class' => 'form-control','data-required'=>1]) !!} 
+            <span class="help-block">{{ $errors->first('country', ':message') }}</span>
+        </div>
+    </div>
 
 
     <div class="form-group {{ $errors->first('email', ' has-error') }}  @if(session('field_errors')) {{ 'has-group' }} @endif">
@@ -76,42 +93,14 @@
         <span class="help-block" style="color:red">{{ $errors->first('email', ':message') }} @if(session('field_errors')) {{ 'The email has already been taken.' }} @endif</span>
 
         </div> 
-    </div>
-
-     
-
-     <div class="form-group {{ $errors->first('categoryName', ' has-error') }}">
-        <label class="control-label col-md-3">Select Category
-            <span class="required">  </span>
-        </label>
-        <div class="col-md-4"> 
-        <div class="portlet-body">
-             <select class="mt-multiselect btn btn-default" multiple="multiple" data-label="right" data-select-all="true" data-width="100%"  name="categoryName[]" data-action-onchange="true">
-                @foreach($categories as $key=>$value)
-                <option value="{{$value->id}}" @if(isset($category_id) && (in_array($value->id,$category_id))) {{ 'selected="selected"'}}  @endif
-
-                @if($value->id==old('categoryName'))  {{ 'selected="selected"'}} @endif
-                  >
-
-                {{ $value->category_name }}
-                
-                </option>
-                @endforeach
-            </select>
-            </div>
-            <span class="help-block">{{ $errors->first('categoryName', ':message') }}</span>
-        </div>
     </div> 
- 
 
-
-
-<div class="form-group {{ $errors->first('address', ' has-error') }}">
-    <label class="control-label col-md-3">Address<span class="required"> </span></label>
+<div class="form-group {{ $errors->first('request_description', ' has-error') }}">
+    <label class="control-label col-md-3">Description<span class="required"> </span></label>
     <div class="col-md-4"> 
-        {!! Form::textarea('address',null, ['class' => 'form-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!} 
+        {!! Form::textarea('request_description',null, ['class' => 'form-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!} 
         
-        <span class="help-block">{{ $errors->first('address', ':message') }}</span>
+        <span class="help-block">{{ $errors->first('request_description', ':message') }}</span>
     </div>
 </div> 
     

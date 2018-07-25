@@ -20,8 +20,9 @@ class PressRequest  extends Request {
                     }
                 case 'POST': {
                         return [
-                            'pressName' => 'required', 
-                            'link'=> 'required'
+                            'title' => 'required', 
+                            'link'=> 'required',
+                            'description'=> 'required'
 
                         ];
                     }
@@ -30,9 +31,9 @@ class PressRequest  extends Request {
                     if ( $result = $this->result) {
 
                         return [
-                            'pressName'   => "required", 
-                            'link'=> 'required'
-                            
+                            'title' => 'required', 
+                            'link'=> 'required',
+                            'description'=> 'required' 
                         ];
                     }
                 }
