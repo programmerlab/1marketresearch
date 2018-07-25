@@ -24,20 +24,8 @@
                             <i class="fa fa-angle-down"></i>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ route('role')}}">
-                                    <i class="icon-user"></i> View Roles </a>
-                            </li>
+                            
 
-                             <li>
-                                <a href="{{ route('user')}}">
-                                    <i class="glyphicon glyphicon-th"></i> View Users </a>
-                            </li>
-
-                           <li>
-                                <a href="{{ route('postTask')}}">
-                                    <i class="glyphicon glyphicon-th"></i> View Tasks </a>
-                            </li>
                             <li>
                                 <a href="{{ route('category')}}">
                                     <i class="glyphicon glyphicon-th"></i> View category </a>
@@ -48,14 +36,10 @@
                                     <i class="glyphicon glyphicon-th"></i> View contact </a>
                             </li>
 
-                            <li>
-                                <a href="{{ route('program')}}">
-                                    <i class="glyphicon glyphicon-th"></i> View Program </a>
-                            </li>
 
                             <li>
-                                <a href="{{ route('blog')}}">
-                                    <i class="glyphicon glyphicon-th"></i> View Blogs </a>
+                                <a href="{{ route('reports')}}">
+                                    <i class="glyphicon glyphicon-th"></i> View Reports </a>
                             </li>
 
                             <li>
