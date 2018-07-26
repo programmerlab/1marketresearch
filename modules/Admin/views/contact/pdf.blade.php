@@ -15,22 +15,14 @@
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
                     <!-- BEGIN PAGE HEAD--> 
-                    <h3> <center>YelloTasker</center></h3>
+                    <h3> <center>Contacts</center></h3>
                     <!-- END PAGE BREADCRUMB -->
                     <!-- BEGIN PAGE BASE CONTENT -->
                     <div class="row">
                         <div class="col-md-12">
                             <!-- BEGIN EXAMPLE TABLE PORTLET-->
                             <div class="portlet light portlet-fit bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-red sbold uppercase">People Of Contacts</span>
-                                    </div>
-                                        <hr>
-                                         
-                                     
-                                </div>
+                                 
                                   
                                 <div class="portlet-body">
                                     <div class="table-toolbar">

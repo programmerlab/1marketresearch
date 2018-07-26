@@ -161,7 +161,7 @@
                   {!! Form::file('photo',null,['class' => 'form-control'])  !!}
              <br>
               @if(isset($reports->photo))
-              <img src="{!! Url::to('storage/reports/'.$blog->photo) !!}" width="150px">
+              <img src="{!! Url::to('storage/reports/'.$reports->photo) !!}" width="150px">
               @endif                                   
             <span class="label label-danger">{{ $errors->first('photo', ':message') }}</span>
             @if(Session::has('flash_alert_notice')) 

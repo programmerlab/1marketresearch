@@ -23,12 +23,11 @@ use Validator;
 use App\Http\Requests;
 use App\Helpers\Helper as Helper;
 //use Modules\Admin\Models\User; 
-use Modules\Admin\Models\Category;
-use Modules\Admin\Models\CategoryDashboard;
+use Modules\Admin\Models\Category; 
 use App\Admin;
 use Illuminate\Http\Request;
 use Session;
-
+use Modules\Admin\Models\Report; 
 use App\User;
 use App\ProfessorProfile;
 use App\StudentProfile;
@@ -119,5 +118,85 @@ class AdminController extends Controller {
         $msg = "page not found";
         return view('packages::auth.page_not_found',compact('page_title','page_action','viewPage'))->with('flash_alert_notice', $msg);
 
-   }  
+   } 
+
+   public function uploadFile($file)
+    {
+       
+        //Display File Name
+        $fileName = $file->getClientOriginalName();
+
+        //Display File Extension
+        $ext = $file->getClientOriginalExtension();
+        //Display File Real Path
+        $realPath = $file->getRealPath(); 
+        //Display File Mime Type
+        
+
+        $file_name = time().'.'.$ext;
+        $path = storage_path('csv');
+
+        chmod($path ,0777);
+        $file->move($path,$file_name);
+        chmod($path.'/'.$file_name ,0777);
+        return $path.'/'.$file_name;
+    }
+
+    public function csvImport(Request $request)
+    {
+        try{
+            $file = $request->file('importCsv');
+            
+            if($file==NULL){
+                echo json_encode(['status'=>0,'message'=>'Please select  csv file!']); 
+                exit(); 
+            }
+            $ext = $file->getClientOriginalExtension();
+            if($file==NULL || $ext!='csv'){
+                echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
+                exit(); 
+            }
+            $mime = $file->getMimeType();   
+           
+            $upload = $this->uploadFile($file);
+           
+            $rs =    \Excel::load($upload, function($reader)use($request) {
+
+            $data = $reader->all();
+              
+            $table_cname = \Schema::getColumnListing('reports');
+            
+            $except = ['id','create_at','updated_at'];
+
+            $input = $request->all(); 
+
+            $contact =  new Report;
+            foreach ($data  as $key => $result) {
+                foreach ($table_cname as $key => $value) {
+                   if(in_array($value, $except )){
+                        continue;
+                   }
+                   if(isset($result->$value)) {
+                       $contact->$value = $result->$value; 
+                       $status = 1;
+                   } 
+                }
+                 if(isset($status)){
+                     $contact->save(); 
+                 }
+            } 
+           
+            if(isset($status)){
+                echo json_encode(['status'=>1,'message'=>' Data imported successfully!']);
+            }else{
+               echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']);
+            }
+             
+            });
+
+        } catch (\Exception $e) {
+            echo json_encode(['status'=>0,'message'=>'Please select csv file!']); 
+            exit(); 
+        } 
+    } 
 }

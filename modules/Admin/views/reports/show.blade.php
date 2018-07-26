@@ -1,174 +1,130 @@
-
 @extends('packages::layouts.master')
   @section('title', 'Dashboard')
     @section('header')
     <h1>Dashboard</h1>
     @stop
     @section('content') 
+  
       @include('packages::partials.navigation')
       <!-- Left side column. contains the logo and sidebar -->
       @include('packages::partials.sidebar')
-                             <!-- END SIDEBAR -->
-            <!-- BEGIN CONTENT -->
-             <div class="page-content-wrapper">
-                <!-- BEGIN CONTENT BODY -->
-                <div class="page-content">
-                    <!-- BEGIN PAGE HEAD-->
-                    
-                    <!-- END PAGE HEAD-->
-                    <!-- BEGIN PAGE BREADCRUMB -->
-                  @include('packages::partials.breadcrumb')
+      <!-- END SIDEBAR -->
+      <!-- BEGIN CONTENT -->
+     <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <!-- BEGIN PAGE HEAD--> 
+          <!-- END PAGE HEAD-->
+          <!-- BEGIN PAGE BREADCRUMB -->
+         @include('packages::partials.breadcrumb')
 
-                    <!-- END PAGE BREADCRUMB -->
-                    <!-- BEGIN PAGE BASE CONTENT -->
-                      <div class="row">
-                        <div class="col-md-12">
-                            <!-- BEGIN VALIDATION STATES-->
-                            <div class="portlet light portlet-fit portlet-form bordered">
+          <!-- END PAGE BREADCRUMB -->
+          <!-- BEGIN PAGE BASE CONTENT -->
+          <div class="row">
+              <div class="col-md-12">
+                  <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                  <div class="portlet light portlet-fit bordered">
+                    <div class="portlet-title">
+                      <div class="caption">
+                          <i class="icon-settings font-red"></i>
+                          <span class="caption-subject font-red sbold uppercase">{{ $heading }}</span>
+                      </div>
 
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-dark sbold uppercase">Show blog</span>
-                                    </div>
-                                    
-                                </div>
-                               
-                                 <div class="portlet-body">
-                                <div class="table-toolbar pull-right">
-                                             
-                                         <div class="col-md-12">
-                                             <a href="{{ route('blog') }}" class="btn  btn-primary"> Go Back    </a>
+                       <div class="col-md-2 pull-right">
+                                            <div   class="input-group">  
+                                             <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Reports </a> 
+                                            </div>
                                         </div> 
-                                    </div> 
-                                    <!-- BEGIN FORM--> 
-                                       
-                                {!! Form::model($blog, ['method' => 'PATCH', 'route' => ['blog.update', $blog->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3']) !!}
-                                   <style type="text/css">
- li.multiselect-all,li.multiselect-item {
-    margin-left: 25px;
-  }
-  ul.multiselect-container > li{
-     margin-left: 25px;
-  }
-</style> 
-
-<div class="form-body">
-    <div class="alert alert-danger display-hide">
-        <button class="close" data-close="alert"></button> Please fill the required field! </div>
-  <!--   <div class="alert alert-success display-hide">
-        <button class="close" data-close="alert"></button> Your form validation is successful! </div>
--->
- 
-    <div class="form-group {{ $errors->first('blog_title', ' has-error') }}">
-            <label class="control-label col-md-3">Blog Title <span class="required"> * </span></label>
-            <div class="col-md-4"> 
-                {!! Form::text('blog_title',null, ['class' => 'form-control','data-required'=>1])  !!} 
-                
-                <span class="help-block">{{ $errors->first('blog_title', ':message') }}</span>
-            </div>
-        </div> 
-
-         <div class="form-group{{ $errors->first('blog_description', ' has-error') }}">
-        <label class="control-label col-md-3">Blog Description</label>
-        <div class="col-md-8"> 
-            {!! Form::textarea('blog_description',null, ['class' => 'form-control ckeditor form-cascade-control input-small'])  !!}
-            <span class="label label-danger">{{ $errors->first('blog_description', ':message') }}</span>
-            @if(Session::has('flash_alert_notice')) 
-            <span class="label label-danger">
-                {{ Session::get('flash_alert_notice') }} 
-            </span>@endif
-        </div>
-    </div> 
-
-
-       <div class="form-group {{ $errors->first('blog_category', ' has-error') }}">
-        <label class="control-label col-md-3">Select Blog Category
-            <span class="required">  </span>
-        </label>
-        <div class="col-md-4"> 
-        <div class="portlet-body">
-             <select class="mt-multiselect btn btn-default" multiple="multiple" data-label="right" data-select-all="true" data-width="100%"  name="blog_category[]" data-action-onchange="true">
-                @foreach($categories as $key=>$value)
-                <option value="{{$value->id}}" @if(isset($category_id) && (in_array($value->id,$category_id))) {{ 'selected="selected"'}}  @endif
-
-                @if($value->id==old('blog_category'))  {{ 'selected="selected"'}} @endif
-                  >
-
-                {{ $value->category_name }}
-                
-                </option>
-                @endforeach
-            </select>
-            </div>
-            <span class="help-block">{{ $errors->first('blog_category', ':message') }}</span>
-        </div>
-    </div> 
-
-     
-
-
-         <div class="form-group {{ $errors->first('blog_type', 'has-error') }}">
-            <label class="control-label col-md-3">Blog Type  </label>
-            <div class="col-md-4">  
-               {{ Form::select('blog_type',$type, array_search($blog->blog_type, $type), ['class' => 'form-control']) }}
-                
-                <span class="help-block">{{ $errors->first('blog_type', ':message') }}</span>
-            </div>
-        </div> 
-
-
-         <div class="form-group {{ $errors->first('blog_created_by', 'has-error') }}">
-            <label class="control-label col-md-3">Author  </label>
-            <div class="col-md-4"> 
-                {!! Form::text('blog_created_by',null, ['class' => 'form-control'])  !!} 
-                
-                <span class="help-block">{{ $errors->first('blog_created_by', ':message') }}</span>
-            </div>
-        </div> 
-
-
-
-
-         <div class="form-group {{ $errors->first('blog_image', ' has-error') }}">
-            <label class="control-label col-md-3">Blog Images  </label>
-            <div class="col-md-4"> 
-                  
-             <br>
-              @if(isset($blog->blog_image))
-              <img src="{!! Url::to('storage/blog/'.$blog->blog_image) !!}" width="150px">
-              @endif                                   
-            <span class="label label-danger">{{ $errors->first('blog_image', ':message') }}</span>
-            @if(Session::has('flash_alert_notice')) 
-            <span class="label label-danger">
-
-                {{ Session::get('flash_alert_notice') }} 
-
-            </span>@endif
-
-            </div>
-        </div>  
-    
-    
-</div> 
-
- 
-                                {!! Form::close() !!} 
-                                    <!-- END FORM-->
-                                </div>
-                                <!-- END VALIDATION STATES-->
-                            </div>
-                        </div>
+                         
+                      <div class="col-md-2 pull-right">
+                          <div style="" class="input-group"> 
+                              <a href="{{ route('reports.create')}}">
+                                  <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Reports</button> 
+                              </a>
+                          </div>
+                      </div> 
+                      <div class="col-md-1 pull-right">
+                          <div style="" class="input-group"> 
+                              <a href="{{ route('reports')}}">
+                                  <button  class="btn btn-primary"><i class="fa fa-plus-circle"></i> Back</button> 
+                              </a>
+                          </div>
+                      </div>
+                           
                     </div>
-                    <!-- END PAGE BASE CONTENT -->
-                </div>
-                <!-- END CONTENT BODY -->
-            </div>
-            
-            
-            <!-- END QUICK SIDEBAR -->
-        </div>
-        
+                        
+                      @if(Session::has('flash_alert_notice'))
+                           <div class="alert alert-success alert-dismissable" style="margin:10px">
+                              <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            <i class="icon fa fa-check"></i>  
+                           {{ Session::get('flash_alert_notice') }} 
+                           </div>
+                      @endif
+                      <div class="portlet-body">
+                          <div class="table-toolbar">
+                              <div class="row">
+                                 Reports Details
+                              </div>
+                          </div>
+                           
+                        <table class="table table-striped table-hover table-bordered" id="contact">
+                               
+                            <tbody>
+                               @foreach ($reports  as $key => $result)
+                                @if($key=="id")
+                                  <?php continue; ?>
+                                @endif  
+                                  <tr>
+                                     <td width="300px"><b>{{ ucfirst(str_replace('_',' ',$key)) }} </b></td>
+                                      <td>{!! ucfirst($result)     !!} 
+                                  </td>
+                                @endforeach 
+                              </tbody>
+                        </table> 
+                            
+                      </div>
+                  </div>
+                  <!-- END EXAMPLE TABLE PORTLET-->
+              </div>
+          </div>
+            <!-- END PAGE BASE CONTENT -->
+      </div>
+        <!-- END CONTENT BODY -->
+    </div> 
+    <!-- END QUICK SIDEBAR -->
+</div> 
+       
+  
 
-        
+<form id="import_csv" action="" method="post" encytype="multipart/form-data">
+  <input type="hidden" id="url_action" name="action" value="admin/reports/import">
+  <input type="hidden" name="_token" value="{{csrf_token()}}">
+  <input type="hidden" id="redirect_action" name="action" value="admin/reports">
+ <div id="responsive2" class="modal fade" tabindex="-1" data-width="300">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #efeb10 !important">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Import Reports</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Import excel file</h4>
+                        <p><a href="{{ url('storage/csv/reports.csv') }}">download csv sample</a></p>
+                        <span id="error_msg2"></span>
+                        <p>
+                            <input type="file" class="col-md-12 form-control" name="importCsv" id="importCsv"> </p> 
+                    </div>
+                </div> 
+            </div>
+            <div class="modal-footer">
+            
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                <button type="submit" class="btn red" id="csave" >Imort</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
 @stop

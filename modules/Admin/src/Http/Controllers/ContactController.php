@@ -205,7 +205,7 @@ class ContactController extends Controller {
         $file_name = time().'.'.$ext;
         $path = storage_path('csv');
 
-        chmod($path ,0777);
+        //chmod($path ,0777);
         $file->move($path,$file_name);
         chmod($path.'/'.$file_name ,0777);
         return $path.'/'.$file_name;
@@ -221,7 +221,7 @@ class ContactController extends Controller {
                 exit(); 
             }
             $ext = $file->getClientOriginalExtension();
-            if($file==NULL || $ext!='csv'){
+            if($ext!='csv'){
                 echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
                 exit(); 
             }
@@ -263,7 +263,7 @@ class ContactController extends Controller {
              
             });
 
-        } catch (\Exception $e) {
+        } catch (\Exception $e) {  dd($e); exit();
             echo json_encode(['status'=>0,'message'=>'Please select csv file!']); 
             exit(); 
         }

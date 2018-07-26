@@ -164,12 +164,12 @@ return [
         * Additional Service provider
         */
        Modules\Admin\AdminServiceProvider::class , 
-      // Orangehill\Iseed\IseedServiceProvider::class,
+       // Orangehill\Iseed\IseedServiceProvider::class,
        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
        Barryvdh\DomPDF\ServiceProvider::class,
        Way\Generators\GeneratorsServiceProvider::class,
        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,  
-      // Maatwebsite\Excel\ExcelServiceProvider::class,
+       Maatwebsite\Excel\ExcelServiceProvider::class,
       // Zizaco\Entrust\EntrustServiceProvider::class,
     ],
 

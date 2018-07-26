@@ -28,6 +28,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Dispatcher; 
 use Modules\Admin\Helpers\Helper as Helper;
 use Response;
+use Excel;
 
 /**
  * Class AdminController
@@ -168,7 +169,7 @@ class ReportController extends Controller {
         $type = ['Stories'=>'Stories','News'=>'News','Tips'=>'Tips'];  
         $category_id  = explode(',',$reports->category_id);
          
-         return view('packages::blog.edit', compact( 'reports' ,'page_title', 'page_action','categories','type','category_id'));
+         return view('packages::reports.edit', compact( 'reports' ,'page_title', 'page_action','categories','type','category_id'));
     }
 
     public function update(ReportRequest $request, Report $reports) 
@@ -181,21 +182,10 @@ class ReportController extends Controller {
             $destinationPath = storage_path('reports');
             $photo->move($destinationPath, time().$photo->getClientOriginalName());
             $photo = time().$photo->getClientOriginalName();
-            $blog->blog_image   =   $photo; 
+            $reports->photo   =   $photo; 
         } 
-
-
-        $categoryName = $request->get('category_id');
-        $cn= '';
-        foreach ($categoryName as $key => $value) {
-            $cn = ltrim($cn.','.$value,',');
-        }
-    
-    
-        if($cn!=''){
-            $reports->category_id =  $cn;
-        }
-        $request = $request->except('_method','_token','blog_category','blog_image');
+ 
+        $request = $request->except('_method','_token','photo','category');
         
         foreach ($request as $key => $value) {
             $reports->$key = $value;
@@ -222,10 +212,91 @@ class ReportController extends Controller {
         $page_title     = 'Report';
         $page_action    = 'Show Report';
         $categories     = Category::all();
-        $type = ['Stories'=>'Stories','News'=>'News','Tips'=>'Tips'];  
-        $category_id  = explode(',',$reports->category_id);
+        $reports        = $reports->toArray();
 
-        return view('packages::blog.show', compact( 'blog','banner' ,'page_title', 'page_action','categories','type','category_id'));
+        return view('packages::reports.show', compact( 'reports','banner' ,'page_title', 'page_action','categories','type','category_id'));
+    }
+
+    public function csvImport(Request $request)
+    {
+        try{
+            $file = $request->file('importCsv'); 
+            if($file==NULL){
+                echo json_encode(['status'=>0,'message'=>'Please select  csv file!']); 
+                exit(); 
+            }
+            $ext = $file->getClientOriginalExtension();
+
+            $file_type = ['csv','xlsx','xls'];
+
+            if(!in_array($ext, $file_type)){   
+                echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
+                exit(); 
+            }
+            $mime = $file->getMimeType(); 
+
+            $upload = $this->uploadFile($file);
+           
+            $rs =    \Excel::load($upload, function($reader)use($request) {
+
+            $data = $reader->all();
+
+            $table_cname = \Schema::getColumnListing('reports');
+            
+            $except = ['id','create_at','updated_at'];
+
+            $input = $request->all(); 
+
+            
+            foreach ($data  as $key => $result) {
+              // $result = $result[0];
+                $csv =  new Report;
+                foreach ($table_cname as $key => $value) {
+                   if(in_array($value, $except )){
+                        continue;
+                   } 
+                   if(isset($result->$value)) {
+                       $csv->$value = $result->$value; 
+                       $status = 1;
+                   } 
+                }
+
+                 if(isset($status)){
+                     $csv->save(); 
+                 } 
+            }  
+            if(isset($status)){
+                echo json_encode(['status'=>1,'message'=>' Data imported successfully!']);
+            }else{
+               echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']);
+            } 
+            });
+
+        } catch (\Exception $e) {
+            echo json_encode(['status'=>0,'message'=>$e->getMessage()]); 
+            exit(); 
+        } 
+    } 
+
+    public function uploadFile($file)
+    {
+       
+        //Display File Name
+        $fileName = $file->getClientOriginalName();
+
+        //Display File Extension
+        $ext = $file->getClientOriginalExtension();
+        //Display File Real Path
+        $realPath = $file->getRealPath(); 
+        //Display File Mime Type 
+
+        $file_name = time().'.'.$ext;
+        $path = storage_path('csv');
+
+       // chmod($path ,0777);
+        $file->move($path,$file_name);
+        chmod($path.'/'.$file_name ,0777);
+        return $path.'/'.$file_name;
     }
 
 }

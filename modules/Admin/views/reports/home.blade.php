@@ -20,6 +20,12 @@
                           <i class="icon-settings font-red"></i>
                           <span class="caption-subject font-red sbold uppercase">{{ $heading }}</span>
                       </div>
+
+                       <div class="col-md-2 pull-right">
+                                            <div   class="input-group">  
+                                             <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Reports </a> 
+                                            </div>
+                                        </div> 
                       <div class="col-md-2 pull-right">
                           <div style="width: 150px;" class="input-group"> 
                               <a href="{{ route('reports.create')}}">
@@ -138,28 +144,37 @@
     </div> 
     <!-- END QUICK SIDEBAR -->
 </div> 
-<div id="responsive" class="modal fade" tabindex="-1" data-width="300">
+       
+  
+
+<form id="import_csv" action="" method="post" encytype="multipart/form-data">
+  <input type="hidden" id="url_action" name="action" value="admin/reports/import">
+  <input type="hidden" name="_token" value="{{csrf_token()}}">
+  <input type="hidden" id="redirect_action" name="action" value="admin/reports">
+ <div id="responsive2" class="modal fade" tabindex="-1" data-width="300">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: #efeb10 !important">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Contact Group</h4>
+                <h4 class="modal-title">Import Reports</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Contact Group Name</h4>
+                        <h4>Import excel file</h4>
+                        <p><a href="{{ url('storage/csv/reports.csv') }}">download csv sample</a></p>
+                        <span id="error_msg2"></span>
                         <p>
-                            <input type="text" class="col-md-12 form-control" name="contact_group" id="contact_group"> </p>
-                            <input type="hidden" name="contacts_id" value="">
+                            <input type="file" class="col-md-12 form-control" name="importCsv" id="importCsv"> </p> 
                     </div>
                 </div> 
             </div>
             <div class="modal-footer">
-            <span id="error_msg"></span>
+            
                 <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                <button type="button" class="btn red" id="csave"  onclick="createGroup('{{url("admin/createGroup")}}','save')" >Save</button>
+                <button type="submit" class="btn red" id="csave" >Imort</button>
             </div>
         </div>
     </div>
 </div>
+</form>

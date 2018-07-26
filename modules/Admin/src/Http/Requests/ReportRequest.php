@@ -28,7 +28,7 @@ class ReportRequest  extends Request {
                             'multi_user_license' => 'required',
                             'corporate_user_license' => 'required',
                             'description' => 'required',
-                            'table_of_contents' => 'required'
+                            'table_of_contents' => 'required',
                             'number_of_pages' => 'required',
                             'report_id' => 'required',
                             'category' => 'required'
@@ -47,7 +47,7 @@ class ReportRequest  extends Request {
                             'multi_user_license' => 'required',
                             'corporate_user_license' => 'required',
                             'description' => 'required',
-                            'table_of_contents' => 'required'
+                            'table_of_contents' => 'required',
                             'number_of_pages' => 'required',
                             'report_id' => 'required',
                             'category' => 'required'

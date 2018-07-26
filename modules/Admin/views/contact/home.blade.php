@@ -19,7 +19,7 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-red sbold uppercase">People Of Contacts</span>
+                                        <span class="caption-subject font-red sbold uppercase">Contacts Details</span>
                                     </div>
                                         <div class="col-md-2 pull-right">
                                             <div class="input-group"> 

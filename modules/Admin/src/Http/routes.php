@@ -242,7 +242,9 @@
 
 
          Route::get('admin/createGroup', 'Modules\Admin\Http\Controllers\ContactController@createGroup');  
-         Route::post('admin/contact/import', 'Modules\Admin\Http\Controllers\ContactController@contactImport');  
+        Route::post('admin/contact/import', 'Modules\Admin\Http\Controllers\ContactController@contactImport');
+
+        Route::post('admin/reports/import', 'Modules\Admin\Http\Controllers\ReportController@csvImport');
 
 
         //  Route::bind('contacts', function($value, $route) {

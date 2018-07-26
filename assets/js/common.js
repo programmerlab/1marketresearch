@@ -544,48 +544,46 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function(){
-    var action = "admin/contact/import";
-    
- 
-        $("#import_contact").on('submit',(function(e){
-            e.preventDefault();
-            $.ajax({
-            url: url+'/'+action,
-            type: "POST",
-            data:  new FormData(this),
-            contentType: false,
-            cache: false,
-            processData:false,
-            success: function(datas){
-                console.log(datas);
-                var data = JSON.parse(datas); 
-                if(data.status==0){
-                    $('#error_msg2').html(data.message).css('color','red');
-                    return false;
-                 }else{
-                     $('#responsive2').modal('hide');
-                     bootbox.alert('Contact imported successfully',function(){
-                         var u =url+'/admin/contact';
-                         console.log(u);
-                         setTimeout(function(){ window.location.assign(u);},100);
-                         
-                     });
-                 }
-            },
-            error: function(){}             
-            });
-        })); 
+    $(document).ready(function(){
+        var action = "admin/contact/import";
+        
+     
+            $("#import_contact").on('submit',(function(e){
+                e.preventDefault();
+                $.ajax({
+                url: url+'/'+action,
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(datas){
+                    console.log(datas);
+                    var data = JSON.parse(datas); 
+                    if(data.status==0){
+                        $('#error_msg2').html(data.message).css('color','red');
+                        return false;
+                     }else{
+                         $('#responsive2').modal('hide');
+                         bootbox.alert('Contact imported successfully',function(){
+                             var u =url+'/admin/contact';
+                             console.log(u);
+                             setTimeout(function(){ window.location.assign(u);},100);
+                             
+                         });
+                     }
+                },
+                error: function(){}             
+                });
+            })); 
+    });
 
-
-});
-
-function updateGroup(Url,id) {
-    createGroup=0;
-    var name =$('form#updateGroup_'+id+' input#contact_group').val().replace(/^\s+|\s+$/gm,'');  
-    console.log(id,name,'form#updateGroup_'+id+' input#contact_group');
-    var parent_id = $('form#updateGroup_'+id+' input#parent_id').val();
-     try {
+    function updateGroup(Url,id) {
+        createGroup=0;
+        var name =$('form#updateGroup_'+id+' input#contact_group').val().replace(/^\s+|\s+$/gm,'');  
+        console.log(id,name,'form#updateGroup_'+id+' input#contact_group');
+        var parent_id = $('form#updateGroup_'+id+' input#parent_id').val();
+        try {
         var checkValues = $('form#updateGroup_'+id+' input[name=checkAll]:checked').map(function()
             {
                 return $(this).val();
@@ -652,3 +650,37 @@ function updateGroup(Url,id) {
         }
       });
   } );
+// import csv
+    $(document).ready(function(){
+        var action = $('#url_action').val();  
+        var redirect_action = $('#redirect_action').val();
+        
+        $("#import_csv").on('submit',(function(e){
+            e.preventDefault();
+            $.ajax({
+            url: url+'/'+action,
+            type: "POST",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(datas){
+                console.log(datas);
+                var data = JSON.parse(datas); 
+                if(data.status==0){
+                    $('#error_msg2').html(data.message).css('color','red');
+                    return false;
+                 }else{
+                     $('#responsive2').modal('hide');
+                     bootbox.alert('Csv imported successfully',function(){
+                         var u =url+'/'+redirect_action;
+                         console.log(u);
+                         setTimeout(function(){ window.location.assign(u);},100);
+                         
+                     });
+                 }
+            },
+            error: function(){}             
+            });
+        })); 
+    });
