@@ -6,7 +6,13 @@
     Route::get('admin/password/reset','Modules\Admin\Http\Controllers\AuthController@resetPassword');  
     Route::get('admin/logout','Modules\Admin\Http\Controllers\AuthController@logout'); 
 
-
+    Route::get('market-reports/{url}',function($url){
+        echo url('market-reports/'.$url);
+    });
+    Route::get('press-release/{url}',function($url){
+        echo url('press-release/'.$url);
+    });
+    
     Route::post('admin/blog/ajax', 'Modules\Admin\Http\Controllers\BlogController@ajax');
 
     Route::post('admin/login',function(App\Admin $user){

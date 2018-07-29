@@ -117,25 +117,21 @@ class ReportController extends Controller {
     public function store(ReportRequest $request, Report $reports) 
     {    
         if ($request->file('photo')) {  
-
             $photo = $request->file('photo');
             $destinationPath = storage_path('reports');
             $photo->move($destinationPath, time().$photo->getClientOriginalName());
             $photo = time().$photo->getClientOriginalName();
             $reports->photo   =   $photo;
-            
-        } 
-       
-        $categoryName = $request->get('category_id');
-        $cn= '';
-        foreach ($categoryName as $key => $value) {
-            $cn = ltrim($cn.','.$value,',');
         }
         
         $table_cname = \Schema::getColumnListing('reports');
-        $except = ['id','create_at','updated_at','category_id','photo'];
+        $except = ['id','create_at','updated_at','_token','photo'];
         $input = $request->all();
-        $reports->category_id = $cn;
+        
+        $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+
+        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+
         foreach ($table_cname as $key => $value) {
            
            if(in_array($value, $except )){
@@ -145,12 +141,7 @@ class ReportController extends Controller {
            if(isset($input[$value])) {
                $reports->$value = $request->get($value); 
            } 
-        }  
-
-        $reports->blog_title     =   $request->get('blog_title');
-        $reports->blog_description   =   $request->get('blog_description');
-        $reports->blog_created_by = $request->get('blog_created_by');
-
+        }   
         $reports->save();
        return Redirect::to('admin/reports')
                             ->with('flash_alert_notice', 'Reports was successfully created !');
@@ -185,13 +176,26 @@ class ReportController extends Controller {
             $reports->photo   =   $photo; 
         } 
  
-        $request = $request->except('_method','_token','photo','category');
+        $table_cname = \Schema::getColumnListing('reports');
+        $except = ['id','create_at','updated_at','_token','photo'];
+        $input = $request->all();
         
-        foreach ($request as $key => $value) {
-            $reports->$key = $value;
-        }  
+        $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
 
+        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+
+        foreach ($table_cname as $key => $value) {
+           
+           if(in_array($value, $except )){
+                continue;
+           }
+
+           if(isset($input[$value])) {
+               $reports->$value = $request->get($value); 
+           } 
+        }   
         $reports->save();
+        
         return Redirect::to('admin/reports')
                         ->with('flash_alert_notice', 'Reports was successfully updated!');
     }

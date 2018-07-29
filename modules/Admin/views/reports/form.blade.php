@@ -29,7 +29,8 @@
         </label>
         <div class="col-md-6"> 
         <div class="portlet-body">
-             <select class="mt-multiselect btn btn-default" multiple="multiple" data-label="right" data-select-all="true" data-width="100%"  name="category[]" data-action-onchange="true">
+             <select class="form-control" name="category" >   
+                <option>Select Category</option>
                 @foreach($categories as $key=>$value)
                 <option value="{{$value->id}}" @if(isset($category_id) && (in_array($value->id,$category_id))) {{ 'selected="selected"'}}  @endif
 
@@ -149,12 +150,7 @@
                 
                 <span class="help-block">{{ $errors->first('status', ':message') }}</span>
             </div>
-        </div>
-
-
-
-
-
+        </div>  
          <div class="form-group {{ $errors->first('photo', ' has-error') }}">
             <label class="control-label col-md-3">Images  </label>
             <div class="col-md-6"> 

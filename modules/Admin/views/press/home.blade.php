@@ -61,7 +61,7 @@
                                         <thead>
                                             <tr>
                                                 <th> Sno. </th>
-                                                <th> Press Name </th>
+                                                <th> Press Title </th>
                                                 <th> Link </th> 
                                                 <th> Description </th> 
                                                 <th>Created date</th> 
@@ -74,16 +74,17 @@
                                         @foreach($results as $key => $result)
                                             <tr>
                                                 <td> {{++$key}} </td>
-                                                <td> {{$result->pressName}} </td>
+                                                <td> {{$result->title}} </td>
                                                 <td style="max-width: 500px; word-wrap:break-word">  
                                                      <a href="{{$result->link}}" target="_blank"> {{ $result->link }}  </a>
                                                 </td>
                                                 <td style="max-width: 4500px"> 
-                                                    <?php if(empty($result->articleDescription))
-                                                    $result->articleDescription = "NA";
+                                                    <?php 
+                                                    if(empty($result->description))
+                                                    $result->description = "NA";
                                                     ?>
-                                                    {!! substr(strip_tags($result->articleDescription),0,100)!!}  
-                                                    @if(strlen(strip_tags($result->articleDescription))>='100')
+                                                    {!! substr(strip_tags($result->description),0,100)!!}  
+                                                    @if(strlen(strip_tags($result->description))>='100')
                                                     ... 
                                                     @endif
                                                      <a href="{{ route('press.show',$result->id)}}">

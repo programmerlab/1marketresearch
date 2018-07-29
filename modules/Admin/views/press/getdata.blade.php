@@ -38,15 +38,36 @@
                                     <table class="table table-striped table-hover table-bordered" id="">
                                         <thead>
                                             <tr>
-                                                <th> Press title </th>  <td> {{ ucfirst($result->pressName)}} </td></tr>
+                                                <th> Press title </th>  <td> {{ ucfirst($result->title)}} </td></tr>
                                              <tr>
-                                                <th> Url</th>  <td> {!!$result->link or 'NA'!!}  </td>
+                                                <th> Table of content link</th>  <td> {!!$result->link or 'NA'!!}  </td>
                                             </tr> 
                                             
                                             <tr>
-                                                <th> Description</th> <td>  {!!$result->articleDescription!!}  </td>
+                                                <th> Description</th> <td>  {!!$result->description!!}  </td>
                                             </tr>
 
+                                            <tr>
+                                                <th> Forecast Year</th> <td>  {!!$result->forecast_year!!}  </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th> Tag</th> <td>  {!!$result->tag!!}  </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th> Url</th> <td>  
+                                                <a target="_blank" href="{{ url($result->url) }}" > {{ url($result->url) }} </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th> About us</th> <td>  {!! $result->about_us !!}  </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th> Contact us</th> <td>  {!! $result->contact_us !!}  </td>
+                                            </tr>
+                                            
                                             <tr>
                                                 <th> Created date </th> <td>  {!! Carbon\Carbon::parse($result->created_at)->format('m-d-Y'); !!}</td>
                                             </tr> 

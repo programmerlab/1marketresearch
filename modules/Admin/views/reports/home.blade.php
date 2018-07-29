@@ -21,11 +21,11 @@
                           <span class="caption-subject font-red sbold uppercase">{{ $heading }}</span>
                       </div>
 
-                       <div class="col-md-2 pull-right">
-                                            <div   class="input-group">  
-                                             <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Reports </a> 
-                                            </div>
-                                        </div> 
+                      <div class="col-md-2 pull-right">
+                          <div   class="input-group">  
+                           <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Reports </a> 
+                          </div>
+                      </div> 
                       <div class="col-md-2 pull-right">
                           <div style="width: 150px;" class="input-group"> 
                               <a href="{{ route('reports.create')}}">
@@ -92,10 +92,13 @@
                                @foreach ($reports  as $key => $result)  
                                   <tr>
                                      <td>{{ ++$key }}</td>
-                                      <td>{!! ucfirst($result->title)     !!} 
+                                      <td>
+                                        <a href="{{url($result->url)}}" target="_blank"> 
+                                          {!! ucfirst($result->title)     !!} 
+                                        </a>
                                       </td> 
                                       <td>
-                                        {!! substr(strip_tags($result->description),0,100) !!}...<a href="{{ route('reports.show',$result->id)}}">
+                                        {!! substr(strip_tags($result->description),0,50) !!}...<a href="{{ route('reports.show',$result->id)}}">
                                           <i class="glyphicon glyphicon-eye-open" title="view"></i> 
                                         </a>
                                       </td> 
@@ -120,10 +123,8 @@
                                               </a>
 
                                               {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('reports.destroy', $result->id))) !!}
-                                              <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button>
-                                              
-                                               {!! Form::close() !!}
-  
+                                              <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button> 
+                                               {!! Form::close() !!} 
                                           </td>
                                       </tr>
                                       @endforeach 

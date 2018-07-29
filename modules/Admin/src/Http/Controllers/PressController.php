@@ -106,7 +106,12 @@ class PressController extends Controller {
     public function store(PressRequest $request, Press $result) 
     {                   
         $result->fill(Input::all()); 
-        $result->save(); 
+
+        $result->slug = str_slug($request->get('title'));
+        $result->url = 'press-release/'.str_slug($request->get('title'));
+
+
+        $result->save();
         return Redirect::to(route('press'))
                             ->with('flash_alert_notice', 'New press   successfully created.');
     }
@@ -128,6 +133,9 @@ class PressController extends Controller {
     public function update(Request $request, Press $result) {
          
         $result->fill(Input::all()); 
+        $result->slug = str_slug($request->get('title'));
+        $result->url = 'press-release/'.str_slug($request->get('title'));
+
         $result->save(); 
         
         return Redirect::to(route('press'))

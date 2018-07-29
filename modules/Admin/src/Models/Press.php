@@ -38,6 +38,8 @@ class Press extends Eloquent {
                     'publish_date',
                     'about_us',
                     'contact_us',
-                    'status'];  // All field from table here    
+                    'status',
+                    'forecast_year',
+                    'tag'];  // All field from table here    
   
 }

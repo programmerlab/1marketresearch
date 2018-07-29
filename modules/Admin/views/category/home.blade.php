@@ -64,6 +64,7 @@
                                                  <th> Sno. </th>
                                                 <th> Category Name </th>
                                                 <th> Image </th>
+                                                <th> Url </th>
                                                 <th>Created date</th> 
                                                 <th>Action</th> 
                                             </tr>
@@ -76,7 +77,9 @@
                                                 <td>
                                                 <a href="{{ url::asset('storage/uploads/category/'.$result->category_group_image)  }}" target="_blank" >
                                                 <img src="{{ url::asset('storage/uploads/category/'.$result->category_group_image)  }}" width="100px" height="50px;"> </a>  </td>
-                                                
+                                                <td>
+                                                    {{ url('category/'.$result->slug) }}
+                                                </td>
                                                      <td>
                                                         {!! Carbon\Carbon::parse($result->created_at)->format('Y-m-d'); !!}
                                                     </td>

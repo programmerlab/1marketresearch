@@ -35,7 +35,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-purple-soft">
-                                            <span data-counter="counterup" data-value="276">{{$users_count}}</span>
+                                            <span data-counter="counterup" data-value="{{$category_count}}">{{$category_count}}</span>
                                         </h3>
                                         <small>Research Category</small>
                                     </div>
@@ -45,8 +45,8 @@
                                 </div>
                                 <div class="progress-info">
                                     <div class="progress">
-                                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
-                                            <span class="sr-only">56% change</span>
+                                        <span style="width: {{$category_count}}%;" class="progress-bar progress-bar-success purple-soft">
+                                            <span class="sr-only">{{$category_count}}% change</span>
                                         </span>
                                     </div>
                                      
@@ -59,7 +59,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
-                                            <span data-counter="counterup" data-value="567">{{ $category_grp_count }}</span>
+                                            <span data-counter="counterup" data-value="{{ $press_count }}">{{ $press_count }}</span>
                                         </h3> 
                                         <small>Press  </small>
                                     </div>
@@ -69,8 +69,8 @@
                                 </div>
                                 <div class="progress-info">
                                     <div class="progress">
-                                        <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
-                                            <span class="sr-only">45% grow</span>
+                                        <span style="width: {{ $press_count }}%;" class="progress-bar progress-bar-success blue-sharp">
+                                            <span class="sr-only">{{ $press_count }}% grow</span>
                                         </span>
                                     </div>
                                    
@@ -83,7 +83,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
-                                            <span data-counter="counterup" data-value="567">{{$category_count}}</span>
+                                            <span data-counter="counterup" data-value="{{$reports_count}}">{{$reports_count}}</span>
                                         </h3>
                                         <small> Reports</small>
                                     </div>
@@ -93,8 +93,8 @@
                                 </div>
                                 <div class="progress-info">
                                     <div class="progress">
-                                        <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
-                                            <span class="sr-only">45% grow</span>
+                                        <span style="width: {{$reports_count}}%;" class="progress-bar progress-bar-success blue-sharp">
+                                            <span class="sr-only">{{$reports_count}}% grow</span>
                                         </span>
                                     </div>
                                     
@@ -107,7 +107,7 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
-                                            <span data-counter="counterup" data-value="567">{{$category_dashboard_count or 0 }}</span>
+                                            <span data-counter="counterup" data-value="567">{{$contact_count or 0 }}</span>
                                         </h3>
                                         <small>Contacts Request</small>
                                     </div>
@@ -117,8 +117,8 @@
                                 </div> 
                                 <div class="progress-info">
                                     <div class="progress">
-                                        <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
-                                            <span class="sr-only">45% grow</span>
+                                        <span style="width: {{$contact_count}}%;" class="progress-bar progress-bar-success blue-sharp">
+                                            <span class="sr-only">{$contact_count}}% grow</span>
                                         </span>
                                     </div>
                                     

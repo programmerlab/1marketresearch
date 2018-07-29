@@ -67,13 +67,14 @@ class AdminController extends Controller {
         $user = User::count();
         $viewPage = "Admin";
 
-        $users_count        =  User::count();
-        $category_grp_count =  Category::where('parent_id',0)->count();
-        $category_count     =  Category::where('parent_id','!=',0)->count();
-        $category_dashboard_count = Contact::count();
+        $category_count    =  Category::where('parent_id',0)->count();
+        $press_count       =  Press::count();
+        $reports_count     =  Report::count();
+        $contact_count     =  Contact::count();
+        
 
 
-        return view('packages::dashboard.index',compact('category_count','users_count','category_grp_count','page_title','page_action','viewPage','category_dashboard_count'));
+        return view('packages::dashboard.index',compact('category_count','reports_count','contact_count','page_title','page_action','viewPage','press_count'));
     }
 
    public function profile(Request $request,Admin $users)

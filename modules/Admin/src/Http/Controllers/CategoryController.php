@@ -133,7 +133,10 @@ class CategoryController extends Controller {
 
         $cat = new Category;
         $cat->category_group_name   =  $request->get('category_group_name');
-        $cat->slug                  =  strtolower(str_slug($request->get('category_group_name')));
+        $cat->slug                  =  strtolower(str_slug($request->get('category_group_name'))).'-market-research-reports';
+        $cat->url                  =  'category/'.strtolower(str_slug($request->get('category_group_name'))).'-market-research-reports';
+        
+
         $cat->parent_id             =  $parent_id;
         $cat->category_name         =  $request->get('category_group_name'); 
         $cat->level                 =  1;
@@ -188,7 +191,10 @@ class CategoryController extends Controller {
 
         $cat                        = Category::find($category->id);
         $cat->category_group_name   =  $request->get('category_group_name');
-        $cat->slug                  =  strtolower(str_slug($request->get('category_group_name')));
+        
+        $cat->slug                  =  strtolower(str_slug($request->get('category_group_name'))).'-market-research-reports';
+        $cat->url                  =  'category/'.strtolower(str_slug($request->get('category_group_name'))).'-market-research-reports';
+
         $cat->parent_id             =  $parent_id;
         $cat->category_name         =  $request->get('category_group_name'); 
         $cat->level                 =  1;
