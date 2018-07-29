@@ -71,13 +71,18 @@
                                
                             <tbody>
                                @foreach ($reports  as $key => $result)
-                                @if($key=="id")
+                                @if($key=="id" || $key=='updated_at')
                                   <?php continue; ?>
                                 @endif  
                                   <tr>
                                      <td width="300px"><b>{{ ucfirst(str_replace('_',' ',$key)) }} </b></td>
-                                      <td>{!! ucfirst($result)     !!} 
-                                  </td>
+                                     @if($key=='url')
+                                     <td>{!! url($result)     !!} </td>
+                                     @else
+                                     <td>{!! ucfirst($result)     !!} </td>
+                                     @endif
+                                      
+                                  
                                 @endforeach 
                               </tbody>
                         </table> 
