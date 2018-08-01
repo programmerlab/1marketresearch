@@ -35,7 +35,7 @@
                                             </div>
                                         </div>  
                                           
-                                          <div class="col-md-2 pull-right">
+                                      <div class="col-md-2 pull-right">
                                             <div   class="input-group">  
                                              <a class="btn  btn-success" data-toggle="modal" href="{{url('admin/contact?export=pdf')}}"><i class="fa fa-plus-circle"></i> Export Contacts to pdf </a> 
                                             </div>

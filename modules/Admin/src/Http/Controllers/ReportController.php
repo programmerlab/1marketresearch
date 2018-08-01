@@ -30,6 +30,11 @@ use Modules\Admin\Helpers\Helper as Helper;
 use Response;
 use Excel;
 
+use Illuminate\Contracts\Support\Responsable;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+
+
 /**
  * Class AdminController
  */
@@ -92,6 +97,23 @@ class ReportController extends Controller {
             $reports  = Report::orderBy('id','desc')->Paginate(10);
             
         } 
+
+        $export = $request->get('export');
+        if($export=='excel')
+        {
+            $reportsname = "reports-".date('d-M-Y');
+            Excel::create($reportsname, function($excel) {
+                $items = Report::get(['title','url','category_name'])->toArray();
+                $url = url('/');
+            $items=Report::select('title as Title',\DB::raw("CONCAT('".$url."/',url) as Report Url"),'category_name as Category Name','publish_date as Publish Date')->get();
+             
+                $excel->sheet('Sheet', function($sheet) use($items){
+                    $sheet->fromModel($items, null, 'A1', true);
+                });
+
+            })->download('xlsx');
+
+        }
         
          return view('packages::reports.index', compact('reports', 'page_title', 'page_action'));
    
@@ -105,9 +127,17 @@ class ReportController extends Controller {
     {
         $page_title = 'Report';
         $page_action = 'Create Report'; 
-         $categories  = Category::all();
-         $type = ['Stories'=>'Stories','News'=>'News','Tips'=>'Tips'];  
-        return view('packages::reports.create', compact('reports','page_title', 'page_action','categories','type'));
+        $categories  = Category::all();
+         
+        $rptid = Report::select('id')->orderBy('id','desc')->limit(1)->first();
+        
+        $rid = ($rptid)?$rptid->id:1;
+        $s = strlen($rid);
+        $r = 5-$s;
+
+        $report_id = str_repeat("0",$r).$rid;
+
+        return view('packages::reports.create', compact('reports','page_title', 'page_action','categories','report_id'));
      }
 
     /*
@@ -124,13 +154,21 @@ class ReportController extends Controller {
             $reports->photo   =   $photo;
         }
         
+        $rptid = Report::select('id')->orderBy('id','desc')->limit(1)->first();
+        
+        $rid = ($rptid)?$rptid->id:1;
+        $s = strlen($rid);
+        $r = 5-$s; 
+        $report_id = str_repeat("0",$r).$rid; 
+
         $table_cname = \Schema::getColumnListing('reports');
-        $except = ['id','create_at','updated_at','_token','photo'];
+        $except = ['id','create_at','updated_at','_token','photo','report_id'];
         $input = $request->all();
         
-        $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+        $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
 
-        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
+
 
         foreach ($table_cname as $key => $value) {
            
@@ -142,6 +180,15 @@ class ReportController extends Controller {
                $reports->$value = $request->get($value); 
            } 
         }   
+
+        if(empty($request->get('meta_title'))){  
+            $reports->meta_title  = implode(' ', array_slice(str_word_count($request->get('title'),1), 0, 7));
+           
+         }
+         
+         if(empty($request->get('meta_description'))){ 
+            $reports->meta_description  =implode(' ', array_slice(str_word_count($request->get('description'),1), 0, 80));
+         }
         $reports->save();
        return Redirect::to('admin/reports')
                             ->with('flash_alert_notice', 'Reports was successfully created !');
@@ -159,8 +206,8 @@ class ReportController extends Controller {
         $categories     = Category::all();
         $type = ['Stories'=>'Stories','News'=>'News','Tips'=>'Tips'];  
         $category_id  = explode(',',$reports->category_id);
-         
-         return view('packages::reports.edit', compact( 'reports' ,'page_title', 'page_action','categories','type','category_id'));
+        $report_id = $reports->report_id;
+         return view('packages::reports.edit', compact( 'reports' ,'page_title', 'page_action','categories','report_id','category_id'));
     }
 
     public function update(ReportRequest $request, Report $reports) 
@@ -175,14 +222,21 @@ class ReportController extends Controller {
             $photo = time().$photo->getClientOriginalName();
             $reports->photo   =   $photo; 
         } 
- 
+           
+        if($request->get('report_id')){
+            $report_id = $request->get('report_id');
+        }else{
+            $report_id = $reports->report_id;
+        }
+          
+        
         $table_cname = \Schema::getColumnListing('reports');
-        $except = ['id','create_at','updated_at','_token','photo'];
+        $except = ['id','create_at','updated_at','_token','photo','report_id'];
         $input = $request->all();
         
-        $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+        $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
 
-        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$request->get('report_id');
+        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
 
         foreach ($table_cname as $key => $value) {
            
@@ -193,7 +247,16 @@ class ReportController extends Controller {
            if(isset($input[$value])) {
                $reports->$value = $request->get($value); 
            } 
-        }   
+        }  
+        if(empty($request->get('meta_title'))){  
+            $reports->meta_title  = implode(' ', array_slice(str_word_count($request->get('title'),1), 0, 7));
+           
+         }
+         
+         if(empty($request->get('meta_description'))){ 
+            $reports->meta_description  =implode(' ', array_slice(str_word_count($request->get('description'),1), 0, 80));
+         }
+       
         $reports->save();
         
         return Redirect::to('admin/reports')

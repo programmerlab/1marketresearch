@@ -32,7 +32,12 @@
                                   <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Reports</button> 
                               </a>
                           </div>
-                      </div> 
+                      </div>
+                      <div class="col-md-2 pull-right">
+                                            <div   class="input-group">  
+                                             <a class="btn  btn-success" data-toggle="modal" href="{{url('admin/reports?export=excel')}}"><i class="fa fa-plus-circle"></i> Export Reports in excel </a> 
+                                            </div>
+                                        </div> 
                            
                     </div>
                         

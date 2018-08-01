@@ -23,8 +23,8 @@
                                     </div>
                                      <div class="col-md-2 pull-right">
                                             <div style="width: 150px;" class="input-group"> 
-                                                <a href="{{ route('program.create')}}">
-                                                    <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Program</button> 
+                                                <a href="{{route('coupan.create')}}">
+                                                    <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Coupon</button> 
                                                 </a>
                                             </div>
                                         </div> 
@@ -41,7 +41,7 @@
                                 <div class="portlet-body">
                                     <div class="table-toolbar">
                                         <div class="row">
-                                            <form action="{{route('program')}}" method="get" id="filter_data">
+                                            <form action="{{route('coupan')}}" method="get" id="filter_data">
                                              
                                             <div class="col-md-3">
                                                 <input value="{{ (isset($_REQUEST['search']))?$_REQUEST['search']:''}}" placeholder="Search " type="text" name="search" id="search" class="form-control" >
@@ -52,7 +52,7 @@
                                            
                                         </form>
                                          <div class="col-md-2">
-                                             <a href="{{ route('program') }}">   <input type="submit" value="Reset" class="btn btn-default form-control"> </a>
+                                             <a href="{{ route('coupan') }}">   <input type="submit" value="Reset" class="btn btn-default form-control"> </a>
                                         </div>
                                        
                                         </div>
@@ -62,34 +62,36 @@
                                         <thead>
                                             <tr>
                                                  <th>Sno.</th>
-                                                <th> Program Name </th>
+                                                <th> coupan Code </th>
                                                 <th> Start Date </th> 
                                                 <th> End Date </th> 
-                                                 <th> View Details  </th> 
+                                                 <th> Fix Discount  </th> 
+                                                 <th> Percentage Discount  </th> 
                                                 <th>Created date</th> 
                                                 <th>Action</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($programs as $key => $result)
+                                        @foreach($coupans as $key => $result)
                                             <tr>
                                              <th>  {{++$key}} </th>
-                                                <td> {{$result->program_name}} </td>
+                                                <td> {{$result->coupan_code}} </td>
                                                  <td> {{$result->start_date}} </td>
                                                  <td> {{$result->end_date}} </td>
-                                                    <td>  <a href="{{ route('program.show',$result->id)}}">
-                                                            <i class="fa fa-eye" title="details"></i> 
-                                                        </a> </td> 
+
+                                                 <td> {{$result->fix_discount}} </td>
+                                                 <td> {{$result->percentage_discount}} </td>
+                                                     
                                                      <td>
                                                         {!! Carbon\Carbon::parse($result->created_at)->format('d-m-Y'); !!}
                                                     </td>
                                                     
                                                     <td> 
-                                                        <a href="{{ route('program.edit',$result->id)}}">
+                                                        <a href="{{ route('coupan.edit',$result->id)}}">
                                                             <i class="fa fa-edit" title="edit"></i> 
                                                         </a>
 
-                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('program.destroy', $result->id))) !!}
+                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('coupan.destroy', $result->id))) !!}
                                                         <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button>
                                                         
                                                          {!! Form::close() !!}
@@ -103,7 +105,7 @@
                                     </table>
                                     <span>
                                      
-                                     <div class="center" align="center">  {!! $programs->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
+                                     <div class="center" align="center">  {!! $coupans->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
                                 </div>
                             </div>
                             <!-- END EXAMPLE TABLE PORTLET-->

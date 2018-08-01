@@ -4,7 +4,7 @@ namespace Modules\Admin\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Program extends Model {
+class Coupan extends Model {
 
    
     /**
@@ -12,7 +12,7 @@ class Program extends Model {
      *
      * @var string
      */
-    protected $table = 'programms';
+    protected $table = 'coupans';
     /**
      * The attributes that are mass assignable.
      *
@@ -40,9 +40,6 @@ class Program extends Model {
      *
      * @var array
      */
-    protected $fillable = ['program_name','start_date','end_date','description','target_users','complete_task','reward_point','description'];  // All field of user table here    
-
-    
-    
+    protected $fillable = ['coupan_code','start_date','end_date','fix_discount','percentage_discount'];  // All field of user table here  
   
 }

@@ -467,6 +467,23 @@
             ]
                 ]
         );
+
+        Route::bind('coupan', function($value, $route) {
+            return Modules\Admin\Models\Coupan::find($value);
+        });
+ 
+        Route::resource('admin/coupan', 'Modules\Admin\Http\Controllers\CoupanController', [
+            'names' => [
+                'edit' => 'coupan.edit',
+                'show' => 'coupan.show',
+                'destroy' => 'coupan.destroy',
+                'update' => 'coupan.update',
+                'store' => 'coupan.store',
+                'index' => 'coupan',
+                'create' => 'coupan.create',
+            ]
+                ]
+        );
 	 
         Route::match(['get','post'],'admin/permission', 'Modules\Admin\Http\Controllers\RoleController@permission');
 

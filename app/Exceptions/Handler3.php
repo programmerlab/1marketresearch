@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
-    {   
+    {  
        $path_info_url = $request->getpathInfo();
        $api_url ='';
        $web_url ='';
@@ -86,14 +86,27 @@ class Handler extends ExceptionHandler
         }
 
         if($e instanceof InvalidArgumentException)
-        {  
+        {
           $data['url']        = URL::previous();
           $data['message']    = $e->getMessage();
           $data['error_type'] = 'InvalidArgumentException';
-           
-          $this->errorLog($data,$e);
-          return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
 
+          $this->errorLog($data,$e);
+          
+
+            if($api_url)
+            {
+                echo json_encode(
+                    [ "status"=>0,
+                      "code"=>500,
+                      "message"=>$e->getMessage(),
+                      "data" => "" 
+                    ]
+                );
+            }else{
+                echo "This Route Not define";
+            } 
+            exit(); 
         }    
         if ($e instanceof ModelNotFoundException) { 
           $data['url']        = URL::previous();
@@ -108,7 +121,7 @@ class Handler extends ExceptionHandler
           $msg = "page not found";
           $error_msg = $e->getMessage(); //"Oops! Server is busy please try later."; 
 
-          return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage()); 
+          return  Redirect::to(URL::previous())->with('flash_alert_notice', $error_msg); 
 
         }
         $error_from_route =0;
@@ -131,7 +144,9 @@ class Handler extends ExceptionHandler
                     ]
                 );
             }else{
-              return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+               
+              //$url =  URL::previous().'?error=InvalidURL'; 
+              return Redirect::to('admin/404');
             } 
             exit();
         }
@@ -180,7 +195,7 @@ class Handler extends ExceptionHandler
                     ]
                 );
             }else{
-               return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+                echo "Method Not Allowed"; 
             } 
             exit();
            
@@ -206,7 +221,7 @@ class Handler extends ExceptionHandler
                     ]
                 );
             }else{
-                 return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+                 return  Redirect::to('admin/404')->with('flash_alert_notice', $e->getmessage()); 
 
             } 
             exit(); 
@@ -214,13 +229,14 @@ class Handler extends ExceptionHandler
         return parent::render($request, $e);
     }
 
-    public function errorLog($data,$e)
-    {
-      $data['log']      = json_encode($e);
-      $data['message']  = $e->getMessage();
-      $data['file']     = $e->getFile();
-      $data['statusCode'] = 500;
+    public function errorLog($data,$e){
 
+      $data['log'] = json_encode($e);
+      $data['message'] = $e->getMessage();
+      $data['file'] = $e->getFile();
+      $data['statusCode'] = $e->getStatusCode();
+     
       \DB::table('error_logs')->insert($data);
+
     }
 }

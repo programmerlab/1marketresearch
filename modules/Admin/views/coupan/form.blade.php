@@ -7,12 +7,12 @@
         <button class="close" data-close="alert"></button> Your form validation is successful! </div>
 -->
  
-    <div class="form-group {{ $errors->first('program_name', ' has-error') }}">
-            <label class="control-label col-md-3">Program Name <span class="required"> * </span></label>
+    <div class="form-group {{ $errors->first('coupan_code', ' has-error') }}">
+            <label class="control-label col-md-3">Coupon code <span class="required"> * </span></label>
             <div class="col-md-4"> 
-                {!! Form::text('program_name',null, ['class' => 'form-control','data-required'=>1])  !!} 
+                {!! Form::text('coupan_code',null, ['class' => 'form-control','data-required'=>1])  !!} 
                 
-                <span class="help-block">{{ $errors->first('program_name', ':message') }}</span>
+                <span class="help-block">{{ $errors->first('coupan_code', ':message') }}</span>
             </div>
         </div> 
 
@@ -42,46 +42,26 @@
                 
                 <span class="help-block">{{ $errors->first('end_date', ':message') }}</span>
             </div> 
+        </div> 
+
+         <div class="form-group {{ $errors->first('fix_discount', ' has-error') }}">
+            <label class="control-label col-md-3">Fix discount  </label>
+            <div class="col-md-4"> 
+                {!! Form::text('fix_discount',null, ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('fix_discount', ':message') }}</span>
+            </div>
         </div>
 
-         <div class="form-group {{ $errors->first('target_users', ' has-error') }}  @if(session('field_errors')) {{ 'has-group' }} @endif">
-            <label class="col-md-3 control-label">Target Users
-                <span class="required"> * </span>
-            </label>
-            <div class="col-md-4"> 
-
-                {{ Form::select('target_users',$status, isset($program->target_users)?$program->target_users:'', ['class' => 'form-control']) }}
-                <span class="help-block">{{ $errors->first('target_users', ':message') }}</span>
-            </div> 
-        </div>
-
-
-         <div class="form-group {{ $errors->first('complete_task', ' has-error') }}">
-            <label class="control-label col-md-3">Complete Task  </label>
-            <div class="col-md-4"> 
-                {!! Form::text('complete_task',null, ['class' => 'form-control'])  !!} 
+         <div class="form-group {{ $errors->first('percentage_discount', ' has-error') }}">
+            <label class="control-label col-md-3">Percentage discount </label>
+            <div class="col-md-4">
+                {!! Form::text('percentage_discount',null, ['class' => 'form-control'])  !!} 
                 
-                <span class="help-block">{{ $errors->first('complete_task', ':message') }}</span>
+                <span class="help-block">{{ $errors->first('percentage_discount', ':message') }}</span>
             </div>
         </div> 
-         <div class="form-group {{ $errors->first('reward_point', ' has-error') }}">
-            <label class="control-label col-md-3">Reward Point </label>
-            <div class="col-md-4"> 
-                {!! Form::text('reward_point',null, ['class' => 'form-control'])  !!} 
-                
-                <span class="help-block">{{ $errors->first('reward_point', ':message') }}</span>
-            </div>
-        </div> 
-          <div class="form-group {{ $errors->first('description', ' has-error') }}">
-            <label class="control-label col-md-3">Description<span class="required"> </span></label>
-            <div class="col-md-4"> 
-                {!! Form::textarea('description',null, ['class' => 'form-control','data-required'=>1,'rows'=>3,'cols'=>5])  !!} 
-                
-                <span class="help-block">{{ $errors->first('description', ':message') }}</span>
-            </div>
-        </div> 
-
-
+           
     
     
 </div>
@@ -91,7 +71,7 @@
           {!! Form::submit(' Save ', ['class'=>'btn  btn-primary text-white','id'=>'saveBtn']) !!}
 
 
-           <a href="{{route('program')}}">
+           <a href="{{route('coupan')}}">
 {!! Form::button('Back', ['class'=>'btn btn-warning text-white']) !!} </a>
         </div>
     </div>

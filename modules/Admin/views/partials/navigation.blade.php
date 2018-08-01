@@ -7,8 +7,7 @@
                 <div class="page-logo">
                     <a href="{{url('admin')}}" >
                        <img src="{{ URL::to('storage/uploads/img/'.$setting->website_logo) }}" alt="logo" class="logo"  style="width: 170px" height="60px" /> 
-
-                       </a>
+                   </a>
                      
                 </div>
                 <!-- END LOGO -->

@@ -11,7 +11,7 @@
         "laravelcollective/html": "^5.2", 
         "laracasts/utilities": "~2.0", 
         "phpmailer/phpmailer": "^5.2",
-         "maatwebsite/excel": "^2.0",
+         "maatwebsite/excel": "^3.0",
         "atayahmet/laravel-nestable": "^0.8.1",
         "lavary/laravel-menu": "^1.7",
         "zizaco/entrust": "^1.9",

@@ -28,7 +28,7 @@
                                 <div class="portlet-title">
                                     <div class="caption">
                                         <i class="icon-settings font-red"></i>
-                                        <span class="caption-subject font-dark sbold uppercase">Edit program</span>
+                                        <span class="caption-subject font-dark sbold uppercase">Edit coupan</span>
                                     </div>
                                     
                                 </div>
@@ -36,8 +36,8 @@
                                     <!-- BEGIN FORM--> 
 
 
-                                {!! Form::model($program, ['method' => 'PATCH', 'route' => ['program.update', $program->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
-                                    @include('packages::program.form', compact('program'))
+                                {!! Form::model($coupan, ['method' => 'PATCH', 'route' => ['coupan.update', $coupan->id],'class'=>'form-horizontal user-form','id'=>'form_sample_3','enctype'=>'multipart/form-data']) !!}
+                                    @include('packages::coupan.form', compact('coupan'))
                                 {!! Form::close() !!} 
                                     <!-- END FORM-->
                                 </div>

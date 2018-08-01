@@ -86,20 +86,23 @@
         <div class="form-group {{ $errors->first('report_id', 'has-error') }}">
             <label class="control-label col-md-3">Report Id  </label>
             <div class="col-md-6"> 
-                {!! Form::number('report_id',null, ['class' => 'form-control','min'=>1])  !!} 
+                {!! Form::number('report_id',$report_id, ['class' => 'form-control','min'=>1])  !!} 
                 
                 <span class="help-block">{{ $errors->first('report_id', ':message') }}</span>
             </div>
         </div> 
 
-        <div class="form-group {{ $errors->first('publish_date', 'has-error') }}">
-            <label class="control-label col-md-3">Publish date  </label>
+        <div class="form-group {{ $errors->first('publish_date', ' has-error') }}  @if(session('field_errors')) {{ 'has-group' }} @endif">
+            <label class="col-md-3 control-label">Publish date 
+                <span class="required"> * </span>
+            </label>
             <div class="col-md-6"> 
-                {!! Form::text('publish_date',null, ['class' => 'form-control'])  !!}
+
+                  {!! Form::text('publish_date',null, ['id'=>'startdate','class' => 'form-control end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd/mm/yyyy","data-date-start-date"=>"+0d" ])  !!} 
                 
                 <span class="help-block">{{ $errors->first('publish_date', ':message') }}</span>
-            </div>
-        </div> 
+            </div> 
+        </div>
 
 
          <div class="form-group {{ $errors->first('signle_user_license', 'has-error') }}">
@@ -151,7 +154,7 @@
                 <span class="help-block">{{ $errors->first('status', ':message') }}</span>
             </div>
         </div>  
-         <div class="form-group {{ $errors->first('photo', ' has-error') }}">
+        <!-- <div class="form-group {{ $errors->first('photo', ' has-error') }}">
             <label class="control-label col-md-3">Images  </label>
             <div class="col-md-6"> 
                   {!! Form::file('photo',null,['class' => 'form-control'])  !!}
@@ -168,7 +171,37 @@
             </span>@endif
 
             </div>
-        </div>  
+        </div>  --> 
+
+        <div class="form-group {{ $errors->first('meta_title', 'has-error') }}">
+            <label class="control-label col-md-3">Meta title  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('meta_title',null, ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('meta_title', ':message') }}</span>
+            </div>
+        </div>
+
+        <div class="form-group {{ $errors->first('meta_key', 'has-error') }}">
+            <label class="control-label col-md-3">Meta key  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('meta_key',null, ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('meta_key', ':message') }}</span>
+            </div>
+        </div>
+
+        <div class="form-group {{ $errors->first('meta_description', 'has-error') }}">
+            <label class="control-label col-md-3">Meta Description  </label>
+            <div class="col-md-8"> 
+            {!! Form::textarea('meta_description',null, ['class' => 'form-control ckeditor form-cascade-control input-small'])  !!}
+            <span class="label label-danger">{{$errors->first('meta_description', ':message') }}</span>
+            @if(Session::has('flash_alert_notice')) 
+            <span class="label label-danger">
+                {{ Session::get('flash_alert_notice') }} 
+            </span>@endif
+        </div>
+        </div>
     
     
 </div>
