@@ -103,10 +103,12 @@ class ReportController extends Controller {
         {
             $reportsname = "reports-".date('d-M-Y');
             Excel::create($reportsname, function($excel) {
-                $items = Report::get(['title','url','category_name'])->toArray();
+                
                 $url = url('/');
-            $items=Report::select('title as Title',\DB::raw("CONCAT('".$url."/',url) as Report Url"),'category_name as Category Name','publish_date as Publish Date')->get();
-             
+
+            $items=Report::select('title as Title',\DB::raw("CONCAT('".$url."/',url) as ReportUrl"),'category_name as CategoryName','publish_date as PublishDate')->get();
+              
+
                 $excel->sheet('Sheet', function($sheet) use($items){
                     $sheet->fromModel($items, null, 'A1', true);
                 });

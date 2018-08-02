@@ -170,7 +170,9 @@ return [
        Way\Generators\GeneratorsServiceProvider::class,
        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,  
        Maatwebsite\Excel\ExcelServiceProvider::class,
-      // Zizaco\Entrust\EntrustServiceProvider::class,
+       Zizaco\Entrust\EntrustServiceProvider::class,
+       Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+       Nestable\NestableServiceProvider::class
     ],
 
     /*
@@ -223,7 +225,9 @@ return [
         'Helper'    =>  App\Helpers\Helper::class,
         'PDF' => Barryvdh\DomPDF\Facade::class, 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class, 
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Nestable' => Nestable\Facades\NestableService::class
     ],
 
 ];

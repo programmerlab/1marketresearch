@@ -8,8 +8,9 @@ use App\Admin;
 
 class LoginController extends Controller
 {
-    public function userLogin(){
+    public function userLogin(){        
         $input = Input::all();
+        //echo "<pre>"; print_r($input); die;
         if(count($input) > 0){
             $auth = auth()->guard('user');
 
@@ -30,9 +31,10 @@ class LoginController extends Controller
 
     public function adminLogin(){
         $input = Input::all();
+        //echo "<pre>"; print_r($input); die;
         if(count($input) > 0){
             $auth = auth()->guard('admin');
-
+            //echo "<pre>"; print_r($input); die;
             $credentials = [
                 'email' =>  $input['email'],
                 'password' =>  $input['password'],
@@ -55,5 +57,14 @@ class LoginController extends Controller
         if(auth()->guard('user')->check()){
             pr(auth()->guard('user')->user()->toArray());
         } 
+    }
+
+    public function signup(Request $request)
+    {  dd($request->all());
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
 }
