@@ -6,36 +6,46 @@
         <h1>Home</h1>
         @stop
 
-        @section('content') 
-
-            @include('partials.menu')
-            <div class="breadcrumb">
+        @section('content')  
+              <!-- header end -->
+        <!-- Start Slider Area -->
+            <div class="inner-serch-bar">
                 <div class="container">
-                    <div class="breadcrumb-inner">
-                        <ul class="list-inline list-unstyled">
-                            <li><a href="home.html">Home</a></li>
-                            <li class="active">Contact Us</li>
-                        </ul>
-                    </div><!-- /.breadcrumb-inner -->
-                </div><!-- /.container -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group md-form form-sm form-2 pl-0">
+                            <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search Your Keywords..." aria-label="Search">
+                                <div class="input-group-append">
+                                    <a href="#">Search</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        <!-- End Slider Area -->
+        
+        <nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">Contact</a></nav>
+        
+        <div class="published-date">
+            <div class="row">
+                <div class="date-box">
+                  <div class="col-sm-12 border-right"> <span class="pub-date">
+                    Contact
+                  </span> </div>
+                  
+                </div>
+            </div>
+        </div>
             <div class="checkout-box faq-page">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="heading-title">Contact Us</h2>
-                    <span class="title-tag">Last Updated on 2017 </span>
+                    
                     <div class="panel-group checkout-steps" id="accordion">
                         <!-- checkout-step-01  -->
             <div class="panel panel-default checkout-step-01">
 
-                <!-- panel-heading -->
-                    <div class="panel-heading">
-                    <h4 class="unicase-checkout-title">
-                        <a data-toggle="collapse" class="" data-parent="#accordion" href="index.htm#collapseOne">
-                          <span>Enquiry form</span> 
-                        </a>
-                     </h4>
-                </div>
+               
                 <!-- panel-heading -->
 
                 <div id="collapseOne" class="panel-collapse collapse in">
@@ -52,7 +62,7 @@
     <div class="col-md-4 ">
         <form class="register-form" role="form">
             <div class="form-group">
-            <label class="info-title" for="exampleInputName">Your Name <span>*</span></label>
+            <label class="info-title" for="exampleInputName">Pull Name <span>*</span></label>
             <input type="email" class="form-control unicase-form-control text-input" id="exampleInputName" placeholder="">
           </div>
         </form>
@@ -60,7 +70,7 @@
     <div class="col-md-4">
         <form class="register-form" role="form">
             <div class="form-group">
-            <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
+            <label class="info-title" for="exampleInputEmail1">Your Email <span>*</span></label>
             <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="">
           </div>
         </form>
@@ -68,22 +78,54 @@
     <div class="col-md-4">
         <form class="register-form" role="form">
             <div class="form-group">
-            <label class="info-title" for="exampleInputTitle">Title <span>*</span></label>
+            <label class="info-title" for="exampleInputTitle">Your Country <span>*</span></label>
             <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
           </div>
         </form>
     </div>
-    <div class="col-md-12">
+
+    <div class="col-md-4">
         <form class="register-form" role="form">
             <div class="form-group">
-            <label class="info-title" for="exampleInputComments">Your Comments <span>*</span></label>
-            <textarea class="form-control unicase-form-control" id="exampleInputComments"></textarea>
+            <label class="info-title" for="exampleInputTitle">Job Title <span>*</span></label>
+            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
           </div>
         </form>
     </div>
-    <div class="col-md-12 outer-bottom-small m-t-20">
-        <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Send Message</button>
+
+
+    <div class="col-md-4">
+        <form class="register-form" role="form">
+            <div class="form-group">
+            <label class="info-title" for="exampleInputTitle">Company <span>*</span></label>
+            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
+          </div>
+        </form>
     </div>
+
+    <div class="col-md-4">
+        <form class="register-form" role="form">
+            <div class="form-group">
+            <label class="info-title" for="exampleInputTitle">Phone No. (Pls. affix country code) <span>*</span></label>
+            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
+          </div>
+        </form>
+    </div>
+
+    
+    <div class="col-md-12">
+        <form class="register-form" role="form">
+            <div class="form-group">
+            <label class="info-title" for="exampleInputComments">Any Specific Request <span>*</span></label>
+            <textarea class="form-control unicase-form-control" id="exampleInputComments" rows="5"></textarea>
+          </div>
+        </form>
+    </div>
+    <div class="col-md-12 outer-bottom-small m-t-20" style="padding-bottom: 50px">
+        <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Send Message</button>
+
+    </div>
+
 </div>
 <div class="col-md-3 contact-info">
     <div class="contact-title">

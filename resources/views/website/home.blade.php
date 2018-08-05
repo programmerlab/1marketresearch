@@ -19,62 +19,36 @@
             </div>
             <div class="blog-grid home-blog">
               <!-- Start single blog -->
+             <style type="text/css">
+               .blog-text h1{
+                font-size: 14px;
+                font-weight: 100px;
+                padding-left: 10px;
+               }
+             </style>
+
+              @foreach($reports as $key => $result)
               <div class="">
                 <div class="single-blog">
-                  
                   <div class="blog-content">
-                     <div class="blog-title">
-                       
-                      <a href="#">
-                        <h4>Global Auto Labeler (Print & Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
-                      </a>                                    </div>
-                      <div class="repoort-tags">
-      <p><span><b>On</b> 02/04/2018</span> <span><b>Pages</b>: 149</span>  <span><b>Report ID</b>: 3291</span><span><b>Price for Single User</b>: $4250</span></p>
-    </div>
-    <div class="blog-text">
-      <p>This report studies the global Auto Labeler (Print & Apply System) market status and forecast, categorizes the global Auto Labeler (Print & Apply System) market size (value & volume) by manufacturers, type, application, and region. This report focuses on the top manufacturers in North </p>
-      <a class="blog-btn" href="#">Read more</a> </div>
-        </div>
-      </div>
-    </div>
-              <!-- End single blog -->
-    <div class="">
-                <div class="single-blog">
-                  
-                  <div class="blog-content">
-                     <div class="blog-title">
-                       
-                      <a href="#">
-                        <h4>Global Auto Labeler (Print & Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
-                      </a>                                    </div>
-                      <div class="repoort-tags">
-      <p><span><b>On</b> 02/04/2018</span> <span><b>Pages</b>: 149</span>  <span><b>Report ID</b>: 3291</span><span><b>Price for Single User</b>: $4250</span></p>
-    </div>
-          <div class="blog-text">
-            <p>This report studies the global Auto Labeler (Print & Apply System) market status and forecast, categorizes the global Auto Labeler (Print & Apply System) market size (value & volume) by manufacturers, type, application, and region. This report focuses on the top manufacturers in North </p>
-            <a class="blog-btn" href="#">Read more</a>                                    </div>
-        </div>
-      </div>
-    </div>
-              <!-- End single blog -->
-    <div class="">
-                <div class="single-blog">
-                  
-                  <div class="blog-content">
-                     <div class="blog-title">
-                       
-                      <a href="#">
-                        <h4>Global Auto Labeler (Print & Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
-                      </a>                                    </div>
-                      <div class="repoort-tags">
-      <p><span><b>On</b> 02/04/2018</span> <span><b>Pages</b>: 149</span>  <span><b>Report ID</b>: 3291</span><span><b>Price for Single User</b>: $4250</span></p>
-    </div>
-                    <div class="blog-text">
-                      <p>This report studies the global Auto Labeler (Print & Apply System) market status and forecast, categorizes the global Auto Labeler (Print & Apply System) market size (value & volume) by manufacturers, type, application, and region. This report focuses on the top manufacturers in North </p>
-                      <a class="blog-btn" href="#">Read more</a>                                    </div>
+                    <div class="blog-title">
+                        <a href="#">
+                            <h4>{{$result->title}}</h4>
+                          </a>                                    </div>
+                          <div class="repoort-tags">
+                <p><span><b>On</b> {{$result->publish_date}}</span> <span><b>Pages</b>: {{$result->number_of_pages}}</span>  <span><b>Report ID</b>: {{$result->report_id}}</span><span><b>Price for Single User</b>: ${{$result->signle_user_license}}</span></p>
+                </div>
+                <div class="blog-text"> 
+                <p>{!! substr($result->description,0,230)
+
+                  !!} </p>
+                <a class="blog-btn" href="{{url($result->url) }}">Read more</a> </div>
                   </div>
                 </div>
               </div>
+              @endforeach
+              <!-- End single blog -->
+ 
               
               <ul class="pagination">
               <li class="disabled"><a href="#">«</a></li>
@@ -90,8 +64,17 @@
             </div>
           </div>
 
-              <div class="report-right-sec col-sm-4">
-            <div class="release-background">
+                <div class="report-right-sec col-sm-4">
+              <div class="release-background">
+                        <div class="mey-help-new">
+                                <div class="assist-pic"><img src="{{ asset('public/assets/img/2(1).jpg')}}"></div>
+                                <div class="assist-slogen">Ansel helps you
+              find the right report:</div>
+                            <div class="assiste-contact">
+                                <p><i class="fa fa-phone"></i> +911234567890</p>
+                                <p><i class="fa fa-envelope"></i> <a href="#">Contact By Mail </p>
+                            </div>
+                        </div>
             <div class="press-release">
               <h4>Testimonial</h4>
             </div>
@@ -136,26 +119,6 @@
                 <!-- End single item -->
               </div>
             </div>
-            <div class="clear" style="margin-bottom:30px;"></div>
-            <div class="press-release" style="margin-top:30px;">
-              <h4>May I Help You!</h4>
-            </div>  
-            <div class="help-content">
-              <p><i class="fa fa-phone"></i> +91-9809809802</p>
-              <p><i class="fa fa-envelope"></i> Contact By Email</p>
-            </div>
-            
-            <div class="clear" style="margin-bottom:30px;"></div>
-            <div class="press-release" style="margin-top:30px;">
-              <h4>Payment Option</h4>
-            </div>  
-            <div class="help-content">
-              <img src="img/payment-option.jpg">
-            </div>
-              
-              
-              
-              
           </div>
           </div>
          
@@ -181,187 +144,44 @@
             </div>
           </div>
         </div>
-                <div class="row"> 
+        <div class="row"> 
+          
+          @foreach($category as $key=> $result)
+
+            <div class="col-md-3 col-sm-3 col-xs-12">
+              <div class="single-services text-center" style="height: 300px">
+                <div class="services-img">
+                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 230px" width="100%">
+                  <div class="image-layer">
+                    <a href="{{url($result->url)}}">{{$result->category_name}}</a>                  </div>
+                </div>
+                <div class="main-services">
+                  <div class="service-content">
+                    <h4>{{$result->category_name}}</h4>
+                                      </div>
+                </div>
+              </div>
+            </div>
+
+          @endforeach  
+
             
             <div class="col-md-2 col-sm-2 col-xs-12">
               <div class="single-services text-center">
                 <div class="services-img">
                   <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
                   <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
+                    <a href="#">Category Not Available</a>                  </div>
                 </div>
                 <div class="main-services">
                   <div class="service-content">
-                    <h4>Agricultural</h4>
+                    <h4>Category Not Available</h4>
                                       </div>
                 </div>
               </div>
             </div>
             
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                  </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-md-2 col-sm-2 col-xs-12">
-              <div class="single-services text-center">
-                <div class="services-img">
-                  <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
-                  <div class="image-layer">
-                    <a href="#">1000 Reports</a>                </div>
-                </div>
-                <div class="main-services">
-                  <div class="service-content">
-                    <h4>Agricultural</h4>
-                                      </div>
-                </div>
-              </div>
-            </div>
+           
             <!-- single-well end-->
                     </div>
                 </div>

@@ -1,62 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title> 1marketresearch.com  </title>
-    <meta name="author" content="">  
-    <meta name="description" content="{{$meta_description or '' }}"/> 
-    <meta name="keywords" content="{{$meta_key or ''}}"/> 
- 
-    <!-- all css here -->
-    <!-- bootstrap v3.3.6 css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css')}}">
-    <!-- owl.carousel css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{ asset('public/assets/css/owl.transitions.css')}}">
-    <!-- meanmenu css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/meanmenu.min.css')}}">
-    <!-- font-awesome css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('public/assets/css/icon.css')}}">
-    <link rel="stylesheet" href="{{ asset('public/assets/css/flaticon.css')}}">
-    <!-- magnific css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/magnific.min.css')}}">
-    <!-- venobox css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/venobox.css')}}">
-    <!-- style css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
-    <!-- responsive css -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/responsive.css')}}">
 
-    <!-- modernizr css -->
-    <script src="{{ asset('public/assets/js/modernizr-2.8.3.min.js')}}"></script>
-  </head>
-<body> 
-<div class="main-wraper">
-    <header class="header-one">
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>1 Market Research</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- favicon -->        
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url('img/logo/favicon.ico')}}">
+
+        <!-- all css here -->
+
+        <!-- bootstrap v3.3.6 css -->
+        <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
+        <!-- owl.carousel css -->
+        <link rel="stylesheet" href="{{url('css/owl.carousel.css')}}">
+        <link rel="stylesheet" href="{{url('css/owl.transitions.css')}}">
+        <!-- meanmenu css -->
+        <link rel="stylesheet" href="{{url('css/meanmenu.min.css')}}">
+        <!-- font-awesome css -->
+        <link rel="stylesheet" href="{{url('css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{url('css/icon.css')}}">
+        <link rel="stylesheet" href="{{url('css/flaticon.css')}}">
+        <!-- magnific css -->
+        <link rel="stylesheet" href="{{url('css/magnific.min.css')}}">
+        <!-- venobox css -->
+        <link rel="stylesheet" href="{{url('css/venobox.css')}}">
+        <!-- style css -->
+        <link rel="stylesheet" href="{{url('css/style.css')}}">
+        <!-- responsive css -->
+        <link rel="stylesheet" href="{{url('css/responsive.css')}}">
+
+        <!-- modernizr css -->
+        <script src="{{url('js/modernizr-2.8.3.min.js')}}"></script>
+    </head>
+        <body>
+
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="main-wraper">
         <header class="header-one">
             <!-- Start top bar -->
             <div class="topbar-area fix hidden-xs">
                 <div class="container">
                     <div class="row">
-                        <div class=" col-md-10 col-sm-9">
+                        <div class=" col-md-12 col-sm-12">
                             <div class="topbar-left">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-map-marker"></i> House-4,2/3 avenew,Inida</a></li>
-                                    
-                                    <li><a href="#"><i class="fa fa-envelope"></i>  sales@globalmarketplayers.com</a></li>
+                                    <li><a href="#"><i class="fa fa-envelope"></i>  sales@1marketresearch.com</a></li>
                                     <li><a href="#"><i class="fa fa-phone"></i> +1-1234567891</a></li>
                                 </ul>  
                             </div>
                         </div>
-                        <div class="col-md-2 col-sm-3">
-                            <div class="quote-button">
-                                <a href="contact.html" class="quote-btn" title="Quick view" data-toggle="modal" data-target="#quoteModal">Get a quote</a>                           </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -69,21 +69,14 @@
                         <div class="col-md-3 col-sm-3 logo-bg">
                             <div class="logo">
                                 <!-- Brand -->
-                                <a class="navbar-brand page-scroll sticky-logo" href="#">
-                                    <img src="{{ asset('public/assets/img/logo/logo2.png')}}" alt="">                                </a>
-                                </div>
+                                <a class="navbar-brand page-scroll sticky-logo" href="{{url('/')}}">
+                                    <img src="{{ url('img/logo/logo2.png')}}" alt="">                                </a>                            </div>
                         </div>
                         <!-- logo end -->
                         <div class="col-md-9 col-sm-9">
                             <div class="header-right-link">
                                 <!-- search option start -->
-                                <form action="#">
-                                    <div class="search-option" style="display: none;">
-                                        <input type="text" placeholder="Search...">
-                                        <button class="button" type="submit"><i class="fa fa-search"></i></button>
-                                    </div>
-                                    <a class="main-search" href="#"><i class="fa fa-search"></i></a>
-                                </form>
+                                
                                 <!-- search option end -->
                             </div>
                             <!-- mainmenu start -->
@@ -93,26 +86,22 @@
                                         <ul class="nav navbar-nav navbar-right">
                                             <li><a class="pagess" href="#">Research Categories</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
+                                                    @foreach($catMenu as $result)
+                                                    <li><a href="{{url($result->url)}}">{{$result->category_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
-                                            <li><a class="pagess" href="#">About us</a>
+                                            <li><a class="pagess" href="{{url('pressRelease')}}">About us</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
+                                                    <li><a href="{{url('pressRelease')}}">Press Release</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a class="pagess" href="#">Publisher</a>
+                                            <li><a class="pagess" href="{{url('publisher')}}">Publisher</a>
                                             </li>
-                                            <li><a class="pagess" href="#">Services</a>
+                                            <li><a class="pagess" href="{{url('services')}}">Services</a>
                                                 
                                             </li>
-                                            <li><a class="pagess" href="#">Contact Us</a>
+                                            <li><a class="pagess" href="{{url('contact')}}">Contact Us</a>
                                             </li>
                                             
                                         </ul>
@@ -132,31 +121,27 @@
                         <div class="col-md-12">
                             <div class="mobile-menu">
                                 <div class="logo">
-                                    <a href="#"><img src="{{ asset('public/assets/img/logo/logo.png')}}" alt=""></a>                                </div>
-                                <nav id="dropdown" style="display: block;">
+                                    <a href="index.html"><img src="{{ url('img/logo/logo.png')}}" alt="" /></a>                                </div>
+                                <nav id="dropdown">
                                     <ul>
                                         <li><a class="pagess" href="#">Research Categories</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
+                                                    @foreach($catMenu as $result)
+                                                    <li><a href="{{url($result->url)}}">{{$result->category_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
-                                            <li><a class="pagess" href="#">About us</a>
+                                            <li><a class="pagess" href="{{url('pressRelease')}}">About us</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="#">Sub menu</a></li>
-                                                    <li><a href="#">Sub menu</a></li>
+                                                    <li><a href="{{url('pressRelease')}}">Press Release</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a class="pagess" href="#">Publisher</a>
+                                            <li><a class="pagess" href="{{url('publisher')}}">Publisher</a>
                                             </li>
-                                            <li><a class="pagess" href="#">Services</a>
+                                            <li><a class="pagess" href="{{url('services')}}">Services</a>
                                                 
                                             </li>
-                                            <li><a class="pagess" href="#">Contact Us</a>
+                                            <li><a class="pagess" href="{{url('contact')}}">Contact Us</a>
                                             </li>
                                     </ul>
                                 </nav>

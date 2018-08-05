@@ -17,20 +17,91 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorizatio
 header('Access-Control-Allow-Credentials: true');
 header("Access-Control-Allow-Origin: *");
 
-Route::get('/', function () { 
-    return redirect('home');
-});
 
 Route::get('/send', 'EmailController@sendMail');
 
 Route::get('/sendEmailReminder', 'NotificationController@sendEmailReminder');
 
+Route::get('/404', function(){
+  return view('website.404');
+});
 
-Route::match(['post','get'],'home',[
+
+
+
+Route::match(['post','get'],'/',[
         'as' => 'homePage',
         'uses' => 'HomeController@home'
         ]
     );
+
+Route::match(['post','get'],'category',[
+        'as' => 'categories',
+        'uses' => 'HomeController@category'
+        ]
+    );
+
+
+Route::match(['post','get'],'category/{name}',[
+        'as' => 'categories',
+        'uses' => 'HomeController@category'
+        ]
+    );
+
+
+Route::match(['post','get'],'services',[
+        'as' => 'services',
+        'uses' => 'HomeController@services'
+        ]
+    );
+
+
+Route::match(['post','get'],'publisher',[
+        'as' => 'publisher',
+        'uses' => 'HomeController@publisher'
+        ]
+    );
+
+
+
+Route::match(['post','get'],'market-reports',[
+        'as' => 'marketReports',
+        'uses' => 'HomeController@reportDetails'
+        ]
+    );
+
+
+Route::match(['post','get'],'market-reports/{name}',[
+        'as' => 'marketReports',
+        'uses' => 'HomeController@reportDetails'
+        ]
+    );
+
+
+Route::match(['post','get'],'payment',[
+        'as' => 'payment',
+        'uses' => 'HomeController@payment'
+        ]
+    );
+
+
+Route::match(['post','get'],'contact',[
+        'as' => 'contact',
+        'uses' => 'HomeController@contact'
+        ]
+    );
+
+Route::match(['post','get'],'press-release',[
+        'as' => 'press-release',
+        'uses' => 'HomeController@pressRelease'
+        ]
+    );
+Route::match(['post','get'],'pressRelease',[
+        'as' => 'press-release',
+        'uses' => 'HomeController@pressRelease'
+        ]
+    );
+
 
 
 /*
@@ -43,21 +114,18 @@ Route::get('/login','Adminauth\AuthController@showLoginForm');
 //Route::post('password/reset','ApiController@resetPassword');  
 
  Route::post('password/email','ApiController@resetPassword'); 
- Route::get('molpay','MolpayPaymentController@index'); 
- Route::post('molpay/return_ipn','MolpayPaymentController@return_ipn'); 
- Route::post('molpay/notification_ipn','MolpayPaymentController@notification_ipn'); 
- Route::get('molpay/payment/success','MolpayPaymentController@success'); 
- Route::post('molpay/payment/failed','MolpayPaymentController@failed'); 
 
 Route::get('admin/404',function(){
     if(Auth::guard('admin')->check()==false){
         return redirect('admin');
-    }
-
-    $page_title = "404 Error";
+    }else{
+      $page_title = "404 Error";
               $page_action = "Page";
               $viewPage = "404 Error";
               $msg = "page not found";
               $error_msg = "Page not found!"; 
               return view('packages::auth.page_not_found',compact('error_msg','page_title','page_action','viewPage'))->with('flash_alert_notice', $msg);
+    }
+
+    
 });

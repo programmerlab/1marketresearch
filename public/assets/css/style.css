@@ -51,7 +51,7 @@ html, body {
 	height: 100%;
 }
 .main-wraper {
-    max-width: 75%;
+    max-width: 80%;
     margin: 0 auto;
     box-shadow: 0px 0px 5px #ccc;
 }
@@ -444,7 +444,7 @@ div#preloader {
     color: #444;
     font-size: 14px;
     font-weight: 700;
-    padding: 30px 0px;
+    padding: 35px 0px;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
     margin: 0px 15px;
@@ -1093,7 +1093,7 @@ div#preloader {
 }
 .service-content h4 {
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 0;
     /* text-transform: uppercase; */
@@ -1725,7 +1725,7 @@ div#preloader {
 /*  13. Footer Area
 /*----------------------------------------*/
 .footer-area {
-    padding: 70px 0;
+    padding: 30px 0;
     background: #071333;
 }
 .footer-logo{
@@ -1825,7 +1825,7 @@ div#preloader {
 }
 .footer-list li a {
     color: #ddd;
-    padding: 3px 0px 3px 20px;
+    padding: 3px 0px 3px 0px;
     display: block;
     position: relative;
     font-weight: 500;
@@ -1836,22 +1836,15 @@ div#preloader {
 .footer-list li:last-child a{
 	padding-bottom: 0px;
 }
-.footer-list li a::after {
-    position: absolute;
-    content: "\e87a";
-    right: auto;
-    top: 2px;
-    font-family: tionscal;
-    font-size: 12px;
-    left: 0;
-}
+
 .footer-list li a:hover {
     color: #ec1b22;
 }
 .footer-area-bottom {
     background: #071333 none repeat scroll 0 0;
-    padding: 25px 0;
-	border-top: 1px solid #333;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+    font-size: 13px;
 }
 .copyright-text a:hover{
 	text-decoration: underline;
@@ -3180,7 +3173,7 @@ span.email-notes{color: #42414f;
     color: #444;
     display: block;
     font-weight: 600;
-    padding: 10px 20px;
+    padding: 10px 6px;
     margin-right: 5px;
     text-transform: uppercase;
     width: 131px;
@@ -3219,7 +3212,7 @@ span.email-notes{color: #42414f;
     z-index: 999;
     padding: 0px 15px;
     background: #ec1b22;
-    line-height: 46px;
+    line-height: 45px;
     font-size: 18px;
     color: #fff;
 }
@@ -3277,10 +3270,9 @@ color:#ec1b22;
     height: 45px;
 }
 .input-group.md-form.form-sm.form-2.pl-0 {
-    width: 65%;
+    width: 70%;
     height: 45px;
     margin: 0 auto;
-    margin-left: 10%;
 }
 .press-release {
     background: #3db1e3;
@@ -3310,7 +3302,7 @@ width:100%;
 }
 .navbar-brand>img {
     display: block;
-    height: 70px;
+    height: 80px;
 }
 .Services-area.area-padding .col-md-2.col-sm-2.col-xs-12 {
     margin-bottom: 30px;
@@ -3434,7 +3426,7 @@ button.single_add_to_cart_button.btn.btn-danger.alt:first-child {
 }
 button.single_add_to_cart_button.btn.btn-danger.alt:nth-child(2) {
     height: 40px;
-    background: #875635;
+    background: #071333;
 }
 button.single_add_to_cart_button.btn.btn-danger.alt:nth-child(3) {
     height: 40px;
@@ -3455,7 +3447,7 @@ button.single_add_to_cart_button.btn.btn-danger.alt:nth-child(4) {
     border-bottom: 0px;
 }
 .detail-tabs .tab-content {
-    padding: 15px 0px;
+    padding: 15px;
 }
 .detail-tabs .tab-content p
 {
@@ -3464,6 +3456,100 @@ margin-bottom:0px;
 .tab-inner .panel {
     box-shadow: none;
 }	
+.topbar-left ul {
+    width: auto;
+    float: right;
+}
+.single-services {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.mey-help-new {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.assist-pic {
+    float: left;
+    width: 30%;
+}
+.assist-pic img {
+    border-radius: 100%;
+}
+.assist-slogen {
+    float: left;
+    width: 70%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: right;
+}
+.assiste-contact {
+    display: table;
+    width: 100%;
+}
+.assiste-contact p {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 0px;
+    padding-top: 10px;
+}
+.blog-grid.home-blog.detail-page .blog-title {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+.blog-grid.home-blog.detail-page .blog-content a h4
+{
+    margin-top: 0px;
+}
+.detail-title {
+    padding-left: 15px;
+}
+.blog-grid.home-blog.detail-page .detail-img {
+    float: left;
+    width: 24%;
+    padding-left: 15px;
+}
+.detail-title {
+    float: left;
+    width: 76%;
+}
+.detail-buttons {
+    margin-top: 15px;
+}
+.blog-grid.home-blog.detail-page {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.detail-img img {
+    height: 162px;
+    border-radius: 5px;
+}
+.plan-pricing {
+    background: #f4f4f4;
+    padding: 15px;
+}
+.plan-pricing p {
+    margin-bottom: 0px;
+    line-height: 30px;
+}
+.plan-pricing button.btn.btn-danger {
+    width: 100%;
+    border: none;
+    background: #ec1b22;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.plan-pricing {
+    margin-bottom: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 /*--------------------------------*/
 /* .End CSS
 /*--------------------------------*//* CSS Document */

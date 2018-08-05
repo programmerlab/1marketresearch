@@ -7,13 +7,15 @@
                         <div class="banner-content text-left">
                             <h4>Are you looking for professional Services of your company</h4>
                             <div class="banner-contact-btn">
-                                <a class="banner-btn" href="#">Contact us</a>                            </div>
+                                <a class="banner-btn" href="{{url('contact')}}">Contact us</a>                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Banner Area -->
+        <!-- Start Footer bottom Area -->
+      <!-- End Banner Area -->
         <!-- Start Footer bottom Area -->
         <footer>
             <div class="footer-area">
@@ -23,7 +25,7 @@
                             <div class="footer-content">
                                 <div class="footer-head">
                                     <div class="footer-logo">
-                                        <a href="#"><img src="{{ asset('public/assets/img/logo/logo2.png')}}" alt=""></a>                               </div>
+                                        <a href="#"><img src="{{asset('public/assets/img/logo/logo2.png')}}" alt="" style="border-radius:5px;"></a>                                    </div>
                                     <p>
                                         Are you looking for professional advice for your new business.Are you looking for professional advice for your new business.Are you looking for professional advice for your new business.                                    </p>
                                     <div class="footer-icons">
@@ -78,14 +80,10 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="footer-content">
                                 <div class="footer-head">
-                                    <h4>Subscribe</h4>
-                                    <p>
-                                        Are you looking for professional advice for your new business.Are you looking for professional advice for your new business                                    </p>
+                                    <h4>Payment Option</h4>
+                                    
                                     <div class="subs-feilds">
-                                        <div class="suscribe-input">
-                                            <input type="email" class="email form-control width-80" id="sus_email" placeholder="Type Email">
-                                            <button type="submit" id="sus_submit" class="add-btn">Subscribe</button>
-                                        </div>
+                                        <img src="{{ asset('public/assets/img/payment-option.jpg')}}" style="border-radius:5px;">
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +99,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="copyright">
                                 <p>
-                                    Copyright  {{date('Y')}}
+                                    Copyright @ {{date('Y')}}
                                     <a href="#">1 market Research</a> All Rights Reserved                                </p>
                             </div>
                         </div>
@@ -112,38 +110,36 @@
         
         </div>
         
+       
+       
         <!-- all js here -->
 
         <!-- jquery latest version -->
-        <script href="{{ asset('public/assets/js/jquery-1.12.4.min.js')}}"></script>
+        <script href="{{url('js/jquery-1.12.4.min.js')}}"></script>
+        <script src="https://use.fontawesome.com/a832a5b49f.js"></script>
         <!-- bootstrap js -->
-        <script href="{{ asset('public/assets/js/bootstrap.min.js')}}"></script>
+        <script href="{{url('js/bootstrap.min.js')}}"></script>
         <!-- owl.carousel js -->
-        <script href="{{ asset('public/assets/js/owl.carousel.min.js')}}"></script>
+        <script href="{{url('js/owl.carousel.min.js')}}"></script>
         <!-- Counter js -->
-        <script href="{{ asset('public/assets/js/jquery.counterup.min.js')}}"></script>
+        <script href="{{url('js/jquery.counterup.min.js')}}"></script>
         <!-- waypoint js -->
-        <script href="{{ asset('public/assets/js/waypoints.js')}}"></script>
+        <script href="{{url('js/waypoints.js')}}"></script>
         <!-- isotope js -->
-        <script href="{{ asset('public/assets/js/isotope.pkgd.min.js')}}"></script>
+        <script href="{{url('js/isotope.pkgd.min.js')}}"></script>
         <!-- stellar js -->
-        <script href="{{ asset('public/assets/js/jquery.stellar.min.js')}}"></script>
+        <script href="{{url('js/jquery.stellar.min.js')}}"></script>
         <!-- magnific js -->
-        <script href="{{ asset('public/assets/js/magnific.min.js')}}"></script>
+        <script href="{{url('js/magnific.min.js')}}"></script>
         <!-- venobox js -->
-        <script href="{{ asset('public/assets/js/venobox.min.js')}}"></script>
+        <script href="{{url('js/venobox.min.js')}}"></script>
         <!-- meanmenu js -->
-        <script href="{{ asset('public/assets/js/jquery.meanmenu.js')}}"></script>
+        <script href="{{url('js/jquery.meanmenu.js')}}"></script>
         <!-- Form validator js -->
-        <script href="{{ asset('public/assets/js/form-validator.min.js')}}"></script>
+        <script href="{{url('js/form-validator.min.js')}}"></script>
         <!-- plugins js -->
-        <script href="{{ asset('public/assets/js/plugins.js')}}"></script>
+        <script href="{{url('js/plugins.js')}}"></script>
         <!-- main js -->
-        <script href="{{ asset('public/assets/js/main.js')}}"></script>
-        <script type="text/javascript">
-            var url= "{{ url('/') }}";
-        </script>
+        <script href="{{url('js/main.js')}}"></script>
     </body>
 </html>
-        
-        

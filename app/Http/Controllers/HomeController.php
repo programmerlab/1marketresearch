@@ -27,6 +27,8 @@ use Cart;
 use Input;
 use App\Helpers\Helper as Helper;
 use Modules\Admin\Models\Settings; 
+use Modules\Admin\Models\Report; 
+
 
 class HomeController extends Controller
 {
@@ -60,26 +62,17 @@ class HomeController extends Controller
 
         $base_page =  Route::currentRouteName();
 
-        $path_info = explode('/', $request->getpathInfo());
-        $md = ($setting::where('field_key','meta_description')->first());
-        $mk = ($setting::where('field_key','meta_key')->first());
-       
-
-        if($base_page == 'homePage'){
-            $meta_description =  isset($md->field_value)?$md->field_value:'';
-            $meta_key         =  isset($mk->field_value)?$mk->field_value:'';
-        }
          
- 
-        View::share('meta_description',$meta_description);
-        View::share('meta_key',$meta_key);
-        View::share('getpathInfo',$request->getpathInfo());
-        
+         
     }
 
     public function home(Request $request){
+        $category =  Category::all(); 
 
-        return view('website.home');
+        $reports = Report::all(); //Paginate(5);
+
+//        dd($reports);
+        return view('website.home',compact('category','reports'));
     }
 
     /**
@@ -93,56 +86,20 @@ class HomeController extends Controller
 
         return view('home'); 
 
-
-        $html =  Category::renderAsHtml(); 
-
-        $categories =  Category::attr(['name' => 'categories'])
-                        ->selected([3])
-                        ->renderAsDropdown();
-
-
-
-      return view('category',compact('categories','html')); 
-
     } 
 
-    public function category(Request $request)
-    {
+    public function category(Request $request,$name=null)
+    {  
+       return view('website.categorydetails');
+    }
 
-        $btn = $request->get('submit_btn');
+    public function reportDetails(Request $request)
+    {  
+       return view('website.reportDetails');
+    }
 
-        if($btn=="Add Category")
-        {
-            $name = $request->get('sub_cat');
-            $slug = str_slug($request->get('sub_cat'));
-            $parent_id = 0;
-            $cat = new Category;
-            $cat->name = title_case($request->get('sub_cat'));
-            $cat->slug = strtolower(str_slug($request->get('sub_cat')));
-            $cat->parent_id = $request->get('categories');
-            $cat->save();            
-        }
-        if($btn=="Add Sub Category")
-        {
-            $name = $request->get('sub_cat');
-            $slug = str_slug($request->get('sub_cat'));
-            $parent_id = $request->get('categories');
-
-            $cat = new Category;
-
-            $cat->name = title_case($request->get('sub_cat'));
-            $cat->slug = strtolower(str_slug($request->get('sub_cat')));
-            $cat->parent_id = $request->get('categories');
-
-            $cat->save();
-        }
-        $categories =  Category::attr(['name' => 'categories'])
-                        ->selected([3])
-                        ->renderAsDropdown();
-
-       $html =  Category::renderAsHtml(); 
-
-       return view('category',compact('categories','html')); 
+    public function payment(){
+      return view('website.payment'); 
     }
  
  /*----------*/
@@ -253,38 +210,27 @@ class HomeController extends Controller
         return view('end-user.order',compact('categories','products','category','cart'));   
          
     }
-     /*----------*/
-    public function faq()
-    {
-         $products = Product::with('category')->orderBy('id','asc')->get();
-        $categories = Category::nested()->get(); 
-        return view('end-user.faq',compact('categories','products','category')); 
-        return view('end-user.faq');   
-    }
+ 
 
     public function contact()
     {
-         $products = Product::with('category')->orderBy('id','asc')->get();
-        $categories = Category::nested()->get(); 
-        return view('end-user.contact',compact('categories','products','category')); 
-        return view('end-user.contact');   
-    }
-     /*----------*/
-     public function trackOrder()
-    {
-         $products = Product::with('category')->orderBy('id','asc')->get();
-        $categories = Category::nested()->get(); 
-        return view('end-user.track-orders',compact('categories','products','category')); 
-        return view('end-user.track-orders');   
-    }
-     /*----------*/
-     public function tNc()
-    {
-         $products = Product::with('category')->orderBy('id','asc')->get();
-        $categories = Category::nested()->get(); 
-        return view('end-user.terms-conditions',compact('categories','products','category')); 
-        return view('end-user.terms-conditions');   
+      return view('website.contact');  
     }
 
-  
+    public function services()
+    {
+      return view('website.services');  
+    }
+
+    public function publisher()
+    {
+      return view('website.publisher');  
+    }
+
+   public function pressRelease(){
+
+    return view('website.pressRelease');
+   }
+
+    
 }
