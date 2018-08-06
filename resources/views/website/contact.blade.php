@@ -57,75 +57,95 @@
              
                 <div class="col-md-9 contact-form">
     <div class="col-md-12 contact-title">
-        <h4>Contact Form</h4>
+        <h4>Reach Us</h4>
+        <hr>
     </div>
+     <form novalidate="" id="contactForm" name="sentMessage">
+         <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <input type="hidden" name="request_type" value="Enquiry">
     <div class="col-md-4 ">
-        <form class="register-form" role="form">
+         
             <div class="form-group">
-            <label class="info-title" for="exampleInputName">Pull Name <span>*</span></label>
-            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputName" placeholder="">
+            <label class="info-title" for="exampleInputName">Full Name <span>*</span></label>
+            <input text="text" name="name" class="form-control unicase-form-control text-input" id="name" placeholder="Full Name">
           </div>
-        </form>
+        
     </div>
     <div class="col-md-4">
-        <form class="register-form" role="form">
+        
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Your Email <span>*</span></label>
-            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="">
+            <input name="email" type="text" class="form-control unicase-form-control text-input" id="email" placeholder="Email">
           </div>
-        </form>
+        
     </div>
     <div class="col-md-4">
-        <form class="register-form" role="form">
+         
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Your Country <span>*</span></label>
-            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
+            <input type="text" name="country" class="form-control unicase-form-control text-input" id="country" placeholder="Country">
           </div>
-        </form>
+        
     </div>
 
     <div class="col-md-4">
-        <form class="register-form" role="form">
+        
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Job Title <span>*</span></label>
-            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
+            <input type="text" name="job_title" class="form-control unicase-form-control text-input" id="job_title" placeholder="Job title">
           </div>
-        </form>
+         
     </div>
 
 
     <div class="col-md-4">
-        <form class="register-form" role="form">
+       
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Company <span>*</span></label>
-            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
+            <input type="text" name="company" class="form-control unicase-form-control text-input" id="company" placeholder="Company">
           </div>
-        </form>
+        
     </div>
 
     <div class="col-md-4">
-        <form class="register-form" role="form">
+        
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Phone No. (Pls. affix country code) <span>*</span></label>
-            <input type="email" class="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title">
+            <input type="text" name="phone" class="form-control unicase-form-control text-input" id="phone" placeholder="Phone">
           </div>
-        </form>
+         
     </div>
 
     
-    <div class="col-md-12">
-        <form class="register-form" role="form">
+    <div class="col-md-12"> 
             <div class="form-group">
             <label class="info-title" for="exampleInputComments">Any Specific Request <span>*</span></label>
-            <textarea class="form-control unicase-form-control" id="exampleInputComments" rows="5"></textarea>
+            <textarea  class="form-control unicase-form-control " name="request_description" id="request_description" rows="5"></textarea>
           </div>
-        </form>
+         
     </div>
+
+     <div class="col-md-4">
+        
+            <div class="form-group">
+            <label>Enter Captcha:</label>
+                        <span id="mainCaptcha" style="margin-left: 10px;" /> </span>
+                        <i class="fa fa-refresh" onclick="Captcha();"  aria-hidden="true" style="color: #337ab7; font-size: 30px; padding-left: 10px;"></i>
+
+                        <span class="cptch_reload_button dashicons dashicons-update"></span>
+                        <input type="text" id="txtInput" class="form-control" onkeyup="ValidCaptcha(1)"> 
+                        <div id="CaptchaMsg" style="color: red"></div>
+                        <span id="mainCaptcha2" style="display: none"></span>
+          </div>
+         
+    </div>
+
     <div class="col-md-12 outer-bottom-small m-t-20" style="padding-bottom: 50px">
-        <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Send Message</button>
+        <button type="submit" class="btn-upper btn btn-primary checkout-page-button" id="btnSubmit">Send Message</button>
 
     </div>
 
+</form>
 </div>
 <div class="col-md-3 contact-info">
     <div class="contact-title">
@@ -133,16 +153,16 @@
     </div>
     <div class="clearfix address">
         <span class="contact-i"><i class="fa fa-map-marker"></i></span>
-         {!! isset($company_address->field_value)?$company_address->field_value:"Indore MP 452001" !!} 
+         {!! isset($company_address->field_value)?$company_address->field_value:"304, S. Jones Blvd, #3299" !!} 
         <span class="contact-span"  </span>  
     </div>
     <div class="clearfix phone-no">
         <span class="contact-i"><i class="fa fa-mobile"></i></span>
-        <span class="contact-span">  {{ isset($contact_number->field_value)?$contact_number->field_value:"+91-9168518310" }} </span>
+        <span class="contact-span">  {{ isset($contact_number->field_value)?$contact_number->field_value:"+1 702-425-8599" }} </span>
     </div>
     <div class="clearfix email">
         <span class="contact-i"><i class="fa fa-envelope"></i></span>
-        <span class="contact-span"><a href="index.htm#"> {{ isset($website_email->field_value)?$website_email->field_value:"info@guruhomeshops.com" }}</a></span>
+        <span class="contact-span"><a href="#"> {{ isset($website_email->field_value)?$website_email->field_value:"Sales@1MarketResearch.com" }}</a></span>
     </div>
 </div>          </div><!-- /.contact-page -->
         </div>        

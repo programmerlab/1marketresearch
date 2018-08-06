@@ -114,14 +114,8 @@
        
         <!-- all js here -->
 
-        <!-- jquery latest version -->
-
-
-
-
-
-        <script src="https://use.fontawesome.com/a832a5b49f.js"></script>
-        
+        <!-- jquery latest version --> 
+ 
 
         <!-- jquery latest version -->
         <script src="js/jquery-1.12.4.min.js"></script>
@@ -153,12 +147,14 @@
         <script src="{{ asset('js/plugins.js')}}"></script>
         <!-- main js -->
         <script src="{{ asset('js/main.js')}}"></script>
+        
+        <script src="{{ asset('assets/js/bootbox.js')}}"></script> 
+        <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script> 
 
-
-
-
-
-
+        <script src="{{ asset('assets/js/common.js')}}"></script> 
+        <script type="text/javascript">
+          var  url = "{{ url('/') }}";
+        </script>
 
     </body>
 </html>

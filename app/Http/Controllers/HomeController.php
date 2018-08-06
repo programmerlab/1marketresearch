@@ -75,18 +75,52 @@ class HomeController extends Controller
         return view('website.home',compact('category','reports'));
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-       // $categories = Category::nested()->get();
+    public function saveForm(Request $request){
+      
+         $validator = Validator::make($request->all(), [
+                'email' => 'required',
+                'name'=>'required' 
+            ]);
+         if ($validator->fails()) {
+                    $error_msg  =   [];
+            foreach ( $validator->messages()->all() as $key => $value) {
+                        array_push($error_msg, $value);     
+                    }
+                            
+            return \Response::json(array(
+                'status' => 0,
+                'message' => $error_msg[0],
+                'data'  =>  ''
+                )
+            );
+             exit();
+        }
 
-        return view('home'); 
 
-    } 
+        $table_cname = \Schema::getColumnListing('contacts');
+        $except = ['id','created_at','updated_at','_token'];  
+        $data = [];
+        foreach ($table_cname as $key => $value) {
+           
+           if(in_array($value, $except )){
+                continue;
+           } 
+            if($request->get($value)){
+                $data[$value] = $request->get($value);
+           }
+        }
+        \DB::table('contacts')->insert($data);
+
+        
+         return \Response::json(array(
+                'status' => 1,
+                'message' => 'Message sent successfully',
+                'data'  =>  ''
+                )
+            );
+         exit();
+
+    }
 
     public function category(Request $request,$name=null)
     {  

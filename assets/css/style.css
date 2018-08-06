@@ -43,7 +43,9 @@
 /*----------------------------------------*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800|Open+Sans:400,400i,600,700|Raleway:400,500,600,700,800');
 
-
+.errorClass{
+    color: red;
+}
 /*----------------------------------------*/
 /*  1.  Theme default CSS
 /*----------------------------------------*/

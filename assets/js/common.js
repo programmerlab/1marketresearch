@@ -1,4 +1,229 @@
 
+/* 
+Method : changeStatus
+@param : id,controllerName (example user)
+Author : Kundan Roy
+Description : Change the status of record to activate or deactivate
+*/
+
+function Captcha(type){
+     var alpha = new Array('1','2','3','4','5','6','7','8','9','0');
+     var i;
+     for (i=0;i<6;i++){
+       var a = alpha[Math.floor(Math.random() * alpha.length)];
+       var b = alpha[Math.floor(Math.random() * alpha.length)];
+       var c = alpha[Math.floor(Math.random() * alpha.length)];
+       var d = alpha[Math.floor(Math.random() * alpha.length)];
+       var e = alpha[Math.floor(Math.random() * alpha.length)];
+      }
+    var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e;
+
+    document.getElementById("mainCaptcha").innerHTML = code
+    document.getElementById("mainCaptcha2").innerHTML = code  
+    $('.btnSubmit').attr('disabled','disabled');
+     $('.btnSubmit2').attr('disabled','disabled');
+  }
+  function ValidCaptcha(type){
+
+    if(type==1){
+       var string1 = removeSpaces(document.getElementById('mainCaptcha').innerHTML);
+
+      var string2 = removeSpaces(document.getElementById('txtInput').value);
+      if (string1 == string2){
+        document.getElementById('CaptchaMsg').innerHTML="";  
+        $('#btnSubmit').removeAttr("disabled");     
+        return true;
+        
+      }
+      else{ 
+        document.getElementById('CaptchaMsg').innerHTML="Invalid Captcha";
+        $('#btnSubmit').attr('disabled','disabled');       
+        return false;
+      } 
+      }else{
+        var string1 = removeSpaces(document.getElementById('mainCaptcha2').innerHTML);
+
+          var string2 = removeSpaces(document.getElementById('txtInput2').value);
+          
+          if (string1 == string2){
+            document.getElementById('CaptchaMsg2').innerHTML="";   
+            $('.btnSubmit2').removeAttr("disabled"); 
+            return true;
+          }
+          else{ 
+            $('.btnSubmit2').attr('disabled','disabled');
+            document.getElementById('CaptchaMsg2').innerHTML="Invalid Captcha";       
+            return false;
+          }
+      }
+      
+  }
+
+  function removeSpaces(string){
+    return string.split(' ').join('');
+  }
+
+
+
+$(document).ready( function(event) {
+    // enquiry
+    $('#btnSubmit').attr('disabled','disabled'); 
+    $("#Enquiry").validate({         
+        errorClass: 'errorClass', // default input error message class        
+        rules: {
+            name: {
+                required: true,                    
+            },
+             country: {
+                required: true,                    
+            },
+            job_title: {
+                required: true,                    
+            }, 
+            email: {
+                required: true,
+                email: true
+            },            
+            phone: {
+                required: true,
+            },
+            request_description:{
+                required:true
+            }
+        },
+        
+        submitHandler: function(form,e) {
+             e.preventDefault();
+            $.ajax({
+                type: "POST",
+                data:  $( "#Enquiry" ).serialize(),
+                url: url+'/saveForm',
+                beforeSend: function() {
+                   $('#btnSubmit').html('please wait...');
+                },
+                success: function(response) {
+                   $('#btnSubmit').html('Submit Request');
+                   if(response.status==1){
+                    form.reset();
+                     bootbox.alert(response.message);
+                   }else{
+                    $('.successMsg').html(response.message+'<br>').css('color','red');
+                   }
+                }
+
+            });
+
+         }
+        });
+
+
+    // request 
+    $('#btnSubmit').attr('disabled','disabled'); 
+    $("#Request").validate({         
+        errorClass: 'errorClass', // default input error message class        
+        rules: {
+            name: {
+                required: true,                    
+            },
+             country: {
+                required: true,                    
+            },
+            job_title: {
+                required: true,                    
+            }, 
+            email: {
+                required: true,
+                email: true
+            },            
+            phone: {
+                required: true,
+            },
+            request_description:{
+                required:true
+            }
+        },
+        
+        submitHandler: function(form,e) {
+             e.preventDefault();
+            $.ajax({
+                type: "POST",
+                data:  $( "#Request" ).serialize(),
+                url: url+'/saveForm',
+                beforeSend: function() {
+                   $('.btnSubmit2').html('please wait...');
+                },
+                success: function(response) {
+                   $('.btnSubmit2').html('Submit Request');
+                   if(response.status==1){
+                    form.reset();
+                     bootbox.alert(response.message);
+                   }else{
+                    $('.successMsg').html(response.message+'<br>').css('color','red');
+                   }
+                }
+
+            });
+
+         }
+        });
+
+    // contact
+
+     $("#contactForm").validate({         
+        errorClass: 'errorClass', // default input error message class        
+        rules: {
+            name: {
+                required: true,                    
+            },
+             country: {
+                required: true,                    
+            },
+            job_title: {
+                required: true,                    
+            }, 
+            email: {
+                required: true,
+                email: true
+            },            
+            phone: {
+                required: true,
+            },
+            request_description:{
+                required:true
+            },
+            company:{
+                required:true
+            }
+        },
+        
+        submitHandler: function(form,e) {
+             e.preventDefault();
+            $.ajax({
+                type: "POST",
+                data:  $( "#contactForm" ).serialize(),
+                url: url+'/saveForm',
+                beforeSend: function() {
+                 //  $('.btnSubmit2').html('please wait...');
+                },
+                success: function(response) {
+                   
+                   if(response.status==1){
+                    form.reset();
+                     bootbox.alert(response.message);
+                   }else{
+                     bootbox.alert(response.message);
+                   }
+                }
+
+            });
+
+         }
+        });
+
+    });
+
+
+
 function popupAlert(url,id){
     bootbox.confirm({
     title: "Destroy default category?",
@@ -21,72 +246,6 @@ function popupAlert(url,id){
 });
 }
 
-$(function() {
-     var d = new Date(); // for now
-    
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-dd-mm',
-        onSelect: function(datetext){
-
-            datetext=datetext+" "+d.getHours()+": "+d.getMinutes()+": "+d.getSeconds();
-            $('.datepicker').val(datetext);
-        },
-    });  
-     
-/* 
-Method : Delete particulare record
-@param : id,status
-Author : Kundan
-Description : delete particular record from dataBase
-*/
-$('button[name="remove_levels"]').on('click', function(e){
-//    bootbox.confirm('hello');
-     var self = $(this);   
-    var form = $(this).closest('form'); 
-    e.preventDefault(); 
-    
-   bootbox.confirm('<b><h3>Are you sure you want to delete?</h3></b>',function(result){
-	if(result)
-	{
-         var id = self.attr('id');
-         
-	    $('#deleteForm_'+id).submit();
-	}   
- 	
-   });
-});
-                                    
-	 	
-    
-    $('#dropoff_date').datepicker({});
-
-    $('.email-error').css('width', '100%');
-
-    $("#user_login").validate({
-        errorLabelContainer: '.error-loc',
-        rules: {
-            email: {
-                required: true,
-                email: true
-            },
-            password: {
-                required: true,
-            }
-        },
-        // Specify the validation error messages
-        messages: {
-            email: {
-                required: email_req},
-            password: {
-                required: password_req,
-            },
-        },
-        submitHandler: function(event) {
-            $("#user_login").submit();
-        }
-    });
-
-});
 /* 
 Method : changeStatus
 @param : id,controllerName (example user)
@@ -365,14 +524,8 @@ $("#building_exc").validate({
 
 });
 
-$('#last_reminder').datepicker({}); 
-$('#end_date').datepicker({
-    format: 'yyyy-mm-dd '+getHora(),
-});
-
-$('#date').datepicker({
-    format: 'yyyy-mm-dd',
-});
+ 
+ 
 
 function getHora() {
     date = new Date();
@@ -526,23 +679,6 @@ function createGroup(Url,action) {
  }
 
  
-$(document).ready(function(){
-
-    $("#startdate").datepicker({
-        todayBtn:  1,
-        autoclose: true,
-    }).on('changeDate', function (selected) {
-        var minDate = new Date(selected.date.valueOf());
-        $('#enddate').datepicker('setStartDate', minDate);
-    });
-
-    $("#enddate").datepicker()
-        .on('changeDate', function (selected) {
-            var maxDate = new Date(selected.date.valueOf());
-            $('#startdate').datepicker('setEndDate', maxDate);
-        });
-
-});
 
     $(document).ready(function(){
         var action = "admin/contact/import";
@@ -636,20 +772,7 @@ $(document).ready(function(){
          alert(e);
      }
  }
- // datepicker  and validation
- $( function() {
-    $( "#taskdate" ).datepicker();
-     var regExp = /[a-z]/i;
-      $('#taskdate,#startdate,#enddate').on('keydown keyup', function(e) {
-        var value = String.fromCharCode(e.which) || e.key;
-
-        // No letters
-        if (regExp.test(value)) {
-          e.preventDefault();
-          return false;
-        }
-      });
-  } );
+ 
 // import csv
     $(document).ready(function(){
         var action = $('#url_action').val();  

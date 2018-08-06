@@ -27,6 +27,17 @@ Route::get('/404', function(){
 });
 
 
+Route::get('/404', function(){
+  return view('website.404');
+});
+
+Route::match(['post','get'],'saveForm',[
+        'as' => 'saveForm',
+        'uses' => 'HomeController@saveForm'
+        ]
+    );
+
+
 
 
 Route::match(['post','get'],'/',[
