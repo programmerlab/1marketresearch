@@ -14,27 +14,27 @@
         <!-- all css here -->
 
         <!-- bootstrap v3.3.6 css -->
-        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css')}}">
         <!-- owl.carousel css -->
-        <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/owl.transitions.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.carousel.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.transitions.css')}}">
         <!-- meanmenu css -->
-        <link rel="stylesheet" href="{{asset('assets/css/meanmenu.min.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/meanmenu.min.css')}}">
         <!-- font-awesome css -->
-        <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/icon.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/icon.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/flaticon.css')}}">
         <!-- magnific css -->
-        <link rel="stylesheet" href="{{asset('assets/css/magnific.min.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/magnific.min.css')}}">
         <!-- venobox css -->
-        <link rel="stylesheet" href="{{asset('assets/css/venobox.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/venobox.css')}}">
         <!-- style css -->
-        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css')}}">
         <!-- responsive css -->
-        <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/responsive.css')}}">
 
         <!-- modernizr css -->
-        <script src="{{asset('assets/js/modernizr-2.8.3.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/modernizr-2.8.3.min.js')}}"></script>
     </head>
         <body onload="Captcha();">
 
