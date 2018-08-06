@@ -151,12 +151,13 @@
             <div class="col-md-2 col-sm-2 col-xs-12">
               <div class="single-services text-center" style="height: 200px">
                 <div class="services-img">
-                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%">
+                    <a href="{{url($result->url)}}"> 
+                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%"> </a> 
                   
                 </div>
                 <div class="main-services">
                   <div class="service-content">
-                    <h4>{{$result->category_name}}</h4>
+                    <h4>  <a href="{{url($result->url)}}">{{$result->category_name}}</a>  </h4>
                                       </div>
                 </div>
               </div>
@@ -165,11 +166,12 @@
             <div class="col-md-2 col-sm-2 col-xs-12">
               <div class="single-services text-center" style="height: 200px">
                 <div class="services-img">
-                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%">
+                   <a href="{{url($result->url)}}"> 
+                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%"> </a>
                  </div>
                 <div class="main-services">
                   <div class="service-content">
-                    <h4>{{$result->category_name}}</h4>
+                    <h4>  <a href="{{url($result->url)}}">{{$result->category_name}}</a>  </h4>
                                       </div>
                 </div>
               </div>
