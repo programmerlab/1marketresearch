@@ -148,13 +148,25 @@
           
           @foreach($category as $key=> $result)
 
-            <div class="col-md-3 col-sm-3 col-xs-12">
-              <div class="single-services text-center" style="height: 300px">
+            <div class="col-md-2 col-sm-2 col-xs-12">
+              <div class="single-services text-center" style="height: 200px">
                 <div class="services-img">
-                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 230px" width="100%">
-                  <div class="image-layer">
-                    <a href="{{url($result->url)}}">{{$result->category_name}}</a>                  </div>
+                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%">
+                  
                 </div>
+                <div class="main-services">
+                  <div class="service-content">
+                    <h4>{{$result->category_name}}</h4>
+                                      </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-sm-2 col-xs-12">
+              <div class="single-services text-center" style="height: 200px">
+                <div class="services-img">
+                  <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%">
+                 </div>
                 <div class="main-services">
                   <div class="service-content">
                     <h4>{{$result->category_name}}</h4>
@@ -166,7 +178,7 @@
           @endforeach  
 
             
-            <div class="col-md-2 col-sm-2 col-xs-12">
+           <!--  <div class="col-md-2 col-sm-2 col-xs-12">
               <div class="single-services text-center">
                 <div class="services-img">
                   <img src="{{ asset('public/assets/img/6.jpg')}}" alt="">
@@ -180,7 +192,7 @@
                 </div>
               </div>
             </div>
-            
+             -->
            
             <!-- single-well end-->
                     </div>
