@@ -4,7 +4,10 @@
                 
                 
         
-            <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-2944px, 0px, 0px); transition: 0s; width: 8832px;"><div class="owl-item cloned" style="width: 1472px; margin-right: 0px;"><div class="intro-content">
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transform: translate3d(-2944px, 0px, 0px); transition: 0s; width: 8832px;">
+                <div class="owl-item cloned" style="width: 1472px; margin-right: 0px;">
+                <div class="intro-content">
                     <div class="slider-images">
                         <img src="img/slider/s1.jpg" alt="">
                     </div>
@@ -34,7 +37,9 @@
                             </div>
                         </div>
                     </div>
-                </div></div><div class="owl-item cloned" style="width: 1472px; margin-right: 0px;"><div class="intro-content">
+                </div></div><div class="owl-item cloned" style="width: 1472px; margin-right: 0px;">
+
+                <div class="intro-content">
                     <div class="slider-images">
                         <img src="{{ asset('public/assets/img/slider/s1.jpg')}}" alt="">
                     </div>

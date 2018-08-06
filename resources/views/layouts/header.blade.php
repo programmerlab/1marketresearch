@@ -14,29 +14,29 @@
         <!-- all css here -->
 
         <!-- bootstrap v3.3.6 css -->
-        <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
         <!-- owl.carousel css -->
-        <link rel="stylesheet" href="{{url('css/owl.carousel.css')}}">
-        <link rel="stylesheet" href="{{url('css/owl.transitions.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/owl.transitions.css')}}">
         <!-- meanmenu css -->
-        <link rel="stylesheet" href="{{url('css/meanmenu.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/meanmenu.min.css')}}">
         <!-- font-awesome css -->
-        <link rel="stylesheet" href="{{url('css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{url('css/icon.css')}}">
-        <link rel="stylesheet" href="{{url('css/flaticon.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/icon.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
         <!-- magnific css -->
-        <link rel="stylesheet" href="{{url('css/magnific.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/magnific.min.css')}}">
         <!-- venobox css -->
-        <link rel="stylesheet" href="{{url('css/venobox.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/venobox.css')}}">
         <!-- style css -->
-        <link rel="stylesheet" href="{{url('css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
         <!-- responsive css -->
-        <link rel="stylesheet" href="{{url('css/responsive.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
 
         <!-- modernizr css -->
-        <script src="{{url('js/modernizr-2.8.3.min.js')}}"></script>
+        <script src="{{asset('assets/js/modernizr-2.8.3.min.js')}}"></script>
     </head>
-        <body>
+        <body onload="Captcha();">
 
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

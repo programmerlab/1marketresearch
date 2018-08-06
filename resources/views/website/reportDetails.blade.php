@@ -71,7 +71,8 @@
                                             
                             
                             
-                            <div class="detail-tabs">
+            <div class="detail-tabs">
+
                 <div class="tab-menu">
                      <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
@@ -470,7 +471,7 @@ Table Key Data Information from Primary Source</p>
                         <div class="tab-inner">
                             <div class="event-content head-team">
                                 
-                                <form novalidate="" id="mrForm" name="sentMessage">
+<form novalidate="" id="mrForm" name="sentMessage" >
 <div class="control-group form-group">
 <div class="controls">
     <label>Full Name :</label> <span class="required" style="color:red;">*</span>
@@ -511,10 +512,21 @@ Table Key Data Information from Primary Source</p>
 </div>
 
 
+<div class="control-group form-group">
+<div class="controls">
 
+<!-- START CAPTCHA -->
+<label>Enter Captcha:</label>
+<span id="mainCaptcha" style="margin-left: 10px;" /> </span>
+<i class="fa fa-refresh" onclick="Captcha();"  aria-hidden="true" style="color: #337ab7; font-size: 30px; padding-left: 10px;"></i>
 
+        <span class="cptch_reload_button dashicons dashicons-update"></span>
+        <input type="text" id="txtInput" class="form-control">    
+        <div id="CaptchaMsg" style="color: red"></div>
+    </div>
+</div>
 
-<button class="btn btn-primary" type="button" id="btnSubmit">Submit Request</button>
+<button class="btn btn-primary" type="button" id="btnSubmit" onclick="ValidCaptcha()">Submit Request</button>
 </form>
                                 
                             </div>
@@ -665,6 +677,43 @@ find the right report:</div>
 <!--End row-->
 </div>
 </div>
+
+<script type="text/javascript">
+    
+
+ function Captcha(){
+     var alpha = new Array('1','2','3','4','5','6','7','8','9','0');
+     var i;
+     for (i=0;i<6;i++){
+       var a = alpha[Math.floor(Math.random() * alpha.length)];
+       var b = alpha[Math.floor(Math.random() * alpha.length)];
+       var c = alpha[Math.floor(Math.random() * alpha.length)];
+       var d = alpha[Math.floor(Math.random() * alpha.length)];
+       var e = alpha[Math.floor(Math.random() * alpha.length)];
+      }
+    var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e;
+
+
+    document.getElementById("mainCaptcha").innerHTML = code
+  }
+  function ValidCaptcha(){
+      var string1 = removeSpaces(document.getElementById('mainCaptcha').innerHTML);
+
+      var string2 = removeSpaces(document.getElementById('txtInput').value);
+      if (string1 == string2){
+        document.getElementById('CaptchaMsg').innerHTML="";       
+        return true;
+      }
+      else{ 
+        document.getElementById('CaptchaMsg').innerHTML="Invalid Captcha";       
+        return false;
+      }
+  }
+  function removeSpaces(string){
+    return string.split(' ').join('');
+  }
+
+</script>
   
      
 @stop

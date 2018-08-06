@@ -115,31 +115,36 @@
         <!-- all js here -->
 
         <!-- jquery latest version -->
-        <script href="{{url('js/jquery-1.12.4.min.js')}}"></script>
+
+
+
+        <script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+
+
+
         <script src="https://use.fontawesome.com/a832a5b49f.js"></script>
-        <!-- bootstrap js -->
-        <script href="{{url('js/bootstrap.min.js')}}"></script>
-        <!-- owl.carousel js -->
-        <script href="{{url('js/owl.carousel.min.js')}}"></script>
+        
+        <script href="{{asset('assets/js/owl.carousel.min.js')}}"></script>
         <!-- Counter js -->
-        <script href="{{url('js/jquery.counterup.min.js')}}"></script>
+        <script href="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
         <!-- waypoint js -->
-        <script href="{{url('js/waypoints.js')}}"></script>
+        <script href="{{asset('assets/js/waypoints.js')}}"></script>
         <!-- isotope js -->
-        <script href="{{url('js/isotope.pkgd.min.js')}}"></script>
+        <script href="{{asset('assets/js/isotope.pkgd.min.js')}}"></script>
         <!-- stellar js -->
-        <script href="{{url('js/jquery.stellar.min.js')}}"></script>
+        <script href="{{asset('assets/js/jquery.stellar.min.js')}}"></script>
         <!-- magnific js -->
-        <script href="{{url('js/magnific.min.js')}}"></script>
+        <script href="{{asset('assets/js/magnific.min.js')}}"></script>
         <!-- venobox js -->
-        <script href="{{url('js/venobox.min.js')}}"></script>
+        <script href="{{asset('assets/js/venobox.min.js')}}"></script>
         <!-- meanmenu js -->
-        <script href="{{url('js/jquery.meanmenu.js')}}"></script>
+        <script href="{{asset('assets/js/jquery.meanmenu.js')}}"></script>
         <!-- Form validator js -->
-        <script href="{{url('js/form-validator.min.js')}}"></script>
+        <script href="{{asset('assets/js/form-validator.min.js')}}"></script>
         <!-- plugins js -->
-        <script href="{{url('js/plugins.js')}}"></script>
+        <script href="{{asset('assets/js/plugins.js')}}"></script>
         <!-- main js -->
-        <script href="{{url('js/main.js')}}"></script>
+        <script href="{{asset('assets/js/main.js')}}"></script>
     </body>
 </html>
