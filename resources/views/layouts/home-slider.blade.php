@@ -11,21 +11,21 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <!-- layer 1 -->
+                                            
                                             <div class="layer-1-2">
                                                 <h1 class="title2">Welcome To 1 Market Research!</h1>
                                             </div>
                                             <div class="layer-1-1 ">
                                                 <p>1 Market Research Reports and Business Consulting Services.</p>
                                             </div>
-                                            <!-- layer 3 -->
+                                            
                                             <div class="input-group md-form form-sm form-2 pl-0">
-    <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search Your Keywords..." aria-label="Search">
-    <div class="input-group-append">
-        <a href="#">Search</a>
-    </div>
-</div>
+                                            <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search Your Keywords..." aria-label="Search">
+                                            <div class="input-group-append">
+                                                <a href="#">Search</a>
+                                            </div>
                                         </div>
+                                                                                </div>
                                     </div>
                                 </div>
                             </div>
