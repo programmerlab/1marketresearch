@@ -92,7 +92,7 @@
 <p>If you are a specialist publisher of market research, please get in touch with us.<br>
 We will need you to first fill a form and register with us for more information.</p>
 <p>&nbsp;</p>
-<p><a href="https://www.1marketresearch.com/contact-us/"><img src="https://www.1marketresearch.com/wp-content/uploads/2017/10/contact-us-now.png" alt="" width="392" height="130" class="alignleft size-full wp-image-121044" srcset="https://www.1marketresearch.com/wp-content/uploads/2017/10/contact-us-now.png 392w, https://www.1marketresearch.com/wp-content/uploads/2017/10/contact-us-now-300x99.png 300w" sizes="(max-width: 392px) 100vw, 392px"></a></p>
+<p><a href="{{url('contact')}}"><img src="https://www.1marketresearch.com/wp-content/uploads/2017/10/contact-us-now.png" alt="" width="392" height="130" class="alignleft size-full wp-image-121044" srcset="https://www.1marketresearch.com/wp-content/uploads/2017/10/contact-us-now.png 392w, https://www.1marketresearch.com/wp-content/uploads/2017/10/contact-us-now-300x99.png 300w" sizes="(max-width: 392px) 100vw, 392px"></a></p>
     
 </article><!-- #post-## -->
     </div>
