@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="intro-content">
+                <div class="intro-content" style="display: none;">
                     <div class="slider-images">
                         <img src="img/slider/s2.jpg" alt="">
                     </div>
