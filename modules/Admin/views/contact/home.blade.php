@@ -90,7 +90,7 @@
                                             <tr>
                                              <th>  {{++$key}} </th>
                                              
-                                                <td> {{$result->title }} {{$result->firstName.' '.$result->lastName}} </td>
+                                                <td> {{$result->title }} {{$result->name }} </td>
                                                  <td> {{$result->email}} </td>
                                                  <td> {{$result->phone}} </td> 
                                                    

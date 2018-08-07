@@ -122,14 +122,49 @@ class HomeController extends Controller
 
     }
 
-    public function category(Request $request,$name=null)
-    {  
-       return view('website.categorydetails');
+    public function askAnAnalyst(Request $request){
+
+        $title = "Ask An Analyst";
+        return view('website.contact',compact('title'));
     }
 
-    public function reportDetails(Request $request)
+    public function requestSample(Request $request){
+       $title = "Request Sample" ;
+       return view('website.contact',compact('title'));
+    }
+
+    public function requestBrochure(Request $request){
+        $title = "Request Brochure";
+        return view('website.contact',compact('title'));
+    }
+
+    public function page(Request $request,$page){
+
+        $title = $page;
+
+        $pages = \DB::table('pages')->where('title',$page)->first();
+
+        return view('website.page',compact('title','pages'));
+    }
+
+    public function category(Request $request,$name=null)
     {  
-       return view('website.reportDetails');
+        $category = \DB::table('categories')->where('slug',$name)->first();
+        
+        $categoryName = $category->category_name;
+
+        $data = \DB::table('reports')->where('category_id',$category->id)->get();
+
+
+       return view('website.categorydetails',compact('data','categoryName'));
+    }
+
+    public function reportDetails(Request $request,$name)
+    {  
+       
+       $data = \DB::table('reports')->where('slug',$name)->first();
+
+       return view('website.reportDetails',compact('data'));
     }
 
     public function payment(){

@@ -24,7 +24,7 @@
       </div>
         <!-- End Slider Area -->
     
-    <nav class="woocommerce-breadcrumb"><a href="#">Home</a> &gt;&gt; Agriculture</nav>
+    <nav class="woocommerce-breadcrumb"><a href="#">Home</a> &gt;&gt; {{$categoryName}}</nav>
     
     <div class="blog-area area-padding">
             <div class="container">
@@ -32,76 +32,36 @@
                 <div class="row">
           <div class="report-left-sec col-sm-8">
             <div class="press-release">
-              <h4>Agriculture Market Research Reports</h4>
+              <h4> {{$categoryName}} Market Research Reports</h4>
             </div>
             <div class="blog-grid home-blog">
               <!-- Start single blog -->
+              
+             @foreach($data as $key => $result)
               <div class="">
                 <div class="single-blog">
-                  
                   <div class="blog-content">
-                     <div class="blog-title">
-                       
-                      <a href="#">
-                        <h4>Global Auto Labeler (Print & Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
-                      </a>                                    </div>
-                      <div class="repoort-tags">
-      <p><span><b>Date</b> 02/04/2018</span> <span><b>Pages</b>: 149</span>  <span><b>Report ID</b>: 3291</span><span><b>Price for Single User</b>: $4250</span></p>
-    </div>
-    <div class="blog-text">
-                      <p>This report studies the global Auto Labeler (Print & Apply System) market status and forecast, categorizes the global Auto Labeler (Print & Apply System) market size (value & volume) by manufacturers, type, application, and region. This report focuses on the top manufacturers in North </p>
-                      <a class="blog-btn" href="#">Read more</a>                                    </div>
+                    <div class="blog-title">
+                        <a href="#">
+                            <h4>{{$result->title}}</h4>
+                          </a>                                    </div>
+                          <div class="repoort-tags">
+                <p><span><b>Date </b>: {{$result->publish_date}}</span> <span><b>Pages</b>: {{$result->number_of_pages}}</span>  <span><b>Report ID</b>: {{$result->report_id}}</span><span><b>Price for Single User</b>: ${{$result->signle_user_license}}</span></p>
+                </div>
+                <div class="blog-text"> 
+                <p>{!! substr($result->description,0,230)
+
+                  !!} </p>
+                <a class="blog-btn" href="{{url($result->url) }}">Read more</a> </div>
                   </div>
                 </div>
               </div>
-              <!-- End single blog -->
-              <div class="">
-                <div class="single-blog">
-                  
-                  <div class="blog-content">
-                     <div class="blog-title">
-                       
-                      <a href="#">
-                        <h4>Global Auto Labeler (Print & Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
-                      </a>                                    </div>
-                      <div class="repoort-tags">
-      <p><span><b>Date</b> 02/04/2018</span> <span><b>Pages</b>: 149</span>  <span><b>Report ID</b>: 3291</span><span><b>Price for Single User</b>: $4250</span></p>
-    </div>
-    <div class="blog-text">
-    <p>This report studies the global Auto Labeler (Print & Apply System) market status and forecast, categorizes the global Auto Labeler (Print & Apply System) market size (value & volume) by manufacturers, type, application, and region. This report focuses on the top manufacturers in North </p>
-    <a class="blog-btn" href="#">Read more</a>                                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End single blog -->
-              <div class="">
-                <div class="single-blog">
-                  
-                  <div class="blog-content">
-                     <div class="blog-title">
-                       
-                      <a href="#">
-                        <h4>Global Auto Labeler (Print & Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
-                      </a>                                    </div>
-                      <div class="repoort-tags">
-      <p><span><b>Date</b> 02/04/2018</span> <span><b>Pages</b>: 149</span>  <span><b>Report ID</b>: 3291</span><span><b>Price for Single User</b>: $4250</span></p>
-    </div>
-                    <div class="blog-text">
-                      <p>This report studies the global Auto Labeler (Print & Apply System) market status and forecast, categorizes the global Auto Labeler (Print & Apply System) market size (value & volume) by manufacturers, type, application, and region. This report focuses on the top manufacturers in North </p>
-                      <a class="blog-btn" href="#">Read more</a>                                    </div>
-                  </div>
-                </div>
-              </div>
+              @endforeach
+
               
               <ul class="pagination">
-              <li class="disabled"><a href="#">«</a></li>
-              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
+               
+             </ul>
       
               <!-- End single blog -->
             </div>

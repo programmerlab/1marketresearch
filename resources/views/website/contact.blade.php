@@ -25,13 +25,13 @@
             </div>
         <!-- End Slider Area -->
         
-        <nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">Contact</a></nav>
+        <nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">{{$title or 'Contact'}}</a></nav>
         
         <div class="published-date">
             <div class="row">
                 <div class="date-box">
                   <div class="col-sm-12 border-right"> <span class="pub-date">
-                    Contact
+                    {{$title or 'Contact Us'}}
                   </span> </div>
                   
                 </div>
@@ -57,12 +57,14 @@
              
                 <div class="col-md-9 contact-form">
     <div class="col-md-12 contact-title">
-        <h4>Reach Us</h4>
+        <h4>{{$title or 'Reach Us'}}</h4>
         <hr>
     </div>
      <form novalidate="" id="contactForm" name="sentMessage">
          <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="request_type" value="Enquiry">
+                <input type="hidden" name="request_type" value="{{ $title or 'contact'}}">
+
+
     <div class="col-md-4 ">
          
             <div class="form-group">

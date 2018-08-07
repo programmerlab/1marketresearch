@@ -56,22 +56,22 @@
                                 <div class="footer-head">
                                     <h4>Services Link</h4>
                                     <div class="footer-services-link">
+                                    
                                         <ul class="footer-list">
-                                        <li><a href="#">Industry</a></li>
-                                        <li><a href="#">Construction </a></li>
-                                        <li><a href="#">Mechanical</a></li>
-                                        <li><a href="#">Engineering</a></li>
-                                        <li><a href="#">Manufacturing</a></li>
-                                        <li><a href="#">Automotive</a></li>
+                                        
+                                        <li><a href="{{url('/')}}">Home</a></li>
+                                        <li><a href="{{url('pressRelease')}}">About Us </a></li>
+                                        <li><a href="{{url('services')}}">Services</a></li>
+                                        <li><a href="{{url('publisher')}}">Publisher</a></li>
+                                        <li><a href="{{url('contact')}}">Contact Us</a></li>
+                                        <li><a href="{{url('requestBrochure')}}">Request Brochure</a></li>
                                     </ul>
-                                    <ul class="footer-list hidden-sm">
-                                        <li><a href="#">Oil & Gas</a></li>
-                                        <li><a href="#">Solar energy</a></li>
-                                        <li><a href="#">Engineering</a></li>
-                                        <li><a href="#">Consulting</a></li>
-                                        <li><a href="#">Building</a></li>
-                                        <li><a href="#">Construction</a></li>
-                                    </ul>
+
+                                     <ul class="footer-list hidden-sm">
+                                        @foreach($pageMenu as $key => $result)
+                                        <li><a href="{{url($result->title)}}"> {{ucfirst($result->title)}}</a></li>
+                                        @endforeach
+                                    </ul> 
                                     </div>
                                 </div>
                             </div>

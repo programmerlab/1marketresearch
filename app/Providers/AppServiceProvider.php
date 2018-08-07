@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $controllers = [];
 
+        $pageMenu = \DB::table('pages')->get();
+
+        View::share('pageMenu', $pageMenu);
+
         $catMenu = Category::all();
 
         if($catMenu){

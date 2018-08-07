@@ -172,6 +172,11 @@ class ReportController extends Controller {
         $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
 
 
+        $cat = Category::find($request->get('category'));
+
+        $reports->category_id = $request->get('category');
+        $reports->category_name = $cat->category_name;
+
         foreach ($table_cname as $key => $value) {
            
            if(in_array($value, $except )){
@@ -214,7 +219,15 @@ class ReportController extends Controller {
 
     public function update(ReportRequest $request, Report $reports) 
     {
+        
         $reports = Report::find($reports->id); 
+        
+        $cat = Category::find($request->get('category'));
+
+        $reports->category_id = $request->get('category');
+        $reports->category_name = $cat->category_name;
+
+
         
         if ($request->file('photo')) {  
 

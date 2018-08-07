@@ -25,13 +25,15 @@
 </div>
 <!-- End Slider Area -->
 
-<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">Agriculture</a> &gt;&gt; Global Animal Feed Antioxidants Market Research Report 2018</nav>
+<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">{{$data->category_name}}</a> &gt;&gt; {{
+    ucwords(str_replace('-',' ',$data->slug))
+}}</nav>
 
 <div class="published-date">
 <div class="row">
 <div class="date-box">
-  <div class="col-sm-6 border-right"> <span class="pub-date">Published Date : 04/12/2018</span> </div>
-  <div class="col-sm-6 text-right"> <span class="pub-pages">Number of Pages : 108</span> </div>
+  <div class="col-sm-6 border-right"> <span class="pub-date">Published Date : {{$data->publish_date or date('d/m/Y')}}</span> </div>
+  <div class="col-sm-6 text-right"> <span class="pub-pages">Number of Pages : {{$data->number_of_pages}}</span> </div>
 </div>
 </div>
 </div>
@@ -55,16 +57,21 @@
             <div class="detail-title">
             <div class="detail-head">
             <a href="#">
-            <h4>Global Auto Labeler (Print &amp; Apply System) Market Research Report 2018 Global Auto Labeler.</h4>
+            <h4>{{$data->title }}.</h4>
             </a>
             </div>
             <div class="repoort-tags">
-            <p><span><b>Date</b> 02/04/2018</span> <span><b>Pages</b>: 149</span></p>
+            <p><span><b>Date</b> {{$data->publish_date }}</span> <span><b>Pages</b>: {{$data->number_of_pages }}</span></p>
             </div>
             <div class="detail-buttons">
                 
+            <a href="{{url('requestBrochure')}}">
                 <button type="submit" class="single_add_to_cart_button btn btn-danger alt"><span class=" glyphicon glyphicon-shopping-cart"></span> Request Brochure</button>
-                <button type="submit" class="single_add_to_cart_button btn btn-danger alt"><span class=" glyphicon glyphicon-shopping-cart"></span> Ask An Analyst</button>
+            </a>
+            <a href="{{url('askAnAnalyst')}}">
+                <button type="submit" class="single_add_to_cart_button btn btn-primary alt " style="height: 40px;"><span class=" glyphicon glyphicon-shopping-cart"></span> Ask An Analyst</button>
+            </a>
+            
             </div>
         </div>
     </div>
@@ -88,7 +95,7 @@
                                             <div class="event-content head-team">
                                                 
                                                 <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" style="display: block;">
-                                                       Global Auto Labeler (Print &amp; Apply System) Market Research Report 2018 Global Auto Labeler.
+                                                       {!! $data->description or 'Description not available' !!}
                                                 </div>
 
                                             </div>
@@ -101,7 +108,9 @@
                                 
                                                 <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--table_of_contents_tab panel entry-content wc-tab" id="tab-table_of_contents_tab" style="display: block;">
                                                     <p style="margin-bottom:15px;"><b>Table of Contents</b></p>
-                                                    <p>Global Animal Feed Antioxidants Market Research Report 2018<br>
+                                                    <p>{{$data->title }} </p> <br>
+
+                                                        {!! $data->table_of_contents or 'Contents not available' !!}
                                     
                                                 </div> 
                                             </div>
@@ -133,7 +142,7 @@
 <script type="text/javascript">
     
 
- 
+
 
 </script>
   

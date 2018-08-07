@@ -40,6 +40,7 @@ Route::match(['post','get'],'saveForm',[
 
 
 
+
 Route::match(['post','get'],'/',[
         'as' => 'homePage',
         'uses' => 'HomeController@home'
@@ -97,7 +98,7 @@ Route::match(['post','get'],'payment',[
 
 
 Route::match(['post','get'],'contact',[
-        'as' => 'contact',
+        'as' => 'contacts',
         'uses' => 'HomeController@contact'
         ]
     );
@@ -110,6 +111,25 @@ Route::match(['post','get'],'press-release',[
 Route::match(['post','get'],'pressRelease',[
         'as' => 'press-release',
         'uses' => 'HomeController@pressRelease'
+        ]
+    );
+
+
+Route::match(['post','get'],'askAnAnalyst',[
+        'as' => 'askAnAnalyst',
+        'uses' => 'HomeController@askAnAnalyst'
+        ]
+    );
+
+Route::match(['post','get'],'requestSample',[
+        'as' => 'requestSample',
+        'uses' => 'HomeController@requestSample'
+        ]
+    );
+
+Route::match(['post','get'],'requestBrochure ',[
+        'as' => 'requestBrochure',
+        'uses' => 'HomeController@requestBrochure'
         ]
     );
 
@@ -140,3 +160,10 @@ Route::get('admin/404',function(){
 
     
 });
+
+Route::match(['post','get'],'{page}',[
+        'as' => 'contentspage',
+        'uses' => 'HomeController@page'
+        ]
+    );
+
