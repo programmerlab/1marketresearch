@@ -32,7 +32,7 @@
                 <div class="single-blog">
                   <div class="blog-content">
                     <div class="blog-title">
-                        <a href="#">
+                        <a href="{{url($result->url) }}">
                             <h4>{{$result->title}}</h4>
                           </a>                                    </div>
                           <div class="repoort-tags">
