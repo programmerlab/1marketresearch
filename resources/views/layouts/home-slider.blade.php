@@ -19,12 +19,19 @@
                                                 <p>1 Market Research Reports and Business Consulting Services.</p>
                                             </div>
                                             
-                                            <div class="input-group md-form form-sm form-2 pl-0">
-                                            <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search Your Keywords..." aria-label="Search">
-                                            <div class="input-group-append">
-                                                <a href="#">Search</a>
-                                            </div>
+                                             
+
+                                    <div class="input-group md-form form-sm form-2 pl-0">
+                                        <form action="{{url('research-reports')}}">
+                                        <input class="form-control my-0 py-1 amber-border" type="text" name="search" placeholder="Search Your Keywords..." aria-label="Search">
+                                        <div class="input-group-append"> 
+                                          <button type="submit" class="single_add_to_cart_button btn btn-danger alt">Search</button>
                                         </div>
+                                        </form>
+
+                                    </div>
+
+
                                                                                 </div>
                                     </div>
                                 </div>
@@ -50,12 +57,16 @@
                                                 <p>1 Market Research Reports and Business Consulting Services.</p>
                                             </div>
                                             <!-- layer 3 -->
+                                            
                                             <div class="input-group md-form form-sm form-2 pl-0">
-    <input class="form-control my-0 py-1 amber-border" type="text" placeholder="Search Your Keywords..." aria-label="Search">
-    <div class="input-group-append">
-        <a href="#">Search</a>
-    </div>
-</div>
+                                                <form action="{{url('research-reports')}}">
+                                                <input class="form-control my-0 py-1 amber-border" type="text" name="search" placeholder="Search Your Keywords..." aria-label="Search">
+                                                <div class="input-group-append"> 
+                                                  <button type="submit" class="single_add_to_cart_button btn btn-danger alt">Search</button>
+                                                </div>
+                                                </form>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

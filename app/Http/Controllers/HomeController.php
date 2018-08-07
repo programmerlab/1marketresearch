@@ -159,6 +159,24 @@ class HomeController extends Controller
        return view('website.categorydetails',compact('data','categoryName'));
     }
 
+    public function researchReports(Request $request)
+    {  
+        $search = $request->get('search');
+
+        $data = \DB::table('reports')
+                ->where('title','LIKE',"%$search%")
+                ->orWhere('category_name','LIKE',"%$search%")
+                ->orWhere('description','LIKE',"$search%")
+                    ->get();
+        
+        $categoryName = $request->get('search');
+                    
+       return view('website.categorydetails',compact('data','categoryName'));
+    }
+
+    
+
+
     public function reportDetails(Request $request,$name)
     {  
        

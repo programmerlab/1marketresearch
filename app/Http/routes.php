@@ -60,6 +60,12 @@ Route::match(['post','get'],'category/{name}',[
         ]
     );
 
+Route::match(['post','get'],'research-reports',[
+        'as' => 'researchReports',
+        'uses' => 'HomeController@researchReports'
+        ]
+    );
+
 
 Route::match(['post','get'],'services',[
         'as' => 'services',
