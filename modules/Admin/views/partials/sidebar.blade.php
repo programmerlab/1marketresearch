@@ -101,7 +101,7 @@
                                <li class="nav-item  {{ (isset($page_title) && $page_title=='Client User')?'open':'' }}">
                                 <a href="javascript:;" class="nav-link nav-toggle">
                                     <i class="icon-user"></i>
-                                    <span class="title">Client User</span>
+                                    <span class="title">Front User</span>
                                     <span class="arrow {{ (isset($page_title) && $page_title=='Client User')?'open':'' }}"></span>
                                 </a>
                                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Client User')?'block':'none' }}">

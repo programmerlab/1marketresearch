@@ -43,9 +43,9 @@ class ClientUsersController extends Controller {
      */
     public function __construct() {
         $this->middleware('admin');
-        View::share('viewPage', 'View Client User');
+        View::share('viewPage', 'View Front User');
         View::share('helper',new Helper);
-        View::share('heading','Client Users');
+        View::share('heading','Front Users');
         View::share('route_url',route('clientuser'));
 
         $this->record_per_page = Config::get('app.record_per_page');
@@ -60,8 +60,8 @@ class ClientUsersController extends Controller {
     public function index(User $user, Request $request) 
     { 
         
-        $page_title = 'Client User';
-        $page_action = 'Client View User'; 
+        $page_title = 'Front User';
+        $page_action = 'Front User'; 
         if ($request->ajax()) { 
             $status = $request->get('status');
             $user = User::where('role_type','>=',$request->user()->role_type)->find($id);
