@@ -120,7 +120,7 @@
                                             {!! ucfirst($result->report_id)     !!}
                                            </td>
                                            <td>
-                                              {!! Carbon\Carbon::parse($result->created_at)->format('d-M-Y'); !!}
+                                              {!! Carbon\Carbon::parse($result->created_at)->format('d-m-Y'); !!}
                                           </td>
                                           
                                           <td> 
