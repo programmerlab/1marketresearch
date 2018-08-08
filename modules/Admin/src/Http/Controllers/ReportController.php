@@ -90,6 +90,8 @@ class ReportController extends Controller {
             $reports = Report::where(function($query) use($search) {
                         if (!empty($search)) {
                             $query->Where('title', 'LIKE', "%$search%");
+                            $query->orWhere('category_name', 'LIKE', "%$search%");
+                            $query->orWhere('category_id', "%$search%");
                         }
                         
                     })->Paginate($this->record_per_page);
@@ -133,11 +135,7 @@ class ReportController extends Controller {
          
         $rptid = Report::select('id')->orderBy('id','desc')->limit(1)->first();
         
-        $rid = ($rptid)?$rptid->id:1;
-        $s = strlen($rid);
-        $r = 5-$s;
-
-        $report_id = str_repeat("0",$r).$rid;
+        $report_id  = intval($rptid->id)+1;
 
         return view('packages::reports.create', compact('reports','page_title', 'page_action','categories','report_id'));
      }
@@ -158,10 +156,8 @@ class ReportController extends Controller {
         
         $rptid = Report::select('id')->orderBy('id','desc')->limit(1)->first();
         
-        $rid = ($rptid)?$rptid->id:1;
-        $s = strlen($rid);
-        $r = 5-$s; 
-        $report_id = str_repeat("0",$r).$rid; 
+        $report_id  = intval($rptid->id)+1;
+        $reports->report_id = $report_id;
 
         $table_cname = \Schema::getColumnListing('reports');
         $except = ['id','create_at','updated_at','_token','photo','report_id'];
@@ -189,12 +185,12 @@ class ReportController extends Controller {
         }   
 
         if(empty($request->get('meta_title'))){  
-            $reports->meta_title  = implode(' ', array_slice(str_word_count($request->get('title'),1), 0, 7));
+            $reports->meta_title  =  implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7));
            
          }
          
          if(empty($request->get('meta_description'))){ 
-            $reports->meta_description  =implode(' ', array_slice(str_word_count($request->get('description'),1), 0, 80));
+            $reports->meta_description  = implode(' ', array_slice(explode(' ', $request->get('description')), 0, 80));
          }
         $reports->save();
        return Redirect::to('admin/reports')
@@ -213,7 +209,9 @@ class ReportController extends Controller {
         $categories     = Category::all();
         $type = ['Stories'=>'Stories','News'=>'News','Tips'=>'Tips'];  
         $category_id  = explode(',',$reports->category_id);
-        $report_id = $reports->report_id;
+        $report_id = $reports->id;
+ 
+
          return view('packages::reports.edit', compact( 'reports' ,'page_title', 'page_action','categories','report_id','category_id'));
     }
 
@@ -238,12 +236,9 @@ class ReportController extends Controller {
             $reports->photo   =   $photo; 
         } 
            
-        if($request->get('report_id')){
-            $report_id = $request->get('report_id');
-        }else{
-            $report_id = $reports->report_id;
-        }
-          
+        
+        $report_id = $reports->id;  
+        $reports->report_id = $report_id;
         
         $table_cname = \Schema::getColumnListing('reports');
         $except = ['id','create_at','updated_at','_token','photo','report_id'];
@@ -264,12 +259,12 @@ class ReportController extends Controller {
            } 
         }  
         if(empty($request->get('meta_title'))){  
-            $reports->meta_title  = implode(' ', array_slice(str_word_count($request->get('title'),1), 0, 7));
+            $reports->meta_title  =  implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7));
            
          }
          
          if(empty($request->get('meta_description'))){ 
-            $reports->meta_description  =implode(' ', array_slice(str_word_count($request->get('description'),1), 0, 80));
+            $reports->meta_description  = implode(' ', array_slice(explode(' ', $request->get('description')), 0, 80));
          }
        
         $reports->save();

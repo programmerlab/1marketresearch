@@ -49,7 +49,7 @@ class PageController extends Controller {
         $this->middleware('admin');
         View::share('viewPage', 'page');
         View::share('helper',new Helper);
-        View::share('route_url',\Request::route()->getName());
+        View::share('route_url',route('content'));
         View::share('heading','Content'); 
         $this->record_per_page = Config::get('app.record_per_page');
     }
@@ -108,6 +108,9 @@ class PageController extends Controller {
 
     public function store(PageRequest $request, Pages $page) 
     {   
+        
+        $page = Pages::firstOrNew(['slug'=>$request->get('slug')]);
+
         if ($request->file('images')) {  
 
             $photo = $request->file('images');
@@ -119,19 +122,38 @@ class PageController extends Controller {
         }
         // Page input
 
-        foreach ($request->only('title','page_content') as $key => $value) {
+         
+          if(empty($request->get('slug')))
+          {
+            $page->slug = str_slug($request->get('title'));  
+          }else{
+             $page->slug = str_slug($request->get('slug'));
+          }
+
+         if(empty($request->get('meta_title'))){  
+            $page->meta_title  =  implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7)); 
+           
+         }
+         
+         if(empty($request->get('meta_description'))){ 
+            $page->meta_description  = implode(' ', array_slice(explode(' ', $request->get('page_content')), 0, 80));
+         }
+
+         if(empty($request->get('url')))
+          {
+            $page->url = str_slug($request->get('title'));  
+          }else{
+             $page->url = str_slug($request->get('url'));  
+          }
+
+
+
+        foreach ($request->only('title','page_content','meta_key') as $key => $value) {
             $page->$key     =   $value;
         }
-        $page->save();
-
-        $meta = $request->only('slug','url','meta_title','meta_key','meta_description');
-        $meta['page_id'] = $page->id;
-            
-        $update = \DB::table('metas')->where('page_id',$page->id)->update($meta);
-        if(!$update){
-            \DB::table('metas')->insert($meta);
-        }
-       return Redirect::to(route('page'))
+         $page->save();
+ 
+       return Redirect::to('admin/content')
                             ->with('flash_alert_notice2', 'Page was successfully created !');
     }
 
@@ -166,7 +188,7 @@ class PageController extends Controller {
 
     public function update(PageRequest $request, Pages $page) 
     {
-         
+        $page = Pages::firstOrNew(['slug'=>$request->get('slug')]);
         if ($request->file('images')) {  
 
             $photo = $request->file('images');
@@ -177,20 +199,36 @@ class PageController extends Controller {
             
         } 
 
-        foreach ($request->only('title','page_content') as $key => $value) {
+        if(empty($request->get('slug')))
+          {
+            $page->slug = str_slug($request->get('title'));  
+          }else{
+             $page->slug = str_slug($request->get('slug'));
+          }
+
+         if(empty($request->get('meta_title'))){  
+            $page->meta_title  = implode(' ', array_slice(str_word_count($request->get('title'),1), 0, 7));
+           
+         }
+         
+         if(empty($request->get('meta_description'))){ 
+            $page->meta_description  = implode(' ', array_slice(explode(' ', $request->get('page_content')), 0, 80));
+         }
+
+         if(empty($request->get('url')))
+          {
+            $page->url = str_slug($request->get('title'));  
+          }else{
+             $page->url = str_slug($request->get('url'));  
+          }
+
+
+
+        foreach ($request->only('title','page_content','meta_key') as $key => $value) {
             $page->$key     =   $value;
         }
-        $page->save();
+         $page->save();
         
-        $metas  = Meta::firstOrCreate(['page_id' => $page->id]);
-        $meta = $request->only('slug','url','meta_title','meta_key','meta_description');
-
-        $meta['page_id'] = $page->id;
-
-        foreach ($meta as $key => $value) {
-            $metas->$key = $value;
-        }
-        $metas->save();
 
         return Redirect::to(route('content'))
                         ->with('flash_alert_notice', 'Page was successfully updated!');

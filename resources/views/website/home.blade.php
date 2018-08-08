@@ -25,6 +25,10 @@
                 font-weight: 100px;
                 padding-left: 10px;
                }
+                .py-1{
+                  height: 44px !important; 
+                }
+
              </style>
 
               @foreach($reports as $key => $result)
@@ -48,17 +52,10 @@
               </div>
               @endforeach
               <!-- End single blog -->
- 
-              
+  
               <ul class="pagination">
-              <li class="disabled"><a href="#">«</a></li>
-              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
+                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
+             </ul> 
       
               <!-- End single blog -->
             </div>
@@ -67,58 +64,15 @@
                 <div class="report-right-sec col-sm-4">
               <div class="release-background">
                         <div class="mey-help-new">
-                                <div class="assist-pic"><img src="{{ asset('public/assets/img/2(1).jpg')}}"></div>
+                                <div class="assist-pic"><img src="{{ asset('public/assets/img/Ansel.jpg')}}"></div>
                                 <div class="assist-slogen">Ansel helps you
               find the right report:</div>
                             <div class="assiste-contact">
-                                <p><i class="fa fa-phone"></i> +911234567890</p>
+                                <p><i class="fa fa-phone"></i> +91{{$phone->field_value or $mobile->field_value}} </p>
                                 <p><i class="fa fa-envelope"></i> <a href="#">Contact By Mail </p>
                             </div>
                         </div>
-            <div class="press-release">
-              <h4>Testimonial</h4>
-            </div>
-            <div class="Reviews-content">
-              <!-- start testimonial carousel -->
-              <div class="testimonial-carousel item-indicator">
-                <div class="single-testimonial text-center">
-                  <div class="testimonial-text">
-                    <p>Dummy text is also used to demonstrate the appearance of different typefaces and layouts, and in general the content of dummy text is nonsensical. Due to its widespread use as filler text for layouts, non-readability is of great importance.</p>
-                  </div>
-                  <div class="testimonial-img ">
-                    <img src="img/review/1.jpg" alt="">
-                    <div class="client-name">
-                      <h4>Arnold russel</h4>
-                      <span>Genarel Manager</span>                    </div>
-                  </div>
-                </div>
-                <!-- End single item -->
-                <div class="single-testimonial text-center">
-                  <div class="testimonial-text">
-                    <p>Dummy text is also used to demonstrate the appearance of different typefaces and layouts, and in general the content of dummy text is nonsensical. Due to its widespread use as filler text for layouts, non-readability is of great importance.</p>
-                  </div>
-                  <div class="testimonial-img ">
-                    <img src="img/review/2.jpg" alt="">
-                    <div class="client-name">
-                      <h4>Arnold russel</h4>
-                      <span>Genarel Manager</span>                    </div>
-                  </div>
-                </div>
-                <!-- End single item -->
-                <div class="single-testimonial text-center">
-                  <div class="testimonial-text">
-                    <p>Dummy text is also used to demonstrate the appearance of different typefaces and layouts, and in general the content of dummy text is nonsensical. Due to its widespread use as filler text for layouts, non-readability is of great importance.</p>
-                  </div>
-                  <div class="testimonial-img ">
-                    <img src="img/review/1.jpg" alt="">
-                    <div class="client-name">
-                      <h4>Arnold russel</h4>
-                      <span>Genarel Manager</span>                    </div>
-                  </div>
-                </div>
-                <!-- End single item -->
-              </div>
-            </div>
+              @include('partials.testimonial')
           </div>
           </div>
          

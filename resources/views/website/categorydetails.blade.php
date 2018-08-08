@@ -43,19 +43,20 @@
                 <p><span><b>Date </b>: {{$result->publish_date}}</span> <span><b>Pages</b>: {{$result->number_of_pages}}</span>  <span><b>Report ID</b>: {{$result->report_id}}</span><span><b>Price for Single User</b>: ${{$result->signle_user_license}}</span></p>
                 </div>
                 <div class="blog-text"> 
-                <p>{!! substr($result->description,0,230)
+                {!!  implode(' ', array_slice(explode(' ', $result->description), 0, 50))
 
-                  !!} </p>
-                <a class="blog-btn" href="{{url($result->url) }}">Read more</a> </div>
+                  !!}  
+
+              <p>  <a class="blog-btn" href="{{url($result->url) }}">Read more</a> </p>
+              </div>
                   </div>
                 </div>
               </div>
               @endforeach
-
-              
+ 
               <ul class="pagination">
-               
-             </ul>
+                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
+             </ul> 
       
               <!-- End single blog -->
             </div>

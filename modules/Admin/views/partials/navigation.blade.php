@@ -39,13 +39,7 @@
                             <li>
                                 <a href="{{ route('reports')}}">
                                     <i class="glyphicon glyphicon-th"></i> View Reports </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('press')}}">
-                                    <i class="glyphicon glyphicon-th"></i> View Press </a>
-                            </li>
-
+                            </li> 
                          
                             
                             

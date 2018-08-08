@@ -97,7 +97,7 @@
                                                 <td> {{$result->request_type}} </td> 
                                                 <td> {{$result->request_description}} </td>
                                                      <td>
-                                                        {!! Carbon\Carbon::parse($result->created_at)->format('Y-m-d'); !!}
+                                                        {!! Carbon\Carbon::parse($result->created_at)->format('d-m-Y'); !!}
                                                     </td>
                                                     
                                                     <td> 

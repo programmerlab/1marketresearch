@@ -4,13 +4,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>1 Market Research</title>
-        <meta name="description" content="">
+        <title>{{ $meta_title or url('/') }}</title> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- favicon -->        
-        <link rel="shortcut icon" type="image/x-icon" href="{{ url('img/logo/favicon.ico')}}">
-
+        <meta name="Keywords" content="{{$meta_key or url('/') }}">
+        <meta name="Description" content="{{ strip_tags($meta_desc) }}"> 
+        <!-- favicon -->      
+        <link rel="shortcut icon" type="image/png" href="{{url('storage/uploads/img/'.$website_logo->field_value)}}" /> 
         <!-- all css here -->
 
         <!-- bootstrap v3.3.6 css -->
@@ -51,8 +50,10 @@
                         <div class=" col-md-12 col-sm-12">
                             <div class="topbar-left">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-envelope"></i>  sales@1marketresearch.com</a></li>
-                                    <li><a href="#"><i class="fa fa-phone"></i> +1-1234567891</a></li>
+                                    <li><a href="#"><i class="fa fa-envelope"></i>  
+                                        {{$website_email->field_value or ' sales@globalmarketplayers.com' }}</a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-phone"></i> {{$phone->field_value or '+1-1234567891'}} </a></li>
                                 </ul>  
                             </div>
                         </div>

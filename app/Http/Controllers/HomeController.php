@@ -27,7 +27,8 @@ use Cart;
 use Input;
 use App\Helpers\Helper as Helper;
 use Modules\Admin\Models\Settings; 
-use Modules\Admin\Models\Report; 
+use Modules\Admin\Models\Report;
+use Response;
 
 
 class HomeController extends Controller
@@ -52,6 +53,23 @@ class HomeController extends Controller
 
         $banner             = $setting::where('field_key','LIKE','%banner_image%')->get();
 
+        $phone    = $setting::where('field_key','phone')->first();
+        $mobile   = $setting::where('field_key','mobile')->first();
+        
+        $facebook_url    = $setting::where('field_key','facebook_url')->first();
+        
+        $linkedin_url    = $setting::where('field_key','linkedin_url')->first();
+        
+        $twitter_url     = $setting::where('field_key','twitter_url')->first();
+        $website_logo  = $setting::where('field_key','website_logo')->first();
+
+         View::share('phone',$phone);
+         View::share('mobile',$mobile); 
+         View::share('website_logo',$website_logo);
+
+         View::share('facebook_url',$facebook_url);
+         View::share('linkedin_url',$linkedin_url);
+         View::share('twitter_url',$twitter_url);
 
          View::share('website_title',$website_title);
          View::share('website_email',$website_email);
@@ -62,14 +80,67 @@ class HomeController extends Controller
 
         $base_page =  Route::currentRouteName();
 
+
+        $meta_title      = $setting::where('field_key','meta_title')->first();
+        $meta_key      = $setting::where('field_key','meta_key')->first();
+        $meta_description      = $setting::where('field_key','meta_description')->first();
+ 
+
+
+        $uri = explode('/',ltrim($request->getpathInfo(),'/'));
+        
+        $meta_title = isset($meta_title->field_value)?$meta_title->field_value:$website_title->field_value;
+        $meta_key   = isset($meta_key->field_value)?$meta_key->field_value:$website_title->field_value;
+        $meta_desc  = isset($meta_description->field_value)?$meta_description->field_value:$website_title->field_value;
+
+        if(count($uri)==2){
+            if($uri[0]=='market-reports'){
+
+                $meta = \DB::table('reports')->where('slug',$uri[1])->first();
+
+                $meta_title = $meta->meta_title;
+                $meta_key = $meta->meta_key;
+                $meta_desc = $meta->meta_description;
+
+            }
+            elseif($uri[0]=='category'){
+                $meta = \DB::table('categories')->where('slug',$uri[1])->first();
+
+                $meta_title = $meta->category_name;
+                $meta_key = $meta->meta_key;
+                $meta_desc = $meta->meta_description;
+            }else{
+
+            }
+        }else{
+            $meta_title = ($uri[0]=="")?$meta_title:$uri[0];
+            $meta_key   = ($uri[0]=="")?$meta_key:$uri[0];
+            $meta_desc  = ($uri[0]=="")?$meta_desc:$uri[0];
+        }
+
+         View::share('meta_title',$meta_title);
+         View::share('meta_key',$meta_key);
+         View::share('meta_desc',$meta_desc);
+
+         $this->page_size = 5;
          
-         
+    }
+
+
+    public function error404(){
+       $title = "Page not found";
+        return view('website.404',compact('title'));
+    }
+
+    public function thankyou($name){
+        $title = "ThankYou!";
+        return view('website.thanku',compact('title'));
     }
 
     public function home(Request $request){
         $category =  Category::all(); 
 
-        $reports = Report::all(); //Paginate(5);
+        $reports = Report::orderBy('id','desc')->Paginate($this->page_size); //Paginate(5);
 
 //        dd($reports);
         return view('website.home',compact('category','reports'));
@@ -100,6 +171,7 @@ class HomeController extends Controller
         $table_cname = \Schema::getColumnListing('contacts');
         $except = ['id','created_at','updated_at','_token'];  
         $data = [];
+
         foreach ($table_cname as $key => $value) {
            
            if(in_array($value, $except )){
@@ -112,13 +184,12 @@ class HomeController extends Controller
         \DB::table('contacts')->insert($data);
 
         
-         return \Response::json(array(
+         return Response::json(array(
                 'status' => 1,
                 'message' => 'Message sent successfully',
                 'data'  =>  ''
                 )
-            );
-         exit();
+            ); 
 
     }
 
@@ -138,11 +209,15 @@ class HomeController extends Controller
         return view('website.contact',compact('title'));
     }
 
-    public function page(Request $request,$page){
+    public function page(Request $request,$page=null){
+        
+        
+        $pages = \DB::table('pages')->where('slug',$page)->first();
+        $title = isset($pages->title)?$pages->title:'Page Not Found';
 
-        $title = $page;
-
-        $pages = \DB::table('pages')->where('title',$page)->first();
+        if($pages==null){
+          return Redirect::to('404');
+        }
 
         return view('website.page',compact('title','pages'));
     }
@@ -152,26 +227,31 @@ class HomeController extends Controller
         $category = \DB::table('categories')->where('slug',$name)->first();
         
         $categoryName = $category->category_name;
+ 
+        $data    = Report::where('category_id',$category->id)->Paginate($this->page_size);
+        $reports = $data;
+         
 
-        $data = \DB::table('reports')->where('category_id',$category->id)->get();
-
-
-       return view('website.categorydetails',compact('data','categoryName'));
+       return view('website.categorydetails',compact('data','categoryName','reports'));
     }
 
     public function researchReports(Request $request)
     {  
-        $search = $request->get('search');
+        $search = $request->get('search');  
 
-        $data = \DB::table('reports')
-                ->where('title','LIKE',"%$search%")
-                ->orWhere('category_name','LIKE',"%$search%")
-                ->orWhere('description','LIKE',"$search%")
-                    ->get();
+        $data = $reports =   Report::where(function($query) use($search) {
+                        if (!empty($search)) {
+                            $query->Where('title', 'LIKE', "%$search%");
+                             $query->orWhere('category_name', 'LIKE', "%$search%");
+                              $query->orWhere('description', 'LIKE', "%$search%");
+                        }
+                        
+                    })->Paginate($this->page_size);
+
         
         $categoryName = $request->get('search');
-                    
-       return view('website.categorydetails',compact('data','categoryName'));
+                  
+       return view('website.categorydetails',compact('data','categoryName','reports'));
     }
 
     
@@ -182,11 +262,22 @@ class HomeController extends Controller
        
        $data = \DB::table('reports')->where('slug',$name)->first();
 
-       return view('website.reportDetails',compact('data'));
+       $category = Category::find($data->category_id);
+
+       return view('website.reportDetails',compact('data','category'));
     }
 
-    public function payment(){
-      return view('website.payment'); 
+    public function payment(Request $request){
+
+      $reports = Report::find($request->get('payment_id'));
+
+      $purl = URL::previous();
+       
+      if(!$reports){
+        return Redirect::to($purl);
+      } 
+
+      return view('website.payment',compact('reports'));
     }
  
  /*----------*/
@@ -316,7 +407,11 @@ class HomeController extends Controller
 
    public function pressRelease(){
 
-    return view('website.pressRelease');
+      $title = "Press Release";
+      $category =  Category::all(); 
+      $reports = Report::orderBy('id','desc')->Paginate($this->page_size); //Paginate(5);
+ 
+      return view('website.pressRelease',compact('category','reports','title'));
    }
 
     

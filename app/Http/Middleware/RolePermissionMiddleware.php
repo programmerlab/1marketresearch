@@ -30,9 +30,11 @@ class RolePermissionMiddleware
         }
         
         $validAccess =false;
-        $user = Auth::guard($guard)->user();
+        $user = Auth::guard('admin')->user();
         $role_type = isset($user->role_type) && $user->role_type?$user->role_type:'Guest';
         $role = \App\Role::find($role_type);
+         
+
         $controllerAction = class_basename(Route::getCurrentRoute()->getActionName());
         list($controller, $action) = explode('@', $controllerAction);
         $routeName = Route::currentRouteName();
@@ -40,8 +42,12 @@ class RolePermissionMiddleware
         $controller = str_replace('Controller', '', $controller);
                 
         $permission =$role?(array)json_decode($role->permission):array();
+
+         
      
         $isControllerExist= key_exists($controller,$permission);
+         
+
         if($controller && $isControllerExist){
             $accessMode= $permission[$controller];
             $userCanRead= isset($accessMode->read)?true:false;
@@ -67,7 +73,7 @@ class RolePermissionMiddleware
             
         }
         }else if(in_array($controller,array('Admin','Role'))){
-         $validAccess=$request->method()=='GET'?true:false;
+         $validAccess=$request->method()=='GET'?true:true;
         }else{
          $validAccess =TRUE;   
         }

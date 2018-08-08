@@ -36,7 +36,18 @@
             <div class="blog-content">
             <div class="blog-title">
             <div class="detail-img">
-            <img src="{{asset('public/assets/img/4.jpg')}}">
+             <?php
+                 if($category->category_group_image){  
+                    $img = asset('storage/uploads/category/'.$category->category_group_image);
+                 }else{
+                    $img = asset('public/assets/img/4.jpg');
+                 }
+
+            ?>
+
+
+            <img src="{{$img}}">
+            
             </div>
             <div class="detail-title">
             <div class="detail-head">
@@ -50,10 +61,10 @@
             <div class="detail-buttons">
                 
             <a href="{{url('requestBrochure')}}">
-                <button type="submit" class="single_add_to_cart_button btn btn-danger alt"><span class=" glyphicon glyphicon-shopping-cart"></span> Request Brochure</button>
+                <button type="submit" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3; height: 38px;"><span class=" glyphicon glyphicon-shopping-cart"></span> Request Brochure</button>
             </a>
             <a href="{{url('askAnAnalyst')}}">
-                <button type="submit" class="single_add_to_cart_button btn btn-primary alt " style="height: 40px;"><span class=" glyphicon glyphicon-shopping-cart"></span> Ask An Analyst</button>
+                <button type="submit" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3;height: 38px;" ><span class=" glyphicon glyphicon-shopping-cart"></span> Ask An Analyst</button>
             </a>
             
             </div>
@@ -62,17 +73,17 @@
                                             
                             
                             
-            <div class="detail-tabs">
+                            <div class="detail-tabs">
 
-                <div class="tab-menu">
-                     <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="active"><a href="#p-view-1" role="tab" data-toggle="tab" aria-expanded="true">Report Description</a></li>
-                        <li class=""><a href="#p-view-2" role="tab" data-toggle="tab" aria-expanded="false">Table of Contents</a></li>
-                        <li class=""><a href="#p-view-3" role="tab" data-toggle="tab" aria-expanded="false">Enquire Before Buying</a></li>
-                        <li class=""><a href="#p-view-4" role="tab" data-toggle="tab" aria-expanded="false">Request Sample</a></li>
-                    </ul>
-                </div>
+                                <div class="tab-menu">
+                                     <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#p-view-1" role="tab" data-toggle="tab" aria-expanded="true">Report Description</a></li>
+                                        <li class=""><a href="#p-view-2" role="tab" data-toggle="tab" aria-expanded="false">Table of Contents</a></li>
+                                        <li class=""><a href="#p-view-3" role="tab" data-toggle="tab" aria-expanded="false">Enquire Before Buying</a></li>
+                                        <li class=""><a href="#p-view-4" role="tab" data-toggle="tab" aria-expanded="false">Request Sample</a></li>
+                                    </ul>
+                                </div>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="p-view-1">
                                         <div class="tab-inner">

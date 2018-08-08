@@ -19,6 +19,7 @@ use Redirect;
 use URL;
 use ErrorException;
 use Illuminate\Database\QueryException;
+use Str;
 
 class Handler extends ExceptionHandler
 {
@@ -57,13 +58,13 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
-    { 
+    {   
 
        $path_info_url = $request->getpathInfo();
 
 
           if(strpos($path_info_url,'admin')==false){
-           return Redirect::to('404?error='.$e->getMessage());
+           return Redirect::to('404?error='.str_slug($e->getMessage()));
        }
 
 
@@ -89,7 +90,7 @@ class Handler extends ExceptionHandler
           $page_action = "Page";
           $viewPage = "404 Error";
           $msg = "page not found";
-          $error_msg = $e->getMessage(); //"Oops! Server is busy please try later."; 
+          $error_msg = str_slug($e->getMessage()); //"Oops! Server is busy please try later."; 
 
           return  Redirect::to(URL::previous())->with('flash_alert_notice', $error_msg); 
         }
@@ -101,7 +102,7 @@ class Handler extends ExceptionHandler
           $data['error_type'] = 'InvalidArgumentException';
            
           $this->errorLog($data,$e);
-          return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+          return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', str_slug($e->getMessage()));
 
         }    
         if ($e instanceof ModelNotFoundException) { 
@@ -117,7 +118,7 @@ class Handler extends ExceptionHandler
           $msg = "page not found";
           $error_msg = $e->getMessage(); //"Oops! Server is busy please try later."; 
 
-          return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage()); 
+          return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', str_slug($e->getMessage())); 
 
         }
         $error_from_route =0;
@@ -140,7 +141,7 @@ class Handler extends ExceptionHandler
                     ]
                 );
             }else{
-              return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+              return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice',str_slug($e->getMessage()));
             } 
             exit();
         }
@@ -189,7 +190,7 @@ class Handler extends ExceptionHandler
                     ]
                 );
             }else{
-               return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+               return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', str_slug($e->getMessage()));
             } 
             exit();
            
@@ -215,7 +216,7 @@ class Handler extends ExceptionHandler
                     ]
                 );
             }else{
-                 return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', $e->getmessage());
+                 return  Redirect::to('admin/404?error='.$e->getmessage())->with('flash_alert_notice', str_slug($e->getMessage()));
 
             } 
             exit(); 
@@ -226,7 +227,7 @@ class Handler extends ExceptionHandler
     public function errorLog($data,$e)
     {
       $data['log']      = json_encode($e);
-      $data['message']  = $e->getMessage();
+      $data['message']  = str_slug($e->getMessage());
       $data['file']     = $e->getFile();
       $data['statusCode'] = 500;
 

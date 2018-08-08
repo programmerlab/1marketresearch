@@ -65,11 +65,19 @@
                                         <li><a href="{{url('publisher')}}">Publisher</a></li>
                                         <li><a href="{{url('contact')}}">Contact Us</a></li>
                                         <li><a href="{{url('requestBrochure')}}">Request Brochure</a></li>
+                                    @foreach($pageMenu as $key => $result)
+                                        @if($key<2)
+                                            <li><a href="{{url($result->slug)}}"> {{ucfirst($result->title)}}</a></li>
+                                        @endif 
+                                    @endforeach
                                     </ul>
 
                                      <ul class="footer-list hidden-sm">
                                         @foreach($pageMenu as $key => $result)
-                                        <li><a href="{{url($result->title)}}"> {{ucfirst($result->title)}}</a></li>
+                                        @if($key<2)
+                                            <?php continue; ?>
+                                        @endif
+                                        <li><a href="{{url($result->slug)}}"> {{ucfirst($result->title)}}</a></li>
                                         @endforeach
                                     </ul> 
                                     </div>
@@ -100,7 +108,7 @@
                             <div class="copyright">
                                 <p>
                                     Copyright @ {{date('Y')}}
-                                    <a href="#">1 market Research</a> All Rights Reserved                                </p>
+                                    <a href="{{url('/')}}">1 market Research</a> All Rights Reserved                                </p>
                             </div>
                         </div>
                     </div>
@@ -117,8 +125,7 @@
         <!-- jquery latest version --> 
  
 
-        <!-- jquery latest version -->
-        <script src="js/jquery-1.12.4.min.js"></script>
+        <!-- jquery latest version --> 
                 <script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
 

@@ -56,7 +56,7 @@
 
                         <!-- START CAPTCHA -->
                         <label>Enter Captcha:</label>
-                        <span id="mainCaptcha2" style="margin-left: 10px;" /> </span>
+                        <span id="mainCaptcha2" style="margin-left: 10px; font-weight: 700; font-size: 25px"  /> </span>
                         <i class="fa fa-refresh" onclick="Captcha();"  aria-hidden="true" style="color: #337ab7; font-size: 30px; padding-left: 10px;"></i>
 
                         <span class="cptch_reload_button dashicons dashicons-update"></span>

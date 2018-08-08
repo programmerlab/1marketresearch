@@ -86,7 +86,7 @@
                                             <a href="#"><i class="fa fa-umbrella" ></i></a>                                     </div>
                                         <div class="well-content">
                                             <h4><a href="#">Quality <br/>Assurence</a></h4>
-                                            <p>Aspernatur sit adipisci quaerat unde at neque Redug Lagre dolor sit amet.</p>
+                                            <p>Ensure your fingertips with our high standards database of market research.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                             <a href="#"><i class="fa fa-clock-o" ></i></a>                                      </div>
                                         <div class="well-content">
                                             <h4><a href="#">24X7 Customer <br/>Service</a></h4>
-                                            <p>Aspernatur sit adipisci quaerat unde at neque Redug Lagre dolor sit amet.</p>
+                                            <p>Ensure your fingertips with our high standards database of market research.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                             <a href="#"><i class="fa fa-certificate" ></i></a>                                      </div>
                                         <div class="well-content">
                                             <h4><a href="#">Customization <br> System</a></h4>
-                                            <p>Aspernatur sit adipisci quaerat unde at neque Redug Lagre dolor sit amet.</p>
+                                            <p>Ensure your fingertips with our high standards database of market research.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                             <a href="#"><i class="fa fa-lock" ></i></a>                                     </div>
                                         <div class="well-content">
                                             <h4><a href="#">Secured Payment <br/>Option</a></h4>
-                                            <p>Aspernatur sit adipisci quaerat unde at neque Redug Lagre dolor sit amet.</p>
+                                            <p>Ensure your fingertips with our high standards database of market research.</p>
                                         </div>
                                     </div>
                                 </div>

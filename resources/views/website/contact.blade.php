@@ -117,7 +117,7 @@
         
             <div class="form-group">
             <label>Enter Captcha:</label>
-                        <span id="mainCaptcha" style="margin-left: 10px;" /> </span>
+                        <span id="mainCaptcha" style="margin-left: 10px; font-weight: 700; font-size: 25px" /> </span>
                         <i class="fa fa-refresh" onclick="Captcha();"  aria-hidden="true" style="color: #337ab7; font-size: 30px; padding-left: 10px;"></i>
 
                         <span class="cptch_reload_button dashicons dashicons-update"></span>
@@ -139,6 +139,7 @@
     <div class="contact-title">
         <h4>Mailing Address</h4>
     </div>
+    <hr>
     <div class="clearfix address">
         <span class="contact-i"><i class="fa fa-map-marker"></i></span>
          {!! isset($company_address->field_value)?$company_address->field_value:"304, S. Jones Blvd, #3299" !!} 

@@ -21,7 +21,7 @@ class PageRequest  extends Request {
                     }
                 case 'POST': {
                         return [
-                            'title'             => 'required' ,  
+                            'title'             => 'required|unique:pages,title' ,  
                             'page_content'      => 'required', 
                             'images'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350', 
                         ];

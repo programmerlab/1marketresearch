@@ -20,24 +20,25 @@
                           <i class="icon-settings font-red"></i>
                           <span class="caption-subject font-red sbold uppercase">{{ $heading }}</span>
                       </div>
-
+                      <div class="col-md-2 pull-right">
+                          <div style="width: 150px;" class="input-group"> 
+                              <a href="{{ route('reports.create')}}">
+                                  <button  class="btn btn-danger"><i class="fa fa-plus-circle"></i> Create Reports</button> 
+                              </a>
+                          </div>
+                      </div>
                       <div class="col-md-2 pull-right">
                           <div   class="input-group">  
                            <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Reports </a> 
                           </div>
                       </div> 
-                      <div class="col-md-2 pull-right">
-                          <div style="width: 150px;" class="input-group"> 
-                              <a href="{{ route('reports.create')}}">
-                                  <button  class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Reports</button> 
-                              </a>
+                       <div class="col-md-2 pull-right">
+                          <div   class="input-group">  
+                           <a class="btn  btn-info" data-toggle="modal" href="{{url('admin/reports?export=excel')}}"><i class="fa fa-plus-circle"></i> Export Reports in excel </a> 
                           </div>
-                      </div>
-                      <div class="col-md-2 pull-right">
-                                            <div   class="input-group">  
-                                             <a class="btn  btn-success" data-toggle="modal" href="{{url('admin/reports?export=excel')}}"><i class="fa fa-plus-circle"></i> Export Reports in excel </a> 
-                                            </div>
-                                        </div> 
+                      </div> 
+                      
+                     
                            
                     </div>
                         

@@ -22,14 +22,12 @@ Route::get('/send', 'EmailController@sendMail');
 
 Route::get('/sendEmailReminder', 'NotificationController@sendEmailReminder');
 
-Route::get('/404', function(){
-  return view('website.404');
-});
+ 
+
+Route::get('/404', 'HomeController@error404');
 
 
-Route::get('/404', function(){
-  return view('website.404');
-});
+ 
 
 Route::match(['post','get'],'saveForm',[
         'as' => 'saveForm',
@@ -75,7 +73,7 @@ Route::match(['post','get'],'services',[
 
 
 Route::match(['post','get'],'publisher',[
-        'as' => 'publisher',
+        'as' => 'publishers',
         'uses' => 'HomeController@publisher'
         ]
     );
@@ -167,7 +165,13 @@ Route::get('admin/404',function(){
     
 });
 
-Route::match(['post','get'],'{page}',[
+Route::match(['post','get'],'/{name}-thankyou',[
+        'as' => 'thankyou',
+        'uses' => 'HomeController@thankyou'
+        ]
+    );
+
+Route::match(['post','get'],'/{name}',[
         'as' => 'contentspage',
         'uses' => 'HomeController@page'
         ]

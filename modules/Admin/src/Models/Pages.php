@@ -32,7 +32,7 @@ class Pages extends Eloquent {
      *
      * @var array
      */
-     protected $fillable = ['title','page_content','images']; 
+     protected $fillable = ['title','page_content','images','slug','url','meta_title','meta_key','meta_description']; 
      // All field of user table here
 
     /**

@@ -97,40 +97,23 @@
 
         /*------------User Category and controller---------*/
 
-            Route::bind('sub-category', function($value, $route) {
-                return Modules\Admin\Models\Category::find($value);
-            });
+            // Route::bind('sub-category', function($value, $route) {
+            //     return Modules\Admin\Models\Category::find($value);
+            // });
      
-            Route::resource('admin/sub-category', 'Modules\Admin\Http\Controllers\SubCategoryController', [
-                'names' => [
-                    'edit' => 'sub-category.edit',
-                    'show' => 'sub-category.show',
-                    'destroy' => 'sub-category.destroy',
-                    'update' => 'sub-category.update',
-                    'store' => 'sub-category.store',
-                    'index' => 'sub-category',
-                    'create' => 'sub-category.create',
-                ]
-                    ]
-            );
-             /*------------User Category and controller---------*/
-
-            Route::bind('category-dashboard', function($value, $route) {
-                return Modules\Admin\Models\CategoryDashboard::find($value);
-            });
-     
-            Route::resource('admin/category-dashboard', 'Modules\Admin\Http\Controllers\CategoryDashboardController', [
-                'names' => [
-                    'edit' => 'category-dashboard.edit',
-                    'show' => 'category-dashboard.show',
-                    'destroy' => 'category-dashboard.destroy',
-                    'update' => 'category-dashboard.update',
-                    'store' => 'category-dashboard.store',
-                    'index' => 'category-dashboard',
-                    'create' => 'category-dashboard.create',
-                ]
-                    ]
-            );
+            // Route::resource('admin/sub-category', 'Modules\Admin\Http\Controllers\SubCategoryController', [
+            //     'names' => [
+            //         'edit' => 'sub-category.edit',
+            //         'show' => 'sub-category.show',
+            //         'destroy' => 'sub-category.destroy',
+            //         'update' => 'sub-category.update',
+            //         'store' => 'sub-category.store',
+            //         'index' => 'sub-category',
+            //         'create' => 'sub-category.create',
+            //     ]
+            //         ]
+            // );
+            
         /*---------Contact Route ---------*/    
 
         Route::bind('contact', function($value, $route) {
@@ -149,142 +132,16 @@
             ]
                 ]
         );  
-
-         Route::bind('comment', function($value, $route) {
-            return App\Models\Comments::find($value);
-        });
  
-        Route::resource('admin/comment', 'Modules\Admin\Http\Controllers\CommentController', [
-            'names' => [
-                'edit' => 'comment.edit',
-                'show' => 'comment.show',
-                'destroy' => 'comment.destroy',
-                'update' => 'comment.update',
-                'store' => 'comment.store',
-                'index' => 'comment',
-                'create' => 'comment.create',
-            ]
-                ]
-        );  
-
-        Route::get('admin/comment/showComment/{id}', 'Modules\Admin\Http\Controllers\CommentController@showComment');
-
-        Route::resource('admin/compaint', 'Modules\Admin\Http\Controllers\CompaintController', [
-            'names' => [
-                'index' => 'compaint',
-            ]
-                ]
-        ); 
-        // complain details
-        Route::get('admin/complainDetail','Modules\Admin\Http\Controllers\CompaintController@complainDetail');
-
-        Route::post('admin/supportReply','Modules\Admin\Http\Controllers\CompaintController@supportReply');
-
-        
-
-         Route::bind('postTask', function($value, $route) {
-            return Modules\Admin\Models\PostTask::find($value);
-        });
- 
-        Route::resource('admin/postTask', 'Modules\Admin\Http\Controllers\PostTaskController', [
-            'names' => [
-                'edit' => 'postTask.edit',
-                'show' => 'postTask.show',
-                'destroy' => 'postTask.destroy',
-                'update' => 'postTask.update',
-                'store' => 'postTask.store',
-                'index' => 'postTask',
-                'create' => 'postTask.create',
-            ]
-                ]
-        );  
-
-        Route::get('admin/mytask/{id}','Modules\Admin\Http\Controllers\PostTaskController@mytask');
+  
 
 
-
-        // programs
-         Route::bind('program', function($value, $route) {
-            return Modules\Admin\Models\Program::find($value);
-        });
- 
-        Route::resource('admin/program', 'Modules\Admin\Http\Controllers\ProgramController', [
-            'names' => [
-                'edit' => 'program.edit',
-                'show' => 'program.show',
-                'destroy' => 'program.destroy',
-                'update' => 'program.update',
-                'store' => 'program.store',
-                'index' => 'program',
-                'create' => 'program.create',
-            ]
-                ]
-        );  
-
-
-        // programs
-         Route::bind('reason', function($value, $route) {
-            return Modules\Admin\Models\Reason::find($value);
-        });
- 
-        Route::resource('admin/reason', 'Modules\Admin\Http\Controllers\ReasonController', [
-            'names' => [
-                'edit' => 'reason.edit',
-                'show' => 'reason.show',
-                'destroy' => 'reason.destroy',
-                'update' => 'reason.update',
-                'store' => 'reason.store',
-                'index' => 'reason',
-                'create' => 'reason.create',
-            ]
-                ]
-        );  
-
-
-         Route::get('admin/createGroup', 'Modules\Admin\Http\Controllers\ContactController@createGroup');  
         Route::post('admin/contact/import', 'Modules\Admin\Http\Controllers\ContactController@contactImport');
 
         Route::post('admin/reports/import', 'Modules\Admin\Http\Controllers\ReportController@csvImport');
 
-
-        //  Route::bind('contacts', function($value, $route) {
-        //     return Modules\Admin\Models\Contact::find($value);
-        // });
-
-        // Route::resource('admin/contacts', 'Modules\Admin\Http\Controllers\ContactController', [
-        //     'names' => [
-        //         'edit' => 'contacts.edit',
-        //         'show' => 'contacts.show',
-        //         'destroy' => 'contacts.destroy',
-        //         'update' => 'contacts.update',
-        //         'store' => 'contacts.store',
-        //         'index' => 'contacts',
-        //         'create' => 'contacts.create',
-        //     ]
-        //         ]
-        // );  
-
-
-
-        Route::get('admin/updateGroup', 'Modules\Admin\Http\Controllers\ContactGroupController@updateGroup'); 
-         /*---------Contact Route ---------*/    
-
-        Route::bind('contactGroup', function($value, $route) {
-            return Modules\Admin\Models\ContactGroup::find($value);
-        });
  
-        Route::resource('admin/contactGroup', 'Modules\Admin\Http\Controllers\ContactGroupController', [
-            'names' => [
-                'edit' => 'contactGroup.edit',
-                'show' => 'contactGroup.show',
-                'destroy' => 'contactGroup.destroy',
-                'update' => 'contactGroup.update',
-                'store' => 'contactGroup.store',
-                'index' => 'contactGroup',
-                'create' => 'contactGroup.create',
-            ]
-                ]
-        );
+ 
 
 
         Route::bind('transaction', function($value, $route) {
@@ -322,22 +179,22 @@
         ); 
 
 
-        Route::bind('blog', function($value, $route) {
-            return Modules\Admin\Models\Blogs::find($value);
-        });
+        // Route::bind('blog', function($value, $route) {
+        //     return Modules\Admin\Models\Blogs::find($value);
+        // });
  
-        Route::resource('admin/blog', 'Modules\Admin\Http\Controllers\BlogController', [
-            'names' => [
-                'edit' => 'blog.edit',
-                'show' => 'blog.show',
-                'destroy' => 'blog.destroy',
-                'update' => 'blog.update',
-                'store' => 'blog.store',
-                'index' => 'blog',
-                'create' => 'blog.create',
-            ]
-                ]
-        );
+        // Route::resource('admin/blog', 'Modules\Admin\Http\Controllers\BlogController', [
+        //     'names' => [
+        //         'edit' => 'blog.edit',
+        //         'show' => 'blog.show',
+        //         'destroy' => 'blog.destroy',
+        //         'update' => 'blog.update',
+        //         'store' => 'blog.store',
+        //         'index' => 'blog',
+        //         'create' => 'blog.create',
+        //     ]
+        //         ]
+        // );
 
 
         Route::bind('role', function($value, $route) {
@@ -357,57 +214,24 @@
                 ]
         );
 
-      
+       
 
-        Route::resource('admin/articleType', 'Modules\Admin\Http\Controllers\ArticleTypeController', [
-            'names' => [
-                'edit' => 'articleType.edit',
-                'show' => 'articleType.show',
-                'destroy' => 'articleType.destroy',
-                'update' => 'articleType.update',
-                'store' => 'articleType.store',
-                'index' => 'articleType',
-                'create' => 'articleType.create',
-            ]
-                ]
-        );
-
-
-        Route::bind('article', function($value, $route) {
-            return Modules\Admin\Models\Article::find($value);
-        });
+        // Route::bind('press', function($value, $route) {
+        //     return Modules\Admin\Models\Press::find($value);
+        // });
  
-        Route::resource('admin/article', 'Modules\Admin\Http\Controllers\ArticleController', [
-            'names' => [
-                'edit' => 'article.edit',
-                'show' => 'article.show',
-                'destroy' => 'article.destroy',
-                'update' => 'article.update',
-                'store' => 'article.store',
-                'index' => 'article',
-                'create' => 'article.create',
-            ]
-                ]
-        );
-
-
-
-        Route::bind('press', function($value, $route) {
-            return Modules\Admin\Models\Press::find($value);
-        });
- 
-        Route::resource('admin/press', 'Modules\Admin\Http\Controllers\PressController', [
-            'names' => [
-                'edit' => 'press.edit',
-                'show' => 'press.show',
-                'destroy' => 'press.destroy',
-                'update' => 'press.update',
-                'store' => 'press.store',
-                'index' => 'press',
-                'create' => 'press.create',
-            ]
-                ]
-        );
+        // Route::resource('admin/press', 'Modules\Admin\Http\Controllers\PressController', [
+        //     'names' => [
+        //         'edit' => 'press.edit',
+        //         'show' => 'press.show',
+        //         'destroy' => 'press.destroy',
+        //         'update' => 'press.update',
+        //         'store' => 'press.store',
+        //         'index' => 'press',
+        //         'create' => 'press.create',
+        //     ]
+        //         ]
+        // );
         
 		
         Route::bind('content', function($value, $route) {
@@ -426,6 +250,23 @@
             ]
                 ]
         );
+
+        // Route::bind('page', function($value, $route) {
+        //     return Modules\Admin\Models\Pages::find($value);
+        // });
+ 
+        // Route::resource('admin/page', 'Modules\Admin\Http\Controllers\PageController', [
+        //     'names' => [
+        //         'edit' => 'page.edit',
+        //         'show' => 'page.show',
+        //         'destroy' => 'page.destroy',
+        //         'update' => 'page.update',
+        //         'store' => 'page.store',
+        //         'index' => 'page',
+        //         'create' => 'page.create',
+        //     ]
+        //         ]
+        // );
 
         Route::bind('publisher', function($value, $route) {
             return Modules\Admin\Models\Publisher::find($value);
@@ -485,8 +326,6 @@
         
         Route::match(['get','post'],'admin/profile', 'Modules\Admin\Http\Controllers\AdminController@profile'); 
         
-        Route::match(['get','post'],'admin/monthly-report/{name}', 'Modules\Admin\Http\Controllers\MonthlyReportController@corporateUser'); 
-        Route::match(['get','post'],'admin/corporate-monthly-report', 'Modules\Admin\Http\Controllers\MonthlyReportController@index'); 
              
   });
 

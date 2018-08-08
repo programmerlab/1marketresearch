@@ -18,10 +18,15 @@ function Captcha(type){
       }
     var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e;
 
-    document.getElementById("mainCaptcha").innerHTML = code
-    document.getElementById("mainCaptcha2").innerHTML = code  
-    $('.btnSubmit').attr('disabled','disabled');
-     $('.btnSubmit2').attr('disabled','disabled');
+    if($("#mainCaptcha").length != 0) {
+        document.getElementById("mainCaptcha").innerHTML = code;
+        $('.btnSubmit').attr('disabled','disabled');
+    }
+    if($("#mainCaptcha2").length != 0) {
+        document.getElementById("mainCaptcha2").innerHTML = code ;
+        $('.btnSubmit2').attr('disabled','disabled'); 
+    }  
+    
   }
   function ValidCaptcha(type){
 
@@ -67,6 +72,19 @@ function Captcha(type){
 
 $(document).ready( function(event) {
     // enquiry
+
+    var form_name = $("input[name=request_type]").val();
+    var urlTo = '';
+   if(form_name!=undefined){
+        urlTo = form_name.split(' ').join('-');
+        urlTo = url+'/'+urlTo+'-thankyou';
+   }else{
+        urlTo = url+'/'+urlTo+'-thankyou';
+   }
+
+   
+              
+
     $('#btnSubmit').attr('disabled','disabled'); 
     $("#Enquiry").validate({         
         errorClass: 'errorClass', // default input error message class        
@@ -102,10 +120,10 @@ $(document).ready( function(event) {
                    $('#btnSubmit').html('please wait...');
                 },
                 success: function(response) {
+                    console.log(response);
                    $('#btnSubmit').html('Submit Request');
                    if(response.status==1){
-                    form.reset();
-                     bootbox.alert(response.message);
+                     window.location.assign(urlTo);
                    }else{
                     $('.successMsg').html(response.message+'<br>').css('color','red');
                    }
@@ -153,10 +171,10 @@ $(document).ready( function(event) {
                    $('.btnSubmit2').html('please wait...');
                 },
                 success: function(response) {
+                    console.log(response);
                    $('.btnSubmit2').html('Submit Request');
                    if(response.status==1){
-                    form.reset();
-                     bootbox.alert(response.message);
+                     window.location.assign(urlTo); 
                    }else{
                     $('.successMsg').html(response.message+'<br>').css('color','red');
                    }
@@ -197,22 +215,18 @@ $(document).ready( function(event) {
         },
         
         submitHandler: function(form,e) {
-             e.preventDefault();
+             e.preventDefault(); 
             $.ajax({
                 type: "POST",
                 data:  $( "#contactForm" ).serialize(),
                 url: url+'/saveForm',
                 beforeSend: function() {
-                 //  $('.btnSubmit2').html('please wait...');
+                    $('.btnSubmit2').html('please wait...');
                 },
                 success: function(response) {
+                   console.log(response);
+                    window.location.href = urlTo; 
                    
-                   if(response.status==1){
-                    form.reset();
-                     bootbox.alert(response.message);
-                   }else{
-                     bootbox.alert(response.message);
-                   }
                 }
 
             });

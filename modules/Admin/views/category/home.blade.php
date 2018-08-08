@@ -65,6 +65,7 @@
                                                 <th> Category Name </th>
                                                 <th> Image </th>
                                                 <th> Url </th>
+                                                <th> Reports </th>
                                                 <th>Created date</th> 
                                                 <th>Action</th> 
                                             </tr>
@@ -76,12 +77,15 @@
                                                 <td> {{$result->category_group_name}} </td>
                                                 <td>
                                                 <a href="{{ url::asset('storage/uploads/category/'.$result->category_group_image)  }}" target="_blank" >
-                                                <img src="{{ url::asset('storage/uploads/category/'.$result->category_group_image)  }}" width="100px" height="50px;"> </a>  </td>
+                                                <img src="{{ url::asset('storage/uploads/category/'.$result->category_group_image)  }}" width="100px" height="50px;">
+                                                 </a>  </td>
                                                 <td>
                                                     {{ url('category/'.$result->slug) }}
+                                                    
                                                 </td>
+                                                <td><a href="{{url('admin/reports?search='.$result->category_group_name)}}"> View Reports </a></td>
                                                      <td>
-                                                        {!! Carbon\Carbon::parse($result->created_at)->format('Y-m-d'); !!}
+                                                        {!! Carbon\Carbon::parse($result->created_at)->format('d-m-Y'); !!}
                                                     </td>
                                                     
                                                     <td> 

@@ -61,8 +61,7 @@ class CategoryController extends Controller {
     public function index(Category $category, Request $request) 
     { 
         $page_title = 'Category';
-        $sub_page_title = 'Group Category';
-        $page_action = 'View Group Category'; 
+        $page_action = 'View Category'; 
 
 
         if ($request->ajax()) {
@@ -73,7 +72,7 @@ class CategoryController extends Controller {
             echo $s;
             exit();
         }
-
+ 
         // Search by name ,email and group
         $search = Input::get('search');
         $status = Input::get('status');
@@ -87,9 +86,9 @@ class CategoryController extends Controller {
                                     ->OrWhere('category_name', 'LIKE', "%$search%");
                         }
                         
-                    })->where('parent_id',0)->Paginate($this->record_per_page);
+                    })->orderBy('id','DESC')->where('parent_id',0)->Paginate($this->record_per_page);
         } else {
-            $categories = Category::where('parent_id',0)->Paginate($this->record_per_page);
+            $categories = Category::orderBy('id','ASC')->where('parent_id',0)->Paginate($this->record_per_page);
         }
          
         
@@ -217,11 +216,16 @@ class CategoryController extends Controller {
      * 
      */
     public function destroy(Category $category) {
-        
+            
+         $reports = \DB::table('reports')->where('category_id',$category->id)->get();
+         if($reports){
+             return Redirect::to(route('category'))
+                        ->with('flash_alert_notice', "You can't delete this Category. This is associated with reports");
+         }
         Category::where('id',$category->id)->delete(); 
         Category::where('parent_id',$category->id)->delete();
         return Redirect::to(route('category'))
-                        ->with('flash_alert_notice', 'Group Category  successfully deleted.');
+                        ->with('flash_alert_notice', 'Category  successfully deleted.');
     }
 
     public function show(Category $category) {
