@@ -9,7 +9,7 @@
 
  @include('partials.search')
 
-<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">{{$data->category_name}}</a> &gt;&gt; {{
+<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="{{url('/')}}">Home</a> &gt;&gt; <a href="#">{{$data->category_name}}</a> &gt;&gt; {{
     ucwords(str_replace('-',' ',$data->slug))
 }}</nav>
 

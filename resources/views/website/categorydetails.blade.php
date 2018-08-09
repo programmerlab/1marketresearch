@@ -6,7 +6,7 @@
   @section('content')  
     @include('partials.search')
         <!-- End Slider Area -->
-    <nav class="woocommerce-breadcrumb"><a href="#">Home</a> &gt;&gt; {{$categoryName or $title}}</nav>
+    <nav class="woocommerce-breadcrumb"><a href="{{url('/')}}">Home</a> &gt;&gt; {{$categoryName or $title or 'Search'}}</nav>
     <div class="blog-area area-padding">
       <div class="container">
                 
