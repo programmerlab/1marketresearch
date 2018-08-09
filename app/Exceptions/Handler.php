@@ -59,9 +59,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {   
-      dd($e);
-
-      
        $path_info_url = $request->getpathInfo();
 
 
