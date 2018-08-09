@@ -4,10 +4,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="banner-content text-left">
-                            <h4>Are you looking for professional Services of your company</h4>
-                            <div class="banner-contact-btn">
-                                <a class="banner-btn" href="{{url('contact')}}">Contact us</a>                            </div>
+                        <div class="banner-content text-left col-md-12">
+                             <div class="col-md-8 ">
+                                <h5 style="color: #fff">Contact us at +1-702-425-8599 or share your details on sales@1marketresearch.com with your requirements of market research reports and business intelligence needs. </h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="banner-contact-btn">
+                                    <a class="banner-btn" href="{{url('contact')}}">Contact us</a>                            
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

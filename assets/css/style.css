@@ -3175,7 +3175,7 @@ span.email-notes{color: #42414f;
     font-weight: 600;
     padding: 10px 6px;
     margin-right: 5px;
-    text-transform: uppercase;
+  /*  text-transform: uppercase; */
     width: 131px;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {

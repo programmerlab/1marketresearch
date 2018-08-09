@@ -61,7 +61,7 @@
             <div class="detail-buttons">
                 
             <a href="{{url('requestBrochure')}}">
-                <button type="submit" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3; height: 38px;"><span class=" glyphicon glyphicon-shopping-cart"></span> Request Brochure</button>
+                <button type="submit" class=" btn btn-primary" style="background-color: darkcyan; border-color: #3db1e3; height: 38px;"><span class=" glyphicon glyphicon-shopping-cart"></span> Request Brochure</button>
             </a>
             <a href="{{url('askAnAnalyst')}}">
                 <button type="submit" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3;height: 38px;" ><span class=" glyphicon glyphicon-shopping-cart"></span> Ask An Analyst</button>

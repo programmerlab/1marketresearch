@@ -5,10 +5,12 @@
               <!-- start testimonial carousel -->
               <div class="testimonial-carousel item-indicator">
                 <div class="single-testimonial text-center">
-                  <div class="testimonial-text">
-                    <p style="text-align: justify;"> 
-                            Professional and unique research report. Customize research as per my requirement. Able to build the perfect future business sales strategy based on the quality research report.
+                  <div class="testimonial-text" style="margin: 13px;background: #fff; padding: 5px; 0px">
+                    <p >
+                      <i class="fa fa-quote-left"></i>
+                            Professional and unique research report. Customize research as per my requirement. Able to build the perfect future business sales strategy based on the quality research report.<i class="fa fa-quote-right"></i>
                             </p>
+
                   </div>
                   <div class="testimonial-img ">
                     <img src="img/review/1.jpg" alt="">
@@ -21,7 +23,10 @@
                 <!-- End single item -->
                 <div class="single-testimonial text-center">
                   <div class="testimonial-text">
-                      <p style="text-align: justify;">  Professional and unique research report. Customize research as per my requirement. Able to build the perfect future business sales strategy based on the quality research report.</p>
+                      <i class="fa fa-quote-left"></i>
+                      <p style="text-align: justify;">  Professional and unique research report. Customize research as per my requirement. Able to build the perfect future business sales strategy based on the quality research report.
+                      <i class="fa fa-quote-right"></i></p>
+                      
                   </div>
                   <div class="testimonial-img ">
                     <img src="img/review/1.jpg" alt="">
