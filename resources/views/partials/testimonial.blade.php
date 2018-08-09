@@ -12,8 +12,7 @@
                             </p>
 
                   </div>
-                  <div class="testimonial-img ">
-                    <img src="img/review/1.jpg" alt="">
+                  <div class="testimonial-img "> 
                     <div class="client-name">
                       <h4>Michael</h4>
                                           </div>
