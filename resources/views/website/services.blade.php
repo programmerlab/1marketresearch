@@ -11,7 +11,7 @@
               @include('partials.search')
         <!-- End Slider Area -->
         
-        <nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">Services</a></nav>
+        <nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="{{url('/')}}">Home</a> &gt;&gt; <a href="#">Services</a></nav>
         
         <div class="published-date">
             <div class="row">
