@@ -31,8 +31,11 @@
                                 <div class="footer-head">
                                     <div class="footer-logo">
                                         <a href="#"><img src="{{asset('public/assets/img/logo/logo2.png')}}" alt="" style="border-radius:5px;"></a>                                    </div>
-                                    <p>
-                                        Are you looking for professional advice for your new business.Are you looking for professional advice for your new business.Are you looking for professional advice for your new business.                                    </p>
+                                    <p >
+                                       
+
+                                        {!! wordwrap($website_description->field_value,5,"\n") !!}   
+                                    </p>
                                     <div class="footer-icons">
                                         <ul>
                                             <li>
@@ -135,7 +138,7 @@
         <script src="{{asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
 
 
-        <script src="https://use.fontawesome.com/a832a5b49f.js"></script>
+       
         <!-- bootstrap js -->
         <!-- owl.carousel js -->
         <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
@@ -162,7 +165,7 @@
         
         <script src="{{ asset('assets/js/bootbox.js')}}"></script> 
         <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script> 
-
+        <script src="{{ URL::asset('assets/js/modernizr-2.8.3.min.js')}}"></script>
         <script src="{{ asset('assets/js/common.js')}}"></script> 
         <script type="text/javascript">
           var  url = "{{ url('/') }}";

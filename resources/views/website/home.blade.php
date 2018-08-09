@@ -53,8 +53,9 @@
               @endforeach
               <!-- End single blog -->
   
-              <ul class="pagination">
-                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
+              <ul class="pagination" style="padding: 5px">
+                 <a class="btn btn-primary" href="{{url('research-reports')}}">View All Reports </a>  
+
              </ul> 
       
               <!-- End single blog -->
@@ -68,7 +69,7 @@
                                 <div class="assist-slogen">Ansel helps you
               find the right report:</div>
                             <div class="assiste-contact">
-                                <p><i class="fa fa-phone"></i> +91{{$phone->field_value or $mobile->field_value}} </p>
+                                <p><i class="fa fa-phone"></i> {{$phone->field_value or $mobile->field_value}} </p>
                                 <p><i class="fa fa-envelope"></i> <a href="#">Contact By Mail </p>
                             </div>
                         </div>

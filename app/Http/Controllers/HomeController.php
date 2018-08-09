@@ -63,6 +63,11 @@ class HomeController extends Controller
         $twitter_url     = $setting::where('field_key','twitter_url')->first();
         $website_logo  = $setting::where('field_key','website_logo')->first();
 
+        $website_description  = $setting::where('field_key','website_description')->first();
+
+        View::share('website_description',$website_description);
+
+
          View::share('phone',$phone);
          View::share('mobile',$mobile); 
          View::share('website_logo',$website_logo);
@@ -183,7 +188,50 @@ class HomeController extends Controller
         }
         \DB::table('contacts')->insert($data);
 
-        
+
+
+        $helper = new Helper;
+
+        $subject = "1marketResearch-".$request->get('request_type');
+
+        $report = Report::find($request->get('report_id'));
+        if($report){
+          $report_name = $report->title;
+          $report_link = url('market-reports/'.$report->slug);
+        }else{
+          $report_name = '';
+          $report_link = '';
+        }
+
+        $email_content = [
+                'receipent_email'=> $request->input('email'),
+                'subject'=> $subject,
+                'greeting'=> '1marketresearch',
+                'first_name'=> $request->input('name'),
+                'from' => env('MAIL_FROM'),
+                'addBCC' => env('MAIL_BCC'),
+                'report_name' => $report_name,
+                'report_link' => $report_link, 
+                'data' => $data
+                ];
+
+        $helper->sendMail($email_content,'contact');
+        unset($data['request_type']);
+         $email_content = [
+                'receipent_email'=> env('MAIL_TO'),
+                'subject'=> $request->get('request_type'),
+                'greeting'=> '1marketresearch',
+                'first_name'=> $request->input('name'),
+                'from' => env('MAIL_FROM'),
+                'addBCC' => env('MAIL_BCC'),
+                'report_name' => $report_name,
+                'report_link' => $report_link, 
+                'data' => $data
+                ];
+
+          $this->sendEmailTo($email_content);
+       
+
          return Response::json(array(
                 'status' => 1,
                 'message' => 'Message sent successfully',
@@ -193,20 +241,28 @@ class HomeController extends Controller
 
     }
 
+    public function sendEmailTo($email_content){
+        $helper_admin = new Helper;
+        $helper_admin->sendMailToAdmin($email_content,'admin');
+    }
+
     public function askAnAnalyst(Request $request){
 
         $title = "Ask An Analyst";
-        return view('website.contact',compact('title'));
+        $report_id = $request->get('report_id');
+        return view('website.contact',compact('title','report_id'));
     }
 
     public function requestSample(Request $request){
        $title = "Request Sample" ;
-       return view('website.contact',compact('title'));
+      $report_id = $request->get('report_id');
+        return view('website.contact',compact('title','report_id'));
     }
 
     public function requestBrochure(Request $request){
         $title = "Request Brochure";
-        return view('website.contact',compact('title'));
+        $report_id = $request->get('report_id');
+        return view('website.contact',compact('title','report_id'));
     }
 
     public function page(Request $request,$page=null){
@@ -248,10 +304,10 @@ class HomeController extends Controller
                         
                     })->Paginate($this->page_size);
 
-        
+        $title= "Market Research Reports";
         $categoryName = $request->get('search');
                   
-       return view('website.categorydetails',compact('data','categoryName','reports'));
+       return view('website.categorydetails',compact('data','categoryName','reports','title'));
     }
 
     
@@ -390,9 +446,10 @@ class HomeController extends Controller
     }
  
 
-    public function contact()
+    public function contact(Request $request)
     {
-      return view('website.contact');  
+      $report_id = $request->get('report_id');
+      return view('website.contact',compact('report_id'));  
     }
 
     public function services()

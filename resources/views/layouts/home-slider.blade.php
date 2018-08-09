@@ -8,7 +8,7 @@
                     <div class="slider-content">
                         <div class="display-table">
                             <div class="display-table-cell">
-                                <div class="container">
+                                <div class="container"> 
                                     <div class="row">
                                         <div class="col-md-12">
                                             

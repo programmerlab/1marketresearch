@@ -16,7 +16,7 @@
                                         <div class="col-md-12">
                                             <!-- layer 1 -->
                                             <div class="layer-1-2">
-                                                <h1 class="title2">Welcome To 1 Market Research!</h1>
+                                                <h1 class="title2">1Welcome To 1 Market Research!</h1>
                                             </div>
                                             <div class="layer-1-1 ">
                                                 <p>1 Market Research Reports and Business Consulting Services.</p>

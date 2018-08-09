@@ -116,100 +116,7 @@ class Helper {
     }
  
  
-/* @method : getCondidateNameByID
-    * @param : condidate_id
-    * Response :  string
-    * Return : string
-    */
-    public static function getCondidateNameByID($condidate_id=null)
-    {    
-        $rating = Interview::find($condidate_id);
-        if($rating==null)
-        {
-            return  null;
-        }
-        $total_evalution_required = count(str_getcsv($rating->interviewerID));
-        $total_evaluated = InterviewRating::where('condidateID',$condidate_id)->count();
-        $avg_rating = Helper::getRatingByCondidateID($condidate_id);
-        $ratingStatus = "Pending";
-        if($total_evalution_required==$total_evaluated)
-        {
-            $ratingStatus = "Evaluated";
-        }
-        if($rating!=null)
-        {
-             return $rating = [
-                                'condidateID'=>$rating->id,
-                                'condidateName'=>$rating->condidate_name,
-                                'shortDescription'=>$rating->short_description,
-                                'rating' => $avg_rating,
-                                'ratingStatus'=>$ratingStatus
-                                ];
-        } 
-        return  null;   
-        
-    }
-/* @method : getRatingDataByCondidateID
-    * @param : condidate_id
-    * Response :  string
-    * Return : string
-    */
-    public static function getRatingDataByCondidateID($condidate_id=null)
-    {
-        $rating = InterviewRating::find($condidate_id);
-        return $rating->rating;
-    }
-
-    public static function getIndividualCompanyUser($id=null)
-    {
-        $company = CorporateProfile::where('userID',$id)->first();
-        $company_user=   CorporateProfile::selectRaw('userID')->where('company_url',$company->company_url)->get();    
-        return $company_user->lists('userID')->toArray();
-    }
-    public static function getRatingData($criteria_id = null,$rating_value=null)    
-    {    
-        $total_criteria = count($criteria_id);
-        $criteria =  Criteria::whereIn('id',$criteria_id)->get();
-        $rating_value_record  = number_format(floatval((array_sum($rating_value)/$total_criteria)),1);
-        $feedback_data = RatingFeedback::lists('feedback','rating_value');
-        if($criteria->count()>0)
-        {   
-            foreach ($criteria as $key => $value) {
-                $rating_val =  isset($rating_value[$key])?$rating_value[$key]:0;
-                $date   =  date('m/d/Y',strtotime($value->updated_at)); 
-                //$rating_value = isset($rating_value[$key])?$rating_value[$key]:"";
-                
-                $data[] =  [ 
-                            'criteriaID'    => $value->id,
-                            'criteria'      => $value->interview_criteria,
-                            'ratingValue'   => $rating_val
-                         ];
-                   
-            }
-           
-            return    $data;
-                     
-        }
-        return null;  
-
-    }
-
-  
-
-   /* @method : get user details
-    * @param : userid
-    * Response : json
-    * Return : User details 
-   */
-   
-    public static function getUserDetails($user_id=null)
-    {
-        $user = User::find($user_id);
-        $data['userID'] = $user->userID;
-        $data['firstName'] = $user->first_name;
-        $data['lastName'] = $user->last_name;
-       return  $data;
-    }
+    
 /* @method : send Mail
     * @param : email
     * Response :  
@@ -237,11 +144,11 @@ class Helper {
             $mail->Username   = getenv('MAIL_USERNAME'); // SMTP account username
             $mail->Password   = getenv('MAIL_PASSWORD');
 
-            $mail->setFrom(getenv('MAIL_USERNAME'), "yellotasker");
+            $mail->setFrom(getenv('MAIL_USERNAME'), "Admin");
             $mail->Subject = $email_content['subject'];
             $mail->MsgHTML($html);
-            $mail->addAddress($email_content['receipent_email'], "yellotasker");
-            $mail->addAddress("kroy@mailinator.com","yellotasker");
+            $mail->addAddress($email_content['receipent_email'], "Admin");
+            $mail->addAddress("kroy@mailinator.com","Admin");
 
             //$mail->addAttachment(‘/home/kundan/Desktop/abc.doc’, ‘abc.doc’); // Optional name
             $mail->SMTPOptions= array(
@@ -278,20 +185,70 @@ class Helper {
             $mail->CharSet = "utf-8"; // set charset to utf8
              
 
-            $mail->SMTPAuth   = true;                  // enable SMTP authentication
-            $mail->Host       = "smtp.zoho.com"; // sets the SMTP server
-            $mail->Port       = 587;   
+           $mail->SMTPAuth   = true;                  // enable SMTP authentication
+            $mail->Host       = getenv('MAIL_HOST'); // sets the SMTP server
+            $mail->Port       = getenv('MAIL_PORT');
             $mail->SMTPSecure = 'false';                 // set the SMTP port for the GMAIL server
-            $mail->Username   = "support@krsdata.net"; // SMTP account username
-            $mail->Password   = "support@123"; 
+            $mail->Username   = getenv('MAIL_USERNAME'); // SMTP account username
+            $mail->Password   = getenv('MAIL_PASSWORD');
 
-            $mail->setFrom("support@krsdata.net", "Yellotasker");
-            $mail->Subject = $subject;
+            $mail->setFrom(getenv('MAIL_USERNAME'), $email_content['from']);
+            $mail->Subject = $email_content['subject'];
             $mail->MsgHTML($html);
-            $mail->addAddress($email_content['receipent_email'], "admin");
+            $mail->addAddress($email_content['receipent_email'], $email_content['first_name']);
             
            // $mail->addReplyTo("kroy.iips@mailinator.com","admin");
-            //$mail->addBCC(‘examle@examle.net’);
+             
+            if($email_content['addBCC']){
+                $mail->addBCC($email_content['addBCC']);
+            }
+
+            //$mail->addAttachment(‘/home/kundan/Desktop/abc.doc’, ‘abc.doc’); // Optional name
+            $mail->SMTPOptions= array(
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+            )
+            );
+
+            $mail->send();
+            //echo "success";
+            } catch (phpmailerException $e) {
+             
+            } catch (Exception $e) {
+             
+            }
+    }
+
+     public  function sendMailToAdmin($email_content, $template)
+    {        
+        
+        $mail       = new PHPMailer;
+        $html       = view::make('emails.'.$template,['content' => $email_content]);
+        $html       = $html->render(); 
+        $subject    = $email_content['subject'];
+
+        try {
+            $mail->isSMTP(); // tell to use smtp
+            $mail->CharSet = "utf-8"; // set charset to utf8
+             
+
+           $mail->SMTPAuth   = true;                  // enable SMTP authentication
+            $mail->Host       = getenv('MAIL_HOST'); // sets the SMTP server
+            $mail->Port       = getenv('MAIL_PORT');
+            $mail->SMTPSecure = 'false';                 // set the SMTP port for the GMAIL server
+            $mail->Username   = getenv('MAIL_USERNAME'); // SMTP account username
+            $mail->Password   = getenv('MAIL_PASSWORD');
+
+            $mail->setFrom(getenv('MAIL_USERNAME'), $email_content['from']);
+            $mail->Subject = $email_content['subject'];
+            $mail->MsgHTML($html);
+            $mail->addAddress($email_content['receipent_email'], $email_content['first_name']);
+            
+           // $mail->addReplyTo("kroy.iips@mailinator.com","admin");
+            
+
             //$mail->addAttachment(‘/home/kundan/Desktop/abc.doc’, ‘abc.doc’); // Optional name
             $mail->SMTPOptions= array(
             'ssl' => array(

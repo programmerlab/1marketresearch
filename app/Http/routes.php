@@ -165,7 +165,7 @@ Route::get('admin/404',function(){
     
 });
 
-Route::match(['post','get'],'/{name}-thankyou',[
+Route::match(['post','get'],'thankyou-{name}',[
         'as' => 'thankyou',
         'uses' => 'HomeController@thankyou'
         ]

@@ -48,26 +48,25 @@
     </div>
      <form novalidate="" id="contactForm" name="sentMessage">
          <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="request_type" value="{{ $title or 'contact'}}">
+        <input type="hidden" name="request_type" value="{{ $title or 'contact'}}">
+        <input type="hidden" name="report_id" value="{{ $report_id or ''}}">
 
-
-    <div class="col-md-4 ">
-         
-            <div class="form-group">
-            <label class="info-title" for="exampleInputName">Full Name <span>*</span></label>
-            <input text="text" name="name" class="form-control unicase-form-control text-input" id="name" placeholder="Full Name">
+    <div class="col-md-12"> 
+        <div class="form-group">
+            <label class="info-title" for="exampleInputEmail1">Full Name  <span>*</span></label>
+            <input name="name" type="text" class="form-control unicase-form-control text-input" id="name" placeholder="Full Name">
           </div>
         
-    </div>
-    <div class="col-md-4">
+        </div>
+    <div class="col-md-12">
         
             <div class="form-group">
             <label class="info-title" for="exampleInputEmail1">Your Email <span>*</span></label>
-            <input name="email" type="text" class="form-control unicase-form-control text-input" id="email" placeholder="Email">
+            <input name="email" type="email" class="form-control unicase-form-control text-input" id="email" placeholder="Email">
           </div>
         
     </div>
-    <div class="col-md-4">
+    <div class="col-md-12">
          
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Your Country <span>*</span></label>
@@ -129,7 +128,7 @@
     </div>
 
     <div class="col-md-12 outer-bottom-small m-t-20" style="padding-bottom: 50px">
-        <button type="submit" class="btn-upper btn btn-primary checkout-page-button" id="btnSubmit">Send Message</button>
+        <button type="submit" class="btn-upper btn btn-primary btn-lg checkout-page-button" style="width: 285px" id="btnSubmit">Send Message</button>
 
     </div>
 
@@ -165,4 +164,11 @@
                 </div>
             </div><!-- /.row -->
         </div><!-- /.checkout-box -->
+
+        <style type="text/css">
+            .errorClass{
+                color: red;
+            }
+        </style>
+
         @stop

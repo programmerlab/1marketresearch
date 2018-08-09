@@ -31,9 +31,15 @@ function Captcha(type){
   function ValidCaptcha(type){
 
     if(type==1){
-       var string1 = removeSpaces(document.getElementById('mainCaptcha').innerHTML);
+       var string1 = removeSpaces(document.getElementById('mainCaptcha').innerHTML); 
 
       var string2 = removeSpaces(document.getElementById('txtInput').value);
+
+      if(string2.length<5){
+        return false;
+      }
+       
+
       if (string1 == string2){
         document.getElementById('CaptchaMsg').innerHTML="";  
         $('#btnSubmit').removeAttr("disabled");     
@@ -41,7 +47,7 @@ function Captcha(type){
         
       }
       else{ 
-        document.getElementById('CaptchaMsg').innerHTML="Invalid Captcha";
+        document.getElementById('CaptchaMsg').innerHTML="Please Enter Valid Captcha";
         $('#btnSubmit').attr('disabled','disabled');       
         return false;
       } 
@@ -49,6 +55,10 @@ function Captcha(type){
         var string1 = removeSpaces(document.getElementById('mainCaptcha2').innerHTML);
 
           var string2 = removeSpaces(document.getElementById('txtInput2').value);
+
+          if(string2.length<5){
+            return false;
+          }
           
           if (string1 == string2){
             document.getElementById('CaptchaMsg2').innerHTML="";   
@@ -57,7 +67,7 @@ function Captcha(type){
           }
           else{ 
             $('.btnSubmit2').attr('disabled','disabled');
-            document.getElementById('CaptchaMsg2').innerHTML="Invalid Captcha";       
+            document.getElementById('CaptchaMsg2').innerHTML="Please Enter Valid Captcha";       
             return false;
           }
       }
@@ -73,17 +83,16 @@ function Captcha(type){
 $(document).ready( function(event) {
     // enquiry
 
-    var form_name = $("input[name=request_type]").val();
-    var urlTo = '';
-   if(form_name!=undefined){
-        urlTo = form_name.split(' ').join('-');
-        urlTo = url+'/'+urlTo+'-thankyou';
-   }else{
-        urlTo = url+'/'+urlTo+'-thankyou';
-   }
-
-   
-              
+     if($("#mainCaptcha").length != 0) {
+        var form_name = ($("input[name=request_type]").val()).toLowerCase();
+        var urlTo = '';
+        if(form_name!=undefined){
+            urlTo = form_name.split(' ').join('-');
+            urlTo = url+'/'+'thankyou-'+urlTo;
+       }else{
+            urlTo =  url+'/'+'thankyou-'+urlTo;
+       }
+    }
 
     $('#btnSubmit').attr('disabled','disabled'); 
     $("#Enquiry").validate({         
@@ -117,13 +126,13 @@ $(document).ready( function(event) {
                 data:  $( "#Enquiry" ).serialize(),
                 url: url+'/saveForm',
                 beforeSend: function() {
-                   $('#btnSubmit').html('please wait...');
+                   $('#btnSubmit').html('Please wait...');
                 },
                 success: function(response) {
                     console.log(response);
                    $('#btnSubmit').html('Submit Request');
                    if(response.status==1){
-                     window.location.assign(urlTo);
+                     window.location.href = urlTo;
                    }else{
                     $('.successMsg').html(response.message+'<br>').css('color','red');
                    }
@@ -168,13 +177,14 @@ $(document).ready( function(event) {
                 data:  $( "#Request" ).serialize(),
                 url: url+'/saveForm',
                 beforeSend: function() {
-                   $('.btnSubmit2').html('please wait...');
+                   $('.btnSubmit2').html('Please wait...');
                 },
                 success: function(response) {
                     console.log(response);
                    $('.btnSubmit2').html('Submit Request');
                    if(response.status==1){
-                     window.location.assign(urlTo); 
+                    
+                  window.location.href = urlTo;
                    }else{
                     $('.successMsg').html(response.message+'<br>').css('color','red');
                    }
@@ -221,7 +231,7 @@ $(document).ready( function(event) {
                 data:  $( "#contactForm" ).serialize(),
                 url: url+'/saveForm',
                 beforeSend: function() {
-                    $('.btnSubmit2').html('please wait...');
+                    $('#btnSubmit').html('Please wait...');
                 },
                 success: function(response) {
                    console.log(response);

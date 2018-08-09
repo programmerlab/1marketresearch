@@ -31,21 +31,19 @@
 <div class="blog-grid home-blog detail-page">
     <!-- Start single blog -->
 <div class="">
-            <div class="single-blog">
+    <div class="single-blog">
 
-            <div class="blog-content">
+        <div class="blog-content">
             <div class="blog-title">
-            <div class="detail-img">
-             <?php
-                 if($category->category_group_image){  
-                    $img = asset('storage/uploads/category/'.$category->category_group_image);
-                 }else{
-                    $img = asset('public/assets/img/4.jpg');
-                 }
+                <div class="detail-img">
+                 <?php
+                     if($category->category_group_image){  
+                        $img = asset('storage/uploads/category/'.$category->category_group_image);
+                     }else{
+                        $img = asset('public/assets/img/4.jpg');
+                     }
 
-            ?>
-
-
+                ?> 
             <img src="{{$img}}">
             
             </div>
@@ -60,10 +58,10 @@
             </div>
             <div class="detail-buttons">
                 
-            <a href="{{url('requestBrochure')}}">
+            <a href="{{url('requestBrochure?report_id='.$data->id)}}">
                 <button type="submit" class=" btn btn-primary" style="background-color: darkcyan; border-color: #3db1e3; height: 38px;"><span class=" glyphicon glyphicon-shopping-cart"></span> Request Brochure</button>
             </a>
-            <a href="{{url('askAnAnalyst')}}">
+            <a href="{{url('askAnAnalyst?report_id='.$data->id)}}">
                 <button type="submit" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3;height: 38px;" ><span class=" glyphicon glyphicon-shopping-cart"></span> Ask An Analyst</button>
             </a>
             

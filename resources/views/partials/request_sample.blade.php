@@ -10,7 +10,8 @@
                                         
             <form novalidate="" id="Request" name="sentMessage">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="request_type" value="Request">
+                <input type="hidden" name="request_type" value="Request Sample">
+                <input type="hidden"  name="report_id" value="{{$data->id or ''}}">
                 <div class="control-group form-group">
                     <div class="controls">
                         <label>Full Name :</label> <span class="required" style="color:red;">*</span>
@@ -65,9 +66,16 @@
                     </div>
                 </div>
                 <span class="successMsg2"></span>
-                <button class="btn btn-primary btnSubmit2" type="submit" id="btnSubmit" onclick="ValidCaptcha(2)">Submit Request</button>
+                <button class="btn-upper btn btn-primary btn-lg checkout-page-button btnSubmit2" type="submit" id="btnSubmit" onclick="ValidCaptcha(2)">
+
+                Submit Request</button>
             </form>
             </div>
         </div>
     </div>
 </div> 
+<style type="text/css">
+    .errorClass{
+        color: red;
+    }
+</style>

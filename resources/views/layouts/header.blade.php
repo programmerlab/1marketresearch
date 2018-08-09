@@ -31,9 +31,9 @@
         <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css')}}">
         <!-- responsive css -->
         <link rel="stylesheet" href="{{ URL::asset('assets/css/responsive.css')}}">
-
+         <script src="https://use.fontawesome.com/a832a5b49f.js"></script>
         <!-- modernizr css -->
-        <script src="{{ URL::asset('assets/js/modernizr-2.8.3.min.js')}}"></script>
+        
     </head>
         <body onload="Captcha();">
 
