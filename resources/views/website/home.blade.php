@@ -7,7 +7,7 @@
       <!-- Left side column. contains the logo and sidebar --> 
  <div class="intro-area banner-section">
            <div class="main-overly"></div>
-            <div class="intro-carousel">
+            <div class="intro-carousel2">
                 <div class="intro-content">
                     <div class="slider-images">
                         <img src="{{ asset('img/slider/s1.jpg') }}" alt="">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="intro-content">
+                <!-- <div class="intro-content">
                     <div class="slider-images">
                         <img src="{{ asset('img/slider/s1.jpg') }}" alt="">
                     </div>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
             <div class="inner-main">
