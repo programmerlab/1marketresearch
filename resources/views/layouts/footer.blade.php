@@ -68,7 +68,7 @@
                                         <ul class="footer-list">
                                         
                                         <li><a href="{{url('/')}}">Home</a></li>
-                                        <li><a href="{{url('pressRelease')}}">About Us </a></li>
+                                        <li><a href="{{url('pressRelease')}}">Press Release </a></li>
                                         <li><a href="{{url('services')}}">Services</a></li>
                                         <li><a href="{{url('publisher')}}">Publisher</a></li>
                                         <li><a href="{{url('contact')}}">Contact Us</a></li>
