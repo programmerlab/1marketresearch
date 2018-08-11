@@ -26,7 +26,20 @@ Route::get('/sendEmailReminder', 'NotificationController@sendEmailReminder');
 
 Route::get('/404', 'HomeController@error404');
 
+Route::post('/billing', 'HomeController@billing');
+Route::post('/ordernote', 'HomeController@ordernote');
+Route::post('/paymentSummary', 'HomeController@paymentSummary');
 
+Route::get('/paypal', 'HomeController@paypal');
+
+Route::get('/directBankTransfer', 'HomeController@directBankTransfer');
+
+
+Route::match(['post','get'],'makeOrder',[
+        'as' => 'makeOrder',
+        'uses' => 'HomeController@makeOrder'
+        ]
+    );
  
 
 Route::match(['post','get'],'saveForm',[

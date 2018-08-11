@@ -1,3 +1,147 @@
+function orderTab(id,btnClass){
+    //$('.'+btnClass).removeAttr("disabled"); 
+    //$('#'+id).trigger('click');
+}
+   
+
+$(function(){
+
+    // payment
+    $("#order_note_form").validate({ 
+        submitHandler: function(form,e) {
+             e.preventDefault(); 
+             var data =  $( "#order_note_form" ).serialize();
+            $.ajax({
+                type: "POST",
+                data:  data,
+                url: url+'/ordernote',
+                beforeSend: function() {
+                  //  $('#order_info').html('Please wait...');
+                },
+                success: function(response) {
+                   console.log(response);
+                   
+                    $('.payment_summary').removeAttr("disabled"); 
+                    $('#order_info').trigger('click');
+                    // alert(data); return false;
+                }
+            });
+         }
+    });
+
+    // order summary
+
+    $("#payment_summary").validate({ 
+        submitHandler: function(form,e) {
+             e.preventDefault(); 
+             var data =  $( "#payment_summary" ).serialize();
+            $.ajax({
+                type: "POST",
+                data:  data,
+                url: url+'/paymentSummary',
+                beforeSend: function() {
+                  //  $('#order_info').html('Please wait...');
+                },
+                success: function(response) {
+                   console.log(response);
+                   
+                    $('.paymentFinal').removeAttr("disabled"); 
+                    $('#payment_info').trigger('click');
+                   //  alert(data); return false;
+                }
+            });
+         }
+    });
+
+
+    // final payment
+
+    $("#paymentFinal").validate({ 
+        submitHandler: function(form,e) {
+             e.preventDefault(); 
+             var data =  $( "#paymentFinal" ).serialize();
+            $.ajax({
+                type: "POST",
+                data:  data,
+                url: url+'/makeOrder',
+                beforeSend: function() {
+                  //  $('#order_info').html('Please wait...');
+                },
+                success: function(response) {
+                  window.location.href=url+'/directBankTransfer';
+                }
+            });
+         }
+    });
+
+
+
+    // order_info_form
+    $("#order_info_form").validate({         
+        errorClass: 'errorClass', // default input error message class        
+        rules: {
+            first_name: {
+                required: true,                    
+            },
+            last_name: {
+                required: true,                    
+            }, 
+            email: {
+                required: true,
+                email: true
+            },            
+            phone: {
+                required: true,
+            },
+            company_name:{
+                required:true
+            },
+            address:{
+                required:true
+            },
+            country: {
+                required: true,                    
+            },
+            state:{
+                required:true
+            },
+            city:{
+                required:true
+            },
+            zipcode:{
+                required:true
+            }
+            
+        },
+        
+        submitHandler: function(form,e) {
+             e.preventDefault(); 
+
+             var data =  $( "#order_info_form" ).serialize();
+
+            $('.order_info').removeAttr("disabled"); 
+            $('#order_notes').trigger('click');
+
+            $.ajax({
+                type: "POST",
+                data:  data,
+                url: url+'/makeOrder',
+                beforeSend: function() {
+                    $('#order_info').html('Please wait...');
+                },
+                success: function(response) {
+                   console.log(response);
+                   $('#order_info').html('Next');
+                   
+                }
+
+            });
+
+         }
+        });
+    
+});
+
 
 /* 
 Method : changeStatus

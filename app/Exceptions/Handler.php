@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {   
-       $path_info_url = $request->getpathInfo();
+             $path_info_url = $request->getpathInfo();
 
 
           if(strpos($path_info_url,'admin')==false){

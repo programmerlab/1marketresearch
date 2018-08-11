@@ -65,51 +65,7 @@ class Helper {
         $company_name = substr($email,$fps+1,$lps-1);
         return  $company_name;       
     } 
-/* @method : getCompanyUrl
-    * @param : email
-    * Response :  string
-    * Return : company URL
-    */
-    public function getCompanyUrl($email=null)
-    {   
-        $fps =  strripos($email,"@");
-        $lps =  strpos(substr($email,$fps),".");
-        $company_url = substr($email,$fps+1);
-        return  $company_url;       
-    }
-
- 
-/* @method : isUserExist
-    * @param : user_id
-    * Response : number
-    * Return : count
-    */
-    static public function isUserExist($user_id=null)
-    {
-        $user = User::where('id',$user_id)->count(); 
-        return $user;
-    }
- 
-/* @method : getpassword
-    * @param : email
-    * Response :  
-    * Return : true or false
-    */
-    
-    public static function getPassword(){
-        $password = "";
-        $user = Auth::user();
-        if(isset($user)){
-            $password = Auth::user()->Password;
-        }
-        return $password;
-    }
-/* @method : check mobile number
-    * @param : mobile_number
-    * Response :  
-    * Return : true or false
-    */     
-   
+  
     
     public static function FormatPhoneNumber($number){
         return preg_replace('~.*(\d{3})[^\d]{0,7}(\d{3})[^\d]{0,7}(\d{4}).*~', '($1) $2-$3', $number). "\n";
@@ -174,9 +130,12 @@ class Helper {
     */
     public  function sendMail($email_content, $template)
     {        
-        
+        $billing = $email_content['billing']??null;
+        $cart_detail = $email_content['cart_detail']??null;
+
+
         $mail       = new PHPMailer;
-        $html       = view::make('emails.'.$template,['content' => $email_content]);
+        $html       = view::make('emails.'.$template,['content' => $email_content,'billing'=>$billing,'cart_detail'=>$cart_detail]);
         $html       = $html->render(); 
         $subject    = $email_content['subject'];
 
@@ -199,7 +158,7 @@ class Helper {
             
            // $mail->addReplyTo("kroy.iips@mailinator.com","admin");
              
-            if($email_content['addBCC']){
+            if(isset($email_content['addBCC'])){
                 $mail->addBCC($email_content['addBCC']);
             }
 

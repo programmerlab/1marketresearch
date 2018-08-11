@@ -128,9 +128,36 @@ class HomeController extends Controller
          View::share('meta_desc',$meta_desc);
 
          $this->page_size = 5;
+
+        View::share('total_item',Cart::content()->count());
+        View::share('sub_total',Cart::subtotal());
+       
          
     }
 
+    public function billing(Request $request){
+      $request->session()->put('billing', $request->all());
+      
+    }
+
+    public function ordernote(Request $request){
+      $request->session()->put('orderNote', $request->all());
+      
+    }
+
+    public function paymentSummary(Request $request){
+      $request->session()->put('paymentSummary', $request->all());
+      
+    }
+
+    public function makeOrder(Request $request){
+
+      //$request->session()->put('orderinfo_final', $request->all());
+
+      $data = $request->session()->all();
+      echo json_encode($data); exit();
+
+    }
 
     public function error404(){
        $title = "Page not found";
@@ -325,17 +352,117 @@ class HomeController extends Controller
 
     public function payment(Request $request){
 
-      $reports = Report::find($request->get('payment_id'));
+    $cart = Cart::content(); 
+        foreach ($cart as $key => $value) {
+             Cart::remove($key);
+    }
+
+
+      $product = Report::find($request->get('payment_id'));
 
       $purl = URL::previous();
-       
-      if(!$reports){
+
+      if(!$product){
         return Redirect::to($purl);
       } 
 
-      return view('website.payment',compact('reports'));
-    }
- 
+        $signle_user_license        = $product->signle_user_license<=>$request->get('price');
+        $multi_user_license         = $product->multi_user_license<=>$request->get('price');
+        $corporate_user_license     = $product->corporate_user_license<=>$request->get('price');
+
+
+        $l[]        = $product->signle_user_license<=>$request->get('price');
+        $l[]        = $product->multi_user_license<=>$request->get('price');
+        $l[]        = $product->corporate_user_license<=>$request->get('price');
+
+
+        $ls = ['signle user license','multi user license','corporate user license'];
+
+        $license_type = 'invalid';
+        if($l[0]==0){
+           $license_type = $ls[0]; 
+        }
+        elseif($l[1]==0){
+           $license_type = $ls[1]; 
+        }
+        elseif($l[2]==0){
+           $license_type = $ls[2]; 
+        }
+
+        if($signle_user_license===0 || $multi_user_license===0 || $corporate_user_license===0){
+
+            $qty = 1;
+            $id  = $product->id;
+            $is_item_exist = 0;
+            foreach(Cart::content() as $row) {
+                if($row->id==$id)
+                {
+                    $is_item_exist++;
+                    break;
+                }
+            }
+
+            if($is_item_exist==0){
+                if ($request->isMethod('get')) {
+                    Cart::add(array(
+                            'id' => $product->id, 
+                            'name' => $product->title, 
+                            'qty' => $qty, 
+                            'price' => $request->get('price'),
+                            'options' => ['license_type' => $license_type,'user'=>$request->session()->all()]
+                        )
+                    );
+                }
+            }
+               
+            $cart = Cart::content();
+
+
+            $cart = Cart::content();  
+            $cart_details = [];
+            foreach ($cart as $key => $value) {
+                $cart_detail = $value;
+            }
+
+            $reports = $product;
+            return view('website.payment',compact('reports','cart_detail'));
+    
+        }else{
+             return Redirect::to($purl);
+      
+        }
+      
+    
+   }
+    
+  public function directBankTransfer(Request  $request){
+        $reports = Cart::content();
+            $cart_details = [];
+            foreach ($reports as $key => $value) {
+                $cart_detail = $value;
+        }
+
+        $billing = $cart_detail->options->user['billing'];
+        $email_content = [
+                'receipent_email'=> $billing['email'],
+                'subject'=> 'Thank you for your order',
+                'greeting'=> '1marketresearch',
+                'first_name'=> $billing['first_name'],
+                'from' => env('MAIL_FROM'),
+                'billing' => $billing,
+                'cart_detail' => $cart_detail
+                ];
+
+        $request->session()->put('order_mail', 1);
+
+        $order_mail = $request->session()->get('order_mail');
+        if(!$order_mail){
+            $helper = new Helper;
+            $helper->sendMail($email_content,'directBankTransfer');
+        }
+
+    return view('website.directBankTransfer',compact('reports','cart_detail','billing'));
+  }
  /*----------*/
     public function checkout()
     {

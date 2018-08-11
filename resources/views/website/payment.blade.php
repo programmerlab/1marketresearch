@@ -10,7 +10,11 @@
         <!-- Start Slider Area -->
             @include('partials.search')
         <!-- End Slider Area -->
-        
+        <style type="text/css">
+            .errorClass{
+                color: red;
+            }
+        </style>
         <nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="#">Home</a> &gt;&gt; <a href="#">Checkout</a></nav>
         
         <div class="published-date">
@@ -37,48 +41,47 @@
                                 <div class="tab-menu">
                                      <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li class="active"><a href="#p-view-1" role="tab" data-toggle="tab" aria-expanded="true">BILLING >></a></li>
-                                        <li class=""><a href="#p-view-2" role="tab" data-toggle="tab" aria-expanded="false">ORDER NOTES >></a></li>
-                                        <li class=""><a href="#p-view-3" role="tab" data-toggle="tab" aria-expanded="false">ORDER INFO >></a></li>
-                                        <li class=""><a href="#p-view-4" role="tab" data-toggle="tab" aria-expanded="false">PAYMENT INFO</a></li>
+                                        <li class="active"><a href="#p-view-1" id="billing" disabled role="tab" data-toggle="tab" aria-expanded="true">BILLING >></a></li>
+                                        <li class=""><a href="#p-view-2" id="order_notes" role="tab" data-toggle="tab" aria-expanded="false">ORDER NOTES >></a></li>
+                                        <li class=""><a href="#p-view-3"  id="order_info" role="tab" data-toggle="tab" aria-expanded="false">ORDER INFO >></a></li>
+                                        <li class=""><a href="#p-view-4"  id="payment_info" role="tab" data-toggle="tab" aria-expanded="false">PAYMENT INFO</a></li>
                                     </ul>
                                 </div>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="p-view-1">
-                                        <div class="tab-inner">
-                                            <div class="event-content head-team checkout-form">
-                                                <ul class="sf-content" style="display: block;">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="p-view-1">
+                                <div class="tab-inner">
+                                    <div class="event-content head-team checkout-form">
+                                      <form id="order_info_form" novalidate="" name="order_info_form">
+                                        <ul class="sf-content" style="display: block;">
                                         <!-- form step one -->
                                         <li style="margin-bottom: 2rem;">
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label> First Name *</label>
-                                                <input type="text" name="first_name" placeholder="First Name" data-required="true">
+                                                <input type="text" name="first_name" placeholder="First Name" data-required="true" title="First Name is required.">
                                             </div>
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Last Name *</label>
-                                                <input type="text" name="last_name" placeholder="Last Name" data-required="true">
+                                                <input type="text" name="last_name" placeholder="Last Name" data-required="true" title="Last Name is required.">
                                             </div>
                                         </li>
                                         <li style="margin-bottom: 2rem;">
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Company Name </label>
-                                                <input type="text" name="company_name" placeholder="Company Name">                                                
+                                                <input type="text" name="company_name" placeholder="Company Name" title="Company Name is required.">                                                
                                             </div>
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Phone *</label>
-                                                <input type="text" name="phone" placeholder="Phone" data-required="true">
+                                                <input type="text" name="phone" placeholder="Phone" data-required="true" title="Phone is required.">
                                             </div>
                                         </li>
-
-
                                         <li style="margin-bottom: 2rem;">
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Email Address *</label>
-                                                <input type="email" name="email" placeholder="Email" data-required="true">
+                                                <input type="email" name="email" placeholder="Email" data-required="true" title="Email Address is required.">
                                             </div>
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Country *</label>                                               
-                                                <select name="country" id="country" data-required="true" autocomplete="country" class="form-control country_to_state country_select " title="Country *">
+                                                <select name="country" id="country" data-required="true" autocomplete="country" class="form-control country_to_state country_select " title="Country is required.">
                                                 <option value="">Select a country…</option>
                                                 <option value="AX">Åland Islands</option>
                                                 <option value="AF">Afghanistan</option>
@@ -154,19 +157,16 @@
 
                                             </div>
                                         </li>
-
-
-
                                         <li style="margin-bottom: 2rem;">
                                             <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
                                                 <label>Address *</label>
-                                                <textarea placeholder="Street Address" name="address" data-required="true"></textarea>
+                                                <textarea placeholder="Street Address" name="address" data-required="true" title="Address is required."></textarea>
                                             </div>
                                             
 
                                             <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
                                                 <label>Town / City *</label>
-                                                <input type="text" name="city" placeholder="Town City" data-required="true">
+                                                <input type="text" name="city" placeholder="Town City" data-required="true" title="City is required.">
                                             </div>
                                         </li>
 
@@ -174,25 +174,27 @@
                                         <li style="margin-bottom: 2rem;">
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>State / County *</label>
-                                                <input type="text" name="state" placeholder="State County" data-required="true">
+                                                <input type="text" name="state" placeholder="State County" data-required="true" title="State is required.">
                                             </div>
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Postcode / ZIP *</label>
-                                                <input type="text" name="zipcode" placeholder="Postcode /Zip" data-required="true">
+                                                <input type="text" name="zipcode" placeholder="Postcode /Zip" data-required="true" title="Postcode is required.">
                                             </div>
                                         </li>
 
                                     </ul>
                                     
                                     <div class="checkout-next">
-                                        <button>Next</button>
+                                        <button type="submit" onclick="orderTab('order_notes','order_info')" class="order_notes" >Next</button>
                                     </div>
-                                    
+                                    </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="p-view-2">
+                                <div class="tab-pane" id="p-view-2">
                                         <div class="tab-inner">
+                                        <form id="order_note_form" novalidate="" name="order_note_form">
+                                    
                                             <div class="event-content head-team checkout-form">
                                                 <ul class="sf-content" style="display: block;">
                                         <!-- form step two -->
@@ -207,72 +209,83 @@
                                       
                                     </ul>
                                     <div class="checkout-next">
-                                        <button>Next</button>
+                                        <button type="submit" onclick="orderTab('order_info','payment_info')" class="order_info"  disabled="disabled" >Next</button>
                                     </div>
+                                    </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="p-view-3">
-                                        <div class="tab-inner">
+                                
+                                <div class="tab-pane" id="p-view-3">
+                                    <div class="tab-inner">
+                                        <form id="payment_summary" novalidate="" name="payment_summary" >
                                             <div class="event-content head-team checkout-form">
                                                 
                                                 <ul class="sf-content" style="display: block;">
-                                        <!-- form step tree -->
-                                        <li style="margin-bottom: 2rem;">
-                                            <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading text-center">
-                                                        <h4>Your Order</h4>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <div class="col-md-12">
-                                                            <strong>Product</strong>
-                                                            <div class="pull-right"><strong>Total</strong></div>
-                                                        </div>
+                                                    <!-- form step tree -->
+                                                    <li style="margin-bottom: 2rem;">
+                                                        <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading text-center">
+                                                                    <h4>Your Order</h4>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="col-md-12">
+                                                                        <strong>Product Details</strong>
+                                                                        <div class="pull-right"><strong>Total</strong></div>
+                                                                    </div>
 
+                                                                        <?php
+                                                                            $number = (float)$cart_detail->price;    ?>
 
+                                                                    <hr>
 
-                                                        <hr>
+                                                                    <div class="col-md-12">
+                                                                        <span>{{ $reports->title }} × 1</span>
+                                                                        <div class="pull-right"><span>$</span><span>{{number_format($number,2)}}
+                                                                         </span>
+                                                                            <input type="hidden" name="price" value="{{ $cart_detail->price }}">
+                                                                            <input type="hidden" name="license_type" value="{{ $cart_detail->options->license_type }}">
+                                                                        </div>
+                                                                        <hr>
+                                                                    </div>
+                                                                    <hr>
 
-                                                        <div class="col-md-12">
-                                                            <span>Quinoa Seed Market Report by Company, Regions, Types and Applications, Global Status and Forecast to 2025 × 1</span>
-                                                            <div class="pull-right"><span>$</span><span>4,250.00</span></div>
-                                                            <hr>
-                                                        </div>
-                                                        <hr>
+                                                                    <div class="col-md-12">
+                                                                        <strong>Subtotal</strong>
+                                                                        <div class="pull-right"><strong>${{number_format($number,2)}}</strong></div>
+                                                                        <hr>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="col-md-12">
+                                                                        <strong>Total</strong>
+                                                                        <div class="pull-right"><strong>${{number_format($number,2)}}</strong></div>
+                                                                        <hr>
+                                                                    </div>
+                                                                    
 
-                                                        <div class="col-md-12">
-                                                            <strong>Subtotal</strong>
-                                                            <div class="pull-right"><strong>$4,250.00</strong></div>
-                                                            <hr>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="col-md-12">
-                                                            <strong>Total</strong>
-                                                            <div class="pull-right"><strong>$4,250.00</strong></div>
-                                                            <hr>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                         
-
-                                                    </div>
-
+                                                    </li>
+                                                </ul>
+                                                <div class="checkout-next"> 
+                                                     <button type="submit"  disabled="disabled" class="payment_summary"  >Next</button>
                                                 </div>
+                                                  
                                             </div>
-                                            
-                                        </li>
-                                    </ul>
-                                    <div class="checkout-next">
-                                        <button>Next</button>
+                                        </form> 
                                     </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="p-view-4">
-                                        <div class="tab-inner">
-                                            <div class="event-content head-team checkout-form">
-                                                
-                                                <ul class="sf-content" style="display: block;">
+                                </div>
+                        <div class="tab-pane" id="p-view-4">
+                            <div class="tab-inner">
+
+                            <form id="paymentFinal" name="paymentFinal" novalidate="">
+                                <div class="event-content head-team checkout-form">
+                                    
+                                    <ul class="sf-content" style="display: block;">
                                         <!-- form step four -->
                                         <li style="margin-bottom: 2rem;">
                                            
@@ -317,8 +330,9 @@
                                         </li>
                                     </ul>
                                     <div class="checkout-next">
-                                        <button>Place Order</button>
+                                        <button type="submit" class="paymentFinal" disabled="disabled">Place Order</button>
                                     </div>
+                                </form>
                                                 
                                             </div>
                                         </div>
