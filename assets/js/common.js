@@ -957,6 +957,7 @@ function createGroup(Url,action) {
             processData:false,
             success: function(datas){
                 console.log(datas);
+                return false;
                 var data = JSON.parse(datas); 
                 if(data.status==0){
                     $('#error_msg2').html(data.message).css('color','red');
@@ -966,7 +967,8 @@ function createGroup(Url,action) {
                      bootbox.alert('Csv imported successfully',function(){
                          var u =url+'/'+redirect_action;
                          console.log(u);
-                         setTimeout(function(){ window.location.assign(u);},100);
+
+                       //  setTimeout(function(){ window.location.assign(u);},100);
                          
                      });
                  }

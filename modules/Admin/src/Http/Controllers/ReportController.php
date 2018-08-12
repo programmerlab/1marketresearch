@@ -299,7 +299,7 @@ class ReportController extends Controller {
         try{
             $file = $request->file('importCsv'); 
             if($file==NULL){
-                echo json_encode(['status'=>0,'message'=>'Please select  csv file!']); 
+                echo json_encode(['status'=>0,'message'=>'Please select  file!']); 
                 exit(); 
             }
             $ext = $file->getClientOriginalExtension();
@@ -307,7 +307,7 @@ class ReportController extends Controller {
             $file_type = ['csv','xlsx','xls'];
 
             if(!in_array($ext, $file_type)){   
-                echo json_encode(['status'=>0,'message'=>'Please select valid csv file!']); 
+                echo json_encode(['status'=>0,'message'=>'Please select valid file!']); 
                 exit(); 
             }
             $mime = $file->getMimeType(); 
@@ -318,36 +318,126 @@ class ReportController extends Controller {
 
             $data = $reader->all();
 
+
             $table_cname = \Schema::getColumnListing('reports');
             
             $except = ['id','create_at','updated_at'];
 
             $input = $request->all(); 
 
-            
+            $dataArray = [];
+
+            $table_cname = \Schema::getColumnListing('reports');
+            $except = ['id','created_at','updated_at','_token','photo'];
+        
+
+           // $dataArray['category_name'] = null;
             foreach ($data  as $key => $result) {
-              // $result = $result[0];
-                $csv =  new Report;
+                              
                 foreach ($table_cname as $key => $value) {
                    if(in_array($value, $except )){
                         continue;
                    } 
                    if(isset($result->$value)) {
-                       $csv->$value = $result->$value; 
-                       $status = 1;
-                   } 
+                        $dataArray[$value][] = $result->$value;
+                   }
+                }
+            }
+                $category = Category::all(['category_name']);
+                $a = $category->toArray();
+
+                $main_category      = array_column($a, 'category_name');
+                $current_category   = $dataArray['category_name'];
+
+                $not_cat =0;
+                foreach ($current_category as $key => $cat) {
+                    if(!in_array($cat, $main_category)){
+                        $not_cat = 1;
+                    }
                 }
 
-                 if(isset($status)){
-                     $csv->save(); 
-                 } 
-            }  
-            if(isset($status)){
-                echo json_encode(['status'=>1,'message'=>' Data imported successfully!']);
-            }else{
-               echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']);
-            } 
-            });
+
+                if($not_cat==1){
+                    echo  json_encode(['status'=>0,'message'=>'Invalid category name found in file']);
+                    exit();
+                }else{
+                    foreach ($data  as $key => $result) {
+                  // $result = $result[0];
+                    $csv = Report::firstOrNew(['title' =>$result->title,'category_name'=> $result->category_name]);
+
+                    $rptid          = Report::select('id')->orderBy('id','desc')->limit(1)->first();
+                    $report_id      = intval($rptid->id)+1;
+                    $category       = Category::where('category_name',$result->category_name)->first();
+
+                    foreach ($table_cname as $key => $value) {
+                       if(in_array($value, $except )){
+                            continue;
+                       } 
+                        $csv->$value = $result->$value;
+                        
+                        $csv->slug = date('Y').'-'.str_slug($result->title).'-'.$report_id;
+                        $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                        $csv->title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                        $csv->report_id = $report_id;
+                        $csv->category_name = $result->category_name;
+                        $csv->category_id = $category->id??null;
+
+                       $csv->category_id = $category->id??null;
+
+                       $csv->url = 'market-reports/'.date('Y').'-'.str_slug($result->title).'-'.$report_id;
+
+
+                       if(isset($result->$value)) {
+                            
+
+                        if($value=='meta_title'  && !empty($result->$value)){
+
+                            $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->$value), 0, 7));
+                            
+                        }else{
+                            $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                        }
+                                           
+                        if($value=="title"){
+                            $csv->url = 'market-reports/'.date('Y').'-'.str_slug($result->$value).'-'.$report_id;
+                        }
+                        if($value=='meta_title' && !empty($result->$value)){  
+                            $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->$value), 0, 7));
+                           
+                         }else{
+                             $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                         }
+
+                        if($value=='description'){
+                            $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->$value), 0, 80));
+                            $csv->description = $result->$value;
+                        }
+
+                        if($value=='meta_description' && !empty($result->$value)){ 
+                            $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->$value), 0, 80));
+                         }else{
+                           $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->description), 0, 80)); 
+                         }
+                           $status = 1;
+                       }
+                    }
+
+                    if(isset($status) && $status==1){
+                        $csv->save();
+                        $status=0;
+                     }
+                }
+
+                    if(isset($status)){
+                        echo json_encode(['status'=>1,'message'=>' Data imported successfully!']);
+                        exit(); 
+                    }else{
+                       echo json_encode(['status'=>0,'message'=>'Invalid file type or content.Please upload csv file only.']);
+                       exit(); 
+                    } 
+                }
+            }
+        );
 
         } catch (\Exception $e) {
             echo json_encode(['status'=>0,'message'=>$e->getMessage()]); 

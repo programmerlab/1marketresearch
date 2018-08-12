@@ -169,7 +169,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Import excel file</h4>
-                        <p><a href="{{ url('storage/csv/reports.csv') }}">download csv sample</a></p>
+                        <p><a href="{{ url('storage/csv/reports.xls') }}">download excel sample</a></p>
                         <span id="error_msg2"></span>
                         <p>
                             <input type="file" class="col-md-12 form-control" name="importCsv" id="importCsv"> </p> 

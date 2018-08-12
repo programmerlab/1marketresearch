@@ -73,7 +73,7 @@
               <script src="{{ URL::asset('assets/js/'.$js) }}" type="text/javascript"></script>
         @endforeach
         @else
-         <script src="{{ URL::asset('public/assets/js/common.js') }}" type="text/javascript"></script>
+         <script src="{{ URL::asset('assets/js/common.js') }}" type="text/javascript"></script>
          <script src="{{ URL::asset('assets/js/bootbox.js') }}" type="text/javascript"></script>
           <script src="{{ URL::asset('assets/js/formValidate.js') }}" type="text/javascript"></script>
       @endif
