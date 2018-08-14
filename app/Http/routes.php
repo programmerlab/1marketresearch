@@ -68,7 +68,7 @@ Route::match(['post','get'],'research-categories',[
 
 Route::match(['post','get'],'category/{name}',[
         'as' => 'categories',
-        'uses' => 'HomeController@category'
+        'uses' => 'HomeController@researchReports'
         ]
     );
 

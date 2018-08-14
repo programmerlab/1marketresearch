@@ -334,24 +334,43 @@ class HomeController extends Controller
     public function category(Request $request,$name=null)
     {  
 
-        $category =  Category::all(); 
+        $category =  Category::all();
        return view('website.category',compact('category'));
     }
 
-    public function researchReports(Request $request)
+    public function researchReports(Request $request,$name=null)
     {  
+
+        $category_id = null;
+        if($name){
+
+            $category = Category::where('slug',$name)->first();
+            $name = $category->category_name;
+            $category_id = $category->category_id;
+        }
+
         $search = $request->get('search');  
 
-        $data = $reports =   Report::where(function($query) use($search) {
+        $data = $reports =   Report::where(function($query) use($search,$name,$category_id) {
                         if (!empty($search)) {
                             $query->Where('title', 'LIKE', "%$search%");
                              $query->orWhere('category_name', 'LIKE', "%$search%");
+                             $query->orWhere('category_name', 'LIKE', "%$name%");
+                             $query->orWhere('category_id',$category_id);
                               $query->orWhere('description', 'LIKE', "%$search%");
                         }
                         
                     })->orderBy('id','desc')->Paginate($this->page_size);
 
         $title= "Market Research Reports";
+        if($name){
+            $title= ucwords($name)." Reports";
+        }
+        if($search==''){
+            $title = 'Search';
+        }
+        
+
         $categoryName = $request->get('search');
                   
        return view('website.categorydetails',compact('data','categoryName','reports','title'));
