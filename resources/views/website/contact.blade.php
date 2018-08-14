@@ -75,7 +75,7 @@
         
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-12">
         
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Job Title <span>*</span></label>
@@ -85,7 +85,7 @@
     </div>
 
 
-    <div class="col-md-4">
+    <div class="col-md-12">
        
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Company <span>*</span></label>
@@ -94,7 +94,7 @@
         
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-12">
         
             <div class="form-group">
             <label class="info-title" for="exampleInputTitle">Phone No. (Pls. affix country code) <span>*</span></label>
@@ -112,7 +112,7 @@
          
     </div>
 
-     <div class="col-md-4">
+     <div class="col-md-12">
         
             <div class="form-group">
             <label>Enter Captcha:</label>
