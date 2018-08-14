@@ -85,14 +85,14 @@
                                 <div class="collapse navbar-collapse" id="navbar-example">
                                     <div class="main-menu">
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li><a class="pagess" href="#">Research Categories</a>
+                                            <li><a class="pagess" href="{{url('research-categories')}}">Research Categories</a>
                                                 <ul class="sub-menu">
                                                     @foreach($catMenu as $result)
                                                     <li><a href="{{url($result->url)}}">{{$result->category_name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>
-                                            <li><a class="pagess" href="{{url('pressRelease')}}">About us</a>
+                                            <li><a class="pagess" href="{{url('about-us')}}">About us</a>
                                                 <ul class="sub-menu">
                                                     <li><a href="{{url('pressRelease')}}">Press Release</a></li>
                                                 </ul>

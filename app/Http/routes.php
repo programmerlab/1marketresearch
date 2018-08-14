@@ -48,7 +48,7 @@ Route::match(['post','get'],'saveForm',[
         ]
     );
 
-
+Route::get('allError', 'HomeController@allError');
 
 
 
@@ -58,8 +58,8 @@ Route::match(['post','get'],'/',[
         ]
     );
 
-Route::match(['post','get'],'category',[
-        'as' => 'categories',
+Route::match(['post','get'],'research-categories',[
+        'as' => 'research-categories',
         'uses' => 'HomeController@category'
         ]
     );

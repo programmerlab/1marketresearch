@@ -1,6 +1,6 @@
 
-<div class="tab-pane" id="p-view-4">
-    <div class="  btn-default" style="padding: 10px; background-color: #ccc">Request Sample</div>
+<div class="tab-pane" id="requestSample">
+    <p style="margin-bottom:15px;"><b>Request Sample</b></p>
 <hr>
      <div class="tab-inner">
         <div class="event-content head-team">

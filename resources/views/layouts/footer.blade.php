@@ -39,20 +39,16 @@
                                     <div class="footer-icons">
                                         <ul>
                                             <li>
-                                                <a href="#">
+                                                <a href="{{$facebook_url->field_value or '#'}}">
                                                     <i class="fa fa-facebook"></i>                                                </a>                                            </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="{{$twitter_url->field_value or '#'}}">
                                                     <i class="fa fa-twitter"></i>                                                </a>                                            </li>
+                                            
                                             <li>
-                                                <a href="#">
-                                                    <i class="fa fa-google"></i>                                                </a>                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-pinterest"></i>                                                </a>                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-instagram"></i>                                                </a>                                            </li>
+                                                <a href="{{$linkedin_url->field_value or '#'}}">
+                                                    <i class="fa fa-linkedin"></i>                                                </a>                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -116,7 +112,7 @@
                             <div class="copyright">
                                 <p>
                                     Copyright @ {{date('Y')}}
-                                    <a href="{{url('/')}}">1 market Research</a> All Rights Reserved                                </p>
+                                    1market Research All Rights Reserved                                </p>
                             </div>
                         </div>
                     </div>

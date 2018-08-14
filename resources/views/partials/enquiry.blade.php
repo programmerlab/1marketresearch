@@ -1,7 +1,6 @@
 
-<div class="tab-pane" id="p-view-3">
-    <div class="  btn-default" style="padding: 10px; background-color: #ccc">Enquiry Before Buying</div>
-<hr>
+<div class="tab-pane" id="enquireBeforeBuying">
+     <p style="margin-bottom:15px;"><b>Enquiry Before Buying</b></p>
     <div class="tab-inner">
         <div class="event-content head-team">
 

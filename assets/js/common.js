@@ -4,7 +4,25 @@ function orderTab(id,btnClass){
 }
    
 
-$(function(){
+$(function(){ 
+
+
+   var hash = window.location.hash;
+
+  // var activeTab = $('[href=' + location.hash + ']');
+ 
+
+
+   if(hash==''){
+    $('#reportDescription').addClass('active');
+    $('.reportDescription').addClass('active'); 
+    
+   }else{
+    $(hash).addClass('active');
+    $('.'+hash.substr(1)).addClass('active');
+   }
+
+    
 
     // payment
     $("#order_note_form").validate({ 

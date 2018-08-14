@@ -76,14 +76,14 @@
                                 <div class="tab-menu">
                                      <!-- Nav tabs -->
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li class="active"><a href="#p-view-1" role="tab" data-toggle="tab" aria-expanded="true">Report Description</a></li>
-                                        <li class=""><a href="#p-view-2" role="tab" data-toggle="tab" aria-expanded="false">Table of Contents</a></li>
-                                        <li class=""><a href="#p-view-3" role="tab" data-toggle="tab" aria-expanded="false">Enquire Before Buying</a></li>
-                                        <li class=""><a href="#p-view-4" role="tab" data-toggle="tab" aria-expanded="false">Request Sample</a></li>
+                                        <li class="reportDescription"><a href="{{url($data->url)}}#reportDescription" role="tab" data-toggle="tab" aria-expanded="false">Report Description</a></li>
+                                        <li class="tableOfContents"><a href="{{url($data->url)}}#tableOfContents" role="tab" data-toggle="tab" aria-expanded="false">Table of Contents</a></li>
+                                        <li class="enquireBeforeBuying"><a href="{{url($data->url)}}#enquireBeforeBuying" role="tab" data-toggle="tab" aria-expanded="false">Enquire Before Buying</a></li>
+                                        <li class="requestSample"><a href="{{url($data->url)}}#requestSample" role="tab" data-toggle="tab" aria-expanded="false">Request Sample</a></li>
                                     </ul>
                                 </div>
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="p-view-1">
+                                    <div class="tab-pane" id="reportDescription">
                                         <div class="tab-inner">
                                             <div class="event-content head-team">
                                                 
@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane" id="p-view-2">
+                                    <div class="tab-pane" id="tableOfContents">
                                         <div class="tab-inner">
                                             <div class="event-content head-team">
                                 

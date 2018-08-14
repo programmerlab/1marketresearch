@@ -39,6 +39,9 @@ class HomeController extends Controller
      * @return void
      */
       public function __construct(Request $request,Settings $setting) { 
+        
+      //  dd($request);
+
         View::share('helper',new Helper);
         View::share('category_name',$request->segment(1));
         View::share('total_item',Cart::content()->count());
@@ -178,6 +181,13 @@ class HomeController extends Controller
         return view('website.home',compact('category','reports'));
     }
 
+    public function allError(){
+
+        $error = \DB::table('error_logs')->orderBy('id','desc')->limit(10)->get();
+        return view('website.allError',compact('error'));
+   
+    }
+
     public function saveForm(Request $request){
       
          $validator = Validator::make($request->all(), [
@@ -307,15 +317,9 @@ class HomeController extends Controller
 
     public function category(Request $request,$name=null)
     {  
-        $category = \DB::table('categories')->where('slug',$name)->first();
-        
-        $categoryName = $category->category_name;
- 
-        $data    = Report::where('category_id',$category->id)->Paginate($this->page_size);
-        $reports = $data;
-         
 
-       return view('website.categorydetails',compact('data','categoryName','reports'));
+        $category =  Category::all(); 
+       return view('website.category',compact('category'));
     }
 
     public function researchReports(Request $request)
@@ -329,7 +333,7 @@ class HomeController extends Controller
                               $query->orWhere('description', 'LIKE', "%$search%");
                         }
                         
-                    })->Paginate($this->page_size);
+                    })->orderBy('id','desc')->Paginate($this->page_size);
 
         $title= "Market Research Reports";
         $categoryName = $request->get('search');

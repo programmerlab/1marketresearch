@@ -157,11 +157,14 @@
                 .py-1{
                   height: 44px !important; 
                 }
-
+                div.bgcolor:nth-child(odd){
+                  background-color: rgba(172, 202, 217, 0.2);
+                }
              </style>
 
+
               @foreach($reports as $key => $result)
-              <div class="">
+              <div class="bgcolor">
                 <div class="single-blog">
                   <div class="blog-content">
                     <div class="blog-title">
@@ -169,13 +172,18 @@
                             <h4>{{$result->title}}</h4>
                           </a>                                    </div>
                           <div class="repoort-tags">
-                <p><span><b>On</b> {{$result->publish_date}}</span> <span><b>Pages</b>: {{$result->number_of_pages}}</span>  <span><b>Report ID</b>: {{$result->report_id}}</span><span><b>Price for Single User</b>: ${{$result->signle_user_license}}</span></p>
-                </div>
-                <div class="blog-text"> 
-                <p>{!! substr($result->description,0,230)
-
-                  !!} </p>
-                <a class="blog-btn" href="{{url($result->url) }}">Read more</a> </div>
+                            <p><span><b>On</b> {{$result->publish_date}}</span> <span><b>Pages</b>: {{$result->number_of_pages}}</span>  <span><b>Report ID</b>: {{$result->report_id}}</span><span><b>Price for Single User</b>: ${{$result->signle_user_license}}</span></p>
+                            </div>
+                            <div class="blog-text"> 
+                            <p>
+                              <?php
+                               $str =  (implode(' ', array_slice(explode(' ',  strip_tags($result->description)), 0, 43)))
+                              ?>
+                              {{(str_replace("Summary",'', trim($str))) }}
+                              @if(strlen($str)>40)<a href="{{url($result->url) }}">[...]</a>
+                              @endif
+                               </p>
+                            <a class="blog-btn" href="{{url($result->url) }}">Read more</a> </div>
                   </div>
                 </div>
               </div>
@@ -234,7 +242,7 @@
                 </div>
                 <div class="main-services">
                   <div class="service-content">
-                    <h4>  <a href="{{url($result->url)}}">{{$result->category_name}}</a>  </h4>
+                    <h4>  <a href="{{url($result->url)}}">{{ ucwords($result->category_name)}}</a>  </h4>
                                       </div>
                 </div>
               </div>
@@ -264,5 +272,5 @@
             <!-- single-well end-->
                     </div>
                 </div>
-            </div>  
+            </div>
   @stop
