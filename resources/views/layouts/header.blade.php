@@ -88,7 +88,7 @@
                                             <li><a class="pagess" href="{{url('research-categories')}}">Research Categories</a>
                                                 <ul class="sub-menu">
                                                     @foreach($catMenu as $result)
-                                                    <li><a href="{{url($result->url)}}">{{$result->category_name}}</a></li>
+                                                    <li><a href="{{url($result->url)}}"> {{ucwords($result->category_name)}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>
@@ -122,13 +122,14 @@
                         <div class="col-md-12">
                             <div class="mobile-menu">
                                 <div class="logo">
-                                    <a href="index.html"><img src="{{ url('img/logo/logo.png')}}" alt="" /></a>                                </div>
+                                    <a href="{{url('/')}}"><img src="{{ url('img/logo/logo.png')}}" alt="" /></a>                                </div>
                                 <nav id="dropdown">
                                     <ul>
                                         <li><a class="pagess" href="#">Research Categories</a>
                                                 <ul class="sub-menu">
                                                     @foreach($catMenu as $result)
-                                                    <li><a href="{{url($result->url)}}">{{$result->category_name}}</a></li>
+                                                    <li><a href="{{url($result->url)}}">
+                                                        {{ucwords($result->category_name)}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>

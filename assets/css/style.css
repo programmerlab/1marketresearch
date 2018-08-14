@@ -527,7 +527,7 @@ div#preloader {
     font-size: 13px;
     font-weight: 700;
     padding: 10px 15px;
-    text-transform: uppercase;
+    
     font-family: 'Montserrat', sans-serif;
 }
 .main-menu ul.nav li:hover ul.sub-menu li a:hover{
