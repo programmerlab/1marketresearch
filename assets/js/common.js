@@ -7,12 +7,12 @@ function orderTab(id,btnClass){
 $(function(){ 
 
 
-   var hash = window.location.hash;
+  $('.showcoupon').click(function(){
+    $('.coupn_form').show();
+  });
 
-  // var activeTab = $('[href=' + location.hash + ']');
- 
 
-
+   var hash = window.location.hash; 
    if(hash==''){
     $('#reportDescription').addClass('active');
     $('.reportDescription').addClass('active'); 
@@ -22,7 +22,38 @@ $(function(){
     $('.'+hash.substr(1)).addClass('active');
    }
 
-    
+    // checkout
+
+     // payment
+    $("#checkout_coupon").validate({ 
+        submitHandler: function(form,e) {
+             e.preventDefault(); 
+             var data =  $( "#checkout_coupon" ).serialize();
+            $.ajax({
+                type: "POST",
+                data:  data,
+                url: url+'/checkoutCoupon',
+                beforeSend: function() {
+                  //  $('#order_info').html('Please wait...');
+                },
+
+                success: function(response) {
+                    var response = JSON.parse(response); 
+                    if(response.status==0){ alert(response);
+                      $('.Cmsg').html(response.message);
+                      $('.Cmsg').show();
+                      $('.coupn_form').hide();
+                      return false;
+                    }else{
+                      $('.Cmsg').html('Coupon Applied');
+                      $('.Cmsg').show();
+                      $('.coupn_form').hide();
+                    }
+                }
+            });
+         }
+    });
+
 
     // payment
     $("#order_note_form").validate({ 

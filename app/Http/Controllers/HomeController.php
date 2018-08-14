@@ -138,6 +138,22 @@ class HomeController extends Controller
          
     }
 
+    public function checkoutCoupon(Request $request){
+        
+        $data = $request->get('coupon_code');
+
+
+        $coupan_code = \DB::table('coupans')->where('coupan_code',$data)->first();
+
+        if($coupan_code){
+            echo json_encode($coupan_code); exit();
+        }else{
+            echo json_encode(['status'=>0,'message'=>"Coupon $data is not valid"]); exit();
+        }
+
+        
+    }
+
     public function billing(Request $request){
       $request->session()->put('billing', $request->all());
       

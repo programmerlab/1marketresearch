@@ -218,6 +218,27 @@
                                 
                                 <div class="tab-pane" id="p-view-3">
                                     <div class="tab-inner">
+                                         <div class="col-md-12">
+                                                                    <p>Have a coupon? 
+                                                                            <a href="javascript:void(0)" class="showcoupon">Click here to enter your code</a>  </p>
+                                                                            <b>
+                                                                            <span style="background-color: #f4f4f4;width: 100%;float: left;padding: 10px;margin-bottom: 20px; display: none;" class="Cmsg"></span> </b>
+
+                                                                        <div style="border: 1px solid #ccc;padding:20px 0px "   class="col-md-12 coupn_form">
+                                                                            
+                                                                            <form  id="checkout_coupon" class="checkout_coupon" method="post">
+
+                                                                                <div class="form-row form-row-first col-md-4">
+                                                                                    <input type="text" name="coupon_code" class="input-text form-control" placeholder="Coupon code" id="coupon_code"   style="height: 40px">
+                                                                                </div>
+
+                                                                                <div class="col-md-2">
+                                                                                    <input type="submit" class="btn btn-primary" style="background-color: #ec1b22;font-weight:700" name="apply_coupon" value="Apply Coupon">
+                                                                                </div>
+                                                                     
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
                                         <form id="payment_summary" novalidate="" name="payment_summary" >
                                             <div class="event-content head-team checkout-form">
                                                 
@@ -226,10 +247,9 @@
                                                     <li style="margin-bottom: 2rem;">
                                                         <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
                                                             <div class="panel panel-default">
-                                                                <div class="panel-heading text-center">
-                                                                    <h4>Your Order</h4>
-                                                                </div>
+                                                               
                                                                 <div class="panel-body">
+                                                                    <hr>
                                                                     <div class="col-md-12">
                                                                         <strong>Product Details</strong>
                                                                         <div class="pull-right"><strong>Total</strong></div>
@@ -239,7 +259,7 @@
                                                                             $number = (float)$cart_detail->price;    ?>
 
                                                                     <hr>
-
+ 
                                                                     <div class="col-md-12">
                                                                         <span>{{ $reports->title }} × 1</span>
                                                                         <div class="pull-right"><span>$</span><span>{{number_format($number,2)}}

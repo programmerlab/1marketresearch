@@ -50,6 +50,7 @@ Route::match(['post','get'],'saveForm',[
 
 Route::get('allError', 'HomeController@allError');
 
+Route::match(['post','get'],'checkoutCoupon','HomeController@checkoutCoupon');
 
 
 Route::match(['post','get'],'/',[

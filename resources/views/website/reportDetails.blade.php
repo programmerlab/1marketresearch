@@ -104,6 +104,10 @@
                                                     <p>{{$data->title }} </p> <br>
 
                                                         {!! $data->table_of_contents or 'Contents not available' !!}
+
+                                                        <p>
+                                                        {!! $data->table_and_figures !!}
+                                                    </p>
                                     
                                                 </div> 
                                             </div>
