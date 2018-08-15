@@ -37,7 +37,7 @@
                             <h4>{{$result->title}}</h4>
                           </a>                                    </div>
                           <div class="repoort-tags">
-                <p><span><b>On</b> {{$result->publish_date}}</span> <span><b>Pages</b>: {{$result->number_of_pages}}</span>  <span><b>Report ID</b>: {{$result->report_id}}</span><span><b>Price for Single User</b>: ${{$result->signle_user_license}}</span></p>
+                <p><span><b>Published On</b> {{$result->publish_date}}</span> </p>
                 </div>
                 <div class="blog-text"> 
                 <p>

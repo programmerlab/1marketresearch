@@ -28,6 +28,8 @@ use Input;
 use App\Helpers\Helper as Helper;
 use Modules\Admin\Models\Settings; 
 use Modules\Admin\Models\Report;
+use Modules\Admin\Models\Press;
+
 use Response;
 
 
@@ -54,7 +56,7 @@ class HomeController extends Controller
         $contact_number     = $setting::where('field_key','contact_number')->first();
         $company_address    = $setting::where('field_key','company_address')->first();
 
-        $banner             = $setting::where('field_key','LIKE','%banner_image%')->get();
+        $banner             = $setting::where('field_key','LIKE',"%banner_image%")->get();
 
         $phone    = $setting::where('field_key','phone')->first();
         $mobile   = $setting::where('field_key','mobile')->first();
@@ -346,29 +348,34 @@ class HomeController extends Controller
 
             $category = Category::where('slug',$name)->first();
             $name = $category->category_name;
-            $category_id = $category->category_id;
+            $category_id = $category->id;
         }
 
         $search = $request->get('search');  
 
         $data = $reports =   Report::where(function($query) use($search,$name,$category_id) {
-                        if (!empty($search)) {
-                            $query->Where('title', 'LIKE', "%$search%");
-                             $query->orWhere('category_name', 'LIKE', "%$search%");
-                             $query->orWhere('category_name', 'LIKE', "%$name%");
-                             $query->orWhere('category_id',$category_id);
-                              $query->orWhere('description', 'LIKE', "%$search%");
-                        }
+                        
+                            if(!empty($search)){
+                                $query->Where('title', 'LIKE', "%$search%");
+                                $query->orWhere('category_name', 'LIKE', "%$search%");
+                                $query->orWhere('description', 'LIKE', "%$search%");
+                            }
+                            
+                             if($name){
+                                $query->where('category_name', 'LIKE', "%$name%");
+                                $query->where('category_id',$category_id); 
+                             }
+                              
                         
                     })->orderBy('id','desc')->Paginate($this->page_size);
+
+       
 
         $title= "Market Research Reports";
         if($name){
             $title= ucwords($name)." Reports";
         }
-        if($search==''){
-            $title = 'Search';
-        }
+         
         
 
         $categoryName = $request->get('search');
@@ -536,7 +543,7 @@ class HomeController extends Controller
                  if($q)
                  {
                     $products = Product::with('category')->whereIn('product_category',$sub_cat)
-                                ->where('product_title','LIKE','%'.$q.'%')
+                                ->where('product_title','LIKE',"%$q%")
                                 ->orderBy('id','asc')
                                 ->get(); 
                  }  
@@ -632,9 +639,21 @@ class HomeController extends Controller
 
       $title = "Press Release";
       $category =  Category::all(); 
-      $reports = Report::orderBy('id','desc')->Paginate($this->page_size); //Paginate(5);
- 
+      $reports = Press::orderBy('id','desc')->Paginate($this->page_size); //Paginate(5);
+
       return view('website.pressRelease',compact('category','reports','title'));
+   }
+
+
+   public function pressReleaseDetails(Request $request, $name=null){
+
+      $title = "Press Release";
+      $category =  Category::all(); 
+      $data = Press::where(function($q) use($name){ 
+        $q->Where('slug', 'LIKE', "%$name%");
+      })->orderBy('id','desc')->first();//Paginate(5);
+       
+      return view('website.pressReleaseDetails',compact('category','data','title'));
    }
 
     

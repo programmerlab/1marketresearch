@@ -121,9 +121,9 @@ Route::match(['post','get'],'contact',[
         ]
     );
 
-Route::match(['post','get'],'press-release',[
-        'as' => 'press-release',
-        'uses' => 'HomeController@pressRelease'
+Route::match(['post','get'],'press-release/{name}',[
+        'as' => 'press-release2',
+        'uses' => 'HomeController@pressReleaseDetails'
         ]
     );
 Route::match(['post','get'],'pressRelease',[

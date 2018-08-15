@@ -18,7 +18,7 @@
         <div class="form-group {{ $errors->first('link', ' has-error') }}
             @if(session('field_errors')) {{ 'has-error' }} @endif
             ">
-            <label class="control-label col-md-3">Table of Content link <span class="required"> * </span></label>
+            <label class="control-label col-md-3">URL<span class="required"> * </span></label>
             <div class="col-md-8"> 
                 {!! Form::text('link',null, ['class' => 'form-control','data-required'=>1,'required'])  !!} 
                 <span class="help-block">{{ $errors->first('link', ':message') }}  
@@ -29,7 +29,7 @@
             ">
             <label class="control-label col-md-3">Publish date <span class="required"> * </span></label>
             <div class="col-md-8"> 
-                {!! Form::text('publish_date',null, ['class' => 'form-control','data-required'=>1,'required','placeholder'=>'Example : 06/19/2018'])  !!} 
+                {!! Form::text('publish_date',null, ['class' => 'form-control','data-required'=>1,'required','placeholder'=>'Example : 06-19-2018','id'=>'startdate'])  !!} 
                 <span class="help-block">{{ $errors->first('publish_date', ':message') }}  
             </div>
         </div> 
@@ -39,11 +39,11 @@
             ">
             <label class="control-label col-md-3">Tag <span class="required"> * </span></label>
             <div class="col-md-8"> 
-                {!! Form::text('tag',null, ['class' => 'form-control','data-required'=>1,'required','placeholder'=>'Example : Growth, Demand'])  !!} 
+                {!! Form::text('tag',null, ['class' => 'form-control','required','placeholder'=>'Example : Growth, Demand'])  !!} 
                 <span class="help-block">{{ $errors->first('tag', ':message') }}  
             </div>
         </div> 
-
+<!-- 
         <div class="form-group {{ $errors->first('forecast_year', ' has-error') }}
             @if(session('field_errors')) {{ 'has-error' }} @endif
             ">
@@ -52,7 +52,7 @@
                 {!! Form::text('forecast_year',null, ['class' => 'form-control','data-required'=>1,'required','placeholder'=>'Example : 2022'])  !!} 
                 <span class="help-block">{{ $errors->first('forecast_year', ':message') }}  
             </div>
-        </div>
+        </div> -->
 
          <div class="form-group {{ $errors->first('description', ' has-error') }}">
             <label class="control-label col-md-3">Description<span class="required"> </span></label>
