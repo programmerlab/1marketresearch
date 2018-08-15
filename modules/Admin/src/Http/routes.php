@@ -141,7 +141,10 @@
         Route::post('admin/reports/import', 'Modules\Admin\Http\Controllers\ReportController@csvImport');
 
  
- 
+        
+        Route::get('admin/importExcel', 'Modules\Admin\Http\Controllers\ReportController@importExcel');
+
+        Route::match(['get','post'],'admin/exportExcel', 'Modules\Admin\Http\Controllers\ReportController@importExcel');
 
 
         Route::bind('transaction', function($value, $route) {

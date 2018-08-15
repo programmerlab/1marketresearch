@@ -32,12 +32,12 @@
                            <a class="btn  btn-success" data-toggle="modal" href="#responsive2"><i class="fa fa-plus-circle"></i>   Import Reports </a> 
                           </div>
                       </div> 
-                       <div class="col-md-2 pull-right">
+                       <!-- <div class="col-md-2 pull-right">
                           <div   class="input-group">  
                            <a class="btn  btn-info" data-toggle="modal" href="{{url('admin/reports?export=excel')}}"><i class="fa fa-plus-circle"></i> Export Reports in excel </a> 
                           </div>
                       </div> 
-                      
+                       -->
                      
                            
                     </div>

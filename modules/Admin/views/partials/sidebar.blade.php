@@ -170,6 +170,15 @@
                                         <span class="arrow {{ (isset($page_title) && $page_title=='Reports')?'open':'' }}"></span>
                                     </a>
                                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Reports')?'block':'none' }}">
+                                        
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Reports')?'active':'' }}">
+                                            <a href="{{ route('reports.create') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    Create Reports
+                                                </span>
+                                            </a>
+                                        </li> 
                                         <li class="nav-item  {{ (isset($page_title) && $page_action=='View Reports')?'active':'' }}">
                                             <a href="{{ route('reports') }}" class="nav-link ">
                                                <i class="glyphicon glyphicon-eye-open"></i> 
@@ -178,11 +187,12 @@
                                                 </span>
                                             </a>
                                         </li> 
-                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Reports')?'active':'' }}">
-                                            <a href="{{ route('reports.create') }}" class="nav-link ">
+
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Export Reports')?'active':'' }}">
+                                            <a href="{{ url('admin/exportExcel') }}" class="nav-link ">
                                                <i class="glyphicon glyphicon-eye-open"></i> 
                                                 <span class="title">
-                                                    Create Reports
+                                                    Export Reports 
                                                 </span>
                                             </a>
                                         </li> 

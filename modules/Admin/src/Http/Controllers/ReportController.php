@@ -59,6 +59,67 @@ class ReportController extends Controller {
         $this->record_per_page = Config::get('app.record_per_page');
     }
 
+    public function importExcel(Request $request){
+
+
+        $page_title = 'Reports';
+        $page_action = 'Export Reports'; 
+
+        $category = Category::all();
+
+        if($request->method()=='POST')
+        {
+            $start_date = Input::get('start_date');
+            $end_date   = Input::get('end_date');
+            $category_id = Input::get('category_name');
+            $page_number = Input::get('page_number');
+            $n = !empty($category_name)?'-'.$category_name:'';
+
+            $page_number = ($page_number)?$page_number:123456789;
+            $reportsname = "reports-".date('d-m-Y').$n;
+            Excel::create($reportsname, function($excel) use($page_number,$start_date,$end_date,$category_id) {
+                
+                $url = url('/');
+
+            $items=Report::select('*',\DB::raw("CONCAT('".$url."/',url) as ReportUrl"),'publish_date as PublishDate')->where(function($q) 
+                use($page_number,$start_date,$end_date,$category_id){
+            
+                if($start_date && $end_date){dd(2);
+                    $q->whereBetween('created_at', [$start_date, $end_date]);    
+                }
+                
+                if(!empty($category_id)){
+                    $q->where('category_id',$category_id);    
+                } 
+                
+                
+            })->orderBy('id','desc')->take($page_number)->get();
+
+  
+                $excel->sheet('Sheet', function($sheet) use($items){
+                    $sheet->fromModel($items, null, 'A1', true);
+                });
+
+            })->download('xlsx');
+
+        }
+
+        return view('packages::reports.importExcel', compact('category', 'page_title', 'page_action'));
+   
+    }
+
+    public function exportExcel(Request $request){
+
+
+        $page_title = 'Reports';
+        $page_action = 'View Reports'; 
+
+        $category = Category::all();
+
+        return view('packages::reports.importExcel', compact('category', 'page_title', 'page_action'));
+   
+    }
+
     public function ajax(Request $request, Report $reports){
         
         if ($request->file('file')) {  
