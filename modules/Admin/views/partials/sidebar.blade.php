@@ -189,6 +189,31 @@
                                     </ul>
                                 </li>
 
+                                <li class="nav-item start active {{ (isset($page_title) && $page_title=='Press')?'open':'' }}">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="glyphicon glyphicon-th"></i>
+                                        <span class="title">Press Release</span>
+                                        <span class="arrow {{ (isset($page_title) && $page_title=='Press')?'open':'' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Press')?'block':'none' }}">
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Press')?'active':'' }}">
+                                            <a href="{{ route('press') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    View Press  Release
+                                                </span>
+                                            </a>
+                                        </li> 
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Press')?'active':'' }}">
+                                            <a href="{{ route('press.create') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    Create Release
+                                                </span>
+                                            </a>
+                                        </li> 
+                                    </ul>
+                                </li> 
                                 
 
 
