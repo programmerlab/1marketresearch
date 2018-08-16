@@ -64,6 +64,196 @@ class ReportController extends Controller {
 
     }
 
+    public function excelImport(Request $request){
+        $page_title = 'Reports';
+        $page_action = 'Export Reports'; 
+
+        if($request->method('method')=='POST'){
+            try{
+            $file = $request->file('importExcel');
+
+            if (!$request->file('importExcel')) { 
+                return Redirect::back()->withErrors(['Please choose a file to upload!', 'The Message']);
+            } 
+
+
+            $validator = Validator::make(
+              [
+                  'importExcel'      => $file,
+                  'extension' => strtolower($file->getClientOriginalExtension()),
+              ],
+              [
+                  'importExcel'          => 'required',
+                  'extension'      => 'required|in:xlsx,xls'
+              ]);
+
+
+
+           // Return Error Message
+            if ($validator->fails()) {
+
+                 $error_msg  =   [];
+                    foreach ( $validator->messages()->all() as $key => $value) {
+                        array_push($error_msg, $value);     
+                    }
+
+                return view('packages::reports.excelImport', compact('category', 'page_title', 'page_action','error_msg'))
+                    ->withErrors($validator);
+
+            }
+            $mime = $file->getMimeType(); 
+
+            $ext = $file->getClientOriginalExtension();
+
+            $file_type = ['csv','xlsx','xls'];
+
+            if(!in_array($ext, $file_type)){   
+                return Redirect::back()->withErrors(['Select a valid file!', 'The Message']);
+            }
+
+
+            $upload = $this->uploadFile($file);
+           
+            $rs =    \Excel::load($upload, function($reader)use($request) {
+
+            $data = $reader->all();
+
+            $table_cname = \Schema::getColumnListing('reports');
+            
+            $except = ['id','create_at','updated_at'];
+
+            $input = $request->all(); 
+
+            $dataArray = [];
+
+            $table_cname = \Schema::getColumnListing('reports');
+            $except = ['id','created_at','updated_at','_token','photo'];
+        
+
+           // $dataArray['category_name'] = null;
+            foreach ($data  as $key => $result) {
+                              
+                foreach ($table_cname as $key => $value) {
+                   if(in_array($value, $except )){
+                        continue;
+                   } 
+                   if(isset($result->$value)) {
+                        $dataArray[$value][] = $result->$value;
+                   }
+                }
+            }
+                $category = Category::all(['category_name']);
+                $a = $category->toArray();
+
+                $main_category      = array_column($a, 'category_name');
+                $current_category   = $dataArray['category_name'];
+
+                $not_cat =0;
+                foreach ($current_category as $key => $cat) {
+                    if(!in_array($cat, $main_category)){
+                        $not_cat = 1;
+                    }
+                }
+
+                $id = Report::orderBy('id','desc')->first();
+
+                $rid = ($id)?'-'.$id->id:null;
+
+                if($not_cat==1){
+                     return Redirect::back()->withErrors(['File contains some invalid category.']);
+                }else{
+                    foreach ($data  as $key => $result) {
+                  // $result = $result[0];
+                    $csv = Report::firstOrNew(['title' =>$result->title.$rid ,'category_name'=> $result->category_name]);
+
+                    $category       = Category::where('category_name',$result->category_name)->first();
+
+                    foreach ($table_cname as $key => $value) {
+                       if(in_array($value, $except )){
+                            continue;
+                       } 
+                        $csv->$value = $result->$value;
+                        
+                        $csv->slug = date('Y').'-'.str_slug($result->title);
+                        $csv->meta_title  =  $result->title;
+                        $csv->title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                       
+                        $csv->category_name = $result->category_name;
+                       
+                       $csv->category_id = $category->id??null;
+
+                       $csv->url = 'market-reports/'.date('Y').'-'.str_slug($result->title);
+
+
+                       if(isset($result->$value)) {
+                            
+
+                        if($value=='meta_title'  && !empty($result->$value)){
+
+                            $csv->meta_title  =   $result->$value;
+                            
+                        }else{
+                            $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                        }
+                                           
+                        if($value=="title"){
+                            $u = implode(' ', array_slice(explode(' ', $result->$value), 0, 7));
+                            $csv->url = 'market-reports/'.date('Y').'-'.str_slug($u);
+                        }
+                        if($value=='meta_title' && !empty($result->$value)){  
+                            $csv->meta_title  =   $result->$value;
+                           
+                         }else{
+                             $csv->meta_title  =  $result->title;
+                         }
+
+                        if($value=='description'){
+                            $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->$value), 0, 80));
+                            $csv->description = $result->$value;
+                        }
+
+                        if($value=='meta_description' && !empty($result->$value)){ 
+                            $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->$value), 0, 80));
+                         }else{
+                           $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->description), 0, 80)); 
+                         }
+                           $status = 1;
+                       }
+                    }
+
+                    if(isset($status) && $status==1){
+                        $rs = $csv->save();
+                        if($rs){
+                            $r = Report::find($csv->id);
+                            $r->report_id = $csv->id;
+                            $r->url = $csv->url.'-'.$csv->id;
+                            $r->slug = $csv->slug.'-'.$csv->id;
+                            $r->title = $csv->title.' '.$csv->id;
+                                
+                            $r->save();
+                        }
+                        $status=0;
+                     }
+                }
+
+                    if(isset($status)){
+                        
+                        return Redirect::back()->withErrors(['<p style="color:green">Data imported successfully!</p>']);
+                    }else{
+                        return Redirect::back()->withErrors(['Invalid file type or content.Please upload xls,xlsx file only']);
+                    } 
+                }
+            }
+            );
+
+            } catch (\Exception $e) {
+                return Redirect::back()->withErrors([$e->getMessage()]);
+            } 
+        }
+        return view('packages::reports.excelImport', compact('category', 'page_title', 'page_action'));
+   
+    }
+
     public function importExcel(Request $request){
 
 
@@ -108,20 +298,21 @@ class ReportController extends Controller {
                 
             })->orderBy('id','desc')->limit($page_number)->get();
 
-            
-       
-
+           
             if(count($items)==0){
                 $items = ['message'=>'Record not found']; 
             }
   
                 $excel->sheet('Sheet', function($sheet) use($items){
                     $sheet->fromModel($items, null, 'A1', true);
-                });
+                }); 
 
             })->download('xlsx');
+          
 
         }
+
+
 
         return view('packages::reports.importExcel', compact('category', 'page_title', 'page_action'));
    
@@ -240,13 +431,18 @@ class ReportController extends Controller {
         $reports->report_id = $report_id;
 
         $table_cname = \Schema::getColumnListing('reports');
-        $except = ['id','create_at','updated_at','_token','photo','report_id'];
+        $except = ['id','create_at','updated_at','_token','photo','report_id','url'];
         $input = $request->all();
         
         $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
 
-        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
-
+        if($request->get('url')){
+            $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('url')).'-'.$report_id;
+        }else{
+            $u = implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7));
+            $reports->url = 'market-reports/'.date('Y').'-'.str_slug($u).'-'.$report_id;
+        }
+        
 
         $cat = Category::find($request->get('category'));
 
@@ -265,7 +461,7 @@ class ReportController extends Controller {
         }   
 
         if(empty($request->get('meta_title'))){  
-            $reports->meta_title  =  implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7));
+            $reports->meta_title  =  $request->get('title');
            
          }
          
@@ -333,8 +529,14 @@ class ReportController extends Controller {
         
         $reports->slug = date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
 
-        $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
-
+        //$reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('title')).'-'.$report_id;
+        if($request->get('url')){
+            $reports->url = 'market-reports/'.date('Y').'-'.str_slug($request->get('url')).'-'.$report_id;
+        }else{
+            $u = implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7));
+            $reports->url = 'market-reports/'.date('Y').'-'.str_slug($u).'-'.$report_id;
+        }
+        
         foreach ($table_cname as $key => $value) {
            
            if(in_array($value, $except )){
@@ -346,8 +548,7 @@ class ReportController extends Controller {
            } 
         }  
         if(empty($request->get('meta_title'))){  
-            $reports->meta_title  =  implode(' ', array_slice(explode(' ', $request->get('title')), 0, 7));
-           
+            $reports->meta_title  =  $request->get('title');
          }
          
          if(empty($request->get('meta_description'))){ 

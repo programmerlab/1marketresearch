@@ -195,7 +195,17 @@
                                                     Export Reports 
                                                 </span>
                                             </a>
-                                        </li> 
+                                        </li>
+
+                                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Export Reports')?'active':'' }}">
+                                            <a href="{{ url('admin/excel/import') }}" class="nav-link ">
+                                               <i class="glyphicon glyphicon-eye-open"></i> 
+                                                <span class="title">
+                                                    Import Reports 
+                                                </span>
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </li>
 

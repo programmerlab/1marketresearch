@@ -133,8 +133,6 @@
                 ]
         );  
  
-  
-
 
         Route::post('admin/contact/import', 'Modules\Admin\Http\Controllers\ContactController@contactImport');
 
@@ -145,6 +143,8 @@
         Route::get('admin/importExcel', 'Modules\Admin\Http\Controllers\ReportController@importExcel');
 
         Route::match(['get','post'],'admin/exportExcel', 'Modules\Admin\Http\Controllers\ReportController@importExcel');
+
+        Route::match(['get','post'],'admin/excel/import', 'Modules\Admin\Http\Controllers\ReportController@excelImport');
 
 
         Route::bind('transaction', function($value, $route) {

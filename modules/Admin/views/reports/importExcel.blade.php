@@ -29,11 +29,31 @@
                             <!-- BEGIN SAMPLE FORM PORTLET-->
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
-                                    <div class="caption font-red-sunglo">
-                                        <span class="caption-subject bold ">Export Reports (Total Reports : {{$report_count}})</span>
-                                    </div>
-                                    
-                                </div>
+                        <div class="caption">
+                            <i class="icon-settings font-red"></i>
+                            <span class="caption-subject font-red sbold uppercase">Export Reports (Total Reports : {{$report_count}})</span>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <div style="width: 150px;" class="input-group"> 
+                                <a href="{{ route('reports.create')}}">
+                                    <button  class="btn btn-danger"><i class="fa fa-plus-circle"></i> Create Reports</button> 
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                           <div   class="input-group">  
+                            <a class="btn  btn-success" data-toggle="modal" href="{{route('reports')}}"><i class="fa fa-plus-circle"></i> View All Reports </a> 
+                           </div>
+                       </div> 
+                        <div class="col-md-2 pull-right">
+                           <div   class="input-group">  
+                            <a class="btn  btn-info" data-toggle="modal" href="{{url('admin/excel/import')}}"><i class="fa fa-plus-circle"></i> Import Reports in excel </a> 
+                           </div>
+                       </div> 
+                        
+
+
+                    </div>
                                 <div class="portlet-body form">
                                     <form role="form" action="{{url('admin/exportExcel')}}" method="post">
 
@@ -64,7 +84,7 @@
                                                     <div class="form-group form-md-line-input has-success form-md-floating-label">
                                                         <div class="input-icon">
                                                             
-                                                            <input class="form-control   date date-picker" size="16" type="text" value=""  name="start_date" data-date-format="dd-mm-yyyy">
+                                                            <input class="form-control   date-picker" size="16" type="text" value=""  name="start_date" data-date-format="dd-mm-yyyy">
 
                                                             <label for="form_control_1">Start Date</label>
                                                             <span class="help-block">Select start date...</span>
@@ -75,7 +95,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group form-md-line-input has-success form-md-floating-label">
                                                         <div class="input-icon">
-                                                            <input class="form-control   date date-picker" size="16" type="text" value="{{date('m-d-Y')}}"  name="end_date" data-date-format="dd-mm-yyyy">
+                                                            <input class="form-control   date-picker" size="16" type="text" value=""  name="end_date" data-date-format="dd-mm-yyyy">
                                                             <label for="form_control_1">End Date</label>
                                                             <span class="help-block">Select end date..</span>
                                                             <i class="fa fa fa-calendar"></i>
