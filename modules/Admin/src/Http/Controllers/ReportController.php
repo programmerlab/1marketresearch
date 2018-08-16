@@ -57,6 +57,11 @@ class ReportController extends Controller {
         View::share('heading','Reports');
 
         $this->record_per_page = Config::get('app.record_per_page');
+
+        $report_count = Report::count();
+        View::share('report_count',$report_count);
+
+
     }
 
     public function importExcel(Request $request){
@@ -68,12 +73,18 @@ class ReportController extends Controller {
         $category = Category::all();
 
         if($request->method()=='POST')
-        {
+        { 
             $start_date = Input::get('start_date');
             $end_date   = Input::get('end_date');
             $category_id = Input::get('category_name');
             $page_number = Input::get('page_number');
             $n = !empty($category_name)?'-'.$category_name:'';
+
+
+            $start_date = \Carbon\Carbon::createFromFormat('m-d-Y', $start_date)->format('d-m-Y');
+            $end_date = \Carbon\Carbon::createFromFormat('m-d-Y', $end_date)->format('d-m-Y');
+
+            
 
             $page_number = ($page_number)?$page_number:123456789;
             $reportsname = "reports-".date('d-m-Y').$n;
@@ -84,17 +95,23 @@ class ReportController extends Controller {
             $items=Report::select('*',\DB::raw("CONCAT('".$url."/',url) as ReportUrl"),'publish_date as PublishDate')->where(function($q) 
                 use($page_number,$start_date,$end_date,$category_id){
             
-                if($start_date && $end_date){dd(2);
-                    $q->whereBetween('created_at', [$start_date, $end_date]);    
+                if($start_date && $end_date){
+                    $q->whereBetween('publish_date',[date($start_date),date($end_date)]);
                 }
                 
-                if(!empty($category_id)){
+                if(!empty($category_id)){ 
                     $q->where('category_id',$category_id);    
                 } 
                 
                 
-            })->orderBy('id','desc')->take($page_number)->get();
+            })->orderBy('id','desc')->limit($page_number)->get();
 
+            
+       
+
+            if(count($items)==0){
+                $items = ['message'=>'Record not found']; 
+            }
   
                 $excel->sheet('Sheet', function($sheet) use($items){
                     $sheet->fromModel($items, null, 'A1', true);

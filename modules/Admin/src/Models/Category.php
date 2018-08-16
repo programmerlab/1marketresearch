@@ -17,6 +17,11 @@ class Category extends Eloquent {
      *
      * @var string
      */
+
+    protected $casts = [
+        'created_at' => 'datetime:m-d-Y',
+    ];
+    
     protected $table = 'categories';
     /**
      * The attributes that are mass assignable.

@@ -30,7 +30,7 @@
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="caption font-red-sunglo">
-                                        <span class="caption-subject bold uppercase">Export Reports</span>
+                                        <span class="caption-subject bold ">Export Reports (Total Reports : {{$report_count}})</span>
                                     </div>
                                     
                                 </div>

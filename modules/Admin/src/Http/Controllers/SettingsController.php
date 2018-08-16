@@ -62,8 +62,8 @@ class SettingsController extends Controller {
     public function index(Settings $setting, Request $request) 
     { 
         
-        $page_title = 'setting';
-        $page_action = 'View setting'; 
+        $page_title = 'Setting';
+        $page_action = 'View Setting'; 
         
         $website_title      = $setting::where('field_key','website_title')->first();
         $website_email      = $setting::where('field_key','website_email')->first();
@@ -99,8 +99,8 @@ class SettingsController extends Controller {
 
     public function create(Settings $setting) 
     {
-        $page_title = 'setting';
-        $page_action = 'Create setting';
+        $page_title = 'Setting';
+        $page_action = 'Create Setting';
         $setting = Settings::first(); 
         
         if($setting)
@@ -165,8 +165,8 @@ class SettingsController extends Controller {
 
     public function edit(Settings $settings) {
 
-        $page_title = 'setting';
-        $page_action = 'Show setting'; 
+        $page_title = 'Setting';
+        $page_action = 'Show Setting'; 
         $category   = Category::all();  
         $cat = [];
         foreach ($category as $key => $value) {

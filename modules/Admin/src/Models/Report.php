@@ -56,4 +56,8 @@ class Report extends Eloquent {
                             'currency',
                             'status'];  // All field of user table here    
 
+    protected $casts = [
+        'created_at' => 'datetime:m-d-Y',
+    ];
+
 }

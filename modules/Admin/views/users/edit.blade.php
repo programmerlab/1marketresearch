@@ -149,7 +149,7 @@
                                                     @endif
                                                 </div>
 
-                                            @include('packages::users.formTab1', compact('user'))
+                                            @include('packages::users.adminTab1', compact('user'))
 
                                             {!! Form::close() !!} 
                                             <!-- END PERSONAL INFO TAB --> 

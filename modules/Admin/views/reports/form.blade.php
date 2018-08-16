@@ -98,7 +98,7 @@
             </label>
             <div class="col-md-6"> 
 
-                  {!! Form::text('publish_date',null, ['id'=>'startdate','class' => 'form-control   date date-picker end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd-mm-yyyy","data-date-start-date"=>"+0d" ])  !!} 
+                  {!! Form::text('publish_date',null, ['id'=>'startdate','class' => 'form-control     date-picker end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd-mm-yyyy","data-date-start-date"=>"+0d" ])  !!} 
                 
                 <span class="help-block">{{ $errors->first('publish_date', ':message') }}</span>
             </div> 
