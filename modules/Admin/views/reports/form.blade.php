@@ -83,7 +83,7 @@
         </div> 
 
 
-        <div class="form-group {{ $errors->first('report_id', 'has-error') }}">
+        <div class="form-group hide {{ $errors->first('report_id', 'has-error') }}">
             <label class="control-label col-md-3">Report Id  </label>
             <div class="col-md-6"> 
                 {!! Form::number('report_id',$report_id, ['class' => 'form-control','min'=>1])  !!} 
@@ -134,7 +134,7 @@
             </div>
         </div>
 
-        <div class="form-group {{ $errors->first('currency', 'has-error') }}">
+        <div class="form-group hide {{ $errors->first('currency', 'has-error') }}">
             <label class="control-label col-md-3">Currency  </label>
             <div class="col-md-6"> 
                 {!! Form::text('currency','$', ['class' => 'form-control'])  !!} 

@@ -270,7 +270,15 @@ class ReportController extends Controller {
          if(empty($request->get('meta_description'))){ 
             $reports->meta_description  = implode(' ', array_slice(explode(' ', $request->get('description')), 0, 80));
          }
-        $reports->save();
+        $rs = $reports->save();
+        
+        if($rs){
+            $r = Report::find($reports->id);
+            $r->report_id = $reports->id;
+            $r->save(); 
+        }
+        
+
        return Redirect::to('admin/reports')
                             ->with('flash_alert_notice', 'Reports was successfully created !');
     }
@@ -316,7 +324,6 @@ class ReportController extends Controller {
            
         
         $report_id = $reports->id;  
-        $reports->report_id = $report_id;
         
         $table_cname = \Schema::getColumnListing('reports');
         $except = ['id','create_at','updated_at','_token','photo','report_id'];
@@ -501,7 +508,12 @@ class ReportController extends Controller {
                     }
 
                     if(isset($status) && $status==1){
-                        $csv->save();
+                        $rs = $csv->save();
+                        if($rs){
+                            $r = Report::find($csv->id);
+                            $r->report_id = $csv->id;
+                            $r->save(); 
+                        }
                         $status=0;
                      }
                 }
