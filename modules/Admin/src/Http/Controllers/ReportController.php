@@ -80,10 +80,12 @@ class ReportController extends Controller {
             $page_number = Input::get('page_number');
             $n = !empty($category_name)?'-'.$category_name:'';
 
-
-            $start_date = \Carbon\Carbon::createFromFormat('m-d-Y', $start_date)->format('d-m-Y');
-            $end_date = \Carbon\Carbon::createFromFormat('m-d-Y', $end_date)->format('d-m-Y');
-
+            if($start_date &&  $end_date){
+                $start_date = \Carbon\Carbon::createFromFormat('m-d-Y', $start_date)->format('d-m-Y');
+                $end_date = \Carbon\Carbon::createFromFormat('m-d-Y', $end_date)->format('d-m-Y');
+  
+            }
+            
             
 
             $page_number = ($page_number)?$page_number:123456789;
