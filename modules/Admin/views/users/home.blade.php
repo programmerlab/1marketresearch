@@ -119,11 +119,11 @@
                                                         </span>
                                                 </td>
                                                 <td> 
-                                                    <a href="{{ route('user.edit',$result->id)}}?role_type={{$result->role_type}}">
+                                                    <a href="{{ route('clientuser.edit',$result->id)}}?role_type={{$result->role_type}}">
                                                             <i class="fa fa-fw fa-pencil-square-o" title="edit"></i> 
                                                         </a>
 
-                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('user.destroy', $result->id))) !!}
+                                                        {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('clientuser.destroy', $result->id))) !!}
                                                         <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button>
                                                         
                                                          {!! Form::close() !!}

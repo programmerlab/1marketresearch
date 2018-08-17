@@ -60,6 +60,12 @@
                         <table class="table table-striped table-hover table-bordered" id="contact">
                             <thead>
                                 <tr>
+                                  <td><div class="mt-checkbox-list">
+                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                    <input type="checkbox" onclick="checkAll(this)"> 
+                                                    <span></span>
+                                                </label>
+                                                </div></td>
                                     <th>Sno</th> 
                                         <th>Page Title</th>
                                         <th>Page description</th>
@@ -83,6 +89,12 @@
                             <tbody>
                              @foreach ($page  as $key => $result)  
                                 <tr>
+                                  <td><div class="mt-checkbox-list">
+                                                <label class="mt-checkbox mt-checkbox-outline">
+                                                    <input type="checkbox" name="checkAll" id="chk_{{$result->id}}" value="{{$result->id}}">  
+                                                    <span></span>
+                                                </label>
+                                                </div></td>
                                    <td>{{ ++$key }}</td>
                                         <td>{!! ucfirst($result->title)     !!}
 
@@ -113,16 +125,16 @@
 
                                             {!! Form::open(array('class' => 'form-inline pull-left deletion-form', 'method' => 'DELETE',  'id'=>'deleteForm_'.$result->id, 'route' => array('content.destroy', $result->id))) !!}
                                             <button class='delbtn btn btn-danger btn-xs' type="submit" name="remove_levels" value="delete" id="{{$result->id}}"><i class="fa fa-fw fa-trash" title="Delete"></i></button>
-                                            
                                              {!! Form::close() !!}
-
                                         </td>
                                     </tr>
                                     @endforeach 
-                                
                             </tbody>
                         </table>
-                        <span>
+                        @if($page->count())
+                              <span id="error_msg"></span>
+                              <button class="btn btn-danger" onclick="deleteAll('{{url('admin')}}','pages')">Delete All</button>
+                         @endif
                          
                          <div class="center" align="center">  {!! $page->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
                     </div>

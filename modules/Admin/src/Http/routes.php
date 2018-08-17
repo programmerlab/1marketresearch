@@ -59,6 +59,9 @@
             ]
                 ]
         );
+        Route::bind('clientuser', function($value, $route) {
+            return Modules\Admin\Models\User::find($value);
+        });
         Route::resource('admin/clientuser', 'Modules\Admin\Http\Controllers\ClientUsersController', [
             'names' => [
                 'edit' => 'clientuser.edit',
@@ -137,6 +140,8 @@
         Route::post('admin/contact/import', 'Modules\Admin\Http\Controllers\ContactController@contactImport');
 
         Route::post('admin/reports/import', 'Modules\Admin\Http\Controllers\ReportController@csvImport');
+
+        Route::post('admin/delete/all', 'Modules\Admin\Http\Controllers\HomeController@deleteAll');
 
  
         

@@ -400,7 +400,7 @@ class ReportController extends Controller {
 
     public function create(Report $reports)  
     {
-        $page_title = 'Report';
+        $page_title = 'Reports';
         $page_action = 'Create Report'; 
         $categories  = Category::all();
          

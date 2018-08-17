@@ -986,7 +986,7 @@ function createGroup(Url,action) {
 
 
      } catch (e) {
-         alert(e);
+         //alert(e);
      }
  }
  
@@ -1026,3 +1026,70 @@ function createGroup(Url,action) {
             });
         })); 
     });
+
+
+
+
+function deleteAll(url,table){
+
+  var checkValues = $('input[name=checkAll]:checked').map(function()
+            {
+                return $(this).val();
+            }).get();
+
+  if(checkValues.length==0){
+      
+    bootbox.confirm({
+    title: "Delete "+table,
+    message: "There is no "+table+' selected to delete',
+    buttons: {
+        cancel: {
+                label: '<i class="fa fa-times"></i> Cancel'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Ok'
+            }
+        },
+        callback: function (result) {
+            if(result){
+ 
+            }
+
+        }
+    });
+
+      return false;
+  }
+    bootbox.confirm({
+    title: "Delete "+table,
+    message: "Do you want to delete? This cannot be undone.",
+    buttons: {
+        cancel: {
+            label: '<i class="fa fa-times"></i> Cancel'
+        },
+        confirm: {
+            label: '<i class="fa fa-check"></i> Confirm'
+        }
+    },
+    callback: function (result) {
+        if(result){
+
+          var checkValues = $('input[name=checkAll]:checked').map(function()
+            {
+                return $(this).val();
+            }).get(); 
+           $.ajax({
+                url: url+'/delete/all',
+                type: 'post',
+                data: { ids: checkValues,table:table},
+                success:function(response){ 
+                      bootbox.alert(table+' deleted successfully',function(){
+                             window.location.reload(true);
+                      }); 
+                }
+            }); 
+        }
+
+    }
+});
+}

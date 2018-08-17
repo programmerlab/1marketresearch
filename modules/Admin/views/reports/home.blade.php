@@ -73,6 +73,12 @@
                         <table class="table table-striped table-hover table-bordered" id="contact">
                             <thead>
                                 <tr>
+                                    <td><div class="mt-checkbox-list">
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" onclick="checkAll(this)"> 
+                                        <span></span>
+                                    </label>
+                                    </div></td>
                                     <th>Sno</th> 
                                     <th>Title</th>
                                     <th>Description</th>
@@ -98,6 +104,12 @@
                             <tbody>
                                 @foreach ($reports  as $key => $result)  
                                 <tr>
+                                    <td><div class="mt-checkbox-list">
+                                    <label class="mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="checkAll" id="chk_{{$result->id}}" value="{{$result->id}}">  
+                                        <span></span>
+                                    </label>
+                                    </div></td>
                                     <td>{{ ++$key }}</td>
                                     <td>
                                         <a href="{{url($result->url)}}" target="_blank"> 
@@ -137,9 +149,12 @@
                                 @endforeach 
 
                             </tbody>
-                        </table>
-                        <span>
 
+                        </table>
+                        @if($reports->count())
+                            <span id="error_msg"></span>
+                            <button class="btn btn-danger" onclick="deleteAll('{{url('admin')}}','reports')">Delete All</button>
+                       @endif
                             <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
                     </div>
                 </div>

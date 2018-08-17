@@ -149,7 +149,7 @@ class ClientUsersController extends Controller {
         $role_id = $user->role_type;
         $roles = Roles::all();
         $js_file = ['common.js','bootbox.js','formValidate.js'];
-        return view('packages::clientuser.edit', compact('js_file','role_id','roles','user', 'page_title', 'page_action'));
+        return view('packages::users.createClient', compact('js_file','role_id','roles','user', 'page_title', 'page_action'));
     }
 
     public function update(Request $request, User $user) {
@@ -183,6 +183,8 @@ class ClientUsersController extends Controller {
      * 
      */
     public function destroy(User $user) {
+        
+       
         
         User::where('id',$user->id)->delete();
 

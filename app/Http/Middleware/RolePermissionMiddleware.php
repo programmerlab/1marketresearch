@@ -26,7 +26,7 @@ class RolePermissionMiddleware
     {   
 
         if (!Auth::guard('admin')->user()) { 
-
+            
             $validAccess =false;
             $user = Auth::guard('web')->user();
             $role_type = isset($user->role_type) && $user->role_type?$user->role_type:'Guest';
@@ -102,23 +102,33 @@ class RolePermissionMiddleware
              $validAccess =TRUE;   
             }
             
+             
+            
             if($validAccess){
                 return $next($request);
             }else{
-             $page_title = '403';
-             $heading  = 'Permission Denied.';
-             $sub_page_title = '403';
-             $page_action = '403'; 
+            
              $route_url = Route::getCurrentRoute()->getPath(); 
              return view('packages::errors.403', compact('route_url','heading','page_title', 'page_action','sub_page_title'));
             }
           
         }
         if (Auth::guard('admin')->user()) { 
-
+                    
             $hide = [];  
-
-             View::share('hide', ($hide)); 
+            
+            $hide = ['Coupan'=>'',
+                    'Setting'=>'',
+                    'Transaction'=>'',
+                    'Contact'=>'',
+                    'ClientUsers'=>'',
+                    'Users'=>'',
+                    'Publisher'=>'',
+                    'Report' => ''
+                ]; 
+                    
+              View::share('hide', ($hide)); 
+                    
 
             return $next($request);
         } 

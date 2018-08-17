@@ -41,6 +41,27 @@ class HomeController extends Controller {
        return view('packages::auth.create', compact('user'));
     } 
 
+    public function deleteAll(Request $request){
+        $ids = $request->get('ids');
+        $table = $request->get('table');
+        $status = 0;
+        
+        if(count($ids )){
+           foreach ($ids as $key => $value) {
+            \DB::table($table)->where('id',$value)->delete();
+            $status =1;
+            } 
+        }
+        
+        
+        if($status==1){
+            echo "true";
+        }else{
+            echo "false";
+        }
+        exit();
+    }
+
     public function csvImport(Request $request)
     {
         try{
