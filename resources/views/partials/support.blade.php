@@ -5,6 +5,6 @@
             <div class="assiste-contact">
                 <p><i class="fa fa-phone"></i> {{$phone->field_value or $mobile->field_value}}</p>
                 
-                <p><i class="fa fa-envelope"></i> <a href="mailto:sales@1marketresearch.com?Subject=Enquiry"  target="_top">Contact By Mail </p>
+                <p><i class="fa fa-envelope"></i> <a href="mailto:sales@1marketresearch.com?Subject=Enquiry"  target="_top">Contact By Mail </a></p>
             </div>
         </div>
