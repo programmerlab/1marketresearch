@@ -105,9 +105,9 @@ class HomeController extends Controller
 
         if(count($uri)==2){
             if($uri[0]=='market-reports'){
-
+                
                 $meta = \DB::table('reports')->where('slug',$uri[1])->first();
-
+                 
                 $meta_title = $meta->meta_title;
                 $meta_key = $meta->meta_key;
                 $meta_desc = $meta->meta_description;

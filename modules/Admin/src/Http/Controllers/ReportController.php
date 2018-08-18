@@ -65,6 +65,7 @@ class ReportController extends Controller {
     }
 
     public function excelImport(Request $request){
+        
         $page_title = 'Reports';
         $page_action = 'Export Reports'; 
 
@@ -131,95 +132,101 @@ class ReportController extends Controller {
         
 
            // $dataArray['category_name'] = null;
-            foreach ($data  as $key => $result) {
-                              
-                foreach ($table_cname as $key => $value) {
-                   if(in_array($value, $except )){
-                        continue;
-                   } 
-                   if(isset($result->$value)) {
-                        $dataArray[$value][] = $result->$value;
-                   }
-                }
+            foreach ($data  as $key => $result) 
+            {
+                $dataArray['category_name'][] =  $result->category;
             }
+            
                 $category = Category::all(['category_name']);
                 $a = $category->toArray();
 
                 $main_category      = array_column($a, 'category_name');
                 $current_category   = $dataArray['category_name'];
 
-                $not_cat =0;
+                
+                $catName = null;
+                $not_cat = 0;
                 foreach ($current_category as $key => $cat) {
                     if(!in_array($cat, $main_category)){
                         $not_cat = 1;
+                        $catName[] = $cat;
                     }
+                    if(is_array($catName)){
+                        $catName = array_unique($catName);
+                    }
+                    
                 }
-
-                $id = Report::orderBy('id','desc')->first();
-
-                $rid = ($id)?'-'.$id->id:null;
-
+                $status = 0;
+                    
+                // category check    
                 if($not_cat==1){
-                     return Redirect::back()->withErrors(['File contains some invalid category.']);
-                }else{
-                    foreach ($data  as $key => $result) {
-                  // $result = $result[0];
-                    $csv = Report::firstOrNew(['title' =>$result->title.$rid ,'category_name'=> $result->category_name]);
-
-                    $category       = Category::where('category_name',$result->category_name)->first();
-
-                    foreach ($table_cname as $key => $value) {
-                       if(in_array($value, $except )){
-                            continue;
-                       } 
-                        $csv->$value = $result->$value;
+                    View::share('catName',$catName);
+                    return Redirect::back()->withErrors(['File contains some invalid category.']);
+                }else{ 
+                    foreach ($data  as $key => $result) { 
+                        $csv        = Report::firstOrNew(['title' =>$result->post_title ,'category_name'=> $result->category]);
+                        $category   = Category::where('category_name',$result->category)->first(); 
                         
-                        $csv->slug = date('Y').'-'.str_slug($result->title);
-                        $csv->meta_title  =  $result->title;
-                        $csv->title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
-                       
-                        $csv->category_name = $result->category_name;
-                       
-                       $csv->category_id = $category->id??null;
-
-                       $csv->url = 'market-reports/'.date('Y').'-'.str_slug($result->title);
-
-
-                       if(isset($result->$value)) {
+                        if($result->post_title){
+                            $status =1;
+                           // $csv->title  =  implode(' ', array_slice(explode(' ', $result->post_title), 0, 7));
+                             $csv->meta_title  =  $result->post_title;
+                        }if($result->category){
+                            $csv->category_name = $result->category;
+                            $csv->category_id   = $category->id??null; 
                             
-
-                        if($value=='meta_title'  && !empty($result->$value)){
-
-                            $csv->meta_title  =   $result->$value;
+                        }if($result->publisher_name){
+                            $csv->publisher_name  =  $result->publisher_name;
+                        }if($result->number_of_pages){
+                            $csv->number_of_pages  =  $result->number_of_pages;
+                        }if($result->post_content){
+                            $csv->description  =  nl2br($result->post_content);
+                        }if($result->table_of_content){
+                            $csv->table_of_contents  = nl2br($result->table_of_content);
+                        }if($result->list_of_figures){
+                            $csv->table_and_figures  =  nl2br($result->list_of_figures);
+                        }if($result->single_user_price){
+                            $csv->signle_user_license  =  $result->single_user_price;
+                        }if($result->multi_user_price){
+                            $csv->multi_user_license  =  $result->multi_user_price;
+                        }if($result->corporate_user_price){
+                            $csv->corporate_user_license  =  $result->corporate_user_price;
+                        }if($result->report_type){
+                            $csv->type  =  $result->report_type;
+                        }if($result->metakeyword){
+                            $csv->meta_key  =  $result->metakeyword;
+                        }
+                        
+                        if(empty($result->short_url)){
+                            $u = implode(' ', array_slice(explode(' ', $result->post_title), 0, 7));
+                            $csv->url   = 'market-reports/'.date('Y').'-'.str_slug($u);
+                            $csv->slug  = date('Y').'-'.str_slug($result->post_title);
+                        }else{
+                            $csv->url   = 'market-reports/'.str_slug($result->short_url);
+                            $csv->slug  = str_slug($result->short_url);
+                        }
+                        
+                        if(empty($result->metatitle)){ 
+                            $csv->meta_title   = $result->post_title; 
+                        }else{
+                            $csv->meta_title  =  $result->metatitle;
+                        }
+                        
+                        if(empty($result->metadescription)){  
+                            $csv->meta_description  = nl2br(implode(' ', array_slice(explode(' ', $result->post_content), 0, 80))); 
+                        }else{ 
+                            $csv->meta_description  =  nl2br($result->metadescription);
+                        }
+                        
+                        if(!empty($result->publishe_date)){
+                            $csv->publish_date  = \Carbon\Carbon::parse($result->publishe_date)->format('d-m-Y');
                             
                         }else{
-                            $csv->meta_title  =  implode(' ', array_slice(explode(' ', $result->title), 0, 7));
+                            $csv->publish_date  = date('m-d-Y');
                         }
-                                           
-                        if($value=="title"){
-                            $u = implode(' ', array_slice(explode(' ', $result->$value), 0, 7));
-                            $csv->url = 'market-reports/'.date('Y').'-'.str_slug($u);
-                        }
-                        if($value=='meta_title' && !empty($result->$value)){  
-                            $csv->meta_title  =   $result->$value;
-                           
-                         }else{
-                             $csv->meta_title  =  $result->title;
-                         }
-
-                        if($value=='description'){
-                            $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->$value), 0, 80));
-                            $csv->description = $result->$value;
-                        }
-
-                        if($value=='meta_description' && !empty($result->$value)){ 
-                            $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->$value), 0, 80));
-                         }else{
-                           $csv->meta_description  = implode(' ', array_slice(explode(' ', $result->description), 0, 80)); 
-                         }
-                           $status = 1;
-                       }
-                    }
+                        $csv->status = 'status';    
+                          
+ 
 
                     if(isset($status) && $status==1){
                         $rs = $csv->save();
@@ -228,17 +235,15 @@ class ReportController extends Controller {
                             $r->report_id = $csv->id;
                             $r->url = $csv->url.'-'.$csv->id;
                             $r->slug = $csv->slug.'-'.$csv->id;
-                            $r->title = $csv->title.' '.$csv->id;
                                 
                             $r->save();
                         }
-                        $status=0;
                      }
                 }
 
-                    if(isset($status)){
+                    if($status){
                         
-                        return Redirect::back()->withErrors(['<p style="color:green">Data imported successfully!</p>']);
+                        return Redirect::back()->withErrors(['<p style="color:green">Data imported successfully! Total imported reports: '.count($data).' </p>']);
                     }else{
                         return Redirect::back()->withErrors(['Invalid file type or content.Please upload xls,xlsx file only']);
                     } 
@@ -311,8 +316,6 @@ class ReportController extends Controller {
           
 
         }
-
-
 
         return view('packages::reports.importExcel', compact('category', 'page_title', 'page_action'));
    
@@ -569,7 +572,7 @@ class ReportController extends Controller {
     {
         Report::where('id',$reports->id)->delete();
         return Redirect::to('admin/reports')
-                        ->with('flash_alert_notice', 'Blog was successfully deleted!');
+                        ->with('flash_alert_notice', 'Reports was successfully deleted!');
     }
 
     public function show(Report $reports) {

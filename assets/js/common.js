@@ -2,10 +2,14 @@ function orderTab(id,btnClass){
     //$('.'+btnClass).removeAttr("disabled"); 
     //$('#'+id).trigger('click');
 }
-   
-
+ 
+ 
 $(function(){ 
 
+    $('#uploadMsg').click(function(){
+        $('#uploadMsgform').hide();
+         $('#uploadMsgs').html('Please wait while reports are being uploaded').css('color','green');
+    });
 
   $('.showcoupon').click(function(){
     $('.coupn_form').show();

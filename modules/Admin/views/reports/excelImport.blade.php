@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="portlet-body form" style="height: 560px">
 
-                                    <form method="POST" action="{{url('admin/excel/import')}}" accept-charset="UTF-8" class="form-horizontal user-form" id="form_sample_3" enctype="multipart/form-data" novalidate="novalidate">
+                                    <form method="POST" action="{{url('admin/excel/import')}}" accept-charset="UTF-8" class="form-horizontal user-form" id="uploadMsgform" enctype="multipart/form-data" novalidate="novalidate">
 
                                         <div class="form-body" style="
                                                 border: 1px solid #ccc;
@@ -58,12 +58,12 @@
                                                         
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <button type="submit" class="btn blue">Import Reports</button>
+                                                    <button type="submit" class="btn blue" id="uploadMsg" >Import Reports</button>
                                                 </div>
 
 
-                                                </div>
-
+                                            </div>
+                                            
                                                @if($errors->any())
                                                 <h4 style="color: red;margin-left: 40px;margin-top: 20px;" >{!!$errors->first()!!}</h4>
                                                 @else
@@ -71,10 +71,21 @@
                                                     (allowed extension: xls,xlsx)
                                                 </h4>
                                                 @endif
+                                                <p>
+                                                    @if(isset($catName))
+                                                <p>Following category is not found in the system.</p>
+                                                <ul>      
+                                                @foreach($catName as $result)
+                                                <li> <b> {{ $result }} </b> </li>
+                                                      @endforeach
+                                                </ul>
+                                                    @endif
+                                                </p>
 
                                             </div>
                                         
                                     </form>
+                                    <div id="uploadMsgs"></div>
                                 </div>
                                                           
                             </div>
