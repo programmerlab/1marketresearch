@@ -243,7 +243,7 @@ class ReportController extends Controller {
 
                     if($status){
                         
-                        return Redirect::back()->withErrors(['<p style="color:green">Data imported successfully! Total imported reports: '.count($data).' </p>']);
+                        return Redirect::back()->withErrors(['<p style="color:green">Reports imported successfully! Total imported reports: '.count($data).' </p>']);
                     }else{
                         return Redirect::back()->withErrors(['Invalid file type or content.Please upload xls,xlsx file only']);
                     } 

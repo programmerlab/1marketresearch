@@ -5,16 +5,14 @@
 </head>
 
 <body style="
-    background: #fbfbfb;
+    background: #fff;
     font-size: 14px;
     border: 0px solid #ccc;
     padding: 20px;
     font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif
 "> 
  
-  <div>Hello Admin,</div>
-  <p> You have new message! </p>
-
+ 
   @foreach($content['data'] as $key => $result)
   <p style="font-size: 13px"> {{ ucfirst(str_replace('_',' ',$key)) }} : {{ $result}} </p>
     @endforeach 

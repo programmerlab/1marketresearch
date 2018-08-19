@@ -132,6 +132,18 @@
              
         </div>
       </div> 
+        
+        
+        <div class="form-group{{ $errors->first('google_analytics_code', ' has-error') }}">
+        <label class="control-label col-md-3">Google analytics code</label>
+        <div class="col-md-6"> 
+          
+            {!! Form::textarea('google_analytics_code',null, ['class' => 'form-control' ,'data-provide'=>"markdown"])  !!}
+            <span class="label label-danger">{{ $errors->first('google_analytics_code', ':message') }}</span>
+             
+             
+        </div>
+      </div> 
  
 
 

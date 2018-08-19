@@ -30,9 +30,11 @@
         <!-- style css -->
         <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css')}}">
         <!-- responsive css -->
-        <link rel="stylesheet" href="{{ URL::asset('assets/css/responsive.css')}}">
-         <script src="https://use.fontawesome.com/a832a5b49f.js"></script>
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/responsive.css')}}"> 
+        <script src="{{ URL::asset('assets/js/font-awesome.js')}}"></script> 
         <!-- modernizr css -->
+        
+        {!! $google_anatycs->field_value or '' !!}
         
     </head>
         <body onload="Captcha();">

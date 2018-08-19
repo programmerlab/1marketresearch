@@ -68,14 +68,14 @@
                 </li>
 
 
-                <li class="nav-item {{$Users or null }}   start active  {{ (isset($page_title) && ($page_title=='Admin User' || $page_title=='Client User') )?'open':'' }}">
+                <li class="nav-item {{$Users or null }}   start active  {{ (isset($page_title) && ($page_title=='Admin User' || $page_title=='Front User') )?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-user"></i>
                         <span class="title">Manage User</span>
                         <span class="arrow {{ (isset($page_title) && $page_title=='Admin User')?'open':'' }}"></span>
                     </a>
 
-                    <ul class="sub-menu" style="display: {{ (isset($page_title) && ($page_title=='Admin User' OR $page_title=='Client User' ))?'block':'none' }}">
+                    <ul class="sub-menu" style="display: {{ (isset($page_title) && ($page_title=='Admin User' OR $page_title=='Front User' ))?'block':'none' }}">
 
                         <li class="nav-item  {{ (isset($page_title) && $page_title=='Admin User')?'open':'' }}">
                             <a href="javascript:;" class="nav-link nav-toggle">
@@ -105,13 +105,13 @@
 
                             </ul>
                         </li>
-                        <li class="nav-item  {{$Users or null }} {{ (isset($page_title) && $page_title=='Client User')?'open':'' }}">
+                        <li class="nav-item start active {{$Users or null }} {{ (isset($page_title) && $page_title=='Front User')?'open':'' }}">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-user"></i>
-                                <span class="title">Front User</span>
-                                <span class="arrow {{ (isset($page_title) && $page_title=='Client User')?'open':'' }}"></span>
+                                <span class="title">Website User</span>
+                                <span class="arrow {{ (isset($page_title) && $page_title=='Front User')?'open':'' }}"></span>
                             </a>
-                            <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Client User')?'block':'none' }}">
+                            <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Front User')?'block':'none' }}">
                                 <!-- <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Client User')?'active':'' }}">
                                     <a href="{{ route('clientuser.create') }}" class="nav-link ">
                                         <i class="glyphicon glyphicon-plus-sign"></i>
@@ -135,37 +135,35 @@
                         </li>
 
                     </ul>
-                </li>
-
-
-                <li class="nav-item  {{ (isset($page_title) && $page_title=='Category')?'open':'' }}">
+                </li> 
+ 
+                
+                
+                <li class="nav-item start active {{$Press or null }} {{ (isset($page_title) && $page_title=='Category')?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-th"></i>
                         <span class="title">Research Category</span>
                         <span class="arrow {{ (isset($page_title) && $page_title=='Category')?'open':'' }}"></span>
-                    </a>    
-
-                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Category')?'block':'' }}">
-                        <li class="nav-item {{ (isset($page_action) && $page_action=='Create Category')?'open':'' }}">
-                            <a href="{{ route('category.create') }}" class="nav-link "  > 
-
-                                <i class="glyphicon glyphicon-plus-sign"></i> 
-                                <span class="title">
-                                    Create Category 
-                                </span> 
-                            </a>
-                        </li>
-                        <li class="nav-item {{ (isset($page_action) && $page_action=='View Category')?'open':'' }}">
-                            <a href="{{ route('category') }}" class="nav-link " >
+                    </a>
+                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Category')?'block':'none' }}">
+                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Category')?'active':'' }}">
+                            <a href="{{ route('category') }}" class="nav-link ">
                                 <i class="glyphicon glyphicon-eye-open"></i> 
                                 <span class="title">
-                                    View Category 
-                                </span> 
-                            </a> 
-                        </li>
-
+                                    View Category
+                                </span>
+                            </a>
+                        </li> 
+                        <li class="nav-item  {{ (isset($page_title) && $page_action=='Create Press')?'active':'' }}">
+                            <a href="{{ route('category.create') }}" class="nav-link ">
+                                <i class="glyphicon glyphicon-eye-open"></i> 
+                                <span class="title">
+                                    Create Category
+                                </span>
+                            </a>
+                        </li> 
                     </ul>
-                </li>
+                </li> 
 
 
 
@@ -173,7 +171,7 @@
                 <li class="nav-item start   active {{ (isset($page_title) && $page_title=='Reports')?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-th"></i>
-                        <span class="title">Reports</span>
+                        <span class="title">Manage Reports</span>
                         <span class="arrow {{ (isset($page_title) && $page_title=='Reports')?'open':'' }}"></span>
                     </a>
                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Reports')?'block':'none' }}">
@@ -216,7 +214,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item start active {{$Press or null }} {{ (isset($page_title) && $page_title=='Press')?'open':'' }}">
+                 <li class="nav-item start active {{$Press or null }} {{ (isset($page_title) && $page_title=='Press')?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-th"></i>
                         <span class="title">Press Release</span>
@@ -247,7 +245,7 @@
                 <li class="nav-item start active {{$Page or null }} {{ (isset($page_title) && $page_title=='Page')?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-th"></i>
-                        <span class="title">Pages </span>
+                        <span class="title">Manage Pages </span>
                         <span class="arrow {{ (isset($page_title) && $page_title=='Page')?'open':'' }}"></span>
                     </a>
                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Page')?'block':'none' }}">
@@ -275,7 +273,7 @@
                 <li class="nav-item start active {{$Publisher or null }} {{ (isset($page_title) && $page_title=='Publisher')?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-th"></i>
-                        <span class="title">Publisher </span>
+                        <span class="title">Manage Publisher </span>
                         <span class="arrow {{ (isset($page_title) && $page_title=='Publisher')?'open':'' }}"></span>
                     </a>
                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Publisher')?'block':'none' }}">
@@ -301,7 +299,7 @@
                 </li>
                 <li class="nav-item start active {{$Contact or null }} ">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="glyphicon glyphicon-globe"></i>
+                        <i class="glyphicon glyphicon-th"></i>
                         <span class="title"> Manage Contact </span>
                         <span class=""></span>
                         <span class="arrow"></span>
@@ -339,30 +337,11 @@
                     </ul>
 
                 </li>
-
-                <li class="nav-item start active {{$Setting or null }} {{ (isset($page_title) && $page_title=='Setting')?'open':'' }}">
+                
+                 <li class="nav-item start active {{$Coupan or null }} {{ (isset($page_title) && $page_title=='Coupon')?'open':'' }}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="glyphicon glyphicon-th"></i>
-                        <span class="title">Website Setting </span>
-                        <span class="arrow {{ (isset($page_title) && $page_title=='Setting')?'open':'' }}"></span>
-                    </a>
-                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Setting')?'block':'none' }}">
-                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Setting')?'active':'' }}">
-                            <a href="{{ route('setting') }}" class="nav-link ">
-                                <i class="glyphicon glyphicon-eye-open"></i> 
-                                <span class="title">
-                                    View Settings
-                                </span>
-                            </a>
-                        </li> 
-
-                    </ul>
-                </li>
-
-                <li class="nav-item start active {{$Coupan or null }} {{ (isset($page_title) && $page_title=='Coupon')?'open':'' }}">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="glyphicon glyphicon-th"></i>
-                        <span class="title">Coupon </span>
+                        <span class="title">Manage Coupon </span>
                         <span class="arrow {{ (isset($page_title) && $page_title=='Coupon')?'open':'' }}"></span>
                     </a>
                     <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Coupon')?'block':'none' }}">
@@ -385,6 +364,27 @@
 
                     </ul>
                 </li>
+
+                <li class="nav-item start active {{$Setting or null }} {{ (isset($page_title) && $page_title=='Setting')?'open':'' }}">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="glyphicon glyphicon-th"></i>
+                        <span class="title">Website Setting </span>
+                        <span class="arrow {{ (isset($page_title) && $page_title=='Setting')?'open':'' }}"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: {{ (isset($page_title) && $page_title=='Setting')?'block':'none' }}">
+                        <li class="nav-item  {{ (isset($page_title) && $page_action=='View Setting')?'active':'' }}">
+                            <a href="{{ route('setting') }}" class="nav-link ">
+                                <i class="glyphicon glyphicon-eye-open"></i> 
+                                <span class="title">
+                                    View Settings
+                                </span>
+                            </a>
+                        </li> 
+
+                    </ul>
+                </li>
+
+               
 
 
                 <!-- posttask end-->

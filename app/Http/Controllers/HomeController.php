@@ -69,8 +69,11 @@ class HomeController extends Controller
         $website_logo  = $setting::where('field_key','website_logo')->first();
 
         $website_description  = $setting::where('field_key','website_description')->first();
+        
+        $google_anatycs  = $setting::where('field_key','google_analytics_code')->first();
 
         View::share('website_description',$website_description);
+        View::share('google_anatycs',$google_anatycs);
 
 
          View::share('phone',$phone);
@@ -143,12 +146,47 @@ class HomeController extends Controller
     public function checkoutCoupon(Request $request){
         
         $data = $request->get('coupon_code');
-
+        
+        $cart = Cart::content();  
+        $cart_details = [];
+        foreach ($cart as $key => $value) {
+            $cart_detail = $value;
+        }
+            
+        $price =  $cart_detail->price; 
+        
+        
 
         $coupan_code = \DB::table('coupans')->where('coupan_code',$data)->first();
 
         if($coupan_code){
-            echo json_encode($coupan_code); exit();
+            
+           
+            
+            $fix_discount =  $coupan_code->fix_discount;
+            $percentage_discount = $price*($coupan_code->percentage_discount)/100;
+            
+            if($fix_discount>$percentage_discount){
+                $discount = $fix_discount;
+            }else{
+                $discount = $percentage_discount;
+            }
+            
+            $id =  $request->session()->get('shiping_id');
+             
+            if(!$id){
+                echo json_encode(['status'=>0,'message'=>"Billing or shipping information is required"]); 
+                exit();
+            }
+             
+            $datas['coupon_code']    =  $coupan_code->coupan_code;
+            $datas['discount']       =  $discount;
+            $datas['price']          =  $price; 
+            $datas['total_price']    =  $price-$discount;
+            
+            \DB::table('shipping_billing_addresses')->where('id',$id)->update($datas);
+            
+            echo json_encode(['status'=>1,'message'=>"Coupon $data is not valid",'data'=>$datas]); exit();
         }else{
             echo json_encode(['status'=>0,'message'=>"Coupon $data is not valid"]); exit();
         }
@@ -157,17 +195,104 @@ class HomeController extends Controller
     }
 
     public function billing(Request $request){
-      $request->session()->put('billing', $request->all());
+        $request->session()->put('billing', $request->all());
+      
+        $table_cname = \Schema::getColumnListing('users');
+        $except = ['id','created_at','updated_at','_token'];  
+        $data = [];
+        
+        $user = User::firstOrNew(['email'=>$request->get('email')]);
+
+        foreach ($table_cname as $key => $value) {
+           
+           if(in_array($value, $except )){
+                continue;
+           } 
+            if($request->get($value)){
+                $user->$value = $request->get($value);
+           }
+        }
+        $rs =  $user->save();
+        
+        if($rs){
+            $user = User::find($user->id);
+            $user->emp_code = $user->id.'-'.time();
+            $user->role_type = 4;
+            $user->save();
+            $request->session()->put('buyer_id', $user->id);
+            
+            
+            $table_cname = \Schema::getColumnListing('shipping_billing_addresses');
+            $except = ['id','created_at','updated_at','_token'];  
+            $data = [];
+            foreach ($table_cname as $key => $value) {
+
+               if(in_array($value, $except )){
+                    continue;
+               } 
+                if($request->get($value)){
+                    $data[$value] = $request->get($value);
+               }
+            }
+            //order_notes
+            //$value = $request->session()->get('key');
+            
+            $cart = Cart::content();  
+            $cart_details = [];
+            foreach ($cart as $key => $value) {
+                $cart_detail = $value;
+            }
+            $data['report_id'] = $cart_detail->id;
+            $data['user_id'] = $user->id;
+            $data['reference_number'] = $cart_detail->id.'-'.time();
+            $data['status'] = "pending";
+            
+            $id = \DB::table('shipping_billing_addresses')->insertGetId($data);
+            
+            $request->session()->put('shiping_id', $id);
+            
+            echo json_encode(['status'=>1,'message'=>"shipping_billing_addresses id $id"]); exit();
+        }
       
     }
 
     public function ordernote(Request $request){
       $request->session()->put('orderNote', $request->all());
       
+        $cart = Cart::content();  
+        $cart_details = [];
+        foreach ($cart as $key => $value) {
+            $cart_detail = $value;
+        }
+        
+        $id =  $request->session()->get('shiping_id');
+        
+        $data['report_id'] =  $cart_detail->id;
+        
+        $data['order_notes'] =  $request->get('order_notes');
+        
+        \DB::table('shipping_billing_addresses')->where('id',$id)->update($data);
+      
     }
 
     public function paymentSummary(Request $request){
       $request->session()->put('paymentSummary', $request->all());
+      
+      
+        $cart = Cart::content();  
+        $cart_details = [];
+        foreach ($cart as $key => $value) {
+            $cart_detail = $value;
+        }
+        
+        $id =  $request->session()->get('shiping_id');
+        
+        $data['report_id'] =  $cart_detail->id;
+        $data['license_type'] =  $request->get('license_type');
+        $data['price'] = $request->get('price');
+        
+        \DB::table('shipping_billing_addresses')->where('id',$id)->update($data);
+        
       
     }
 
@@ -175,7 +300,8 @@ class HomeController extends Controller
 
       //$request->session()->put('orderinfo_final', $request->all());
 
-      $data = $request->session()->all();
+      $data = $request->session()->all(); 
+      
       echo json_encode($data); exit();
 
     }
@@ -243,7 +369,8 @@ class HomeController extends Controller
         }
         \DB::table('contacts')->insert($data);
 
-
+        
+        
 
         $helper = new Helper;
 
@@ -257,7 +384,8 @@ class HomeController extends Controller
           $report_name = '';
           $report_link = '';
         }
-
+        $data = $request->except('_method','_token','report_id'); 
+        
         $email_content = [
                 'receipent_email'=> $request->input('email'),
                 'subject'=> $subject,
@@ -350,26 +478,24 @@ class HomeController extends Controller
             $name = $category->category_name;
             $category_id = $category->id;
         }
-
+        
         $search = $request->get('search');  
 
         $data = $reports =   Report::where(function($query) use($search,$name,$category_id) {
                         
                             if(!empty($search)){
-                                $query->Where('title', 'LIKE', "%$search%");
-                                $query->orWhere('category_name', 'LIKE', "%$search%");
-                                $query->orWhere('description', 'LIKE', "%$search%");
+                               // $query->Where('title', 'LIKE', "%$search%");
+                                 $query->orWhere('category_name', 'LIKE', "%$search%");
+                               // $query->orWhere('description', 'LIKE', "%$search%");
+                                $query->orwhereRaw("MATCH(title) AGAINST(? IN BOOLEAN MODE)", array($search));
                             }
                             
                              if($name){
                                 $query->where('category_name', 'LIKE', "%$name%");
                                 $query->where('category_id',$category_id); 
                              }
-                              
-                        
                     })->orderBy('id','desc')->Paginate($this->page_size);
-
-       
+                    
 
         $title= "Market Research Reports";
         if($name){
@@ -460,10 +586,7 @@ class HomeController extends Controller
                     );
                 }
             }
-               
-            $cart = Cart::content();
-
-
+            
             $cart = Cart::content();  
             $cart_details = [];
             foreach ($cart as $key => $value) {
@@ -521,94 +644,7 @@ class HomeController extends Controller
         return view('end-user.checkout',compact('categories','products','category'));   
     }
 
-     /*----------*/
-    public function mainCategory( $category=null)
-    {   
-        $request = new Request;
-        $q = Input::get('q'); 
-         
-        $catID = Category::where('slug',$category)->orWhere('name',$category)->first();
-        if($catID!=null && $catID->count()){ 
-
-            $sub_cat = Category::where('parent_id', $catID->id)->Orwhere('id', $catID->id)->lists('id');
-             
-            $products = Product::with('category')->whereIn('product_category',$sub_cat)->orderBy('id','asc')->get();
-             
-            if($products->count())
-            { 
-                 
-                $products = Product::with('category')->whereIn('product_category',$sub_cat) 
-                                ->orderBy('id','asc')
-                                ->get();
-                 if($q)
-                 {
-                    $products = Product::with('category')->whereIn('product_category',$sub_cat)
-                                ->where('product_title','LIKE',"%$q%")
-                                ->orderBy('id','asc')
-                                ->get(); 
-                 }  
-            } 
-        }else{
-            $products = Product::with('category')->where('product_category',0)->orderBy('id','asc')->get();
-
-        } 
-        $category = isset($catID->name)?$catID->name:null; 
-        $categories = Category::nested()->get();  
-        return view('end-user.category',compact('categories','products','category','q','category','catID','helper'));   
-    }
-
-     /*----------*/
-    public function productCategory( $category=null)
-    {  
-        $request = new Request;
-        $q = Input::get('q'); 
-         
-        $catID = Category::where('slug',$category)->orWhere('name',$category)->first(); 
-        if($catID!=null && $catID->count()){ 
-            $products = Product::with('category')->where('product_category',$catID->id)->orderBy('id','asc')->get();
-            
-            if($products->count()==0)
-            {
-                  
-                  $products = Product::with('category')->whereIn('product_category',[$catID->id]) 
-                                ->orderBy('id','asc')
-                                ->get();
-                 if($q)
-                 {
-                    $products = Product::with('category')->whereIn('product_category',[$catID->id])
-                                ->where('product_title','LIKE','%'.$q.'%')
-                                ->orderBy('id','asc')
-                                ->get();
-           
-                 } 
-            } 
-        }else{
-            $products = Product::with('category')->where('product_category',0)->orderBy('id','asc')->get();
-
-        } 
-         $category = isset($catID->name)?$catID->name:null; 
-        $categories = Category::nested()->get(); 
-        return view('end-user.category',compact('categories','products','category','q','category'));   
-    }
-    /*----------*/
-    public function productDetail($subCategoryName=null,$productName=null)
-    {   
-        $product = Product::with('category')->where('slug',$productName)->first();
-         
-        $categories = Category::nested()->get();  
-         
-        if($product==null)
-        {
-             $url =  URL::previous().'?error=InvaliAccess'; 
-              return Redirect::to($url);
-        }else{
-          $product->views=$product->views+1;
-          $product->save(); 
-        } 
-        $main_title=  $product->product_title;
-        return view('end-user.product-details',compact('categories','product','main_title','helper'));  
-    }
-     /*----------*/
+   
     public function order(Request $request)
     { 
         $cart = Cart::content();

@@ -43,7 +43,7 @@ $(function(){
 
                 success: function(response) {
                     var response = JSON.parse(response); 
-                    if(response.status==0){ alert(response);
+                    if(response.status==0){
                       $('.Cmsg').html(response.message);
                       $('.Cmsg').show();
                       $('.coupn_form').hide();
@@ -52,6 +52,11 @@ $(function(){
                       $('.Cmsg').html('Coupon Applied');
                       $('.Cmsg').show();
                       $('.coupn_form').hide();
+                      var disc = response.data.discount;
+                      $('#discount_price').html('$'+disc.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+                      $('.discount').show();
+                      var price =response.data.total_price; 
+                      $('#total_price').html('$'+price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
                     }
                 }
             });
@@ -172,20 +177,19 @@ $(function(){
 
              var data =  $( "#order_info_form" ).serialize();
 
-            $('.order_info').removeAttr("disabled"); 
-            $('#order_notes').trigger('click');
 
             $.ajax({
                 type: "POST",
                 data:  data,
-                url: url+'/makeOrder',
+                url: url+'/billing',
                 beforeSend: function() {
-                    $('#order_info').html('Please wait...');
+                    //$('.order_info').html('Please wait...');
                 },
                 success: function(response) {
-                   console.log(response);
-                   $('#order_info').html('Next');
-                   
+                 
+                $('.order_info').removeAttr("disabled"); 
+                $('#order_notes').trigger('click');
+
                 }
 
             });
@@ -324,9 +328,12 @@ $(document).ready( function(event) {
                 url: url+'/saveForm',
                 beforeSend: function() {
                    $('#btnSubmit').html('Please wait...');
+                   setTimeout(function(){
+                      window.location.href = urlTo; 
+                   },1000);
                 },
+                async:true,
                 success: function(response) {
-                    console.log(response);
                    $('#btnSubmit').html('Submit Request');
                    if(response.status==1){
                      window.location.href = urlTo;
@@ -374,14 +381,19 @@ $(document).ready( function(event) {
                 data:  $( "#Request" ).serialize(),
                 url: url+'/saveForm',
                 beforeSend: function() {
-                   $('.btnSubmit2').html('Please wait...');
+                    $('.btnSubmit2').html('Please wait...');
+                    setTimeout(function(){
+                      window.location.href = urlTo; 
+                   },1000);
+                   
                 },
+                async:true,
                 success: function(response) {
                     console.log(response);
                    $('.btnSubmit2').html('Submit Request');
                    if(response.status==1){
                     
-                  window.location.href = urlTo;
+                        window.location.href = urlTo;
                    }else{
                     $('.successMsg').html(response.message+'<br>').css('color','red');
                    }
@@ -428,10 +440,16 @@ $(document).ready( function(event) {
                 data:  $( "#contactForm" ).serialize(),
                 url: url+'/saveForm',
                 beforeSend: function() {
-                    $('#btnSubmit').html('Please wait...');
+                   $('#btnSubmit').html('Please wait...');
+                   
+                   setTimeout(function(){
+                      window.location.href = urlTo; 
+                   },1000);
+                   
                 },
+                async:true,
                 success: function(response) {
-                   console.log(response);
+                   
                     window.location.href = urlTo; 
                    
                 }

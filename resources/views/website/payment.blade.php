@@ -58,6 +58,7 @@
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label> First Name *</label>
                                                 <input type="text" name="first_name" placeholder="First Name" data-required="true" title="First Name is required.">
+                                                
                                             </div>
                                             <div class="sf_columns column_3" style="width: 50%; margin-bottom: 0px;">
                                                 <label>Last Name *</label>
@@ -271,15 +272,21 @@
                                                                     </div>
                                                                     <hr>
 
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-12 "  >
                                                                         <strong>Subtotal</strong>
-                                                                        <div class="pull-right"><strong>${{number_format($number,2)}}</strong></div>
+                                                                        <div class="pull-right"><strong >${{number_format($number,2)}}</strong></div>
                                                                         <hr>
                                                                     </div>
+                                                                     <div class="col-md-12 discount" style="display:none">
+                                                                         <strong>Discount</strong>
+                                                                        <div class="pull-right" >- <strong id="discount_price"> $700 </strong></div>
+                                                                        <hr>
+                                                                    </div>
+                                                                    
                                                                     <hr>
                                                                     <div class="col-md-12">
                                                                         <strong>Total</strong>
-                                                                        <div class="pull-right"><strong>${{number_format($number,2)}}</strong></div>
+                                                                        <div class="pull-right"><strong id="total_price">${{number_format($number,2)}}</strong></div>
                                                                         <hr>
                                                                     </div>
                                                                     

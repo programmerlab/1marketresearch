@@ -649,7 +649,7 @@ div#preloader {
     left: 5%;
     position: absolute;
     top: 12px;
-    text-transform: uppercase;
+   text-transform: capitalize;
     font-weight: 500;
 }
 .mean-container a.meanmenu-reveal:hover {
@@ -671,9 +671,9 @@ div#preloader {
     margin: 0;
     padding: 13px 10px;
     text-align: left;
-    text-decoration: none;
-    text-transform: uppercase;
+    text-decoration: none; 
     width: 90%;
+    text-transform: capitalize;
 }
 .mean-nav ul li.mean-last {
     margin-bottom: 20px;

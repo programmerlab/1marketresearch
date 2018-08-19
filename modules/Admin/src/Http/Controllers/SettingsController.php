@@ -200,6 +200,12 @@ class SettingsController extends Controller {
 
                 $setting->field_key     =   $key;
                 $setting->field_value   =   $banner_image1;
+                
+                $google_analytics_code = HTML::entities(Input::get('google_analytics_code'));
+                if($google_analytics_code){
+                    $setting->google_analytics_code = $google_analytics_code ;
+                }
+                
                 $setting->save(); 
                
             } 

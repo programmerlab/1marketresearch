@@ -5,14 +5,14 @@
 </head>
 
 <body style="
-    background: #fbfbfb;
+    background: #fff;
     font-size: 14px;
     border: 0px solid #ccc;
     padding: 20px;
     font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif
 "> 
  
-  <div>Hello {{$content['first_name']}}</div>
+  <div>Hello {{$content['first_name']}},</div>
   <p style="font-size: 13px">Thank you for getting in touch!</p>
   <div style="font-size: 13px">We appreciate you contacting us. We try to respond as soon as possible, so one of our Customer Service colleagues will  get back to you within a few hours. 
   </div>
