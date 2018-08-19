@@ -326,7 +326,7 @@
                                                                 <!--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel1">
                                                                 
                                                                 </a>-->
-                                                                 <input type="radio" name="payment_method" value="PayPal" class="payment_method" checked="checked">&nbsp;&nbsp;&nbsp;PayPal
+                                                                 <input type="radio" name="payment_method" value="PayPal" class="payment_method" >&nbsp;&nbsp;&nbsp;PayPal
                                                             </h4>
                                                         </div>
                                                         <div id="panel1" class="panel-collapse collapse">
@@ -341,7 +341,7 @@
                                                                <!-- <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel2">
                                                                 
                                                                 </a>-->
-                                                                <input type="radio" name="payment_method" value="BankTransfer" class="payment_method"> &nbsp;&nbsp;&nbsp;Direct Bank Transfer
+                                                                <input type="radio" name="payment_method" value="BankTransfer" class="payment_method" checked="checked"> &nbsp;&nbsp;&nbsp;Direct Bank Transfer
                                                             </h4>
                                                         </div>
                                                         <div id="panel2" class="panel-collapse collapse">
@@ -357,7 +357,7 @@
                                         </li>
                                     </ul>
                                     <div class="checkout-next">
-                                        <button type="submit" class="paymentFinal" disabled="disabled">Place Order</button>
+                                        <button type="submit" class="paymentFinal" disabled="disabled" id="place_order">Place Order</button>
                                     </div>
                                 </form>
                                                 

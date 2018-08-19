@@ -10,7 +10,7 @@ $(function(){
         $('#uploadMsgform').hide();
          $('#uploadMsgs').html('Please wait while reports are being uploaded').css('color','green');
     });
-
+    $('.coupn_form').hide();
   $('.showcoupon').click(function(){
     $('.coupn_form').show();
   });
@@ -117,16 +117,33 @@ $(function(){
     $("#paymentFinal").validate({ 
         submitHandler: function(form,e) {
              e.preventDefault(); 
-             var data =  $( "#paymentFinal" ).serialize();
+            var data =  $( "#paymentFinal" ).serialize();
+           
+            var paymentFinal = $('input[name=payment_method]:checked').map(function()
+            {
+                return $(this).val();
+            }).get();
+            
+            if(paymentFinal=='PayPal'){
+              var  paymenturl = 'checkout';
+              var redirectUrl = 'checkout';
+            }else{
+              var  paymenturl = 'makeOrder';
+              var redirectUrl = 'directBankTransfer';
+            }
+             
             $.ajax({
                 type: "POST",
                 data:  data,
-                url: url+'/makeOrder',
+                url: url+'/'+paymenturl,
                 beforeSend: function() {
-                  //  $('#order_info').html('Please wait...');
+                    $('#place_order').html('Please wait...');
+                    setTimeout(function(){
+                      window.location.href = url+'/'+redirectUrl;; 
+                    },1000);
                 },
                 success: function(response) {
-                  window.location.href=url+'/directBankTransfer';
+                  window.location.href=url+'/'+redirectUrl;
                 }
             });
          }
@@ -177,6 +194,8 @@ $(function(){
 
              var data =  $( "#order_info_form" ).serialize();
 
+            $('.order_info').removeAttr("disabled"); 
+            $('#order_notes').trigger('click');
 
             $.ajax({
                 type: "POST",
@@ -186,10 +205,9 @@ $(function(){
                     //$('.order_info').html('Please wait...');
                 },
                 success: function(response) {
-                 
-                $('.order_info').removeAttr("disabled"); 
-                $('#order_notes').trigger('click');
-
+                   console.log(response);
+                 $('.order_info').html('Next');
+                   
                 }
 
             });

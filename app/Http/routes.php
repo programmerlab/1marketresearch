@@ -59,6 +59,13 @@ Route::match(['post','get'],'/',[
         ]
     );
 
+Route::match(['post','get'],'checkout',[
+        'as' => 'checkout',
+        'uses' => 'HomeController@checkout'
+        ]
+    );
+
+
 Route::match(['post','get'],'research-categories',[
         'as' => 'research-categories',
         'uses' => 'HomeController@category'

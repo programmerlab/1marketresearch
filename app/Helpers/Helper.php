@@ -133,7 +133,7 @@ class Helper {
         $billing = $email_content['billing']??null;
         $cart_detail = $email_content['cart_detail']??null;
 
-
+        
         $mail       = new PHPMailer;
         $html       = view::make('emails.'.$template,['content' => $email_content,'billing'=>$billing,'cart_detail'=>$cart_detail]);
         $html       = $html->render(); 

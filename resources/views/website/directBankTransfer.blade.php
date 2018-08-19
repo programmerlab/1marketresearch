@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="date-box">
                   <div class="col-sm-12 border-right"> <span class="pub-date">
-                    Order Recieved
+                    Checkout
                   </span> </div>
                   
                 </div>
@@ -42,7 +42,7 @@
                   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="m_326117052521356084template_header" style="background-color:#00aff0;border-radius:3px 3px 0 0!important;color:#ffffff;border-bottom:0;font-weight:bold;line-height:100%;vertical-align:middle;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
                     <tbody><tr>
                       <td id="m_326117052521356084header_wrapper" style="padding:36px 48px;display:block">
-                        <h1 style="color:#ffffff;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:left">Thank you for your order</h1>
+                        <h1 style="color:#ffffff;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:left">Order Information
                       </td>
                     </tr>
                   </tbody></table>
@@ -63,6 +63,8 @@
 
 <p style="margin:0 0 16px">Your order is recieved. Our sales team will contact with you for bank details.<br>
 Your order details are shown below for your reference:</p>
+
+
 
 <ul class="m_326117052521356084wc-bacs-bank-details m_326117052521356084order_details m_326117052521356084bacs_details">
 </ul>
@@ -87,19 +89,32 @@ amount"><span class="m_326117052521356084woocommerce-Price-currencySymbol">$</sp
     
   </tbody>
   <tfoot>
-    <tr>
+        <tr>
             <th class="m_326117052521356084td" scope="row" colspan="2" style="text-align:left;border-top-width:4px;color:#737373;border:1px solid #e4e4e4;padding:12px">Subtotal:</th>
             <td class="m_326117052521356084td" style="text-align:left;border-top-width:4px;color:#737373;border:1px solid #e4e4e4;padding:12px"><span class="m_326117052521356084woocommerce-Price-amount m_326117052521356084amount"><span class="m_326117052521356084woocommerce-Price-currencySymbol">$</span>{{number_format($cart_detail->price,2)}}</span></td>
           </tr>
+          
+          
+          <tr>
+            <th class="m_326117052521356084td" scope="row" colspan="2" style="text-align:left;border-top-width:4px;color:#737373;border:1px solid #e4e4e4;padding:12px">Discount:</th>
+            <td class="m_326117052521356084td" style="text-align:left;border-top-width:4px;color:#737373;border:1px solid #e4e4e4;padding:12px">
+                <span class="m_326117052521356084woocommerce-Price-amount m_326117052521356084amount">
+                <span class="m_326117052521356084woocommerce-Price-currencySymbol">$</span>{{number_format($cart_detail->discount,2)}}</span></td>
+          </tr>
+          
+          
 <tr>
             <th class="m_326117052521356084td" scope="row" colspan="2" style="text-align:left;color:#737373;border:1px solid #e4e4e4;padding:12px">Payment Method:</th>
             <td class="m_326117052521356084td" style="text-align:left;color:#737373;border:1px solid #e4e4e4;padding:12px">Direct Bank
 Transfer</td>
           </tr>
-<tr>
-            <th class="m_326117052521356084td" scope="row" colspan="2" style="text-align:left;color:#737373;border:1px solid #e4e4e4;padding:12px">Total:</th>
-            <td class="m_326117052521356084td" style="text-align:left;color:#737373;border:1px solid #e4e4e4;padding:12px"><span class="m_326117052521356084woocommerce-Price-amount m_326117052521356084amount"><span class="m_326117052521356084woocommerce-Price-currencySymbol">$</span>{{number_format($cart_detail->price,2)}}</span></td>
-          </tr> </tfoot>
+    <tr>
+        <th class="m_326117052521356084td" scope="row" colspan="2" style="text-align:left;color:#737373;border:1px solid #e4e4e4;padding:12px">Total:</th>
+        <td class="m_326117052521356084td" style="text-align:left;color:#737373;border:1px solid #e4e4e4;padding:12px">
+        <span class="m_326117052521356084woocommerce-Price-amount m_326117052521356084amount">
+        <span class="m_326117052521356084woocommerce-Price-currencySymbol">$</span>{{number_format(($cart_detail->price - $cart_detail->discount),2)}}</span></td>
+    </tr> 
+  </tfoot>
 </table>
 
 <h2 style="color:#00aff0;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">Customer

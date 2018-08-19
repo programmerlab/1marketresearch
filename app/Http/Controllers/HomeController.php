@@ -147,6 +147,7 @@ class HomeController extends Controller
         
         $data = $request->get('coupon_code');
         
+        
         $cart = Cart::content();  
         $cart_details = [];
         foreach ($cart as $key => $value) {
@@ -182,9 +183,12 @@ class HomeController extends Controller
             $datas['coupon_code']    =  $coupan_code->coupan_code;
             $datas['discount']       =  $discount;
             $datas['price']          =  $price; 
-            $datas['total_price']    =  $price-$discount;
+            
             
             \DB::table('shipping_billing_addresses')->where('id',$id)->update($datas);
+            
+            $datas['total_price']    =  $price-$discount;
+            Cart::content('rowId',['price'=> $datas['total_price']]);
             
             echo json_encode(['status'=>1,'message'=>"Coupon $data is not valid",'data'=>$datas]); exit();
         }else{
@@ -212,8 +216,9 @@ class HomeController extends Controller
                 $user->$value = $request->get($value);
            }
         }
-        $rs =  $user->save();
         
+        $rs =  $user->save();
+     
         if($rs){
             $user = User::find($user->id);
             $user->emp_code = $user->id.'-'.time();
@@ -248,10 +253,10 @@ class HomeController extends Controller
             $data['status'] = "pending";
             
             $id = \DB::table('shipping_billing_addresses')->insertGetId($data);
+           
+            $request->session()->put('shiping_id', intval($id));
             
-            $request->session()->put('shiping_id', $id);
-            
-            echo json_encode(['status'=>1,'message'=>"shipping_billing_addresses id $id"]); exit();
+            return json_encode(['status'=>1,'message'=>"shipping_billing_addresses id"]);
         }
       
     }
@@ -272,6 +277,10 @@ class HomeController extends Controller
         $data['order_notes'] =  $request->get('order_notes');
         
         \DB::table('shipping_billing_addresses')->where('id',$id)->update($data);
+        
+        $data['shiping_id'] =  $request->session()->get('shiping_id');
+        
+        echo json_encode(['status'=>1,'message'=>$data]); exit();
       
     }
 
@@ -287,12 +296,12 @@ class HomeController extends Controller
         
         $id =  $request->session()->get('shiping_id');
         
-        $data['report_id'] =  $cart_detail->id;
-        $data['license_type'] =  $request->get('license_type');
-        $data['price'] = $request->get('price');
+        
+        $data['lisence_type'] =  $request->get('license_type');
+        $data['price'] = $cart_detail->price;
         
         \DB::table('shipping_billing_addresses')->where('id',$id)->update($data);
-        
+        return json_encode(['status'=>1,'message'=>$data]); 
       
     }
 
@@ -611,7 +620,19 @@ class HomeController extends Controller
                 $cart_detail = $value;
         }
 
+        $id = (object) ($request->session()->all());
+        
+        \DB::table('shipping_billing_addresses')->where('id',$id->shiping_id)->update(['payment_mode'=>'direct-bank-transfer']);
+       
+        $order = \DB::table('shipping_billing_addresses')->where('id',$id->shiping_id)->first();
+        
+        if($order==null){
+            return Redirect::to('404');
+        }
+        
+        $cart_detail->discount = $order->discount;
         $billing = $cart_detail->options->user['billing'];
+        
         $email_content = [
                 'receipent_email'=> $billing['email'],
                 'subject'=> 'Thank you for your order',
@@ -619,31 +640,66 @@ class HomeController extends Controller
                 'first_name'=> $billing['first_name'],
                 'from' => env('MAIL_FROM'),
                 'billing' => $billing,
-                'cart_detail' => $cart_detail
+                'cart_detail' => $cart_detail,
+                'addBCC' => env('MAIL_FROM')
                 ];
 
-        $request->session()->put('order_mail', 1);
-
+        
         $order_mail = $request->session()->get('order_mail');
         if(!$order_mail){
             $helper = new Helper;
             $helper->sendMail($email_content,'directBankTransfer');
-        }
+            $request->session()->put('order_mail', 1);
 
-    return view('website.directBankTransfer',compact('reports','cart_detail','billing'));
+        }
+        
+        
+    return view('website.directBankTransfer',compact('reports','cart_detail','billing','order'));
   }
  /*----------*/
-    public function checkout()
+    public function checkout(Request $request)
     {
-         
-         $request = new Request;
+        $reports = Cart::content();
+            $cart_details = [];
+            foreach ($reports as $key => $value) {
+                $cart_detail = $value;
+        }
+
+        $id = (object) ($request->session()->all());
+        
+        \DB::table('shipping_billing_addresses')->where('id',$id->shiping_id)->update(['payment_mode'=>'paypal']);
+       
+        $order = \DB::table('shipping_billing_addresses')->where('id',$id->shiping_id)->first();
+        
+        if($order==null){
+            return Redirect::to('404');
+        }
+        
+        $cart_detail->discount = $order->discount;
+        $billing = $cart_detail->options->user['billing'];
+        
+        $email_content = [
+                'receipent_email'=> $billing['email'],
+                'subject'=> 'Thank you for your order',
+                'greeting'=> '1marketresearch',
+                'first_name'=> $billing['first_name'],
+                'from' => env('MAIL_FROM'),
+                'billing' => $billing,
+                'cart_detail' => $cart_detail,
+                'addBCC' => env('MAIL_FROM')
+                ];
 
         
-        $products = Product::with('category')->orderBy('id','asc')->get();
-        $categories = Category::nested()->get(); 
-        return view('end-user.checkout',compact('categories','products','category'));   
-    }
+        $paypal = $request->session()->get('paypal');
+        if(!$paypal){
+            $helper = new Helper;
+            $helper->sendMail($email_content,'checkout');
+            $request->session()->put('paypal', 1);
 
+        }
+        return view('website.checkout',compact('reports','cart_detail','billing','order'));
+    }
+    
    
     public function order(Request $request)
     { 
