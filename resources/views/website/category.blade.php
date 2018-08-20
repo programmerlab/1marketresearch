@@ -41,7 +41,7 @@
                       @foreach($category as $key=> $result)
 
                         <div class="col-md-2 col-sm-2 col-xs-12">
-                          <div class="single-services text-center" style="height: 396px">
+                          <div class="single-services text-center" style="height: 300px">
                             <div class="services-img2">
                                 <a href="{{url($result->url)}}"> 
                               <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="" width="100%"> </a> 
