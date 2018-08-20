@@ -44,14 +44,14 @@
                           <div class="single-services text-center" style="height: 200px">
                             <div class="services-img">
                                 <a href="{{url($result->url)}}"> 
-                              <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="height: 153px" width="100%"> </a> 
+                              <img src="{{ url('storage/uploads/category/'.$result->category_group_image) }}" alt="" style="" width="100%"> </a> 
                               
                             </div>
-                            <div class="main-services">
+                           <!--  <div class="main-services">
                               <div class="service-content">
                                 <h4>  <a href="{{url($result->url)}}">{{ucwords($result->category_name)}}</a>  </h4>
                                                   </div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
 
