@@ -1,4 +1,8 @@
- 
+<style type="text/css">
+    .datepicker-orient-top{
+        z-index:9999 !important;
+    }
+</style> 
 
 <div class="form-body">
     <div class="alert alert-danger display-hide">
@@ -25,7 +29,7 @@
             </label>
             <div class="col-md-4"> 
 
-                  {!! Form::text('start_date',null, ['id'=>'startdate','class' => 'form-control end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd/mm/yyyy","data-date-start-date"=>"+0d" ])  !!} 
+                  {!! Form::text('start_date',null, ['id'=>'startdate','class' => 'form-control end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd/mm/yyyy","data-date-start-date"=>"+0d" ,' autocomplete'=>"off"])  !!} 
                 
                 <span class="help-block">{{ $errors->first('start_date', ':message') }}</span>
             </div> 
@@ -36,7 +40,7 @@
                 <span class="required"> * </span>
             </label>
             <div class="col-md-4"> 
-                {!! Form::text('end_date',null, ['id'=>'enddate','class' => 'form-control end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd/mm/yyyy","data-date-start-date"=>"+0d" ])  !!} 
+                {!! Form::text('end_date',null, ['id'=>'enddate','class' => 'form-control end_date','data-required'=>1,"size"=>"16","data-date-format"=>"dd/mm/yyyy","data-date-start-date"=>"+0d",' autocomplete'=>"off"])  !!} 
 
 
                 

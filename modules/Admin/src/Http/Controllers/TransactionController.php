@@ -44,9 +44,12 @@ class TransactionController extends Controller {
      */
     public function __construct() {
         $this->middleware('admin');
-        View::share('viewPage', 'product');
+        View::share('viewPage', 'Transaction');
         View::share('helper',new Helper);
         $this->record_per_page = Config::get('app.record_per_page');
+        View::share('route_url',route('transaction'));
+        View::share('heading','Transaction');
+
     }
 
     protected $categories;

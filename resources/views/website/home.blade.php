@@ -241,9 +241,9 @@
                   
                 </div>
                 <div class="main-services">
-                  <div class="service-content">
+                 <!--  <div class="service-content">
                     <h4>  <a href="{{url($result->url)}}">{{ ucwords($result->category_name)}}</a>  </h4>
-                                      </div>
+                                      </div> -->
                 </div>
               </div>
             </div>

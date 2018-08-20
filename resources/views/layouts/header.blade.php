@@ -14,6 +14,10 @@
 
         <!-- bootstrap v3.3.6 css -->
         <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css')}}">
+
+        
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-switch.min.css')}}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-datepicker3.min.css')}}">
         <!-- owl.carousel css -->
         <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.carousel.css')}}">
         <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.transitions.css')}}">
