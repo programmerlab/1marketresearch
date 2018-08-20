@@ -3638,4 +3638,35 @@ ul.sf-content li {
 /*--------------------------------*/
 /* .End CSS
 /*--------------------------------*//* CSS Document */
+nav.navbar.navbar-default {
+    border: none !important;
+}
+.services-img img {
+    height: auto !important;
+    width: auto !important;
+}
 
+
+.mobile-menu-area.hidden-lg.hidden-md.hidden-sm {
+    position: relative;
+    background: #fff; 
+}
+.main-menu ul.nav li ul.sub-menu {
+    background: #fff;
+    border-top: 2px solid #ec1b22;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 115%;
+    transition: all .3s ease 0s;
+    visibility: hidden;
+    width: 580px;
+    z-index: -99;
+}
+.main-menu ul.nav li ul.sub-menu li {
+    border-bottom: 1px solid #ddd;
+    padding: 0;
+    position: relative;
+    width: 50%;
+    float: left;
+}    
