@@ -91,7 +91,7 @@
                                     <div class="main-menu">
                                         <ul class="nav navbar-nav navbar-right">
                                             <li><a class="pagess" href="{{url('research-categories')}}">Research Categories</a>
-                                                <ul class="sub-menu">
+                                                <ul class="sub-menu" style="max-width: 200px">
                                                     @foreach($catMenu as $result)
                                                     <li><a href="{{url($result->url)}}"> {{ucwords($result->category_name)}}</a></li>
                                                     @endforeach
@@ -130,7 +130,8 @@
                                     <a href="{{url('/')}}"><img src="{{ url('img/logo/logo.png')}}" alt="" /></a>                                </div>
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a class="pagess" href="#">Research Categories</a>
+                                        <li>
+                                            <a class="pagess" href="{{url('research-categories')}}">Research Categories</a>
                                                 <ul class="sub-menu">
                                                     @foreach($catMenu as $result)
                                                     <li><a href="{{url($result->url)}}">
