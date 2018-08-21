@@ -44,7 +44,7 @@
                      }
 
                 ?> 
-            <img src="{{$img}}">
+            <img src="{{$img}}" style="width: 100%">
             
             </div>
             <div class="detail-title">
