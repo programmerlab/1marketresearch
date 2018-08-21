@@ -91,15 +91,15 @@
                                     <div class="main-menu">
                                         <ul class="nav navbar-nav navbar-right">
                                             <li><a class="pagess" href="{{url('research-categories')}}">Research Categories</a>
-                                                <ul class="sub-menu" style="max-width: 200px">
+                                                <ul class="sub-menu" >
                                                     @foreach($catMenu as $result)
                                                     <li><a href="{{url($result->url)}}"> {{ucwords($result->category_name)}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>
                                             <li><a class="pagess" href="{{url('about-us')}}">About us</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="{{url('pressRelease')}}">Press Release</a></li>
+                                                <ul class="sub-menu" style="max-width: 100%">
+                                                    <li style="max-width: 100%"><a href="{{url('pressRelease')}}">Press Release</a></li>
                                                 </ul>
                                             </li>
                                             <li><a class="pagess" href="{{url('publisher')}}">Publisher</a>
