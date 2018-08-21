@@ -161,8 +161,9 @@
         
         <script src="{{ asset('assets/js/bootbox.js')}}"></script> 
         <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script> 
-        <script src="{{ URL::asset('assets/js/modernizr-2.8.3.min.js')}}"></script>
         <script src="{{ asset('assets/js/common.js')}}"></script> 
+
+        <script src="{{ URL::asset('assets/js/font-awesome.js')}}"></script> 
         <script type="text/javascript">
           var  url = "{{ url('/') }}";
         </script>
