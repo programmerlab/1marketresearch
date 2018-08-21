@@ -9,7 +9,8 @@
            <div class="main-overly"></div>
             <div class="intro-carousel2">
                 <div class="intro-content">
-                    <div class="slider-images" style="background-image: url('http://1marketresearch.krsdata.net/img/slider/s1.jpg')" style="width: 100%; height: 420px"><!-- 
+                    <div class="slider-images" style="background-image: url({{url('img/slider/s1.jpg')}});width: 100%;height: 500px;">
+                    <!-- 
                         <img src="{{ asset('img/slider/s1.jpg') }}" alt=""> -->
                     </div>
                     <div class="slider-content">
