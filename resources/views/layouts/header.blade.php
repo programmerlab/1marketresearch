@@ -98,8 +98,8 @@
                                                 </ul>
                                             </li>
                                             <li><a class="pagess" href="{{url('about-us')}}">About us</a>
-                                                <ul class="sub-menu" style="max-width: 100%">
-                                                    <li style="max-width: 100%"><a href="{{url('pressRelease')}}">Press Release</a></li>
+                                                <ul class="sub-menu" style="width: 300px">
+                                                    <li style="width: 100%"><a href="{{url('pressRelease')}}">Press Release</a></li>
                                                 </ul>
                                             </li>
                                             <li><a class="pagess" href="{{url('publisher')}}">Publisher</a>
