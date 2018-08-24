@@ -897,5 +897,17 @@ img.mob-logo {
 .slider-images {
     height: 260px !important;
 }
+.banner-area
+{
+	clear:both; 
+}
+.mean-container .mean-nav ul
+{
+	margin:0px;
+}
+.banner-btn
+{
+	width: 250px;
+}
 }
  

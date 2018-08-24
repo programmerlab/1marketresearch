@@ -3671,3 +3671,7 @@ nav.navbar.navbar-default {
     width: 50%;
     float: left;
 }    
+.banner-area
+{
+	clear:both; 
+}
