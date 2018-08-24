@@ -1,4 +1,4 @@
-
+	
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -122,6 +122,7 @@
             <!-- header-area end -->
             <!-- mobile-menu-area start -->
             <div class="mobile-menu-area hidden-lg hidden-md hidden-sm">
+				<img class="mob-logo" src="{{ url('img/logo/logo2.png')}}" alt="" />
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

@@ -85,9 +85,15 @@
     margin-top: -100px;
 }	
 	
+h2.title22 {
+    font-size: 30px;
+}
 	
-	
-	
+.main-wraper {
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 5px #ccc;
+}
 	
     
     
@@ -874,6 +880,22 @@ h2 {
     width: 300px;
     text-align: center;
     margin: 0 auto;
+}
+img.mob-logo {
+    position: absolute !important;
+    height: 55px !important;
+    top: 5px !important;
+    left: 15px !important;
+}
+.slider-content
+{
+	top:0px !important;
+}
+.slider-content {
+    margin-top: 45px !important;
+}
+.slider-images {
+    height: 260px !important;
 }
 }
  
