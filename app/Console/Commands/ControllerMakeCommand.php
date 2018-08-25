@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Hash;
-use DB;
-use Input;
-use Request;
-use app\admin;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
-
 
 class ControllerMakeCommand extends GeneratorCommand
 {
@@ -45,12 +40,12 @@ class ControllerMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('resource')) {
-            return __DIR__.'/stubs/controller.stub';
+            return __DIR__ . '/stubs/controller.stub';
         }
 
-        return __DIR__.'/stubs/controller.plain.stub';
+        return __DIR__ . '/stubs/controller.plain.stub';
     }
-    //use Modules\Admin\Http\Controllers; 
+    //use Modules\Admin\Http\Controllers;
 
     /**
      * Get the default namespace for the class.
@@ -60,8 +55,7 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-       
-        return $rootNamespace.'\modules\Admin\src\Http\Controllers';
+        return $rootNamespace . '\modules\Admin\src\Http\Controllers';
     }
 
     /**

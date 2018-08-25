@@ -1,201 +1,189 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Admin;
-use Validator;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Auth;
-use Illuminate\Http\Request; 
-use App\Http\Requests;
-use Input;
-use Redirect; 
-use Response;	
-use App\Http\Requests\UserRequest;
-use Hash;
-use URL;
-use App\User;
 use App\Helpers\Helper as Helper;
-use Crypt; 
-use Illuminate\Http\Dispatcher; 
+use App\Http\Requests\UserRequest;
+use App\User;
+use Auth;
+use Crypt;
+use Hash;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
+use Input;
+use Redirect;
+use Response;
+use URL;
+use Validator;
 use View;
-use Cookie;
-use Closure; 
 
 class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     protected $redirectTo = '/admin';
-	protected $guard = 'admin';
-	
-	public function showLoginForm()
-	{
-		return view('admin.auth.login');
-	}
-	
-	public function showRegistrationForm()
-	{
-		return view('admin.auth.register');
-	}
+    protected $guard      = 'admin';
 
-	public function forgetPassword()
-	{
-		return view('auth.passwords.email');
-	}
-	
-	public function resetPassword(UserRequest $request)
-	{ 
-		 
-		$encryptedValue = ($request->get('key'))?$request->get('key'):''; 
-		$method_name = $request->method();
-		$token = $request->get('token');
-		$email = ($request->get('email'))?$request->get('email'):'';
+    public function showLoginForm()
+    {
+        return view('admin.auth.login');
+    }
 
-		if($method_name=='GET')
-		{ 	 
-			try {
-			    $email = Crypt::decrypt($encryptedValue);
-			    if (Hash::check($email, $token)) {
-			    	return view('admin.auth.passwords.reset',compact('token','email'));	
-			    }else{
-			    	return redirect()
-				 		->back()
-				 		->withInput()  
-				 		->withErrors(['message'=>'Invalid reset password link!']);
-			    } 
-			    
-			} catch (DecryptException $e) {
-				 	
-				return view('admin.auth.passwords.reset',compact('token','email')) 
-				 			->withErrors(['message'=>'Invalid reset password link!']); 		
-			}
-			
-		}else
-		{ 	  
-			 
-			if (Hash::check($email, $token)) {
-				 
-				$password =  Hash::make($request->get('password'));
-		        $user = User::where('email',$request->get('email'))->update(['password'=>$password]);
-		        echo "Password reset successfully.";
-			}else{
-				 
-				 //return Redirect::to(URL::previous())->with('message','Invalid token');
-				 return redirect()
-				 		->back()
-				 		->withInput()  
-				 		->withErrors(['message'=>'Invalid reset password link!']);
-			}
-			
-		}
-		
-	}
-	
-	public function logout(){
-		Auth::guard('admin')->logout();
-		return redirect('/admin/login');
-	}
-	public function login(Request $request)
-	{
-		$credentials = array('email' => Input::get('email'), 'password' => Input::get('password')); 
+    public function showRegistrationForm()
+    {
+        return view('admin.auth.register');
+    }
+
+    public function forgetPassword()
+    {
+        return view('auth.passwords.email');
+    }
+
+    public function resetPassword(UserRequest $request)
+    {
+        $encryptedValue = ($request->get('key'))?$request->get('key'):'';
+        $method_name    = $request->method();
+        $token          = $request->get('token');
+        $email          = ($request->get('email'))?$request->get('email'):'';
+
+        if ($method_name == 'GET') {
+            try {
+                $email = Crypt::decrypt($encryptedValue);
+
+                if (Hash::check($email, $token)) {
+                    return view('admin.auth.passwords.reset', compact('token', 'email'));
+                } else {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->withErrors(['message' => 'Invalid reset password link!']);
+                }
+            } catch (DecryptException $e) {
+                return view('admin.auth.passwords.reset', compact('token', 'email'))
+                    ->withErrors(['message' => 'Invalid reset password link!']);
+            }
+        } else {
+            if (Hash::check($email, $token)) {
+                $password =  Hash::make($request->get('password'));
+                $user     = User::where('email', $request->get('email'))->update(['password' => $password]);
+                echo 'Password reset successfully.';
+            } else {
+
+                 //return Redirect::to(URL::previous())->with('message','Invalid token');
+                return redirect()
+                     ->back()
+                     ->withInput()
+                     ->withErrors(['message' => 'Invalid reset password link!']);
+            }
+        }
+    }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+
+        return redirect('/admin/login');
+    }
+    public function login(Request $request)
+    {
+        $credentials = ['email' => Input::get('email'), 'password' => Input::get('password')];
+
         if (Auth::attempt($credentials, true)) {
             return Redirect::to('testAdmin');
         }
-		//dd(Auth::check());
-	}
+        //dd(Auth::check());
+    }
 
-	public function sendResetPasswordLink(Request $request)
-	{
-		$email = $request->get('email');
+    public function sendResetPasswordLink(Request $request)
+    {
+        $email = $request->get('email');
         //Server side valiation
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email'
-        ]); 
-        $user =   User::where('email',$email)->get(); 
-        if($user->count()==0){
-            return  'Email not found <a href="/password/reset">Go Back</a>' ; 
+            'email' => 'required|email',
+        ]);
+        $user =   User::where('email', $email)->get();
+
+        if ($user->count() == 0) {
+            return  'Email not found <a href="/password/reset">Go Back</a>' ;
         }
         $user_data = User::find($user[0]->userID);
-         
-      // Send Mail after forget password
+
+        // Send Mail after forget password
         $temp_password = Hash::make($email);
-        $email_content = array(
-                        'receipent_email'=> $request->get('email'),
-                        'subject'=>'Forgot Password',
-                        'name' => $user[0]->first_name,
-                        'temp_password' => $temp_password
-                    );
-        $helper = new Helper;
+        $email_content = [
+            'receipent_email' => $request->get('email'),
+            'subject'         => 'Forgot Password',
+            'name'            => $user[0]->first_name,
+            'temp_password'   => $temp_password,
+        ];
+        $helper         = new Helper;
         $email_response = $helper->sendMail(
                                 $email_content,
                                 'forgot_password_link'
-                            ); 
+                            );
 
-        echo "Reset password link has sent to your registered email.";
-	}
+        echo 'Reset password link has sent to your registered email.';
+    }
 
-	public function forgetPasswordLink(Request $request)
-    {  
-     
+    public function forgetPasswordLink(Request $request)
+    {
         $email = $request->input('email');
         //Server side valiation
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email'
+            'email' => 'required|email',
         ]);
 
         $helper = new Helper;
-       
-        if ($validator->fails()) {
-            
 
-        return redirect()
-				 		->back()
-				 		->withInput()  
-				 		->withErrors(['message'=>'Email id is required!']);
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withInput()
+            ->withErrors(['message' => 'Email id is required!']);
         }
 
-        $user =   User::where('email',$email)->first();
+        $user =   User::where('email', $email)->first();
 
-        if($user==null){
-            return Response::json(array(
-                'status' => 0,
-                'code' => 500,
-                'message' => "Oh no! The address you provided isn't in our system",
-                'data'  =>  $request->all()
-                )
+        if ($user == null) {
+            return Response::json(
+                [
+                    'status'  => 0,
+                    'code'    => 500,
+                    'message' => 'Oh no! The address you provided isn\'t in our system',
+                    'data'    => $request->all(),
+                ]
             );
         }
-        $user_data = User::find($user->id);
+        $user_data     = User::find($user->id);
         $temp_password = Hash::make($email);
-        
-      // Send Mail after forget password
-        $temp_password =  Hash::make($email);
-       
-        $email_content = array(
-                        'receipent_email'   => $request->input('email'),
-                        'subject'           => 'Your Account Password',
-                        'name'              => $user->first_name,
-                        'temp_password'     => $temp_password,
-                        'encrypt_key'       => Crypt::encrypt($email),
-                        'greeting'          => 'Newborn'
 
-                    );
-        $helper = new Helper;
+        // Send Mail after forget password
+        $temp_password =  Hash::make($email);
+
+        $email_content = [
+            'receipent_email'   => $request->input('email'),
+            'subject'           => 'Your Account Password',
+            'name'              => $user->first_name,
+            'temp_password'     => $temp_password,
+            'encrypt_key'       => Crypt::encrypt($email),
+            'greeting'          => 'Newborn',
+
+        ];
+        $helper         = new Helper;
         $email_response = $helper->sendMail(
                                 $email_content,
                                 'forgot_password_link'
-                            ); 
-       
-     
+                            );
+
+
 
         return redirect()
-				 		->back()
-				 		->withInput()  
-				 		->withErrors(['message'=>'Invalid reset password link!']);
-
+            ->back()
+            ->withInput()
+            ->withErrors(['message' => 'Invalid reset password link!']);
     }
 }

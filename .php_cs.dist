@@ -8,9 +8,9 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in([
-        __DIR__ . '/bin',
-        __DIR__ . '/docroot',
-        __DIR__ . '/src',
+        __DIR__ . '/app',
+        __DIR__ . '/modules',
+        __DIR__ . '/resources',
         __DIR__ . '/tests',
     ]);
 

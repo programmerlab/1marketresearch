@@ -1,13 +1,14 @@
-<?php 
+<?php
+
+declare(strict_types=1);
+
 namespace App;
 
-use Auth;
-use Session;
 use Eloquent;
 
 class Role extends Eloquent
 {
-	/**
+    /**
      * The database table used by the model.
      *
      * @var string
@@ -18,7 +19,7 @@ class Role extends Eloquent
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string

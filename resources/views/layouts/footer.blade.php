@@ -158,12 +158,11 @@
         <script src="{{ asset('js/plugins.js')}}"></script>
         <!-- main js -->
         <script src="{{ asset('js/main.js')}}"></script>
-        
+        <script src="{{ URL::asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('assets/js/bootbox.js')}}"></script> 
         <script src="{{ asset('assets/js/jquery.validate.min.js')}}"></script> 
         <script src="{{ asset('assets/js/common.js')}}"></script> 
 
-        <script src="{{ URL::asset('assets/js/font-awesome.js')}}"></script> 
         <script type="text/javascript">
           var  url = "{{ url('/') }}";
         </script>

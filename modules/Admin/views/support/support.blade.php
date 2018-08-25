@@ -81,12 +81,12 @@
                                         </thead>
                                         <tbody>
                                         @foreach($results as $key => $result)
-                                            <?php 
+                                            <?php
                                                 $dept = isset($result->supportType->resolution_department)?$result->supportType->resolution_department:null;
 
-                                                if($dept==null){
+                                                if ($dept == null) {
                                                     continue;
-                                                } 
+                                                }
                                             ?>
 
                                             <tr>

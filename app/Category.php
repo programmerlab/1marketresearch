@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 use Nestable\NestableTrait;
 
-class Category extends Eloquent {
-
+class Category extends Eloquent
+{
     use NestableTrait;
 
     protected $parent = 'parent_id';
 
-     /**
+    /**
      * The database table used by the model.
      *
      * @var string
@@ -23,12 +25,10 @@ class Category extends Eloquent {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
      */
     protected $primaryKey = 'id';
-
-
 }

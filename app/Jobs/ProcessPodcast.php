@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
-use App\Jobs\Job;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ProcessPodcast extends Job implements ShouldQueue
 {
-   // use \Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    // use \Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $podcast;
 
@@ -23,7 +24,7 @@ class ProcessPodcast extends Job implements ShouldQueue
      */
     public function __construct()
     {
-       // $this->podcast = $podcast;
+        // $this->podcast = $podcast;
     }
 
     /**
@@ -33,13 +34,11 @@ class ProcessPodcast extends Job implements ShouldQueue
      */
     public function handle(Mailer $mailer)
     {
-        
-        $mailer->send('emails.welcome', ['data'=>'data'], function ($message) {
+        $mailer->send('emails.welcome', ['data' => 'data'], function ($message) {
 
           //  $message->from('kroy.iips@gmail.com', 'Christian Nwmaba');
 
             $message->to('kroy@mailinator.com');
-
         });
     }
 }

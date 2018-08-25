@@ -257,7 +257,7 @@
                                                                     </div>
 
                                                                         <?php
-                                                                            $number = (float)$cart_detail->price;    ?>
+                                                                            $number = (float) $cart_detail->price;    ?>
 
                                                                     <hr>
  

@@ -38,7 +38,7 @@
         <div class="col-md-6"> 
             <div class="portlet-body">
                 <select class="form-control" name="category" >   
-                    <option>Select Category</option>
+                    <option value="">Select Category</option>
                     @foreach($categories as $key=>$value)
                     <option value="{{$value->id}}" @if(isset($category_id) && (in_array($value->id,$category_id))) {{ 'selected="selected"'}}  @endif
 

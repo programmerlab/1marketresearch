@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,16 +11,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PaymentHistory extends Model
 {
-  protected $table = 'payment_history';
+    protected $table = 'payment_history';
     //
-      protected $guarded = ['created_at' , 'updated_at' , 'id'];
+    protected $guarded = ['created_at', 'updated_at', 'id'];
 
-    public function userDetails() {
+    public function userDetails()
+    {
         return $this->belongsTo('App\Models\Tasks', 'user_id', 'id');
     }
 
-    public function taskDetails() {
+    public function taskDetails()
+    {
         return $this->belongsTo('App\Models\Tasks', 'taskId', 'id')->with('taskPostedUser', 'seekerUserDetail');
     }
-
 }

@@ -10,7 +10,7 @@
   <input type="hidden" name="vcode" value="<?php echo $vcode?>">
   <input type="hidden" name="returnurl" value="<?php echo $returnurl; ?>" />
 
-  <input type="hidden" name="bill_desc" value="<?php echo implode("\n",$prod_desc);?>" />
+  <input type="hidden" name="bill_desc" value="<?php echo implode("\n", $prod_desc);?>" />
   <div class="buttons">
     <div class="pull-right">
       <input type="submit" value="<?php echo $button_confirm; ?>" class="btn btn-primary" />

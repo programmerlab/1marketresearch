@@ -146,17 +146,17 @@
 			     <table class="table table-striped table-hover table-bordered" id="">
 	                <thead>
 	                @foreach($userDetail as $key => $result)
-	                	<?php if( $key == "id" || $key=="created_at" || $key == "updated_at")
-	                	{
-	                		//continue;	
-	                	}else{
-	                	?>
+	                	<?php if ($key == 'id' || $key == 'created_at' || $key == 'updated_at') {
+    //continue;
+} else {
+    ?>
 	                    <tr>
 	                    	<th> {{ ucfirst($key) }} </th>
 	                        <th> {{ !empty($result)?$result:'NA' }} </th>
 	                         
 	                    </tr>
-	                    <?php } ?>
+	                    <?php
+} ?>
                     @endforeach
 	                </thead>
 	                <tbody>

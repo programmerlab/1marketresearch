@@ -1,16 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\Admin\Models\Group;
-use Modules\Admin\Models\Position;
-use Auth;
 
-class User extends Authenticatable {
-
-   
+class User extends Authenticatable
+{
     /**
      * The database table used by the model.
      *
@@ -22,26 +19,26 @@ class User extends Authenticatable {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
      */
     protected $primaryKey = 'id';
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-                            'name',
-                            'phone',
-                            'mobile',
-                            'email', 
-                            'role_type',
-                            'remember_token'
-                        ];  // All field of user table here    
+        'name',
+        'phone',
+        'mobile',
+        'email',
+        'role_type',
+        'remember_token',
+    ];  // All field of user table here
 
 
     /**
@@ -50,11 +47,8 @@ class User extends Authenticatable {
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token',
     ];
 
-    protected $guarded = ['created_at' , 'updated_at' , 'id' ];
-
-    
-
+    protected $guarded = ['created_at', 'updated_at', 'id'];
 }

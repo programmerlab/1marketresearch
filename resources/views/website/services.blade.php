@@ -31,7 +31,7 @@
                     <div class="report-left-sec col-sm-12">
                          Consulting Services :
 
-Our consulting Market Research services are geared toward empowering our clients to clearly visualise the future of the market where their interests lie and power our own growth in the process.
+                            Our consulting Market Research services are geared toward empowering our clients to clearly visualise the future of the market where their interests lie and power our own growth in the process.
                     </div>
                     
                     
@@ -41,4 +41,5 @@ Our consulting Market Research services are geared toward empowering our clients
                 <!--End row-->
             </div>
         </div>
+        </
         @stop

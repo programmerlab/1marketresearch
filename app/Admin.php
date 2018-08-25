@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-   
     /**
      * The database table used by the model.
      *
@@ -18,19 +19,19 @@ class Admin extends Authenticatable
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
      */
     protected $primaryKey = 'id';
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name','email','password'];  // All field of user table here    
+    protected $fillable = ['name','email','password'];  // All field of user table here
 
 
     /**
@@ -39,7 +40,6 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password',
     ];
- 
 }

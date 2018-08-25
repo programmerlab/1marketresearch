@@ -125,8 +125,8 @@
                                             <span class="help-block">{{ $errors->first('description', ':message') }}</span>
                                         </div>
                                     </div>
-                                    <?php 
-                                        $status = isset($_REQUEST['status'])?$_REQUEST['status']:'inprogress'; 
+                                    <?php
+                                        $status = isset($_REQUEST['status'])?$_REQUEST['status']:'inprogress';
                                     ?>
                                     <input type="hidden" name="status" value="{{$status}}">    
                                         

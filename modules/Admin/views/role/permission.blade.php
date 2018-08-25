@@ -75,10 +75,10 @@
                                              <tr>
                                                  <td>{{$route}}</td>
                                                @foreach($roles as $role )
-                                               <?php $permission =json_decode($role->permission); 
-                                               $canRead = isset($permission->{$route}->read)?true:false;
-                                               $canWrite = isset($permission->{$route}->write)?true:false;
-                                               $canDelete = isset($permission->{$route}->delete)?true:false;
+                                               <?php $permission = json_decode($role->permission);
+                                               $canRead          = isset($permission->{$route}->read)?true:false;
+                                               $canWrite         = isset($permission->{$route}->write)?true:false;
+                                               $canDelete        = isset($permission->{$route}->delete)?true:false;
                                                ?>
                                                <td class="text-center"> 
                                                    <input type="checkbox" name="permission[{{$role->id}}][{{$route}}][read]" value="1"   @if($canRead)  checked="checked" @endif >

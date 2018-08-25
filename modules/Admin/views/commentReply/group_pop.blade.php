@@ -24,11 +24,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $i=1; ?>
+                                        <?php $i = 1; ?>
                                         @foreach($contacts as $key => $result)
-                                        <?php // $chk = $helper->contactName($result->parent_id); 
+                                        <?php // $chk = $helper->contactName($result->parent_id);
                                            // echo $result->contact->id. '==' . $result->parent_id;
-                                       
+
                                           ?>
                                           @if(isset($result->contact->firstName))
                                             <tr>

@@ -38,6 +38,9 @@
         <!-- modernizr css -->
         
         {!! $google_anatycs->field_value or '' !!}
+
+        
+        <script src="{{ URL::asset('assets/js/font-awesome.js')}}"></script> 
         
     </head>
         <body onload="Captcha();">

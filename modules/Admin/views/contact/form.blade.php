@@ -30,23 +30,16 @@
 
 
 
-    <div class="form-group {{ $errors->first('firstName', ' has-error') }}">
-        <label class="control-label col-md-3">First Name <span class="required"> * </span></label>
+    <div class="form-group {{ $errors->first('name', ' has-error') }}">
+        <label class="control-label col-md-3">Name <span class="required"> * </span></label>
         <div class="col-md-4"> 
-            {!! Form::text('firstName',null, ['class' => 'form-control','data-required'=>1])  !!} 
+            {!! Form::text('name',null, ['class' => 'form-control','data-required'=>1])  !!} 
             
-            <span class="help-block">{{ $errors->first('firstName', ':message') }}</span>
+            <span class="help-block">{{ $errors->first('name', ':message') }}</span>
         </div>
     </div> 
 
-    <div class="form-group {{ $errors->first('lastName', ' has-error') }}">
-        <label class="control-label col-md-3">Last Name </label>
-        <div class="col-md-4"> 
-            {!! Form::text('lastName',null, ['class' => 'form-control','data-required'=>1])  !!} 
-            
-            <span class="help-block">{{ $errors->first('lastName', ':message') }}</span>
-        </div>
-    </div> 
+    
 
      <div class="form-group {{ $errors->first('job_title', ' has-error') }}">
         <label class="control-label col-md-3">Job Title </label>

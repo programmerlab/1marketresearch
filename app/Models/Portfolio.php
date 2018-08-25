@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Auth;
 
-class Portfolio extends Authenticatable {
-
-   
+class Portfolio extends Authenticatable
+{
     /**
      * The database table used by the model.
      *
@@ -20,7 +19,7 @@ class Portfolio extends Authenticatable {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
@@ -34,19 +33,15 @@ class Portfolio extends Authenticatable {
      *
      * @var array
      */
-    protected $guarded = ['created_at' , 'updated_at' , 'id' ];
+    protected $guarded = ['created_at', 'updated_at', 'id'];
 
     public function user()
     {
-        return $this->belongsTo('App\User','userId','id');
+        return $this->belongsTo('App\User', 'userId', 'id');
     }
 
     public function task()
     {
-        return $this->hasMany('App\Models\Tasks','id','taskId');
+        return $this->hasMany('App\Models\Tasks', 'id', 'taskId');
     }
-
-    
-
-    
 }

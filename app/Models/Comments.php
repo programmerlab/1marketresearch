@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent; 
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Comments extends Eloquent {
-
-   
+class Comments extends Eloquent
+{
     /**
      * The database table used by the model.
      *
@@ -18,7 +19,7 @@ class Comments extends Eloquent {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
@@ -33,26 +34,24 @@ class Comments extends Eloquent {
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token',
     ];
 
-    protected $guarded = ['created_at' , 'updated_at' , 'id' ];
+    protected $guarded = ['created_at', 'updated_at', 'id'];
 
     // user details
-    public  function userDetail()
+    public function userDetail()
     {
-        return $this->hasOne('App\User','id','userId') ;
+        return $this->hasOne('App\User', 'id', 'userId') ;
     }
 
-    public  function commentReply()
+    public function commentReply()
     {
-        return $this->hasMany('App\Models\Comments','commentId')->with('userDetail') ;
+        return $this->hasMany('App\Models\Comments', 'commentId')->with('userDetail') ;
     }
 
-    public  function taskDetail()
+    public function taskDetail()
     {
-        return $this->hasOne('App\Models\Tasks','id','taskId');
+        return $this->hasOne('App\Models\Tasks', 'id', 'taskId');
     }
-
-
 }

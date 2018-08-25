@@ -1,53 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request; 
- 
+use Illuminate\Foundation\Http\FormRequest;
+  
 
-class SettingRequest  extends Request {
 
+class SettingRequest extends FormRequest
+{
     /**
      * The product validation rules.
      *
      * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
 
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'website_title'     => 'required' ,  
-                            'website_email'     => 'required|email', 
+                            'website_title'     => 'required',
+                            'website_email'     => 'required|email',
                             'website_url'       => 'required|url',
-                            'contact_number'    =>  "required|min:10",
-                            'company_address'   =>  'required',
+                            'contact_number'    => 'required|min:10',
+                            'company_address'   => 'required',
                             'banner_image1'     => 'required|mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
                             'banner_image2'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
-                            'banner_image3'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350'
+                            'banner_image3'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
-
-                    if ( $setting = $this->setting ) {
-
+ 
                         return [
 
-                            'website_title'     => 'required' ,  
-                            'website_email'     => 'required|email', 
+                            'website_title'     => 'required',
+                            'website_email'     => 'required|email',
                             'website_url'       => 'required|',
                             'contact_number'    => 'required|min:0',
                             'company_address'   => 'required',
                             'banner_image1'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
                             'banner_image2'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
-                            'banner_image3'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350'
-                            ];
-                    }
+                            'banner_image3'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
+                        ];
+                    
                 }
                 default:break;
             }
@@ -59,8 +61,8 @@ class SettingRequest  extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

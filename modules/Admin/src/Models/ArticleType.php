@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent; 
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
- 
-class ArticleType extends Eloquent {
- 
+class ArticleType extends Eloquent
+{
     /*
      * The database table used by the model.
      *
@@ -18,19 +19,19 @@ class ArticleType extends Eloquent {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
      */
     protected $primaryKey = 'id';
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-   protected $fillable = ['article_type','resolution_department'];  // All field of user table here    
+    protected $fillable = ['article_type','resolution_department'];  // All field of user table here
 
 
     /**
@@ -38,19 +39,13 @@ class ArticleType extends Eloquent {
      *
      * @var array
      */
-
     public function article()
-    {  
-        return $this->hasMany('Modules\Admin\Models\Article','article_type');
+    {
+        return $this->hasMany('Modules\Admin\Models\Article', 'article_type');
     }
-    
+
     public function relatedArticle()
-    {  
-        return $this->hasMany('Modules\Admin\Models\Article','article_type');
+    {
+        return $this->hasMany('Modules\Admin\Models\Article', 'article_type');
     }
-    
-    
-    
-    
-  
 }

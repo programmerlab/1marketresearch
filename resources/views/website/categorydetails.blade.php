@@ -6,10 +6,15 @@
   @section('content')  
     @include('partials.search')
         <!-- End Slider Area -->
-    <nav class="woocommerce-breadcrumb"><a href="{{url('/')}}">Home</a> &gt;&gt; {{$categoryName or $title }}</nav>
+    <nav class="woocommerce-breadcrumb"><a href="{{url('/')}}">Home</a> &gt;&gt; {{$categoryName or $title }}
+      @if(empty($categoryName) || empty($title))
+        Search Research Reports
+      @endif
+
+    </nav>
     <div class="blog-area area-padding">
       <div class="container">
-                
+              
         <div class="row">
           <div class="report-left-sec col-sm-8">
             <div class="press-release">
@@ -40,8 +45,8 @@
                 </div>
                 <div class="blog-text"> 
                <p> 
-                  <?php 
-                   $str =  (implode(' ', array_slice(explode(' ',  strip_tags($result->description)), 0, 43)))
+                  <?php
+                   $str =  (implode(' ', array_slice(explode(' ', strip_tags($result->description)), 0, 43)))
                   ?>
                   {{(str_replace("Summary",'', trim($str))) }}
                   @if(strlen($str)>40)<a href="{{url($result->url) }}">[...]</a>
@@ -54,14 +59,16 @@
                 </div>
               </div>
               @endforeach
-        
-              <ul class="pagination">
-                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
-             </ul> 
-      
+         
               <!-- End single blog -->
             </div>
-            <br><br>
+
+            <br>
+            <ul class="pagination">
+                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
+             </ul> 
+            
+            <br>
           </div>
             <div class="report-right-sec col-sm-4">
                 <div class="release-background"> 

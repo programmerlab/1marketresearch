@@ -1,12 +1,15 @@
-<?php 
+<?php
+
+declare(strict_types=1);
+
 namespace Modules\Admin;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
 
-class AdminServiceProvider extends ServiceProvider {
-
-      /**
+class AdminServiceProvider extends ServiceProvider
+{
+    /**
      * Inventory version.
      *
      * @var string
@@ -45,17 +48,16 @@ class AdminServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot()
-    {   
-       
+    {
+
         /*
          * If the package method exists, we're using Laravel 4, if not, we're on 5
          */
-        $this->loadViewsFrom(realpath(__DIR__.'/../views'), 'packages');
+        $this->loadViewsFrom(realpath(__DIR__ . '/../views'), 'packages');
 
-       // $modules = config("module.modules");
+        // $modules = config("module.modules");
         if (method_exists($this, 'package')) {
-          
-            $this->package('modules/admin', 'modules/admin', __DIR__.'/..');
+            $this->package('modules/admin', 'modules/admin', __DIR__ . '/..');
         } else {
             /*
              * Set the proper configuration separator since
@@ -72,22 +74,22 @@ class AdminServiceProvider extends ServiceProvider {
             /*
              * Load the inventory translations from the inventory lang folder
              */
-            $this->loadTranslationsFrom(__DIR__.'/lang', 'modules');
+            $this->loadTranslationsFrom(__DIR__ . '/lang', 'modules');
 
             /*
              * Assign the configuration as publishable, and tag it as 'config'
              */
             $this->publishes([
-                __DIR__.'/config/config.php' => config_path('modules.php'),
+                __DIR__ . '/config/config.php' => config_path('modules.php'),
             ], 'config');
 
             /*
              * Assign the migrations as publishable, and tag it as 'migrations'
              */
             $this->publishes([
-                __DIR__.'/migrations/' => base_path(__DIR__.'/database/migrations'),
+                __DIR__ . '/migrations/' => base_path(__DIR__ . '/database/migrations'),
             ], 'migrations');
-        } 
+        }
     }
 
     /**
@@ -98,10 +100,8 @@ class AdminServiceProvider extends ServiceProvider {
      */
     public function setupRoutes(Router $router)
     {
-        
-        $router->group(['namespace' => 'Modules\Admin\Http\Controllers'], function($router)
-        {   
-            require __DIR__.'/Http/routes.php';
+        $router->group(['namespace' => 'Modules\Admin\Http\Controllers'], function ($router) {
+            require __DIR__ . '/Http/routes.php';
         });
     }
 
@@ -117,10 +117,9 @@ class AdminServiceProvider extends ServiceProvider {
     }*/
     private function registerModules()
     {
-        $this->app->bind('modules',function($app){
+        $this->app->bind('modules', function ($app) {
             return new Modules($app);
         });
-         
     }
 
     /**
@@ -128,8 +127,7 @@ class AdminServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-      
-        include __DIR__.'/Http/routes.php'; 
+        include __DIR__ . '/Http/routes.php';
         /*
          * Bind the install command
          */
@@ -137,7 +135,7 @@ class AdminServiceProvider extends ServiceProvider {
             return new Commands\InstallCommand();
         });
 
-        
+
         /*
          * Bind the check-schema command
          */
@@ -171,5 +169,4 @@ class AdminServiceProvider extends ServiceProvider {
     {
         return ['modules'];
     }
-
 }

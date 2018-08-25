@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
 use DB;
+use Illuminate\Console\Command;
 
 class UpdateStatus extends Command
 {
@@ -31,12 +32,11 @@ class UpdateStatus extends Command
     {
         $d = date('Y-m-d');
         DB::table('post_tasks')
-            ->where('dueDate', '<',date('Y-m-d'))
-            ->where(DB::raw("STR_TO_DATE(dueDate,'%Y-%m-%d')"),'<',$d )
-            ->where('status','open')
+            ->where('dueDate', '<', date('Y-m-d'))
+            ->where(DB::raw('STR_TO_DATE(dueDate,\'%Y-%m-%d\')'), '<', $d)
+            ->where('status', 'open')
             ->update(['status' => 'expired']);
 
-        $this->info('status updated successfully '.date('m-d-Y'));
-
+        $this->info('status updated successfully ' . date('m-d-Y'));
     }
 }

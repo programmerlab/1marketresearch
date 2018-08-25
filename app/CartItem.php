@@ -1,13 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class CartItem extends Model
 {
-    
-
-	/**
+    /**
      * The database table used by the model.
      *
      * @var string
@@ -18,7 +19,7 @@ class CartItem extends Model
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string

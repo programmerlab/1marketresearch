@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/page-sitemap.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/product-sitemap.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/product-sitemap1.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/product-sitemap2.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/product-sitemap3.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/product-sitemap4.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://localhost/1marketresearch2/sitemap/product-sitemap5.xml</loc>
+    
+    
+        <lastmod>2018-08-25T20:50:09+05:30</lastmod>
+    
+        <changefreq>daily</changefreq>
+    
+        <priority>0.8</priority>
+    </url>
+</urlset>

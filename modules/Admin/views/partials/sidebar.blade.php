@@ -2,10 +2,9 @@
 <!-- BEGIN CONTAINER -->
 <div class="page-container"> 
     
-    <?php 
-        if(isset($hide) && is_array($hide))
-        {  
-              extract($hide); 
+    <?php
+        if (isset($hide) && is_array($hide)) {
+            extract($hide);
         }
     ?>
    

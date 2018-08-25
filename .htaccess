@@ -13,3 +13,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+RewriteEngine On     
+RewriteCond %{HTTP_HOST} ^1marketresearch\.com$ [NC] 
+RewriteRule ^(.*)$ https://www.1marketresearch.com/$1 [R=301,L] 

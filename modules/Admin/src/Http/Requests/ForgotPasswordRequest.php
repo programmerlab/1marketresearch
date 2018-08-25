@@ -1,37 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request;
-use Input;
+use Illuminate\Foundation\Http\FormRequest;
+  
 
-class ForgotPasswordRequest extends Request {
 
+class ForgotPasswordRequest extends FormRequest
+{
     /**
      * The metric validation rules.
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         //if ( $metrics = $this->metrics ) {
-            switch ( $this->method() ) {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'email'   => "required|email" ,
+                            'email'   => 'required|email',
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
-                    if ( $metrics = $this->metrics ) {
-
+                   
                         return [
-                            'email'   => "required|email" ,
+                            'email'   => 'required|email',
                         ];
-                    }
+                   
                 }
                 default:break;
             }
@@ -43,8 +46,8 @@ class ForgotPasswordRequest extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

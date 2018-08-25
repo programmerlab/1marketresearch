@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Hash;
 use DB;
-use Input;
-use Request;
-use app\admin;
+use Hash;
+use Illuminate\Console\Command;
+
 class AdminCommand extends Command
 {
     /**
@@ -40,12 +40,12 @@ class AdminCommand extends Command
      * @return mixed
      */
     public function handle()
-    { 
-        $input['name'] = $this->ask('What is your name?');
-        $input['email'] = $this->ask('What is your email?');
+    {
+        $input['name']     = $this->ask('What is your name?');
+        $input['email']    = $this->ask('What is your email?');
         $input['password'] = $this->secret('What is the password?');
-        $input['password'] = Hash::make($input['password']); 
+        $input['password'] = Hash::make($input['password']);
         DB::table('admin')->insert($input);
-        $this->info('New Admin Created Successfully.'); 
+        $this->info('New Admin Created Successfully.');
     }
 }

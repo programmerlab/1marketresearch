@@ -1,39 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request;
-use Input;
+use Illuminate\Foundation\Http\FormRequest;
+   
 
-class ArticleTypeRequest  extends Request {
-
+class ArticleTypeRequest extends FormRequest
+{
     /**
      * The metric validation rules.
      *
-     * @return array    
+     * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'article_type' => 'required|unique:article_type,article_type', 
-                            'resolution_department'=> 'required'
+                            'article_type'          => 'required|unique:article_type,article_type',
+                            'resolution_department' => 'required',
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
-                    if ( $result = $this->result) {
-
+               
                         return [
-                            'article_type'   => "required" , 
-                            'resolution_department'=> 'required'
-                            
+                            'article_type'          => 'required',
+                            'resolution_department' => 'required',
+
                         ];
-                    }
+                    
                 }
                 default:break;
             }
@@ -45,8 +47,8 @@ class ArticleTypeRequest  extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

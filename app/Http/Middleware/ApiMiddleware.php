@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
-use Closure;
-use App\Helpers\Helper;
 use Auth;
- 
+use Closure;
+
 class ApiMiddleware
 {
     /**
@@ -17,9 +18,9 @@ class ApiMiddleware
      */
     public function handle($request, Closure $next)
     {
-        
+
        // dd( Auth::guard('api')->user());
-         
+
         //dd(str_random());
         return $next($request);
     }

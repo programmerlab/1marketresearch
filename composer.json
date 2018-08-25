@@ -5,10 +5,12 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "php": ">=7.0.0",
+        "fideloper/proxy": "~3.3",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "v5.5.4",
         "tymon/jwt-auth": "^0.5.9",
-        "laravelcollective/html": "^5.2", 
         "laracasts/utilities": "~2.0", 
         "phpmailer/phpmailer": "^5.2",
          "maatwebsite/excel": "^2.1",
@@ -18,17 +20,22 @@
         "facebook/graph-sdk": "^5.6",
         "twilio/sdk": "^5.17",
         "barryvdh/laravel-dompdf": "^0.8.2",
-        "gloudemans/shoppingcart": "^2.3"
+        "gloudemans/shoppingcart": "^2.3",
+        "roumen/sitemap": "2.6.*",
+        "illuminate/support": "5.5.*",
+        "spatie/laravel-sitemap": "^3.0",
+        "friendsofphp/php-cs-fixer": "^2.11"
 
     },
     "require-dev": {
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
+        "fzaninotto/faker": "~1.4", 
         "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*",
+        "symfony/dom-crawler": "^4.0",
         "xethron/migrations-generator": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.11"
+         "filp/whoops": "~2.0", 
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.0",
+        "symfony/thanks": "^1.0"
 
     },
     "autoload": {

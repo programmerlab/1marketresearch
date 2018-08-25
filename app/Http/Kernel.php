@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -26,14 +28,14 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-           \App\Http\Middleware\EncryptCookies::class,
-             \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         ],
 
         'api' => [
             'throttle:60,1',
-            'restApiAuth:api'
+            'restApiAuth:api',
         ],
     ];
 
@@ -45,15 +47,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
-        'api'   =>  \App\Http\Middleware\ApiMiddleware::class,
-        'restApiAuth'   =>  \App\Http\Middleware\ApiMiddleware::class,
-        'jwt-auth' => \App\Http\Middleware\authJWT::class,
+        'auth'           => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'     => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'can'            => \Illuminate\Foundation\Http\Middleware\Authorize::class,
+        'guest'          => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'       => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin'          => \App\Http\Middleware\RedirectIfNotAdmin::class,
+        'api'            => \App\Http\Middleware\ApiMiddleware::class,
+        'restApiAuth'    => \App\Http\Middleware\ApiMiddleware::class,
+        'jwt-auth'       => \App\Http\Middleware\authJWT::class,
         'userpermission' => \App\Http\Middleware\RolePermissionMiddleware::class,
 
     ];

@@ -138,8 +138,8 @@
                                             <span class="help-block">{{ $errors->first('support_comments', ':message') }}</span>
                                         </div>
                                     </div>
-                                    <?php 
-                                        $status = isset($_REQUEST['status'])?$_REQUEST['status']:'inprogress'; 
+                                    <?php
+                                        $status = isset($_REQUEST['status'])?$_REQUEST['status']:'inprogress';
                                     ?> 
                                         
                                     </div>

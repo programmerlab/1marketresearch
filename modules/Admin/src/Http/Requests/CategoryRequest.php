@@ -1,38 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request;
-use Input;
+use Illuminate\Foundation\Http\FormRequest;
+  
 
-class CategoryRequest  extends Request {
-
+class CategoryRequest extends FormRequest
+{
     /**
      * The metric validation rules.
      *
-     * @return array    
+     * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'category_group_name' => 'required|unique:categories,category_group_name', 
-                             'category_group_image'             => 'required|mimes:jpeg,bmp,png,gif'
+                            'category_group_name'              => 'required|unique:categories,category_group_name',
+                            'category_group_image'             => 'required|mimes:jpeg,bmp,png,gif',
                         ];
                     }
                 case 'PUT':
-                case 'PATCH': {
-                    if ( $category = $this->category) {
-
+                case 'PATCH': { 
                         return [
-                            'category_group_name'   => "required" , 
-                            
+                            'category_group_name'   => 'required',
+
                         ];
-                    }
+                     
                 }
                 default:break;
             }
@@ -44,8 +45,8 @@ class CategoryRequest  extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

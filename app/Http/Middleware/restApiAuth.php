@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -15,7 +17,7 @@ class restApiAuth
      */
     public function handle($request, Closure $next)
     {
-       // dd($request);
+        // dd($request);
         return $next($request);
     }
 }

@@ -1,40 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request;
-use Input;
+use Illuminate\Foundation\Http\FormRequest;
 
-class ProgramRequest  extends Request {
-
+class ProgramRequest extends FormRequest
+{
     /**
      * The metric validation rules.
      *
-     * @return array    
+     * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'program_name' => 'required', 
-                             'start_date'  => "required" , 
-                             'end_date'    => "required" , 
+                            'program_name' => 'required',
+                            'start_date'   => 'required',
+                            'end_date'     => 'required',
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
-                    if ( $program = $this->program) {
-
+                    
                         return [
-                            'program_name'  => 'required', 
-                            'start_date'    => "required" , 
-                            'end_date'      => "required" , 
+                            'program_name'  => 'required',
+                            'start_date'    => 'required',
+                            'end_date'      => 'required',
                         ];
-                    }
+                     
                 }
                 default:break;
             }
@@ -46,8 +47,8 @@ class ProgramRequest  extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Commands;
 
 use Illuminate\Console\Command;
@@ -30,4 +32,3 @@ class RunMigrationsCommand extends Command
         ]);
     }
 }
- 

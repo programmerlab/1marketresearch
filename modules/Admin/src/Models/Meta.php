@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent; 
-use Modules\Admin\Models\Category;
-use Illuminate\Foundation\Http\FormRequest;
-use Response;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Meta extends Eloquent {
- 
+class Meta extends Eloquent
+{
     /**
      * The database table used by the model.
      *
@@ -20,7 +19,7 @@ class Meta extends Eloquent {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string

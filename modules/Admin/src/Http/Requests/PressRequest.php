@@ -1,41 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request;
-use Input;
+use Illuminate\Foundation\Http\FormRequest;
 
-class PressRequest  extends Request {
-
+class PressRequest extends FormRequest
+{
     /**
      * The metric validation rules.
      *
-     * @return array    
+     * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'title' => 'required', 
-                            'link'=> 'required',
-                            'description'=> 'required'
+                            'title'       => 'required',
+                            'link'        => 'required',
+                            'description' => 'required',
 
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
-                    if ( $result = $this->result) {
-
+               
                         return [
-                            'title' => 'required', 
-                            'link'=> 'required',
-                            'description'=> 'required' 
+                            'title'       => 'required',
+                            'link'        => 'required',
+                            'description' => 'required',
                         ];
-                    }
+                     
                 }
                 default:break;
             }
@@ -47,8 +48,8 @@ class PressRequest  extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

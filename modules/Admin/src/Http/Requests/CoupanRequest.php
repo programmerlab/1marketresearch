@@ -1,44 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests;
 
-use App\Http\Requests\Request;
-use Input;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CoupanRequest  extends Request {
-
+class CoupanRequest extends FormRequest
+{
     /**
      * The metric validation rules.
      *
-     * @return array    
+     * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'coupan_code' => 'required', 
-                             'start_date'  => "required" , 
-                             'end_date'    => "required" , 
-                             'fix_discount'    => "required" ,
-                             'percentage_discount'    => "required" 
+                            'coupan_code'            => 'required',
+                            'start_date'             => 'required',
+                            'end_date'               => 'required',
+                            'fix_discount'           => 'required',
+                            'percentage_discount'    => 'required',
                         ];
                     }
                 case 'PUT':
                 case 'PATCH': {
-                    if ( $coupan = $this->coupan) {
-
+                   
                         return [
-                            'coupan_code' => 'required', 
-                             'start_date'  => "required" , 
-                             'end_date'    => "required" , 
-                             'fix_discount'    => "required" ,
-                             'percentage_discount'    => "required"  
+                            'coupan_code'            => 'required',
+                            'start_date'             => 'required',
+                            'end_date'               => 'required',
+                            'fix_discount'           => 'required',
+                            'percentage_discount'    => 'required',
                         ];
-                    }
+                  
                 }
                 default:break;
             }
@@ -50,8 +51,8 @@ class CoupanRequest  extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

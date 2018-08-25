@@ -79,9 +79,10 @@
                                                      <a href="{{$result->link}}" target="_blank"> {{ $result->link }}  </a>
                                                 </td>
                                                 <td style="max-width: 4500px"> 
-                                                    <?php 
-                                                    if(empty($result->description))
-                                                    $result->description = "NA";
+                                                    <?php
+                                                    if (empty($result->description)) {
+                                                        $result->description = 'NA';
+                                                    }
                                                     ?>
                                                     {!! substr(strip_tags($result->description),0,100)!!}  
                                                     @if(strlen(strip_tags($result->description))>='100')

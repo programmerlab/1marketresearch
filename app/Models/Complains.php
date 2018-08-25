@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as Eloquent; 
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Complains extends Eloquent {
-
-   
+class Complains extends Eloquent
+{
     /**
      * The database table used by the model.
      *
@@ -18,7 +19,7 @@ class Complains extends Eloquent {
      *
      * @var array
      */
-     /**
+    /**
      * The primary key used by the model.
      *
      * @var string
@@ -31,46 +32,42 @@ class Complains extends Eloquent {
      * The attributes that should be hidden for arrays.
      *
      * @var array
-     */ 
-    
-
-    protected $guarded = ['created_at' , 'updated_at' , 'id' ];
+     */
+    protected $guarded = ['created_at', 'updated_at', 'id'];
 
 
-    public  function reportedUser()
+    public function reportedUser()
     {
-        return $this->hasMany('App\User','id','reportedUserId') ;
+        return $this->hasMany('App\User', 'id', 'reportedUserId') ;
     }
 
-    public  function postedUser()
+    public function postedUser()
     {
-        return $this->hasOne('App\User','id','postedUserId') ;
+        return $this->hasOne('App\User', 'id', 'postedUserId') ;
     }
 
     public function task()
     {
-        return $this->belongsTo('App\Models\Tasks','taskId','id');
+        return $this->belongsTo('App\Models\Tasks', 'taskId', 'id');
     }
 
     public function reason()
     {
-        return $this->belongsTo('Modules\Admin\Models\Reason','reasonId','id');
-    }
-    
-    public  function userDetail()
-    {
-        return $this->hasOne('App\User','id','postedUserId') ;
-    }
-    
-    public  function reportedUserDetail()
-    {
-        return $this->hasOne('App\User','id','reportedUserId') ;
+        return $this->belongsTo('Modules\Admin\Models\Reason', 'reasonId', 'id');
     }
 
-    public  function taskDetail()
+    public function userDetail()
     {
-        return $this->hasOne('App\Models\Tasks','id','taskId'); 
+        return $this->hasOne('App\User', 'id', 'postedUserId') ;
     }
 
-    
+    public function reportedUserDetail()
+    {
+        return $this->hasOne('App\User', 'id', 'reportedUserId') ;
+    }
+
+    public function taskDetail()
+    {
+        return $this->hasOne('App\Models\Tasks', 'id', 'taskId');
+    }
 }

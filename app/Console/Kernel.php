@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -14,12 +16,12 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         // Commands\Inspire::class,
-     Commands\AdminCommand::class,
-     Commands\ControllerMakeCommand::class,
-     Commands\UpdateStatus::class,
-     
-     
-        
+        Commands\AdminCommand::class,
+        Commands\ControllerMakeCommand::class,
+        Commands\UpdateStatus::class,
+
+
+
     ];
     //'
 

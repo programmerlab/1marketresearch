@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Http\Requests\Admin;
 
 use Modules\Admin\Http\Requests\Request;
@@ -14,7 +16,7 @@ class PasswordRequest extends Request
     public function rules()
     {
         return [
-            'password' => 'required|confirmed|min:8',
+            'password'              => 'required|confirmed|min:8',
             'password_confirmation' => 'required|min:8',
         ];
     }

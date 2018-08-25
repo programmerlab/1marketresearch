@@ -1,71 +1,70 @@
 <?php
 
-namespace Modules\Admin\Http\Requests;
+declare(strict_types=1);
 
-use App\Http\Requests\Request; 
+namespace Modules\Admin\Http\Requests;
  
 
-class ReportRequest  extends Request {
-
+use Illuminate\Foundation\Http\FormRequest;
+ 
+class ReportRequest extends FormRequest
+{
+    
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
     /**
      * The product validation rules.
      *
      * @return array
      */
-    public function rules() { 
-            switch ( $this->method() ) {
+    public function rules()
+    {
+        switch ($this->method()) {
 
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            'title'        => 'required' ,  
-                            'description'  => 'required', 
-                            'photo'   => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
-                            'signle_user_license' => 'required',
-                            'multi_user_license' => 'required',
+                            'title'                  => 'required',
+                            'description'            => 'required',
+                            'photo'                  => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
+                            'signle_user_license'    => 'required',
+                            'multi_user_license'     => 'required',
                             'corporate_user_license' => 'required',
-                            'description' => 'required',
-                            'table_of_contents' => 'required',
-                            'number_of_pages' => 'required',
-                            'report_id' => 'required',
-                            'category' => 'required'
+                            'description'            => 'required',
+                            'table_of_contents'      => 'required',
+                            'number_of_pages'        => 'required', 
+                            'category'               => 'required',
                         ];
                     }
                 case 'PUT':
-                case 'PATCH': {
-
-                    if ( $reports = $this->reports ) {
-
+                case 'PATCH': { 
                         return [
-                            'title'      => 'required' ,  
-                            'description'=> 'required', 
-                            'photo'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
-                            'signle_user_license' => 'required',
-                            'multi_user_license' => 'required',
+                            'title'                  => 'required',
+                            'description'            => 'required',
+                            'photo'                  => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
+                            'signle_user_license'    => 'required',
+                            'multi_user_license'     => 'required',
                             'corporate_user_license' => 'required',
-                            'description' => 'required',
-                            'table_of_contents' => 'required',
-                            'number_of_pages' => 'required',
-                            'report_id' => 'required',
-                            'category' => 'required'
+                            'description'            => 'required',
+                            'table_of_contents'      => 'required',
+                            'number_of_pages'        => 'required', 
+                            'category'               => 'required',
                         ];
-                    }
+                    
                 }
                 default:break;
             }
         //}
     }
-
-    /**
-     * The
-     *
-     * @return bool
-     */
-    public function authorize() {
-        return true;
-    }
-
+ 
 }

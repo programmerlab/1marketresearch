@@ -41,8 +41,8 @@
                 </div>
                 <div class="blog-text"> 
                 <p>
-                  <?php 
-                   $str =  (implode(' ', array_slice(explode(' ',  strip_tags($result->description)), 0, 43)))
+                  <?php
+                   $str =  (implode(' ', array_slice(explode(' ', strip_tags($result->description)), 0, 43)))
                   ?>
                   {{(str_replace("Summary",'', trim($str))) }}
                   @if(strlen($str)>40)<a href="{{url($result->url) }}">[...]</a>

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Services;
 
-use Swift_TransportException;
 use Illuminate\Mail\Mailer;
 use Stevebauman\CoreHelper\Services\Service;
+use Swift_TransportException;
 
 /**
  * Class MailService.

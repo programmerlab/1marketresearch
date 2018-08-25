@@ -1,44 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
- 
-use Input; 
-
-class UserRequest extends Request {
-
-    /** 
+class UserRequest extends Request
+{
+    /**
      * The metric validation rules.
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         //if ( $metrics = $this->metrics ) {
-            switch ( $this->method() ) {
+        switch ($this->method()) {
                 case 'GET':
                 case 'DELETE': {
-                        return [ ];
+                        return [];
                     }
                 case 'POST': {
                         return [
-                            
-                            'password' => 'required|min:6',
-                            'confirm_password' => 'required|same:password'
+
+                            'password'         => 'required|min:6',
+                            'confirm_password' => 'required|same:password',
 
                         ];
                     }
                 case 'PUT':
-                case 'PATCH': { 
-                    
+                case 'PATCH': {
+
 
                         return [
-                             
+
                         ];
-                    
+
                 }
                 default:break;
             }
-         
     }
 
     /**
@@ -46,8 +45,8 @@ class UserRequest extends Request {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-
 }

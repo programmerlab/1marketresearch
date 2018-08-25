@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Admin\Commands;
 
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 use Modules\Admin\Exceptions\Commands\DatabaseTableReservedException;
 use Modules\Admin\Exceptions\Commands\DependencyNotFoundException;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Console\Command;
 
 class SchemaCheckCommand extends Command
 {
@@ -40,7 +42,7 @@ class SchemaCheckCommand extends Command
      * @var array
      */
     protected $reserved = [
-        
+
     ];
 
     /**
