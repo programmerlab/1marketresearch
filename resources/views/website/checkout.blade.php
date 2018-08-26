@@ -61,13 +61,39 @@
                             <td valign="top" style="padding:48px">
                               <div id="m_326117052521356084body_content_inner" style="color:#737373;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left">
 
-<p style="margin:0 0 16px">Your order is recieved. Our sales team will contact with you for bank details.<br>
+<p style="margin:0 0 16px">
 Your order details are shown below for your reference:</p>
 
 <div style="margin-bottom: 15px;float: right;">
-<form action="https://www.paypal.com/webapps/hermes?token=0KT71982T7639353H&useraction=commit&rm=2&mfid=1534710019697_a95deecde264c" target="_blank" id="payForm">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="payForm">
 
-    <input  onclick="document.getElementById('payForm').submit();"  type="image" src="https://www.braintreepayments.com/images/features/paypal/paypal-button@2x-d5ec2863.png" alt="paypal" width="250px" height="48">
+  <input type="hidden" name="cmd" value="_xclick">
+  <input type="hidden" name="business" value="sales@1marketresearch.com">
+  <input type="hidden" name="item_name" value="{{$cart_detail->name}}">
+  <input type="hidden" name="item_number" value="{{$ref}}">
+  <input type="hidden" name="amount" value="{{$final_payment}}">
+  <input type="hidden" name="tax" value="0.00">
+  <input type="hidden" name="quantity" value="1">
+  <input type="hidden" name="currency_code" value="USD">
+
+  <!-- Enable override of buyers's address stored with PayPal . -->
+  <input type="hidden" name="address_override" value="1">
+  <!-- Set variables that override the address stored with PayPal. -->
+  <input type="hidden" name="first_name" value="{{$order->first_name}}">
+  <input type="hidden" name="last_name" value="{{$order->last_name}}">
+  <input type="hidden" name="address1" value="{{$order->address}}">
+  <input type="hidden" name="city" value="{{$order->city}}">
+  <input type="hidden" name="state" value="{{$order->state}}">
+  <input type="hidden" name="zip" value="{{$order->zipcode}}">
+  <input type="hidden" name="country" value="{{$order->country}}">
+  <input type="hidden" name="email" value="{{$order->email}}">
+
+    <!-- Specify URLs -->
+  <input type='hidden' name='cancel_return' value="{{url('paypalpay?cancel_return=1')}}">
+  <input type='hidden' name='return' value="{{url('paypalpay?return=1')}}">
+  <input type='hidden' name='notify_url' value="{{url('paypalpay?notify_url=1')}}">
+
+    <input  onclick="document.getElementById('payForm').submit();"  type="image" src="https://www.braintreepayments.com/images/features/paypal/paypal-button@2x-d5ec2863.png" alt="paypal" width="250px" height="48" alt="PayPal - The safer, easier way to pay online">
 
     </form>
 
@@ -75,7 +101,7 @@ Your order details are shown below for your reference:</p>
 
 <ul class="m_326117052521356084wc-bacs-bank-details m_326117052521356084order_details m_326117052521356084bacs_details">
 </ul>
-  <h2 style="color:#00aff0;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">Order #155256</h2>
+  <h2 style="color:#00aff0;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">Order #{{$ref}}</h2>
 
 <table class="m_326117052521356084td" cellspacing="0" cellpadding="6" style="width:100%;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;color:#737373;border:1px solid #e4e4e4" border="1">
   <thead>

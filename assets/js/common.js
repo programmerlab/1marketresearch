@@ -78,7 +78,7 @@ $(function(){
                 },
                 success: function(response) {
                    console.log(response);
-                   
+                  
                     $('.payment_summary').removeAttr("disabled"); 
                     $('#order_info').trigger('click');
                     // alert(data); return false;
@@ -102,9 +102,11 @@ $(function(){
                 },
                 success: function(response) {
                    console.log(response);
+                    var data = JSON.parse(response);
                    
                     $('.paymentFinal').removeAttr("disabled"); 
                     $('#payment_info').trigger('click');
+                    $('#paypalFormData').html(data.html);
                    //  alert(data); return false;
                 }
             });
@@ -118,7 +120,6 @@ $(function(){
         submitHandler: function(form,e) {
              e.preventDefault(); 
             var data =  $( "#paymentFinal" ).serialize();
-           
             var paymentFinal = $('input[name=payment_method]:checked').map(function()
             {
                 return $(this).val();
@@ -131,19 +132,32 @@ $(function(){
               var  paymenturl = 'makeOrder';
               var redirectUrl = 'directBankTransfer';
             }
-             
+             // return false;
+             $('form#paypalForm').submit();
             $.ajax({
                 type: "POST",
                 data:  data,
                 url: url+'/'+paymenturl,
                 beforeSend: function() {
-                    $('#place_order').html('Please wait...');
-                    setTimeout(function(){
-                      window.location.href = url+'/'+redirectUrl;; 
-                    },1000);
+                    
+                    if(paymentFinal=='PayPal'){
+                      $('#place_order').html('Please wait');
+                      $('form#paypalForm').submit();
+                    }else{
+                      $('#place_order').html('Please wait...');
+                        setTimeout(function(){
+                        window.location.href = url+'/'+redirectUrl;; 
+                      },500);
+                      } 
+                  
                 },
                 success: function(response) {
-                  window.location.href=url+'/'+redirectUrl;
+                  
+                    if(paymentFinal=='PayPal'){
+                      $('#paypalForm').submit();
+                    }else{
+                        window.location.href = url+'/'+redirectUrl;; 
+                    } 
                 }
             });
          }

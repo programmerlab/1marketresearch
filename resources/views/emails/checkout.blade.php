@@ -35,7 +35,7 @@ Your order details are shown below for your reference:</p>
 
 <ul class="m_326117052521356084wc-bacs-bank-details m_326117052521356084order_details m_326117052521356084bacs_details">
 </ul>
-  <h2 style="color:#00aff0;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">Order #155256</h2>
+  <h2 style="color:#00aff0;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">Order #{{$billing['reference_number']}}</h2>
 
 <table class="m_326117052521356084td" cellspacing="0" cellpadding="6" style="width:100%;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;color:#737373;border:1px solid #e4e4e4" border="1">
   <thead>

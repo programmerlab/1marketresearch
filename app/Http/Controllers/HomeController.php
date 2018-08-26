@@ -275,7 +275,6 @@ class HomeController extends Controller
     {
         $request->session()->put('paymentSummary', $request->all());
 
-
         $cart         = Cart::content();
         $cart_details = [];
         foreach ($cart as $key => $value) {
@@ -283,14 +282,31 @@ class HomeController extends Controller
         }
 
         $id =  $request->session()->get('shiping_id');
+        $orderinfo = \DB::table('shipping_billing_addresses')->where('id', $id)->first();
+        
+        $ref = $orderinfo->id.strtoupper(Helper::generateRandomString(8));
 
-
-        $data['lisence_type'] =  $request->get('license_type');
-        $data['price']        = $cart_detail->price;
+        $data['lisence_type']       =   $request->get('license_type');
+        $data['price']              =   $cart_detail->price;
+        $data['reference_number']   =   $ref;
 
         \DB::table('shipping_billing_addresses')->where('id', $id)->update($data);
 
-        return json_encode(['status' => 1,'message' => $data]);
+        $final_payment = $cart_detail->price - $orderinfo->discount;
+
+        $html = view::make('website.paypalform' , 
+            [
+                'order' => $orderinfo,
+                'ref'=>$ref,
+                'cart_detail'=>$cart_detail,
+                'amount_pay'=> sprintf("%.2f", $final_payment)
+            ]
+        );
+
+        $html = $html->render();
+
+
+        return json_encode(['status' => 1,'message' => $data,'ref'=>$ref,'html'=>$html]);
     }
 
     public function makeOrder(Request $request)
@@ -322,10 +338,8 @@ class HomeController extends Controller
     public function home(Request $request)
     {
         $category =  Category::all();
-
-        $reports = Report::orderBy('id', 'desc')->Paginate($this->page_size); //Paginate(5);
-
-//        dd($reports);
+        $request->session()->flush();
+        $reports = Report::orderBy('id', 'desc')->Paginate($this->page_size);  
         return view('website.home', compact('category', 'reports'));
     }
 
@@ -624,16 +638,23 @@ class HomeController extends Controller
         \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->update(['payment_mode' => 'direct-bank-transfer']);
 
         $order = \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->first();
+        $ref = $order->id.strtoupper(Helper::generateRandomString(8));
+        $final_payment =  $order->price - $order->discount;
+
+        \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->update(['reference_number' => $ref]);
+        
+        $order = \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->first();
+
 
         if ($order == null) {
             return Redirect::to('404');
         }
-
+       
         $cart_detail->discount = $order->discount;
-        $billing               = $cart_detail->options->user['billing'];
+        $billing               =  (array) $order ;
 
         $email_content = [
-            'receipent_email' => $billing['email'],
+            'receipent_email' => $order->email,
             'subject'         => 'Thank you for your order',
             'greeting'        => '1marketresearch',
             'first_name'      => $billing['first_name'],
@@ -651,9 +672,13 @@ class HomeController extends Controller
             $helper->sendMail($email_content, 'directBankTransfer');
             $request->session()->put('order_mail', 1);
         }
+        $ref = $order->id.strtoupper(Helper::generateRandomString(8));
+        $final_payment =  $order->price - $order->discount;
+
+       \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->update(['reference_number' => $ref]);
 
 
-        return view('website.directBankTransfer', compact('reports', 'cart_detail', 'billing', 'order'));
+        return view('website.directBankTransfer', compact('reports', 'cart_detail', 'billing', 'order','ref'));
     }
     /*----------*/
     public function checkout(Request $request)
@@ -669,13 +694,21 @@ class HomeController extends Controller
         \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->update(['payment_mode' => 'paypal']);
 
         $order = \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->first();
+        $ref = $order->id.strtoupper(Helper::generateRandomString(8));
+        $final_payment =  $order->price - $order->discount;
+
+        \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->update(['reference_number' => $ref]);
+        
+        $order = \DB::table('shipping_billing_addresses')->where('id', $id->shiping_id)->first();
+
+        
 
         if ($order == null) {
             return Redirect::to('404');
         }
 
         $cart_detail->discount = $order->discount;
-        $billing               = $cart_detail->options->user['billing'];
+        $billing               =  (array) $order ;
 
         $email_content = [
             'receipent_email' => $billing['email'],
@@ -696,8 +729,9 @@ class HomeController extends Controller
             $helper->sendMail($email_content, 'checkout');
             $request->session()->put('paypal', 1);
         }
+         
 
-        return view('website.checkout', compact('reports', 'cart_detail', 'billing', 'order'));
+        return view('website.checkout', compact('reports', 'cart_detail', 'billing', 'order','final_payment','ref'));
     }
 
 
@@ -747,5 +781,62 @@ class HomeController extends Controller
         })->orderBy('id', 'desc')->first();//Paginate(5);
 
         return view('website.pressReleaseDetails', compact('category', 'data', 'title'));
+    }
+
+    public function paypalpay(Request $request, $name = null){
+
+        
+        $title    = 'Payment Status';
+        $show =0;
+        $id =  $request->session()->get('shiping_id');
+
+        $msg = "Your order is recieved. Our sales team will contact with you.";
+        if($request->get('cancel_return')){
+             $show =1;
+              $msg = "Your order is cancel. Our sales team will contact with you.";
+              $data =  isset($_POST)?$_POST:[];
+
+            \DB::table('shipping_billing_addresses')->where('id', $id)->update(['status' => 'cancel','payment_details' => json_encode($data)]);
+        }
+        if($request->get('return')){
+            $show =1;
+            $msg = "Your order is recieved. Our sales team will contact with you.";
+            $status = isset($_POST['payment_status'])?$_POST['payment_status']:'pending';
+
+            $data =  isset($_POST)?$_POST:[];
+
+           \DB::table('shipping_billing_addresses')->where('id', $id)->update(['status' => $status,'payment_details' => json_encode($data)]);
+        //   return Redirect::to('checkout');
+
+        }
+        if($request->get('notify_url')){
+             $show =1;
+                $msg = "Your order is recieved. Our sales team will contact with you";
+                $status = isset($_POST['payment_status'])?$_POST['payment_status']:'pending';
+
+                $data =  isset($_POST)?$_POST:[];
+
+          //  $status =  isset($_POST['payment_status'])?$_POST['payment_status']:'notify';
+            \DB::table('shipping_billing_addresses')
+                    ->where('id', $id)
+                        ->update(
+                            [
+                                'status' => $status,'payment_details' => json_encode($data)
+                            ]);
+        }
+
+
+        if($request->get('cancel_return')){
+            $show =1;
+            $msg = "Your order is cancel. Our sales team will contact with you";
+            $status = isset($_POST['payment_status'])?$_POST['payment_status']:'pending';
+
+            $data =  isset($_POST)?$_POST:[];
+
+           \DB::table('shipping_billing_addresses')->where('id', $id)->update(['status' => $status,'payment_details' => json_encode($data)]); 
+        }
+         
+        return view('website.paypalpay', compact('category', 'data', 'title','msg','show'));
+      
     }
 }

@@ -22,7 +22,7 @@ class Helper
      *
      * @param = null
      */
-    public function generateRandomString($length)
+    public static function generateRandomString($length)
     {
         $key  = '';
         $keys = array_merge(range(0, 9), range('a', 'z'));
