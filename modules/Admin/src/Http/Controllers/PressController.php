@@ -66,7 +66,7 @@ class PressController extends Controller
             $results = Press::where(function ($query) use ($search,$status) {
                 if (!empty($search)) {
                     $query->Where('pressName', 'LIKE', "%$search%")
-                                ->OrWhere('link', 'LIKE', "%$search%");
+                        ->OrWhere('link', 'LIKE', "%$search%");
                 }
             })->Paginate($this->record_per_page);
         } else {
@@ -117,7 +117,7 @@ class PressController extends Controller
     {
         $page_title  = 'Press';
         $page_action = 'Edit Press';
-        $press = Press::find($id);
+        $press       = Press::find($id);
 
         return view('packages::press.edit', compact('press', 'page_title', 'page_action'));
     }
@@ -139,7 +139,7 @@ class PressController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $del = Press::where('id', $id)->delete();
 

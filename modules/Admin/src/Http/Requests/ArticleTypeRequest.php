@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-   
 
 class ArticleTypeRequest extends FormRequest
 {
@@ -29,13 +28,13 @@ class ArticleTypeRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-               
+
                         return [
                             'article_type'          => 'required',
                             'resolution_department' => 'required',
 
                         ];
-                    
+
                 }
                 default:break;
             }

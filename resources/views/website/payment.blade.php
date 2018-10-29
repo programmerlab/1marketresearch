@@ -47,7 +47,7 @@
                                         <li class=""><a href="#p-view-4"  id="payment_info" role="tab" data-toggle="tab" aria-expanded="false">PAYMENT INFO</a></li>
                                     </ul>
                                 </div>
-                        <div class="tab-content">
+                        <div class="tab-content" style="min-height: auto">
                             <div class="tab-pane active" id="p-view-1">
                                 <div class="tab-inner">
                                     <div class="event-content head-team checkout-form">
@@ -200,10 +200,10 @@
                                                 <ul class="sf-content" style="display: block;">
                                         <!-- form step two -->
 
-                                        <li style="margin-bottom: 2rem;">
-                                            <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
+                                        <li style="margin-bottom: 1rem;">
+                                            <div class="column_6" style="margin:15px;">
                                                 <label>Order Notes</label>
-                                                <textarea placeholder="Notes About Your Order, e.g Special Note For delivery. " name="order_notes"></textarea>
+                                                <textarea placeholder="Notes About Your Order, e.g Special Note For delivery. " name="order_notes" rows="5" class="form-control"></textarea>
                                             </div>
 
                                         </li>
@@ -220,10 +220,10 @@
                                 <div class="tab-pane" id="p-view-3">
                                     <div class="tab-inner">
                                          <div class="col-md-12">
-                                                                    <p>Have a coupon? 
-                                                                            <a href="javascript:void(0)" class="showcoupon">Click here to enter your code</a>  </p>
-                                                                            <b>
-                                                                            <span style="background-color: #f4f4f4;width: 100%;float: left;padding: 10px;margin-bottom: 20px; display: none;" class="Cmsg"></span> </b>
+                                            <p>Have a coupon? 
+                                                    <a href="javascript:void(0)" class="showcoupon">Click here to enter your code</a>  </p>
+                                                    <b>
+                                                    <span style="background-color: #f4f4f4;width: 100%;float: left;padding: 10px;margin-bottom: 20px; display: none;" class="Cmsg"></span> </b>
 
                                                                         <div style="border: 1px solid #ccc;padding:20px 0px "   class="col-md-12 coupn_form">
                                                                             
@@ -245,11 +245,11 @@
                                                 
                                                 <ul class="sf-content" style="display: block;">
                                                     <!-- form step tree -->
-                                                    <li style="margin-bottom: 2rem;">
+                                                    <li>
                                                         <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
                                                             <div class="panel panel-default">
                                                                
-                                                                <div class="panel-body">
+                                                                <div class="">
                                                                     <hr>
                                                                     <div class="col-md-12">
                                                                         <strong>Product Details</strong>
@@ -309,16 +309,16 @@
                         <div class="tab-pane" id="p-view-4">
                             <div class="tab-inner">
 
-                            <form id="paymentFinal" name="paymentFinal" novalidate="">
-                                <div class="event-content head-team checkout-form">
-                                    
+                             <div class="event-content head-team checkout-form">
+                                    <form id="paymentFinal" name="paymentFinal" novalidate="">
+                                
                                     <ul class="sf-content" style="display: block;">
                                         <!-- form step four -->
-                                        <li style="margin-bottom: 2rem;">
-                                           
-                                            <div class="sf_columns column_6" style="width: 100%; margin-bottom: 0px;">
-
-                                                <h3>Payment</h3>
+                                        <li>
+                                                
+                                            <div class="column_6" style="margin:15px;">
+                                               <p> <label>Payment Info</label> </p>
+                                               
                                                 <div class="panel-group" id="accordion">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
@@ -326,7 +326,7 @@
                                                                 <!--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel1">
                                                                 
                                                                 </a>-->
-                                                                 <input type="radio" name="payment_method" value="PayPal" class="payment_method" >&nbsp;&nbsp;&nbsp;PayPal
+                                                                 <input type="radio" name="payment_method" value="PayPal" class="payment_method" checked="checked">&nbsp;&nbsp;&nbsp;PayPal
                                                             </h4>
                                                         </div>
                                                         <div id="panel1" class="panel-collapse collapse">
@@ -341,7 +341,7 @@
                                                                <!-- <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel2">
                                                                 
                                                                 </a>-->
-                                                                <input type="radio" name="payment_method" value="BankTransfer" class="payment_method" checked="checked"> &nbsp;&nbsp;&nbsp;Direct Bank Transfer
+                                                                <input type="radio" name="payment_method" value="BankTransfer" class="payment_method" > &nbsp;&nbsp;&nbsp;Direct Bank Transfer
                                                             </h4>
                                                         </div>
                                                         <div id="panel2" class="panel-collapse collapse">
@@ -355,11 +355,12 @@
                                             </div>
 
                                         </li>
-                                    </ul>
-                                    <div class="checkout-next">
+                                        <div class="checkout-next">
                                         <button type="submit" class="paymentFinal" disabled="disabled" id="place_order">Place Order</button>
                                     </div>
-                                </form>
+                                    </ul>
+                                    
+                                    </form>
                                                 
                                             </div>
                                         </div>
@@ -387,6 +388,7 @@
         <div id="paypalFormData">
             
         </div>
+        
         
 @stop
          

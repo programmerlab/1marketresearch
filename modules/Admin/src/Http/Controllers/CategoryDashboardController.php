@@ -75,7 +75,7 @@ class CategoryDashboardController extends Controller
             $categories = Category::with('subcategory')->where(function ($query) use ($search,$status) {
                 if (!empty($search)) {
                     $query->Where('category_group_name', 'LIKE', "%$search%")
-                                ->OrWhere('category_name', 'LIKE', "%$search%");
+                        ->OrWhere('category_name', 'LIKE', "%$search%");
                 }
             })->where('parent_id', 0)->get();
         } else {
@@ -190,7 +190,7 @@ class CategoryDashboardController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $d = CategoryDashboard::where('id', $id)->delete();
 

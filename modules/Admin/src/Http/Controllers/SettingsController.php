@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use HTML;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
@@ -19,6 +18,7 @@ use Modules\Admin\Models\User;
 use Route;
 use URL;
 use View;
+use Html;
 
 /**
  * Class AdminController
@@ -73,7 +73,7 @@ class SettingsController extends Controller
             return Redirect::to(route('setting.create'));
         }
         foreach ($web_setting as $key => $value) {
-            echo $key_name = $value->field_key;
+             $key_name = $value->field_key;
 
             $setting->$key_name = $value->field_value;
         }
@@ -137,7 +137,7 @@ class SettingsController extends Controller
 
 
         return Redirect::to(route('setting'))
-           ->with('flash_alert_notice2', 'Site settigs was successfully created !');
+            ->with('flash_alert_notice2', 'Site settigs was successfully created !');
     }
     /*
      * Edit Group method
@@ -199,7 +199,7 @@ class SettingsController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Product::where('id', $id)->delete();
 

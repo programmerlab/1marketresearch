@@ -78,6 +78,4 @@ class Category extends Eloquent
     {
         return $this->hasMany('Modules\Admin\Models\Report', 'category_id');
     }
-
-        
 }

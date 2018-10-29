@@ -32,7 +32,7 @@ class ProductRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                     
+
                         return [
                             'product_title'        => 'required',
                             'product_category'     => 'required',
@@ -41,7 +41,7 @@ class ProductRequest extends FormRequest
                             'discount'             => 'required|numeric|min:0',
                             'image'                => 'mimes:jpeg,bmp,png,gif',
                         ];
-                    
+
                 }
                 default:break;
             }

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Modules\Admin\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
@@ -27,12 +28,12 @@ class LoginRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                 
+
                         return [
                             'email'    => 'required|email',
                             'password' => 'required',
                         ];
-                  
+
                 }
                 default:break;
             }

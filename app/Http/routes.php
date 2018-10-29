@@ -34,7 +34,7 @@ Route::post('/paymentSummary', 'HomeController@paymentSummary');
 
 Route::get('/paypal', 'HomeController@paypal');
 
-Route::get('/paypalpay', 'HomeController@paypalpay'); 
+Route::get('/paypalpay', 'HomeController@paypalpay');
 
 Route::get('/directBankTransfer', 'HomeController@directBankTransfer');
 

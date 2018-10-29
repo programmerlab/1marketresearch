@@ -136,7 +136,7 @@ class BlogController extends Controller
         $blog->save();
 
         return Redirect::to('admin/blog')
-           ->with('flash_alert_notice', 'Blog was successfully created !');
+            ->with('flash_alert_notice', 'Blog was successfully created !');
     }
     /*
      * Edit Group method
@@ -194,7 +194,7 @@ class BlogController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Blogs::where('id', $id)->delete();
 

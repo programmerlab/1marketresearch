@@ -65,7 +65,7 @@ class PublisherController extends Controller
             $results = Publisher::where(function ($query) use ($search,$status) {
                 if (!empty($search)) {
                     $query->Where('publisher', 'LIKE', "%$search%")
-                                ->OrWhere('company', 'LIKE', "%$search%");
+                        ->OrWhere('company', 'LIKE', "%$search%");
                 }
             })->Paginate($this->record_per_page);
         } else {
@@ -107,9 +107,9 @@ class PublisherController extends Controller
      * object : $category
      * */
 
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
-        $publisher = Publisher::find($id);
+        $publisher   = Publisher::find($id);
         $page_title  = 'Publisher';
         $page_action = 'Edit Publisher';
 
@@ -117,7 +117,7 @@ class PublisherController extends Controller
     }
 
     public function update(Request $request, $id)
-    {   
+    {
         $result = Publisher::find($id);
         $result->fill(Input::all());
         $result->save();
@@ -130,7 +130,7 @@ class PublisherController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $del = Publisher::where('id', $id)->delete();
 

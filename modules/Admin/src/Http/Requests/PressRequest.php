@@ -30,13 +30,13 @@ class PressRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-               
+
                         return [
                             'title'       => 'required',
                             'link'        => 'required',
                             'description' => 'required',
                         ];
-                     
+
                 }
                 default:break;
             }

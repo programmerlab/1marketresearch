@@ -174,7 +174,78 @@
                 
                 <span class="help-block">{{ $errors->first('twitter_url', ':message') }}</span>
             </div>
-        </div>  
+        </div>
+
+
+
+        <div class="form-group {{ $errors->first('MAIL_HOST', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL HOST  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_HOST',isset($setting->MAIL_HOST)?$setting->MAIL_HOST:'', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_HOST', ':message') }}</span>
+            </div>
+        </div>
+
+        <div class="form-group {{ $errors->first('MAIL_PORT', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL PORT  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_PORT',isset($setting->MAIL_PORT)?$setting->MAIL_PORT:'587', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_PORT', ':message') }}</span>
+            </div>
+        </div>
+
+
+        <div class="form-group {{ $errors->first('MAIL_USERNAME', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL USERNAME  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_USERNAME',isset($setting->MAIL_USERNAME)?$setting->MAIL_USERNAME:'', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_USERNAME', ':message') }}</span>
+            </div>
+        </div>
+
+
+        <div class="form-group {{ $errors->first('MAIL_PASSWORD', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL PASSWORD  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_PASSWORD',isset($setting->MAIL_PASSWORD)?$setting->MAIL_PASSWORD:'', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_PASSWORD', ':message') }}</span>
+            </div>
+        </div>
+
+
+        <div class="form-group {{ $errors->first('MAIL_ENCRYPTION', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL ENCRYPTION  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_ENCRYPTION',isset($setting->MAIL_ENCRYPTION)?$setting->MAIL_ENCRYPTION:'tls', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_ENCRYPTION', ':message') }}</span>
+            </div>
+        </div>
+
+
+        <div class="form-group {{ $errors->first('MAIL_FROM', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL FROM  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_FROM',isset($setting->MAIL_FROM)?$setting->MAIL_FROM:'1marketresearch', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_FROM', ':message') }}</span>
+            </div>
+        </div>
+
+
+        <div class="form-group {{ $errors->first('MAIL_TO', 'has-error') }}">
+            <label class="control-label col-md-3">MAIL TO  </label>
+            <div class="col-md-6"> 
+                {!! Form::text('MAIL_TO',isset($setting->MAIL_TO)?$setting->MAIL_TO:'admin@1marketresearch.com', ['class' => 'form-control'])  !!} 
+                
+                <span class="help-block">{{ $errors->first('MAIL_TO', ':message') }}</span>
+            </div>
+        </div>
+
 
 
 

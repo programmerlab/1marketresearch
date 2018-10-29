@@ -79,8 +79,8 @@ class ContactController extends Controller
             $contacts = Contact::where(function ($query) use ($search,$status) {
                 if (!empty($search)) {
                     $query->Where('name', 'LIKE', "%$search%")
-                                ->OrWhere('email', 'LIKE', "%$search%")
-                                ->OrWhere('phone', 'LIKE', "%$search%");
+                        ->OrWhere('email', 'LIKE', "%$search%")
+                        ->OrWhere('phone', 'LIKE', "%$search%");
                 }
             })->Paginate($this->record_per_page);
         } else {
@@ -274,9 +274,9 @@ class ContactController extends Controller
      * object : $category
      * */
 
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
-        $contact = Contact::find($id);
+        $contact        = Contact::find($id);
         $page_title     = 'contact';
         $page_action    = 'Edit contact';
 
@@ -302,7 +302,7 @@ class ContactController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Contact::where('id', $id)->delete();
 

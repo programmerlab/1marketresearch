@@ -11,6 +11,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Modules\Admin\Models\CategoryDashboard;
 use View;
+use App\Helpers\Helper;
 
 class Controller extends BaseController
 {
@@ -19,6 +20,7 @@ class Controller extends BaseController
 
     public function __construct(\Request $request)
     {
+
         $category_list = Category::where('parent_id', 0)->get();
         View::share('category_list', $category_list);
         $cat       = Category::nested()->get();
@@ -34,7 +36,12 @@ class Controller extends BaseController
                 }
 
                 $result = $rs;
-                $c      = count($result['child']);
+                if(isset($result['child'])){
+                    $c  = count($result['child']);    
+                }else{
+                    $c = 0;
+                }
+                
 
                 if ($c == 0) {
                     break;

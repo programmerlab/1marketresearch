@@ -31,7 +31,7 @@ class CoupanRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                   
+
                         return [
                             'coupan_code'            => 'required',
                             'start_date'             => 'required',
@@ -39,7 +39,7 @@ class CoupanRequest extends FormRequest
                             'fix_discount'           => 'required',
                             'percentage_discount'    => 'required',
                         ];
-                  
+
                 }
                 default:break;
             }

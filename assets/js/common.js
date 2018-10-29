@@ -3,12 +3,33 @@ function orderTab(id,btnClass){
     //$('#'+id).trigger('click');
 }
  
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == 'price')
+        {
+            window.scrollBy(0,100);
+        }
+    }
+  
+  
  
 $(function(){ 
 
     $('#uploadMsg').click(function(){
-        $('#uploadMsgform').hide();
-         $('#uploadMsgs').html('Please wait while reports are being uploaded').css('color','green');
+      //  $('#uploadMsgform').hide();
+      var i=0;
+      setInterval(function(){  
+        i++;
+         $('#uploadMsgs').html('Please wait while reports are being uploaded. Total time in second:'+i).css('color','green');
+       
+       }, 1000);
+
+     
+
+
     });
     $('.coupn_form').hide();
   $('.showcoupon').click(function(){
@@ -17,6 +38,9 @@ $(function(){
 
 
    var hash = window.location.hash; 
+ 
+
+
    if(hash==''){
     $('#reportDescription').addClass('active');
     $('.reportDescription').addClass('active'); 
@@ -74,13 +98,13 @@ $(function(){
                 data:  data,
                 url: url+'/ordernote',
                 beforeSend: function() {
-                  //  $('#order_info').html('Please wait...');
+                   $('.payment_summary').removeAttr("disabled"); 
+                  $('#order_info').trigger('click');
                 },
                 success: function(response) {
                    console.log(response);
                   
-                    $('.payment_summary').removeAttr("disabled"); 
-                    $('#order_info').trigger('click');
+                   
                     // alert(data); return false;
                 }
             });
@@ -98,14 +122,14 @@ $(function(){
                 data:  data,
                 url: url+'/paymentSummary',
                 beforeSend: function() {
-                  //  $('#order_info').html('Please wait...');
+                  $('.paymentFinal').removeAttr("disabled"); 
+                  $('#payment_info').trigger('click');
                 },
                 success: function(response) {
                    console.log(response);
                     var data = JSON.parse(response);
                    
-                    $('.paymentFinal').removeAttr("disabled"); 
-                    $('#payment_info').trigger('click');
+                    
                     $('#paypalFormData').html(data.html);
                    //  alert(data); return false;
                 }
@@ -147,7 +171,7 @@ $(function(){
                       $('#place_order').html('Please wait...');
                         setTimeout(function(){
                         window.location.href = url+'/'+redirectUrl;; 
-                      },500);
+                      },1000);
                       } 
                   
                 },
@@ -216,12 +240,16 @@ $(function(){
                 data:  data,
                 url: url+'/billing',
                 beforeSend: function() {
-                    //$('.order_info').html('Please wait...');
+                    $('.order_info').html('Next');
                 },
                 success: function(response) {
-                   console.log(response);
-                 $('.order_info').html('Next');
-                   
+                  // console.log(response);
+                //  window.scrollBy(0, -100); 
+                  window.scrollBy({ 
+                    top: -300, // could be negative value
+                    left: 0, 
+                    behavior: 'smooth' 
+                  });
                 }
 
             });
@@ -421,7 +449,7 @@ $(document).ready( function(event) {
                 },
                 async:true,
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                    $('.btnSubmit2').html('Submit Request');
                    if(response.status==1){
                     
@@ -542,7 +570,7 @@ function changeStatus(id,method)
                 $('#'+id).attr('data',response);
                 $('#'+id).removeClass('label label-warning status').addClass('label label-success status');
                 
-                 console.log(response);
+               //  console.log(response);
                  $('#btn'+id).removeAttr('disabled');
             }else
             {
@@ -838,7 +866,7 @@ function checkAll(ele) {
          }
      } else {
          for (var i = 0; i < checkboxes.length; i++) {
-             console.log(i)
+            // console.log(i)
              if (checkboxes[i].type == 'checkbox') {
                  checkboxes[i].checked = false;
              }
@@ -856,7 +884,7 @@ function checkAll(ele) {
          }
      } else {
          for (var i = 0; i < checkboxes.length; i++) {
-             console.log(i)
+            // console.log(i)
              if (checkboxes[i].type == 'checkbox') {
                  checkboxes[i].checked = false;
              }
@@ -931,7 +959,7 @@ function createGroup(Url,action) {
                              $('#responsive').modal('hide');
                              bootbox.alert('Group name created successfully',function(){
                                  var u =url+'/admin/contactGroup';
-                                 console.log(u);
+                               //  console.log(u);
                                  window.location.assign(u);
                              });
                              
@@ -965,7 +993,7 @@ function createGroup(Url,action) {
                 cache: false,
                 processData:false,
                 success: function(datas){
-                    console.log(datas);
+                  //  console.log(datas);
                     var data = JSON.parse(datas); 
                     if(data.status==0){
                         $('#error_msg2').html(data.message).css('color','red');
@@ -974,7 +1002,7 @@ function createGroup(Url,action) {
                          $('#responsive2').modal('hide');
                          bootbox.alert('Contact imported successfully',function(){
                              var u =url+'/admin/contact';
-                             console.log(u);
+                           //  console.log(u);
                              setTimeout(function(){ window.location.assign(u);},100);
                              
                          });
@@ -988,7 +1016,7 @@ function createGroup(Url,action) {
     function updateGroup(Url,id) {
         createGroup=0;
         var name =$('form#updateGroup_'+id+' input#contact_group').val().replace(/^\s+|\s+$/gm,'');  
-        console.log(id,name,'form#updateGroup_'+id+' input#contact_group');
+       // console.log(id,name,'form#updateGroup_'+id+' input#contact_group');
         var parent_id = $('form#updateGroup_'+id+' input#parent_id').val();
         try {
         var checkValues = $('form#updateGroup_'+id+' input[name=checkAll]:checked').map(function()
@@ -1024,7 +1052,7 @@ function createGroup(Url,action) {
                              $('#responsive_'+id).modal('hide');
                              bootbox.alert('Group updated successfully',function(){
                                  var u =url+'/admin/contactGroup';
-                                 console.log(u);
+                               //  console.log(u);
                                  //window.location.assign(u);
                                 setTimeout(function(){ location.reload();},100);
                                 
@@ -1060,7 +1088,7 @@ function createGroup(Url,action) {
             processData:false,
             success: function(datas){
                 console.log(datas);
-                return false;
+               // return false;
                 var data = JSON.parse(datas); 
                 if(data.status==0){
                     $('#error_msg2').html(data.message).css('color','red');
@@ -1069,7 +1097,7 @@ function createGroup(Url,action) {
                      $('#responsive2').modal('hide');
                      bootbox.alert('Csv imported successfully',function(){
                          var u =url+'/'+redirect_action;
-                         console.log(u);
+                        // console.log(u);
 
                        //  setTimeout(function(){ window.location.assign(u);},100);
                          

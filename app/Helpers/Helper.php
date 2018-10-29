@@ -17,6 +17,21 @@ use View;
 
 class Helper
 {
+    
+
+    public static function setting(){
+
+        $setting = \DB::table('settings')->select('field_key','field_value')->get()->toArray();
+        $data = [];
+        foreach ($setting as $key => $value) {
+           
+           $data[$value->field_key] = $value->field_value;
+        }
+
+        return (object) $data;
+
+
+    }
     /**
      * function used to check stock in kit
      *
@@ -33,26 +48,7 @@ class Helper
 
         return $key;
     }
-    /* @method : createCompanyGroup
-        * @param : email,user_id
-        * Response :  string
-        * Return : company name
-        */
-
-    /* @method : getCorporateGroupName
-        * @param : email
-        * Response :  string
-        * Return : company name
-        */
-    public function getCorporateGroupName($email = null)
-    {
-        $fps          =  strripos($email, '@');
-        $lps          =  strpos(substr($email, $fps), '.');
-        $company_name = substr($email, $fps + 1, $lps - 1);
-
-        return  $company_name;
-    }
-
+    
 
     public static function FormatPhoneNumber($number)
     {
@@ -80,19 +76,21 @@ class Helper
             $mail->isSMTP(); // tell to use smtp
             $mail->CharSet = 'utf-8'; // set charset to utf8
 
-
             $mail->SMTPAuth   = true;                  // enable SMTP authentication
-            $mail->Host       = getenv('MAIL_HOST'); // sets the SMTP server
-            $mail->Port       = getenv('MAIL_PORT');
-            $mail->SMTPSecure = 'false';                 // set the SMTP port for the GMAIL server
-            $mail->Username   = getenv('MAIL_USERNAME'); // SMTP account username
-            $mail->Password   = getenv('MAIL_PASSWORD');
+            $mail->Host       = isset(Helper::setting()->MAIL_HOST)?Helper::setting()->MAIL_HOST:getenv('MAIL_HOST'); // sets the SMTP server
+            $mail->Port       = isset(Helper::setting()->MAIL_PORT)?Helper::setting()->MAIL_PORT:getenv('MAIL_PORT');
+            $mail->SMTPSecure = isset(Helper::setting()->MAIL_ENCRYPTION)?Helper::setting()->MAIL_ENCRYPTION:getenv('MAIL_ENCRYPTION');                 // set the SMTP port for the GMAIL server
+            $mail->Username   = isset(Helper::setting()->MAIL_USERNAME)?Helper::setting()->MAIL_USERNAME:getenv('MAIL_USERNAME'); // SMTP account username
+            $mail->Password   = isset(Helper::setting()->MAIL_PASSWORD)?Helper::setting()->MAIL_PASSWORD:getenv('MAIL_PASSWORD');
 
-            $mail->setFrom(getenv('MAIL_USERNAME'), 'Admin');
+            $username       =  isset(Helper::setting()->MAIL_USERNAME)?Helper::setting()->MAIL_USERNAME:getenv('MAIL_USERNAME'); 
+
+            $email_from       =  isset(Helper::setting()->MAIL_FROM)?Helper::setting()->MAIL_FROM:getenv('MAIL_FROM');
+            
+            $mail->setFrom($username, $email_from);
             $mail->Subject = $email_content['subject'];
             $mail->MsgHTML($html);
             $mail->addAddress($email_content['receipent_email'], 'Admin');
-            $mail->addAddress('kroy@mailinator.com', 'Admin');
 
             //$mail->addAttachment(‘/home/kundan/Desktop/abc.doc’, ‘abc.doc’); // Optional name
             $mail->SMTPOptions = [
@@ -119,7 +117,6 @@ class Helper
         $billing     = $email_content['billing']     ?? null;
         $cart_detail = $email_content['cart_detail'] ?? null;
 
-
         $mail       = new PHPMailer;
         $html       = view::make('emails.' . $template, ['content' => $email_content,'billing' => $billing,'cart_detail' => $cart_detail]);
         $html       = $html->render();
@@ -129,20 +126,20 @@ class Helper
             $mail->isSMTP(); // tell to use smtp
             $mail->CharSet = 'utf-8'; // set charset to utf8
 
+            $mail->SMTPAuth   = true;                  // enable SMTP authentication
+            $mail->Host       = isset(Helper::setting()->MAIL_HOST)?Helper::setting()->MAIL_HOST:getenv('MAIL_HOST'); // sets the SMTP server
+            $mail->Port       = isset(Helper::setting()->MAIL_PORT)?Helper::setting()->MAIL_PORT:getenv('MAIL_PORT');
+            $mail->SMTPSecure = isset(Helper::setting()->MAIL_ENCRYPTION)?Helper::setting()->MAIL_ENCRYPTION:getenv('MAIL_ENCRYPTION');                 // set the SMTP port for the GMAIL server
+            $mail->Username   = isset(Helper::setting()->MAIL_USERNAME)?Helper::setting()->MAIL_USERNAME:getenv('MAIL_USERNAME'); // SMTP account username
+            $mail->Password   = isset(Helper::setting()->MAIL_PASSWORD)?Helper::setting()->MAIL_PASSWORD:getenv('MAIL_PASSWORD');
 
-           $mail->SMTPAuth    = true;                  // enable SMTP authentication
-            $mail->Host       = getenv('MAIL_HOST'); // sets the SMTP server
-            $mail->Port       = getenv('MAIL_PORT');
-            $mail->SMTPSecure = 'false';                 // set the SMTP port for the GMAIL server
-            $mail->Username   = getenv('MAIL_USERNAME'); // SMTP account username
-            $mail->Password   = getenv('MAIL_PASSWORD');
+            $username       =  isset(Helper::setting()->MAIL_USERNAME)?Helper::setting()->MAIL_USERNAME:getenv('MAIL_USERNAME'); 
+            $email_from     =  isset(Helper::setting()->MAIL_FROM)?Helper::setting()->MAIL_FROM:getenv('MAIL_FROM'); 
 
-            $mail->setFrom(getenv('MAIL_USERNAME'), $email_content['from']);
+            $mail->setFrom($username, $email_from);
             $mail->Subject = $email_content['subject'];
             $mail->MsgHTML($html);
             $mail->addAddress($email_content['receipent_email'], $email_content['first_name']);
-
-            // $mail->addReplyTo("kroy.iips@mailinator.com","admin");
 
             if (isset($email_content['addBCC'])) {
                 $mail->addBCC($email_content['addBCC']);
@@ -164,6 +161,7 @@ class Helper
         }
     }
 
+    
     public function sendMailToAdmin($email_content, $template)
     {
         $mail       = new PHPMailer;
@@ -178,18 +176,24 @@ class Helper
 
            $mail->SMTPAuth    = true;                  // enable SMTP authentication
             $mail->Host       = getenv('MAIL_HOST'); // sets the SMTP server
-            $mail->Port       = getenv('MAIL_PORT');
-            $mail->SMTPSecure = 'false';                 // set the SMTP port for the GMAIL server
-            $mail->Username   = getenv('MAIL_USERNAME'); // SMTP account username
-            $mail->Password   = getenv('MAIL_PASSWORD');
+            $mail->Port       = 465; //getenv('MAIL_PORT');
+            $mail->SMTPSecure = 'ssl';                 // set the SMTP port for the GMAIL server
+            
+            $mail->Username   = isset(Helper::setting()->MAIL_USERNAME)?Helper::setting()->MAIL_USERNAME:getenv('MAIL_USERNAME'); // SMTP account username
+            $mail->Password   = isset(Helper::setting()->MAIL_PASSWORD)?Helper::setting()->MAIL_PASSWORD:getenv('MAIL_PASSWORD');
 
-            $mail->setFrom(getenv('MAIL_USERNAME'), $email_content['from']);
+            $uname = isset(Helper::setting()->MAIL_USERNAME)?Helper::setting()->MAIL_USERNAME:getenv('MAIL_USERNAME'); // SMTP account username
+
+            $sendMail = isset(Helper::setting()->MAIL_TO)?Helper::setting()->MAIL_TO:getenv('MAIL_TO');
+
+            if(!$sendMail){
+                $sendMail = $email_content['receipent_email'];
+            }
+
+            $mail->setFrom($uname, $email_content['from']);
             $mail->Subject = $email_content['subject'];
             $mail->MsgHTML($html);
-            $mail->addAddress($email_content['receipent_email'], $email_content['first_name']);
-
-            // $mail->addReplyTo("kroy.iips@mailinator.com","admin");
-
+            $mail->addAddress($sendMail, $email_content['first_name']);
 
             //$mail->addAttachment(‘/home/kundan/Desktop/abc.doc’, ‘abc.doc’); // Optional name
             $mail->SMTPOptions = [
@@ -205,234 +209,7 @@ class Helper
         } catch (phpmailerException $e) {
         } catch (Exception $e) {
         }
-    }
-    /* @method : send Mail
-    * @param : email
-    * Response :
-    * Return : true or false
-    */
-    public function sendNotificationMail($email_content, $template)
-    {
-        return  Mail::send('emails.' . $template, ['content' => $email_content], function ($message) use ($email_content) {
-            $name = $_SERVER['SERVER_NAME'];
-            $message->from('no-reply@abc.com', $name);
-            $message->to($email_content['receipent_email'])->subject($email_content['subject']);
-        });
-    }
-
-    public static function send_ios_notification($deviceToken, $message)
-    {
-        // var_dump($notification_id, $owner_id, $member_id); exit;
-
-        // $deviceToken = '9e88aba24a3981635b2620f7a9762fb97a10cbb694f37e93b212035138872bd6';
-
-        // Put your private key's passphrase here:
-        $passphrase = 'pushchat';
-
-        // Put your alert message here:
-        // $message = 'Myredfolder notification!';
-
-        ////////////////////////////////////////////////////////////////////////////////
-
-        $ctx = stream_context_create();
-        stream_context_set_option($ctx, 'ssl', 'local_cert', app_path() . '/PushUDEX.pem');
-        stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
-
-        // Open a connection to the APNS server
-        $fp = stream_socket_client(
-                                   'ssl://gateway.sandbox.push.apple.com:2195',
-            $err,
-                                   $errstr,
-            60,
-            STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT,
-            $ctx
-        );
-
-        if (!$fp) {
-            exit("Failed to connect: $err $errstr" . PHP_EOL);
-        }
-
-        //echo 'Connected to APNS' . PHP_EOL;
-
-        // Create the payload body
-        $body['aps'] = [
-            'alert' => trim($message),
-            'sound' => 'default',
-        ];
-
-        // Encode the payload as JSON
-        $payload = json_encode($body);
-
-        // Build the binary notification
-        $msg = chr(0) . pack('n', 32) . pack('H*', trim($deviceToken)) . pack('n', strlen($payload)) . $payload;
-
-        // Send it to the server
-        $result = fwrite($fp, $msg, strlen($msg));
-
-        if (!$result) {
-            //echo 'Message not delivered' . PHP_EOL;
-        } else {
-            //echo 'Message successfully delivered' . PHP_EOL;
-        }
-
-        // Close the connection to the server
-        fclose($fp);
-    }
-
-    public static function getRatingFeedback($rating_value = null)
-    {
-        $feedback_data = RatingFeedback::lists('feedback', 'rating_value');
-
-        $rating_value = isset($rating_value)?$rating_value:'';
-        switch ($rating_value) {
-                    case 1:
-                        $feedback = isset($feedback_data[1])?$feedback_data[1]:'Terrible';
-
-                        return $feedback;
-                        break;
-                    case 2:
-                        $feedback = isset($feedback_data[2])?$feedback_data[2]:'Poor';
-
-                        return $feedback;
-                        break;
-                    case 3:
-                        $feedback = isset($feedback_data[3])?$feedback_data[3]:'Average';
-
-                        return $feedback;
-                        break;
-                    case 4:
-                        $feedback = isset($feedback_data[4])?$feedback_data[4]:'Good';
-
-                        return $feedback;
-                        break;
-                    case 5:
-                        $feedback = isset($feedback_data[5])?$feedback_data[5]:'Excellent';
-
-                        return $feedback;
-                        break;
-
-                    default:
-                        $feedback = 'Not rated';
-
-                        return $feedback;
-                        break;
-                }
-    }
-
-    public static function getCondidateCountByUserID($user_id = null)
-    {
-        $query              = CorporateProfile::query();
-        $corp_profile       = $query->where('userID', $user_id)->first();
-        $query              = CorporateProfile::query();
-        $total_cuser        = $query->where('company_url', $corp_profile->company_url)->get();
-        $user_arr           = $total_cuser->lists('userID');
-        $c                  = [];
-        foreach ($user_arr as $key => $userid) {
-            # code...
-
-            $interviewD = Interview::where(
-                function ($query) use ($userid) {
-                    $query->whereRaw('FIND_IN_SET(' . $userid . ',interviewerID)');
-                }
-            )
-                ->get();
-            foreach ($interviewD as $key => $value) {
-                $c[$value->id] = $value->condidate_name;
-            }
-        }
-
-        return count($c);
-    }
-    /*
-     *Method : getActiveUserCount
-     * Parameter : company_url
-     * Response : active user Count
-     */
-    public function getActiveUserCount($company_url = null)
-    {
-        $arr1     =   CorporateProfile::where('company_url', $company_url)->lists('userID')->toArray();
-        $user_arr = User::whereIn('userID', $arr1)->where('status', 1)->lists('userID');
-
-        return $user_arr->count();
-    }
-    /*
-     *Method : getEvaulationCount
-     * Parameter : User ID
-     * Response : condidate Evaluation Count
-     */
-
-    public function getEvaulationCount($userid = null)
-    {
-        $evaluated = InterviewRating::where('interviewerID', $userid)->count();
-
-        return $evaluated;
-    }
-    /*
-     *Method : getPendingEvaulationCount
-     * Parameter : User ID
-     * Response : condidate Evaluation Count
-     */
-
-    public function getPendingEvaulationCount($userid = null)
-    {
-        $evaluated_count = InterviewRating::where('interviewerID', $userid)->count();
-        $pending_count   = Interview::whereRaw('FIND_IN_SET(' . $userid . ',interviewerID)')->count();
-        $actual_pending  = $pending_count - $evaluated_count;
-
-        return  $pending_count;
-    }
-
-    /*
-    *Method : getLastEvaluationDate
-    * Parameter : User ID
-    * Response : last Evaluation date
-    */
-
-    public function getLastEvaluationDate($userid = null)
-    {
-        $evaluated_count = InterviewRating::where('interviewerID', $userid)
-            ->orderBy('id', 'desc')->first();
-        $date =  'N/A';
-
-        if ($evaluated_count != null) {
-            $date = (\Carbon\Carbon::parse($evaluated_count->created_at)->format('m-d-Y H:i:s A'));
-        }
-
-        return  $date;
-    }
-    /*
-     *Method : getEvaluationCountByMonth
-     * Parameter : User ID, month
-     * Response : last Evaluation date
-     */
-    public function getEvaluationCountByMonth($userid = null, $month = null)
-    {
-        $year = Input::get('year');
-        $year =  isset($year)?$year:date('Y');
-
-        $count = InterviewRating::where('interviewerID', $userid)
-            ->whereYear('created_at', '=', $year)
-            ->whereMonth('created_at', '=', $month)->count();
-
-        return $count;
-    }
-    /*
-    *Method : getCorporateEvaluationCountByMonth
-    * Parameter : User ID, month
-    * Response : last Evaluation date
-    */
-    public function getCorporateEvaluationCountByMonth($userid = null, $month = null)
-    {
-        $year       = Input::get('year');
-        $year       =  isset($year)?$year:date('Y');
-        $cp         = CorporateProfile::where('userID', $userid)->first();
-        $org_domain = $cp->company_url;
-        $cp_user    = CorporateProfile::where('company_url', $org_domain)->lists('userID')->toArray();
-        $user       = User::whereIn('userID', $cp_user)->count();
-        $count      = InterviewRating::whereIn('interviewerID', $cp_user)
-            ->whereYear('created_at', '=', $year)
-            ->whereMonth('created_at', '=', $month)->count();
-
-        return $count;
-    }
+    }    
+    
+    
 }

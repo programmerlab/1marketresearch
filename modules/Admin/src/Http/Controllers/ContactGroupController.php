@@ -110,7 +110,7 @@ class ContactGroupController extends Controller
         $cgn->save();
 
         ContactGroup::whereNotIn('id', $request->get('ids'))
-           ->where('parent_id', $request->get('parent_id'))->delete();
+            ->where('parent_id', $request->get('parent_id'))->delete();
 
         $ids = $request->get('ids');
 
@@ -242,7 +242,7 @@ class ContactGroupController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         ContactGroup::whereIdOrParentId($id, $id)->delete();
 

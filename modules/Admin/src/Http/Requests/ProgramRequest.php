@@ -29,13 +29,13 @@ class ProgramRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                    
+
                         return [
                             'program_name'  => 'required',
                             'start_date'    => 'required',
                             'end_date'      => 'required',
                         ];
-                     
+
                 }
                 default:break;
             }

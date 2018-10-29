@@ -84,8 +84,8 @@ class TransactionController extends Controller
         }
 
         $categories =  Category::attr(['name' => 'product_category','class' => 'form-control form-cascade-control input-small'])
-             ->selected([1])
-             ->renderAsDropdown();
+            ->selected([1])
+            ->renderAsDropdown();
 
         return view('packages::product.create', compact('categories', 'cat', 'category', 'product', 'sub_category_name', 'page_title', 'page_action'));
     }
@@ -124,7 +124,7 @@ class TransactionController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Transaction::where('id', $id)->delete();
 

@@ -260,7 +260,7 @@ class CommentController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Comments::where('id', $id)->delete();
 

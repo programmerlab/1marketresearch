@@ -9,19 +9,105 @@
 
  @include('partials.search')
 
-<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="{{url('/')}}">Home</a> &gt;&gt; <a href="#">{{$data->category_name}}</a> &gt;&gt; {{
-    ucwords(str_replace('-',' ',$data->slug))
-}}</nav>
+<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="{{url('/')}}">Home1</a> &gt;&gt; 
 
-<div class="published-date">
+    {{$data->category_name or ''}} &gt;&gt; {{
+        ucwords(str_replace('-',' ',$data->slug))
+    }}
+
+</nav>
+
+<style>
+    
+      .published-date2 {
+    margin-top: 27px;
+    padding-top: 10px;  
+    background: transparent;
+    font-weight: 600;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+   .published-date2 p{color: #0a8a2d;}
+
+.published-date3 {
+    margin-top: 11px;
+     background: transparent;
+    padding: 10px 15px;
+    font-weight: 600;
+    
+}
+.published-date3 p{font-size:20px;border-bottom: 1px solid #ddd;margin-bottom: 15px;}
+    </style>
+
+
+
+<div class="published-date2">
 <div class="row">
 <div class="date-box">
   <div class="col-sm-12 border-right" style="color: #000; font-size: 16px;"> <span class="pub-date"> 
+     <div class="col-sm-6 text-left">
+         <b><p>Published Date: {{ $data->publish_date or ''}}</p></b>
+     </div>
+     <div class="col-sm-6 text-right">
+         <b><p>Number of Pages: {{$data->number_of_pages  or  ''}}</p></b>
+     </div>
+    </span> 
+  </div>
+</div>
+</div>
+</div>
 
-    <b>{{$data->title}} </b></span> </div>
+<div class="published-date" style="margin:5px;">
+<div class="row">
+<div class="date-box">
+  <div class="col-sm-12 border-right" style="color: #000; font-size: 16px;"> 
+        <span class="pub-date"> 
+
+    <b>{{$data->title or '' }} </b></span> </div>
 </div>
 </div>
 </div>
+
+
+<div class="col-md-12" style="margin: 0px; background: #ccc; padding: 12px 0 12px 12px; padding-left: 10%">
+       <form action="{{url('payment')}}">
+        <input type="hidden" name="payment_id" value="{{$data->id}}">
+        <div class="col-md-3">
+            <select class="form-control" style="height: 40px" name="price">
+                <option value="{{$data->signle_user_license}}"> <b>Single User License </b>: US $ {{$data->signle_user_license}} </option>
+                <option value="{{$data->multi_user_license}}">Multi User License </b>: US $ {{$data->multi_user_license}}  </option>
+                <option value="{{$data->corporate_user_license}}">Corporate User License </b>: US $ {{$data->corporate_user_license}}</option>
+            </select>
+
+        </div>
+        <div class="col-md-1">
+        
+            <button type="submit" class="btn btn-danger" style="height: 38px">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </span> <b> Buy Now!</b>
+            </button>
+       </div>
+
+        
+        <div class="col-md-1" style="margin-left: 0px">
+        <a href="{{url('requestSample?report_id='.$data->id)}}">
+                <button type="button" class=" btn btn-primary" style="background-color: darkcyan; border-color: #875635; background-color: #875635; height: 38px;margin-left: 5px;"><span class=" glyphicon glyphicon-shopping-cart"></span><b> Request Sample </b></button>
+            </a>
+        </div>
+
+        <div class="col-md-1" style="margin-left: 40px">
+        <a href="{{url('requestBrochure?report_id='.$data->id)}}">
+                <button type="button" class=" btn btn-primary" style="background-color: darkcyan; border-color: #3db1e3; height: 38px;margin-left: 5px;"><span class=" glyphicon glyphicon-shopping-cart"></span><b> Request Brochure </b></button>
+            </a>
+        </div>
+        <div class="col-md-2" style="margin-left: 60px">
+            <a href="{{url('askAnAnalyst?report_id='.$data->id)}}">
+                <button type="button" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3;height: 38px; margin-left: 0px;" ><span class=" glyphicon glyphicon-shopping-cart"></span><b> Ask An Analyst </b></button>
+            </a>
+            </div>  
+    </form>
+ </div>
 
 
 
@@ -29,56 +115,15 @@
 <div class="container">
 
 <div class="row">
-<div class="report-left-sec col-sm-8">
+<div class="report-left-sec col-sm-12">
 
-<div class="blog-grid home-blog detail-page">
+<div class="blog-grid home-blog detail-page" style="margin-top: 10px; border-radius: 0px;">
     <!-- Start single blog -->
 <div class="">
     <div class="single-blog">
 
         <div class="blog-content">
-            <div class="blog-title">
-                <div class="detail-img">
-                 <?php
-                     if ($category->category_group_image) {
-                         $img = asset('storage/uploads/category/' . $category->category_group_image);
-                     } else {
-                         $img = asset('public/assets/img/4.jpg');
-                     }
-
-                ?> 
-            <img src="{{$img}}" style="width: 100%">
-            
-            </div>
-            <div class="detail-title">
-            <div class="detail-head">
-               <p><span><b>Research Category:</b> {{$data->category_name }}</span></p>
-            
-            </div>
-            <div class="repoort-tags">
-            <p><span><b>Publish Date:</b> {{$data->publish_date }}</span></p>
-            </div>
-
-
-            <div class="repoort-tags">
-             <p> <span><b>Pages</b>: {{$data->number_of_pages }}</span></p>
-
-            </div>
-
-            <div class="detail-buttons col-md-12">
-            <div class="col-md-3">
-            <a href="{{url('requestBrochure?report_id='.$data->id)}}">
-                <button type="submit" class=" btn btn-primary" style="background-color: darkcyan; border-color: #3db1e3; height: 38px;"><span class=" glyphicon glyphicon-shopping-cart"></span><b> Request Brochure </b></button>
-            </a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{url('askAnAnalyst?report_id='.$data->id)}}">
-                <button type="submit" class=" btn btn-primary" style="background-color: #3db1e3; border-color: #3db1e3;height: 38px;" ><span class=" glyphicon glyphicon-shopping-cart"></span><b> Ask An Analyst </b></button>
-            </a>
-            </div>
-            </div>
-        </div>
-    </div>
+             
                                             
                             
                             
@@ -136,12 +181,7 @@
             </div>
         </div>
     
-            <div class="report-right-sec col-sm-4">
-                <div class="release-background">
-                    @include('partials.pricing')  
-                    @include('partials.support') 
-                    @include('partials.testimonial') 
-                </div>
+            <div class="report-right-sec col-sm-4"> 
             </div 
         </div> 
     </div>

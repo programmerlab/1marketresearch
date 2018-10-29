@@ -98,9 +98,9 @@ class RoleController extends Controller
         /** Return Error Message */
         if ($validator->fails()) {
             return redirect()
-                 ->back()
-                 ->withInput()
-                 ->withErrors($validator);
+                ->back()
+                ->withInput()
+                ->withErrors($validator);
         }
 
 
@@ -113,7 +113,7 @@ class RoleController extends Controller
         $role->save();
 
         return Redirect::to('admin/role')
-           ->with('flash_alert_notice', 'Role was successfully created !');
+            ->with('flash_alert_notice', 'Role was successfully created !');
     }
     /*
      * Edit Group method
@@ -147,7 +147,7 @@ class RoleController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Role::where('id', $id)->delete();
 
@@ -180,7 +180,7 @@ class RoleController extends Controller
             }
 
             return Redirect::to('admin/permission')
-                        ->with('flash_alert_notice', 'Permission was successfully changed!');
+                ->with('flash_alert_notice', 'Permission was successfully changed!');
         }
     }
 }

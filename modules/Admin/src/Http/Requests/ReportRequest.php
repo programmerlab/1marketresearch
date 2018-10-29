@@ -3,13 +3,11 @@
 declare(strict_types=1);
 
 namespace Modules\Admin\Http\Requests;
- 
 
 use Illuminate\Foundation\Http\FormRequest;
- 
+
 class ReportRequest extends FormRequest
 {
-    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -42,12 +40,12 @@ class ReportRequest extends FormRequest
                             'corporate_user_license' => 'required',
                             'description'            => 'required',
                             'table_of_contents'      => 'required',
-                            'number_of_pages'        => 'required', 
+                            'number_of_pages'        => 'required',
                             'category'               => 'required',
                         ];
                     }
                 case 'PUT':
-                case 'PATCH': { 
+                case 'PATCH': {
                         return [
                             'title'                  => 'required',
                             'description'            => 'required',
@@ -57,14 +55,13 @@ class ReportRequest extends FormRequest
                             'corporate_user_license' => 'required',
                             'description'            => 'required',
                             'table_of_contents'      => 'required',
-                            'number_of_pages'        => 'required', 
+                            'number_of_pages'        => 'required',
                             'category'               => 'required',
                         ];
-                    
+
                 }
                 default:break;
             }
         //}
     }
- 
 }

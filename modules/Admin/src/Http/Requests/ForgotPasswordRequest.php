@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-  
-
 
 class ForgotPasswordRequest extends FormRequest
 {
@@ -30,11 +28,11 @@ class ForgotPasswordRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                   
+
                         return [
                             'email'   => 'required|email',
                         ];
-                   
+
                 }
                 default:break;
             }

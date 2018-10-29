@@ -166,7 +166,7 @@ class ProductController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Product::where('id', $id)->delete();
 

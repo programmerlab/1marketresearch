@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-  
-
 
 class SettingRequest extends FormRequest
 {
@@ -37,7 +35,7 @@ class SettingRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
- 
+
                         return [
 
                             'website_title'     => 'required',
@@ -49,7 +47,7 @@ class SettingRequest extends FormRequest
                             'banner_image2'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
                             'banner_image3'     => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=800,min_height=350',
                         ];
-                    
+
                 }
                 default:break;
             }

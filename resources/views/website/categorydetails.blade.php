@@ -61,12 +61,13 @@
               @endforeach
          
               <!-- End single blog -->
+               <ul class="pagination">
+                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
+             </ul> 
             </div>
 
             <br>
-            <ul class="pagination">
-                 <div class="center" align="center">  {!! $reports->appends(['search' => isset($_GET['search'])?$_GET['search']:''])->render() !!}</div>
-             </ul> 
+           
             
             <br>
           </div>

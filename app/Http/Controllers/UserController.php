@@ -10,83 +10,76 @@ use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Input;
+use Modules\Admin\Models\Category; 
+use Modules\Admin\Models\Report;
 use Response;
 use Session;
-use Spatie\Sitemap\Sitemap; 
-use Spatie\Sitemap\SitemapGenerator;
+use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
-use Carbon\Carbon;
 use Validator;
+
 use View;
-
-use Modules\Admin\Models\Report;
-use Modules\Admin\Models\Category;
-
 
 class UserController extends Controller
 {
-    public function sitemap(Request $request, $sitemapPath='sitemap.xml')
+    public function sitemap(Request $request, $sitemapPath = 'sitemap.xml')
     {
-        echo "start at:".date('h:i:s').'<br>';
-        
-        $destination = "sitemap";
+        echo 'start at:' . date('h:i:s') . '<br>';
 
-        $page = \DB::table('pages')->select('url')->pluck('url')->toArray();
-        $page[] = "research-categories";
-        $page[] = "pressRelease";
-        $page[] = "publisher";
-        $page[] = "services";
-        $page[] = "contact";
+        $destination = 'sitemap';
+
+        $page   = \DB::table('pages')->select('url')->pluck('url')->toArray();
+        $page[] = 'research-categories';
+        $page[] = 'pressRelease';
+        $page[] = 'publisher';
+        $page[] = 'services';
+        $page[] = 'contact';
 
         // static page xml
         $u =  Sitemap::create();
         foreach ($page as $key => $result) {
             $u->add(url($result));
         }
-        $u->writeToFile($destination.'/page-sitemap.xml');
+        $u->writeToFile($destination . '/page-sitemap.xml');
 
         //  category xml
-        $category = \DB::table('categories')->pluck('url')->toArray();
+        // $category = \DB::table('categories')->pluck('url')->toArray();
 
-        $u =  Sitemap::create();
-        foreach ($category as $key => $value) {
-            $u->add(url($value));
-        }
+        // $u =  Sitemap::create();
+        // foreach ($category as $key => $value) {
+        //     $u->add(url($value));
+        // }
 
-        $u->writeToFile($destination.'/product-sitemap.xml');
-        $count=0;
-      
+        // $u->writeToFile($destination . '/product-sitemap.xml');
+        $count = 0;
+
         // reports xml
-      
-        $categories = Category::with('report')->get();
-        $i=0;
+
+        $categories = Report::select('url')->orderBy('id','asc')->get();
         $url_path[] = '/';
         $url_path[] = 'page-sitemap.xml';
-        $url_path[] = 'product-sitemap.xml';
-      
+        //$url_path[] = 'product-sitemap.xml';
+        $c=0;
+        $i=0;
+        $u =  Sitemap::create();
         foreach ($categories as $key => $result) {
-            $u =  Sitemap::create();
+            $c++;
             $u->add(url($result->url));
-                
-            foreach ($result->report as $key2 => $value) {
-                $count=1;
-                $u->add(url($result->url));
-            }
-            if($count==1){
+            if($c%1000==0){
                 $i++;
-                $path = 'product-sitemap'.$i.'.xml';
+                $path       = 'product-sitemap' . $i . '.xml';
                 $url_path[] = $path;
-                $u->writeToFile($destination.'/'.$path);    
+                $u->writeToFile($destination . '/' . $path);
+                $u =  Sitemap::create();
             }
-            $count=0;
-        } 
+        }
         // mail sitemap
         $u =  Sitemap::create();
         foreach ($url_path as $key => $final) {
-               $u->add(url('sitemap/'.$final));
-            }
+            $u->add(url('sitemap/' . $final));
+        }
         $u->writeToFile($sitemapPath);
-        echo "end at:".date('h:i:s');
+        echo 'end at:' . date('h:i:s');
     }
 
     public function index(Request $request)

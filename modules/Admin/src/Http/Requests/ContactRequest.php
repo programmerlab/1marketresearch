@@ -6,7 +6,6 @@ namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class ContactRequest extends FormRequest
 {
     /**
@@ -30,14 +29,14 @@ class ContactRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                
+
                         return [
                             'firstName' => 'required',
                             'email'     => 'required',
                             'phone'     => 'required',
 
                         ];
-                    
+
                 }
                 default:break;
             }

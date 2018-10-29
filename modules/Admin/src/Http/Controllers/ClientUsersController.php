@@ -74,8 +74,8 @@ class ClientUsersController extends Controller
             $users = User::where(function ($query) use ($search,$status,$role_type) {
                 if (!empty($search)) {
                     $query->Where('first_name', 'LIKE', "%$search%")
-                                ->OrWhere('last_name', 'LIKE', "%$search%")
-                                ->OrWhere('email', 'LIKE', "%$search%");
+                        ->OrWhere('last_name', 'LIKE', "%$search%")
+                        ->OrWhere('email', 'LIKE', "%$search%");
                 }
 
                 if (!empty($status)) {
@@ -179,7 +179,7 @@ class ClientUsersController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         User::where('id', $id)->delete();
 

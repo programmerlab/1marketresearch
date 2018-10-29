@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-  
 
 class CategoryRequest extends FormRequest
 {
@@ -28,12 +27,12 @@ class CategoryRequest extends FormRequest
                         ];
                     }
                 case 'PUT':
-                case 'PATCH': { 
+                case 'PATCH': {
                         return [
                             'category_group_name'   => 'required',
 
                         ];
-                     
+
                 }
                 default:break;
             }

@@ -115,11 +115,11 @@ class CoupanController extends Controller
      * object : $coupan
      * */
 
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
         $page_title     = 'Coupon';
         $page_action    = 'Edit Coupon';
-        $coupan = Coupan::find($id);
+        $coupan         = Coupan::find($id);
 
         return view('packages::coupan.edit', compact('url', 'coupan', 'status', 'page_title', 'page_action'));
     }
@@ -138,7 +138,7 @@ class CoupanController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Coupan::where('id', $id)->delete();
 

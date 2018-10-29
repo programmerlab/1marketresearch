@@ -27,11 +27,11 @@ class ReasonRequest extends FormRequest
                     }
                 case 'PUT':
                 case 'PATCH': {
-                     
+
                         return [
                             'reasonDescription' => 'required',
                         ];
-                    
+
                 }
                 default:break;
             }

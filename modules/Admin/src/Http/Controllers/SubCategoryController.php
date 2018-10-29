@@ -74,7 +74,7 @@ class SubCategoryController extends Controller
             $categories = Category::where(function ($query) use ($search,$status) {
                 if (!empty($search)) {
                     $query->Where('category_group_name', 'LIKE', "%$search%")
-                                ->OrWhere('category_name', 'LIKE', "%$search%");
+                        ->OrWhere('category_name', 'LIKE', "%$search%");
                 }
             })->where('parent_id', '!=', 0)->Paginate($this->record_per_page);
         } else {
@@ -218,7 +218,7 @@ class SubCategoryController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $d = Category::where('id', $id)->delete();
 

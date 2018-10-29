@@ -73,7 +73,7 @@ class CategoryController extends Controller
             $categories = Category::where(function ($query) use ($search,$status) {
                 if (!empty($search)) {
                     $query->Where('category_group_name', 'LIKE', "%$search%")
-                                ->OrWhere('category_name', 'LIKE', "%$search%");
+                        ->OrWhere('category_name', 'LIKE', "%$search%");
                 }
             })->orderBy('id', 'DESC')->where('parent_id', 0)->Paginate($this->record_per_page);
         } else {
@@ -144,7 +144,7 @@ class CategoryController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category    = Category::find($id);
         $page_title  = 'Category';
         $page_action = 'Edit category';
         $url         = url::asset('storage/uploads/category/' . $category->category_group_image)  ;
@@ -206,13 +206,13 @@ class CategoryController extends Controller
      * @param ID
      *
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $reports = \DB::table('reports')->where('category_id', $id)->get();
 
         if ($reports) {
             return Redirect::to(route('category'))
-                 ->with('flash_alert_notice', 'You can\'t delete this Category. This is associated with reports');
+                ->with('flash_alert_notice', 'You can\'t delete this Category. This is associated with reports');
         }
         Category::where('id', $category->id)->delete();
         Category::where('parent_id', $category->id)->delete();
